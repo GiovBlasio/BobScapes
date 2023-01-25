@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:bobscapes/common_widget/logo.dart';
-import 'package:bobscapes/common_widget/logoAnimated.dart';
+import 'package:bobscapes/common_widget/logo_animated.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/home/home.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,29 @@ class _BodyState extends State<Body> {
     super.initState();
 
     startAnimation();
+
+      Navigator.push(
+         context,
+         PageRouteBuilder(
+             transitionDuration: const Duration(seconds: 2),
+             pageBuilder: (context, animation, secondaryAnimation) =>
+                 const HomeScreen(),
+             transitionsBuilder: (context, animation, secondaryAnimation, child) {
+               const begin = Offset(-1, 0);
+               const end = Offset.zero;
+               const curve = Curves.slowMiddle;
+
+               var tween =
+                   Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+               final offsetAnimation = animation.drive(tween);
+
+               return SlideTransition(
+                 position: offsetAnimation,
+                 child: child,
+               );
+             }),
+       );
+  
   }
 
   @override
@@ -108,34 +130,13 @@ class _BodyState extends State<Body> {
   }
 
   Future startAnimation() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       animate = true;
     });
 
-    await Future.delayed(Duration(milliseconds: 2000));
-    //   Navigator.push(
-    //     context,
-    //     PageRouteBuilder(
-    //         transitionDuration: const Duration(seconds: 2),
-    //         pageBuilder: (context, animation, secondaryAnimation) =>
-    //             const HomeScreen(),
-    //         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //           const begin = Offset(-1, 0);
-    //           const end = Offset.zero;
-    //           const curve = Curves.slowMiddle;
-
-    //           var tween =
-    //               Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-    //           final offsetAnimation = animation.drive(tween);
-
-    //           return SlideTransition(
-    //             position: offsetAnimation,
-    //             child: child,
-    //           );
-    //         }),
-    //   );
-  }
+    await Future.delayed(const Duration(milliseconds: 2000));
+     }
 }
 
 class Transition extends StatelessWidget {

@@ -1,7 +1,6 @@
 import 'package:bobscapes/provider/birds_counter.dart';
 import 'package:bobscapes/provider/email_enabler.dart';
 import 'package:bobscapes/provider/heard_page1_state.dart';
-import 'package:bobscapes/provider/page_changer.dart';
 import 'package:bobscapes/views/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -167,66 +167,64 @@ class _CustomAlertState extends State<CustomAlert> {
                             )
                           ],
                         ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    position = Duration.zero;
-                                    isPlaying = false;
-                                  });
-                                },
-                                child: Card(
-                                  shape: const CircleBorder(),
-                                  elevation: 8,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.grey,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            getProportionateScreenWidth(8),
-                                        vertical:
-                                            getProportionateScreenHeight(8)),
-                                    child: const Icon(Icons.repeat),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  position = Duration.zero;
+                                  isPlaying = false;
+                                });
+                              },
+                              child: Card(
+                                shape: const CircleBorder(),
+                                elevation: 8,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    shape: BoxShape.circle,
                                   ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          getProportionateScreenWidth(8),
+                                      vertical:
+                                          getProportionateScreenHeight(8)),
+                                  child: const Icon(Icons.repeat),
                                 ),
                               ),
-                              InkWell(
-                                onTap: (() async {
-                                  if (isPlaying) {
-                                    await audioPlayer.pause();
-                                  } else {
-                                    await audioPlayer.resume();
-                                  }
-                                  setState(() {
-                                    isPlaying = !isPlaying;
-                                  });
-                                }),
-                                child: Card(
-                                  shape: const CircleBorder(),
-                                  elevation: 8,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.grey,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            getProportionateScreenWidth(8),
-                                        vertical:
-                                            getProportionateScreenHeight(8)),
-                                    child: Icon(isPlaying
-                                        ? Icons.pause
-                                        : Icons.play_arrow),
+                            ),
+                            InkWell(
+                              onTap: (() async {
+                                if (isPlaying) {
+                                  await audioPlayer.pause();
+                                } else {
+                                  await audioPlayer.resume();
+                                }
+                                setState(() {
+                                  isPlaying = !isPlaying;
+                                });
+                              }),
+                              child: Card(
+                                shape: const CircleBorder(),
+                                elevation: 8,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    shape: BoxShape.circle,
                                   ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          getProportionateScreenWidth(8),
+                                      vertical:
+                                          getProportionateScreenHeight(8)),
+                                  child: Icon(isPlaying
+                                      ? Icons.pause
+                                      : Icons.play_arrow),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         )
                       ],
                     ),

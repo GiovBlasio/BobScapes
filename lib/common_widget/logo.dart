@@ -1,4 +1,3 @@
-import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

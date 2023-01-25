@@ -64,53 +64,50 @@ class CustomCard extends StatelessWidget {
                   height: 10,
                 ),
                 Flexible(
-                  child: Container(
-                    // color: Colors.green,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Card(
-                          shape: const CircleBorder(),
-                          elevation: 8,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              shape: BoxShape.circle,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: getProportionateScreenWidth(8),
-                                vertical: getProportionateScreenHeight(8)),
-                            child: Icon(
-                              Icons.volume_up_outlined,
-                              size: getProportionateScreenWidth(22),
-                            ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Card(
+                        shape: const CircleBorder(),
+                        elevation: 8,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getProportionateScreenWidth(8),
+                              vertical: getProportionateScreenHeight(8)),
+                          child: Icon(
+                            Icons.volume_up_outlined,
+                            size: getProportionateScreenWidth(22),
                           ),
                         ),
-                        Container(
-                          //width: 245,
-                          margin: EdgeInsets.only(
-                              left: getProportionateScreenWidth(25)),
-                          child: Column(
-                            //mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                title,
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(14)),
-                              ),
-                              Text(
-                                time,
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(10)),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      Container(
+                        //width: 245,
+                        margin: EdgeInsets.only(
+                            left: getProportionateScreenWidth(25)),
+                        child: Column(
+                          //mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              title,
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14)),
+                            ),
+                            Text(
+                              time,
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(10)),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ],

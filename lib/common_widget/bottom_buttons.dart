@@ -61,7 +61,7 @@ class BottomButtons extends StatelessWidget {
                       //   height: getProportionateScreenHeight(0),
                       //   color: Colors.white,
                       // ),
-                      Container(
+                      SizedBox(
                         // color: Colors.red,
                         width: title.contains('Map')
                             ? getProportionateScreenWidth(130)
@@ -90,7 +90,8 @@ class BottomButtons extends StatelessWidget {
         InkWell(
           onTap: () {
             showDialog(
-                context: context, builder: ((context) => IHeardBobScreen()));
+                context: context,
+                builder: ((context) => const IHeardBobScreen()));
             //  _showModalBottomSheet(context);
           },
           child: Container(
@@ -132,7 +133,7 @@ class BottomButtons extends StatelessWidget {
                         height: getProportionateScreenHeight(30),
                         color: Colors.white,
                       ),
-                      Container(
+                      SizedBox(
                         width: getProportionateScreenWidth(110),
                         child: Text(
                           "Hey, I heard Bob!",
@@ -159,18 +160,18 @@ class BottomButtons extends StatelessWidget {
     );
   }
 
-  void _showModalBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        isScrollControlled: true,
-        context: context,
-        builder: ((context) => DraggableScrollableSheet(
-              //  snap: true,
-              expand: false,
-              initialChildSize: 0.95,
-              //maxChildSize: 0.9,
-              controller: DraggableScrollableController(),
-              builder: ((context, scrollController) => const IHeardBobScreen()),
-            )));
-  }
+  // void _showModalBottomSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //       backgroundColor: Colors.transparent,
+  //       isScrollControlled: true,
+  //       context: context,
+  //       builder: ((context) => DraggableScrollableSheet(
+  //             //  snap: true,
+  //             expand: false,
+  //             initialChildSize: 0.95,
+  //             //maxChildSize: 0.9,
+  //             controller: DraggableScrollableController(),
+  //             builder: ((context, scrollController) => const IHeardBobScreen()),
+  //           )));
+  // }
 }

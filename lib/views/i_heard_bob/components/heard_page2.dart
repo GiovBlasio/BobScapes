@@ -1,5 +1,4 @@
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/i_heard_bob/components/body.dart';
 import 'package:flutter/material.dart';
 
 import 'heard_page2/custom_dropdown_menu.dart';

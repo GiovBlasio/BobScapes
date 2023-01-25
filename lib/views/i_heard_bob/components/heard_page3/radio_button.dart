@@ -1,7 +1,6 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/email_enabler.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/i_heard_bob/components/heard_page3.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

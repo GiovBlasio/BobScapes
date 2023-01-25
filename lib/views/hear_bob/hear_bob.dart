@@ -1,5 +1,4 @@
 import 'package:bobscapes/common_widget/custom_back_button.dart';
-import 'package:bobscapes/common_widget/custom_title.dart';
 import 'package:bobscapes/common_widget/logo.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';

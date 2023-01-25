@@ -1,15 +1,14 @@
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
-import '../../../provider/page_changer.dart';
-//import 'body.dart';
-import 'body.dart';
+// import '../../../provider/page_changer.dart';
+
 import 'heard_page1/custom_forms.dart';
 import 'heard_page1/custom_radio_button.dart';
 import 'heard_page1/personal_info.dart';
-import 'heard_page2.dart';
-import 'heard_page3.dart';
+// import 'heard_page2.dart';
+// import 'heard_page3.dart';
 
 class HeardPage1 extends StatefulWidget {
   const HeardPage1({
@@ -127,25 +126,25 @@ class _HeardPage1State extends State<HeardPage1> {
     );
   }
 
-  void changePage(Widget newPage) {
-    switch (newPage.runtimeType) {
-      case HeardPage1:
-        context.read<PageChanger>().changePage(HeardPage2());
-        context
-            .read<PageChanger>()
-            .changeTop(getProportionateScreenHeight(235));
-        break;
-      case HeardPage2:
-        context.read<PageChanger>().changePage(HeardPage3());
-        context
-            .read<PageChanger>()
-            .changeTop(getProportionateScreenHeight(150));
-        break;
-      case HeardPage3:
-        context.read<PageChanger>().changePage(HeardPage1());
-        context.read<PageChanger>().changeTop(getProportionateScreenHeight(60));
-        break;
-      default:
-    }
-  }
+  // void changePage(Widget newPage) {
+  //   switch (newPage.runtimeType) {
+  //     case HeardPage1:
+  //       context.read<PageChanger>().changePage(HeardPage2());
+  //       context
+  //           .read<PageChanger>()
+  //           .changeTop(getProportionateScreenHeight(235));
+  //       break;
+  //     case HeardPage2:
+  //       context.read<PageChanger>().changePage(HeardPage3());
+  //       context
+  //           .read<PageChanger>()
+  //           .changeTop(getProportionateScreenHeight(150));
+  //       break;
+  //     case HeardPage3:
+  //       context.read<PageChanger>().changePage(HeardPage1());
+  //       context.read<PageChanger>().changeTop(getProportionateScreenHeight(60));
+  //       break;
+  //     default:
+  //   }
+  // }
 }
