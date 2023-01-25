@@ -1,4 +1,4 @@
-import 'package:bobscapes/common_widget/logo.dart';
+import 'logo.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedLogo extends ImplicitlyAnimatedWidget {
