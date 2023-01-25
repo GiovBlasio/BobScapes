@@ -1,0 +1,247 @@
+import 'package:bobscapes/constants.dart';
+import 'package:bobscapes/provider/heard_page1_state.dart';
+import 'package:bobscapes/size_config.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class PersonalInfo extends StatefulWidget {
+  const PersonalInfo({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+
+  final List<String> items;
+
+  @override
+  State<PersonalInfo> createState() => _PersonalInfoState();
+}
+
+class _PersonalInfoState extends State<PersonalInfo> {
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15),
+        ),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(15),
+              vertical: getProportionateScreenHeight(20)),
+          color: const Color(0x33c2c2c2),
+          child: Row(
+            children: [
+              const NameForm(),
+              SizedBox(
+                width: getProportionateScreenWidth(25),
+              ),
+              CustomDropDownMenu(items: widget.items)
+            ],
+          ),
+        ));
+  }
+}
+
+class CustomDropDownMenu extends StatefulWidget {
+  const CustomDropDownMenu({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+
+  final List<String> items;
+
+  @override
+  State<CustomDropDownMenu> createState() => _CustomDropDownMenuState();
+}
+
+class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
+  late String dropdownvalue;
+
+  @override
+  void initState() {
+    _initialization();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(10),
+                bottom: getProportionateScreenHeight(8)),
+            child: Text(
+              "You are",
+              style: TextStyle(
+                  fontSize: getProportionateScreenWidth(12),
+                  fontWeight: FontWeight.w500),
+            ),
+          ),
+          ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            child: Container(
+              height: getProportionateScreenHeight(35),
+              padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(10)),
+              color: Colors.white,
+              child: DropdownButton(
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                    fontSize: getProportionateScreenWidth(13),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  underline: Container(),
+                  isExpanded: true,
+                  value: dropdownvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: widget.items.map((String item) {
+                    return DropdownMenuItem(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    changeValue(newValue!);
+                    setState(() {
+                      dropdownvalue = newValue;
+                    });
+                  }),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void changeValue(String value) {
+    context.read<HeardPage1State>().changeType(value);
+  }
+
+  void _initialization() {
+    dropdownvalue = Provider.of<HeardPage1State>(context, listen: false).type;
+  }
+}
+
+class NameForm extends StatefulWidget {
+  const NameForm({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<NameForm> createState() => _NameFormState();
+}
+
+class _NameFormState extends State<NameForm> {
+  final Set<String> errors = {};
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    _initialization();
+    super.initState();
+  }
+
+  void changeName(String name) {
+    context.read<HeardPage1State>().changeName(name);
+  }
+
+  void _initialization() {
+    String name = Provider.of<HeardPage1State>(context, listen: false).name;
+    if (name != '') controller = TextEditingController(text: name);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: Form(
+            child: TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.name,
+      onSaved: (newValue) {
+        //email = newValue ?? "";
+      },
+      onChanged: (value) {
+        changeName(value);
+
+        // if (value.isNotEmpty) {
+        //   setState(() {
+        //     errors.remove(kEmailNullError);
+        //   });
+        // }
+        // if (emailValidatorRegExp.hasMatch(value)) {
+        //   setState(() {
+        //     errors.remove(kInvalidEmailError);
+        //   });
+        // }
+      },
+      validator: (value) {
+        // if (value!.isEmpty) {
+        //   setState(() {
+        //     errors.add(kEmailNullError);
+        //   });
+        //   return "";
+        // } else if (!emailValidatorRegExp.hasMatch(value)) {
+        //   setState(() {
+        //     errors.add(kInvalidEmailError);
+        //   });
+        //   return "";
+        // }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelStyle: TextStyle(
+            color: kPrimaryColor,
+            // fontFamily: "Heebo",
+            fontSize: getProportionateScreenWidth(14),
+            fontWeight: FontWeight.w500),
+        hintStyle: TextStyle(
+          color: kPrimaryColor.withAlpha(177),
+          fontFamily: "Heebo",
+          fontSize: getProportionateScreenWidth(13),
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: const EdgeInsets.only(
+          left: 0,
+          top: 0,
+          bottom: 0,
+        ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: kPrimaryColor,
+          ),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: kPrimaryColor,
+          ),
+        ),
+        border: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: kPrimaryColor,
+          ),
+        ),
+        errorBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 1.5,
+            color: kSecondaryColor,
+          ),
+        ),
+        focusedErrorBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 1.5,
+            color: kSecondaryColor,
+          ),
+        ),
+        labelText: "Your name",
+        hintText: "Shane Mahoney",
+      ),
+    )));
+  }
+}
