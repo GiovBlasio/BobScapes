@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -288,22 +289,53 @@ class _MappaState extends State<Mappa> {
                 Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
                   ),
                   margin: EdgeInsets.symmetric(
-                      vertical: getProportionateScreenHeight(8)),
+                    vertical: getProportionateScreenHeight(8),
+                  ),
                   height: getProportionateScreenHeight(4),
                   width: getProportionateScreenWidth(100),
                 ),
+                // Flexible(
+                //   child: InfiniteCarousel.builder(
+                //     itemCount: imgList.length,
+                //     itemExtent: 150,
+                // velocityFactor: 0.5,
+                // center: false,
+
+                //     //loop: _loop,
+                //     controller: InfiniteScrollController(),
+                //     // onIndexChanged: (index) {
+                //     //   if (_selectedIndex != index) {
+                //     //     setState(() {
+                //     //       _selectedIndex = index;
+                //     //     });
+                //     //   }
+                //     // },
+                //     itemBuilder: (context, itemIndex, realIndex) {
+                //       return Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 10.0),
+                //         child: GestureDetector(
+                //             onTap: () {
+                //              // _controller.animateToItem(realIndex);
+                //             },
+                //             child: Container(child: Text('data'), color: Colors.red,)),
+                //       );
+                //     },
+                //   ),
+                // ),
                 CarouselSlider.builder(
                   itemCount: usState.length,
                   options: CarouselOptions(
-                      enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                      enlargeFactor: 0.7,
+                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      enlargeFactor: 0.45,
                       onPageChanged: (index, reason) {},
-                      aspectRatio: 2,
+                      aspectRatio: 1.6,
                       enlargeCenterPage: true,
-                      viewportFraction: 0.5),
+                      viewportFraction: 0.52),
                   itemBuilder: (context, index, realIdx) {
                     return InkWell(
                       onTap: () {
@@ -315,59 +347,55 @@ class _MappaState extends State<Mappa> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Container(
-                          constraints: const BoxConstraints(minWidth: 150),
+                          padding: const EdgeInsets.all(20),
+                          constraints: const BoxConstraints(
+                            minWidth: 150,
+                          ),
                           decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  usState.keys.toList()[index],
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize:
-                                          getProportionateScreenWidth(14)),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  "Bob has\nbeen heard",
-                                  style: TextStyle(
-                                      fontSize:
-                                          getProportionateScreenWidth(12)),
-                                ),
-                                Container(
-                                  color: Colors.amber,
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "127",
-                                        style: TextStyle(
-                                            fontSize:
-                                                getProportionateScreenWidth(40),
-                                            fontWeight: FontWeight.w300),
-                                      ),
-                                      SizedBox(
-                                        width: getProportionateScreenWidth(15),
-                                      ),
-                                      Text(
-                                        "times",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize:
-                                                getProportionateScreenWidth(
-                                                    12)),
-                                      ),
-                                    ],
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                usState.keys.toList()[index],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: getProportionateScreenWidth(14)),
+                              ),
+                              const Spacer(
+                                flex: 1,
+                              ),
+                              Text(
+                                "Bob has\nbeen heard",
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(12)),
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "127",
+                                    style: TextStyle(
+                                        fontSize:
+                                            getProportionateScreenWidth(40),
+                                        fontWeight: FontWeight.w300),
                                   ),
-                                ),
-                              ],
-                            ),
+                                  SizedBox(
+                                    width: getProportionateScreenWidth(5),
+                                  ),
+                                  Text(
+                                    "times",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize:
+                                            getProportionateScreenWidth(12)),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -378,67 +406,6 @@ class _MappaState extends State<Mappa> {
                   height: getProportionateScreenHeight(18),
                 )
               ],
-            )
-        // CarouselSlider(
-        //   options: CarouselOptions(
-        //     //  autoPlay: true,
-        //     aspectRatio: 2.0,
-        //     enlargeCenterPage: true,
-        //     viewportFraction: 0.25,
-        //   ),
-        //   items: [
-        //     Card()
-        //     Container(color: Colors.red, child: Text("DAta")),
-        //     Container(color: Colors.red, child: Text("DAta")),
-        //     Container(color: Colors.red, child: Text("DAta")),
-        //     Container(color: Colors.red, child: Text("DAta")),
-        //     Container(color: Colors.red, child: Text("DAta")),
-        //     Text("DAta"),
-        //     Text("DAta"),
-        //     Text("DAta"),
-        //     Text("DAta"),
-        //   ],
-        // ),
-        // Container(
-        //   child: ListView.builder(
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: 15,
-        //     itemBuilder: ((context, index) => Text("data")),
-        //   ),
-        // )
-        //   (context) => DraggableScrollableSheet(
-        //     maxChildSize: 0.4,
-        //     initialChildSize: 0.4,
-        //     expand: false,
-        //     builder: (context, scrollController) => Container(
-        //       color: kPrimaryColor.withOpacity(0.3),
-        //       width: SizeConfig.screenWidth,
-        //       child: ListWheelScrollView(
-        //         useMagnifier: true,
-        //         // magnification: 1.5,
-        //         itemExtent: 200,
-        //         diameterRatio: pi,
-        //         squeeze: 2.1,
-        //         perspective: 0.01,
-        //         physics: const FixedExtentScrollPhysics(),
-        //         controller: FixedExtentScrollController(),
-        //         // padding: EdgeInsets.zero,
-        //         // scrollDirection: Axis.horizontal,
-        //         children: usState.entries
-        //             .map(
-        //               (maps) => Container(
-        //                 color: Colors.red,
-        //                 margin: const EdgeInsets.all(10),
-        //                 child: Text(
-        //                   maps.key,
-        //                   style: const TextStyle(fontSize: 24),
-        //                 ),
-        //               ),
-        //             )
-        //             .toList(),
-        //       ),
-        //     ),
-        //   ),
-        );
+            ));
   }
 }
