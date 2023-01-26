@@ -1,6 +1,6 @@
-import 'package:bobscapes/provider/birds_counter.dart';
-import 'package:bobscapes/provider/email_enabler.dart';
-import 'package:bobscapes/provider/heard_page1_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/views/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +13,10 @@ import 'routes.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
-      create: (context) => EmailEnabler(),
+      create: (context) => HeardPage3State(),
     ),
     ChangeNotifierProvider(
-      create: (context) => BirdsCounter(),
+      create: (context) => HeardPage2State(),
     ),
     ChangeNotifierProvider(
       create: (context) => HeardPage1State(),
@@ -25,7 +25,7 @@ void main() {
 }
 
 const TextTheme textTheme = TextTheme(
-  headline6: TextStyle(color: Color(0xff8b8b8b), fontSize: 18),
+  titleLarge: TextStyle(color: Color(0xff8b8b8b), fontSize: 18),
 );
 
 class MyApp extends StatelessWidget {
@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
 
 ThemeData theme(BuildContext context) {
   return ThemeData(
+    primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: const Color(0xfff0f0f0),
     fontFamily: "Heebo",
     appBarTheme: appBarTheme(),
@@ -125,6 +126,6 @@ AppBarTheme appBarTheme() {
     systemOverlayStyle:
         const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
     iconTheme: const IconThemeData(color: kPrimaryColor),
-    titleTextStyle: textTheme.headline6,
+    titleTextStyle: textTheme.titleLarge,
   );
 }

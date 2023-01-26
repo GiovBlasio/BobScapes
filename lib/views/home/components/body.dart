@@ -8,23 +8,30 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../constants.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({super.key});
 
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  late double imageHeight =
+      SizeConfig.screenHeight / 2 - getProportionateScreenHeight(45);
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25),
+      padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(25)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
             // margin: const EdgeInsets.only(left: 20, right: 20),
             color: Colors.grey,
-            height:
-                SizeConfig.screenHeight / 2 - getProportionateScreenHeight(45),
+            height: imageHeight,
             width: double.infinity,
           ),
           IconButton(
@@ -41,7 +48,8 @@ class Body extends StatelessWidget {
               icon: const Icon(Icons.info_outline)),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -121,7 +129,8 @@ class HomeButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding:
+            EdgeInsets.symmetric(horizontal: getProportionateScreenHeight(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

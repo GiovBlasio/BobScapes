@@ -1,5 +1,5 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page1_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/email_enabler.dart';
+import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +67,7 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                             ),
                             SizedBox(
                                 height: getProportionateScreenHeight(37),
-                                width: getProportionateScreenWidth(65),
+                                width: getProportionateScreenWidth(68),
                                 child: Text(
                                   item,
                                   softWrap: true,
@@ -88,9 +88,9 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
   String groupValue(int id) {
     switch (id) {
       case 1:
-        return Provider.of<EmailEnabler>(context, listen: false).moreInfo;
+        return Provider.of<HeardPage3State>(context, listen: false).moreInfo;
       case 2:
-        return Provider.of<EmailEnabler>(context, listen: false).learnMore;
+        return Provider.of<HeardPage3State>(context, listen: false).learnMore;
       default:
         return 'Yes';
     }
@@ -99,12 +99,12 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
   void changeValue(int id, String value) {
     switch (id) {
       case 1:
-        context.read<EmailEnabler>().enablingMoreInformation(value);
-        context.read<EmailEnabler>().changeMoreInfoValue(value);
+        context.read<HeardPage3State>().enablingMoreInformation(value);
+        context.read<HeardPage3State>().changeMoreInfoValue(value);
         break;
       case 2:
-        context.read<EmailEnabler>().enablingLearnMore(value);
-        context.read<EmailEnabler>().changeLearnMoreValue(value);
+        context.read<HeardPage3State>().enablingLearnMore(value);
+        context.read<HeardPage3State>().changeLearnMoreValue(value);
         break;
     }
   }

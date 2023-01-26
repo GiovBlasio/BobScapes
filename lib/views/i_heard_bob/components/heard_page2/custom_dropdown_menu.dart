@@ -1,4 +1,4 @@
-import 'package:bobscapes/provider/birds_counter.dart';
+import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,11 +25,12 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
   }
 
   void changeValue(String value) {
-    context.read<BirdsCounter>().changeWhatSee(value);
+    context.read<HeardPage2State>().changeWhatSee(value);
   }
 
   void _initialization() {
-    dropdownvalue = Provider.of<BirdsCounter>(context, listen: false).whatSee;
+    dropdownvalue =
+        Provider.of<HeardPage2State>(context, listen: false).whatSee;
   }
 
   @override

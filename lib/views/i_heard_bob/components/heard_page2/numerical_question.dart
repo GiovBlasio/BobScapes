@@ -1,5 +1,5 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/birds_counter.dart';
+import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +95,10 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               SizedBox(
                 width: getProportionateScreenWidth(55),
                 child: TextFormField(
-                  toolbarOptions: const ToolbarOptions(),
+                  // toolbarOptions: const ToolbarOptions(),
+                  contextMenuBuilder: (context, editableTextState) {
+                    return Container();
+                  },
                   enableInteractiveSelection: false,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
@@ -134,34 +137,34 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   void decrementCounter(int id) {
     switch (id) {
       case 1:
-        context.read<BirdsCounter>().decrementTotalCounter();
+        context.read<HeardPage2State>().decrementTotalCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).totalCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).totalCounter)
                 .toString();
         break;
       case 2:
-        context.read<BirdsCounter>().decrementMaleCounter();
+        context.read<HeardPage2State>().decrementMaleCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).maleCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).maleCounter)
                 .toString();
         break;
       case 3:
-        context.read<BirdsCounter>().decrementFemaleCounter();
+        context.read<HeardPage2State>().decrementFemaleCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).femaleCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).femaleCounter)
                 .toString();
         break;
       case 4:
-        context.read<BirdsCounter>().decrementYoungCounter();
+        context.read<HeardPage2State>().decrementYoungCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).youngCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).youngCounter)
                 .toString();
         break;
 
       case 5:
-        context.read<BirdsCounter>().decrementBroodsCounter();
+        context.read<HeardPage2State>().decrementBroodsCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).broodsCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).broodsCounter)
                 .toString();
         break;
       default:
@@ -171,33 +174,33 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   void incrementCounter(int id) {
     switch (id) {
       case 1:
-        context.read<BirdsCounter>().incrementTotalCounter();
+        context.read<HeardPage2State>().incrementTotalCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).totalCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).totalCounter)
                 .toString();
         break;
       case 2:
-        context.read<BirdsCounter>().incrementMaleCounter();
+        context.read<HeardPage2State>().incrementMaleCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).maleCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).maleCounter)
                 .toString();
         break;
       case 3:
-        context.read<BirdsCounter>().incrementFemaleCounter();
+        context.read<HeardPage2State>().incrementFemaleCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).femaleCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).femaleCounter)
                 .toString();
         break;
       case 4:
-        context.read<BirdsCounter>().incrementYoungCounter();
+        context.read<HeardPage2State>().incrementYoungCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).youngCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).youngCounter)
                 .toString();
         break;
       case 5:
-        context.read<BirdsCounter>().incrementBroodsCounter();
+        context.read<HeardPage2State>().incrementBroodsCounter();
         controller.text =
-            (Provider.of<BirdsCounter>(context, listen: false).broodsCounter)
+            (Provider.of<HeardPage2State>(context, listen: false).broodsCounter)
                 .toString();
         break;
       default:
@@ -207,19 +210,24 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   String initialValue(int id) {
     switch (id) {
       case 1:
-        return (Provider.of<BirdsCounter>(context, listen: false).totalCounter)
+        return (Provider.of<HeardPage2State>(context, listen: false)
+                .totalCounter)
             .toString();
       case 2:
-        return (Provider.of<BirdsCounter>(context, listen: false).maleCounter)
+        return (Provider.of<HeardPage2State>(context, listen: false)
+                .maleCounter)
             .toString();
       case 3:
-        return (Provider.of<BirdsCounter>(context, listen: false).femaleCounter)
+        return (Provider.of<HeardPage2State>(context, listen: false)
+                .femaleCounter)
             .toString();
       case 4:
-        return (Provider.of<BirdsCounter>(context, listen: false).youngCounter)
+        return (Provider.of<HeardPage2State>(context, listen: false)
+                .youngCounter)
             .toString();
       case 5:
-        return (Provider.of<BirdsCounter>(context, listen: false).broodsCounter)
+        return (Provider.of<HeardPage2State>(context, listen: false)
+                .broodsCounter)
             .toString();
       default:
         return '0';

@@ -1,7 +1,7 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/birds_counter.dart';
-import 'package:bobscapes/provider/email_enabler.dart';
-import 'package:bobscapes/provider/heard_page1_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/i_heard_bob_thanks/i_heard_bob_thanks_screen.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,7 @@ class _BodyState extends State<Body> {
                 // page = page.runtimeType == HeardPage1
                 //     ? HeardPage2()
                 //     : HeardPage3();
-               // top = getProportionateScreenHeight(285);
+                // top = getProportionateScreenHeight(285);
                 // top = page.runtimeType == HeardPage2
                 //     ? getProportionateScreenHeight(235)
                 //     : getProportionateScreenHeight(150);
@@ -123,7 +123,7 @@ class _BodyState extends State<Body> {
                       // page = page.runtimeType == HeardPage1
                       //     ? HeardPage2()
                       //     : HeardPage3();
-                 //     top = getProportionateScreenHeight(60);
+                      //     top = getProportionateScreenHeight(60);
                       // top = page.runtimeType == HeardPage2
                       //  F   ? getProportionateScreenHeight(235)
                       //     : getProportionateScreenHeight(150);
@@ -142,7 +142,7 @@ class _BodyState extends State<Body> {
                       // page = page.runtimeType == HeardPage1
                       //     ? HeardPage2()
                       //     : HeardPage3();
-                   //   top = getProportionateScreenHeight(180);
+                      //   top = getProportionateScreenHeight(180);
                       // top = page.runtimeType == HeardPage2
                       //     ? getProportionateScreenHeight(235)
                       //     : getProportionateScreenHeight(150);
@@ -177,7 +177,7 @@ class _BodyState extends State<Body> {
                       // page = page.runtimeType == HeardPage1
                       //     ? HeardPage2()
                       //     : HeardPage3();
-                  //    top = getProportionateScreenHeight(285);
+                      //    top = getProportionateScreenHeight(285);
                       // top = page.runtimeType == HeardPage2
                       //     ? getProportionateScreenHeight(235)
                       //     : getProportionateScreenHeight(150);
@@ -193,9 +193,9 @@ class _BodyState extends State<Body> {
                   text: "Send",
                   press: () {
                     //TODO inviare i dati all'API
-                    context.read<EmailEnabler>().resetAll();
+                    context.read<HeardPage3State>().resetAll();
                     context.read<HeardPage1State>().resetAll();
-                    context.read<BirdsCounter>().resetAll();
+                    context.read<HeardPage2State>().resetAll();
 
                     Navigator.popAndPushNamed(
                         context, IHeardBobThanksScreen.routeName);

@@ -8,7 +8,8 @@ class BottomRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return AnimatedPositioned(
+      duration: Duration(seconds: 1),
         bottom: getProportionateScreenHeight(50),
         left: getProportionateScreenHeight(25),
         right: getProportionateScreenHeight(25),

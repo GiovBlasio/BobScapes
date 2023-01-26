@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class EmailEnabler with ChangeNotifier {
+class HeardPage3State with ChangeNotifier {
   bool _moreInformationIsTrue = true;
   bool _learnMoreIsTrue = true;
   String _moreInfoValue = 'Yes';

@@ -1,5 +1,5 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/email_enabler.dart';
+import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +10,10 @@ class HeardPage3 extends StatefulWidget {
   const HeardPage3({super.key});
 
   @override
-  State<HeardPage3> createState() => HeardPage3State();
+  State<HeardPage3> createState() => _HeardPage3State();
 }
 
-class HeardPage3State extends State<HeardPage3> {
+class _HeardPage3State extends State<HeardPage3> {
   TextEditingController commentController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
@@ -26,20 +26,21 @@ class HeardPage3State extends State<HeardPage3> {
   }
 
   void changeComment(String comment) {
-    context.read<EmailEnabler>().changeComment(comment);
+    context.read<HeardPage3State>().changeComment(comment);
   }
 
   void changeEmail(String email) {
-    context.read<EmailEnabler>().changeEmail(email);
+    context.read<HeardPage3State>().changeEmail(email);
   }
 
   void _initialization() {
-    isEnabled = Provider.of<EmailEnabler>(context, listen: false).isEnable;
-    String comment = Provider.of<EmailEnabler>(context, listen: false).comment;
+    isEnabled = Provider.of<HeardPage3State>(context, listen: false).isEnable;
+    String comment =
+        Provider.of<HeardPage3State>(context, listen: false).comment;
 
     if (comment != '') commentController = TextEditingController(text: comment);
 
-    String email = Provider.of<EmailEnabler>(context, listen: false).email;
+    String email = Provider.of<HeardPage3State>(context, listen: false).email;
 
     if (email != '' && isEnabled) {
       emailController = TextEditingController(text: email);
@@ -99,7 +100,7 @@ class HeardPage3State extends State<HeardPage3> {
                           horizontal: getProportionateScreenWidth(15)),
                       child: Form(
                           child: TextFormField(
-                        enabled: context.watch<EmailEnabler>().isEnable,
+                        enabled: context.watch<HeardPage3State>().isEnable,
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         onTap: (() {
@@ -116,14 +117,17 @@ class HeardPage3State extends State<HeardPage3> {
                           return null;
                         },
                         decoration: InputDecoration(
+                          enabled: context.watch<HeardPage3State>().isEnable,
                           labelStyle: TextStyle(
-                              color: kPrimaryColor,
-                              // fontFamily: "Heebo",
+                              color: context.watch<HeardPage3State>().isEnable
+                                  ? kPrimaryColor
+                                  : null,
                               fontSize: getProportionateScreenWidth(18),
                               fontWeight: FontWeight.w500),
                           hintStyle: TextStyle(
-                            color: kPrimaryColor.withAlpha(177),
-                            fontFamily: "Heebo",
+                            color: context.watch<HeardPage3State>().isEnable
+                                ? kPrimaryColor
+                                : null,
                             fontSize: getProportionateScreenWidth(14),
                           ),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -141,7 +145,7 @@ class HeardPage3State extends State<HeardPage3> {
                           disabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: Colors.amber,
+                              color: kPrimaryColor,
                             ),
                           ),
                           focusedBorder: const UnderlineInputBorder(

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class BirdsCounter with ChangeNotifier {
+class HeardPage2State with ChangeNotifier {
   int _maleCounter = 0;
   int _femaleCounter = 0;
   int _youngCounter = 0;
