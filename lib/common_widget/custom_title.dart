@@ -28,7 +28,7 @@ class CustomTitle extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(vertical: getProportionateScreenHeight(10)),
           width: double.infinity,
-          height: getProportionateScreenHeight(45),
+          height: getProportionateScreenHeight(50),
           color: kPrimaryColor,
           child: Center(
             child: Text(

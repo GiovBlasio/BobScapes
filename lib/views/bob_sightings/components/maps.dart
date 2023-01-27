@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -160,57 +159,6 @@ class _MappaState extends State<Mappa> {
             ],
           ),
         ),
-        //   Positioned(
-        //       bottom: 100,
-        //       left: 0,
-        //       right: 0,
-        //       top: 0,
-        //       child: DraggableScrollableSheet(
-        //         expand: false,
-        //         builder:
-        //             (BuildContext context, ScrollController scrollController) {
-        //           return ListWheelScrollView(
-        //               useMagnifier: true,
-        //               itemExtent: 200,
-        //               children: [
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //                 Container(
-        //                   height: 50,
-        //                   width: 100,
-        //                   padding: EdgeInsets.all(10),
-        //                 ),
-        //               ]);
-        //         },
-        //       ))
       ],
     );
   }
@@ -277,9 +225,6 @@ class _MappaState extends State<Mappa> {
 
   void _showBottomSheet(BuildContext context) {
     showBottomSheet(
-        // constraints: BoxConstraints(
-        //     // maxHeight: getProportionateScreenHeight(500),
-        //     ),
         backgroundColor: const Color.fromARGB(150, 158, 158, 158),
         context: context,
         builder: (context) => Column(
@@ -299,34 +244,6 @@ class _MappaState extends State<Mappa> {
                   height: getProportionateScreenHeight(4),
                   width: getProportionateScreenWidth(100),
                 ),
-                // Flexible(
-                //   child: InfiniteCarousel.builder(
-                //     itemCount: imgList.length,
-                //     itemExtent: 150,
-                // velocityFactor: 0.5,
-                // center: false,
-
-                //     //loop: _loop,
-                //     controller: InfiniteScrollController(),
-                //     // onIndexChanged: (index) {
-                //     //   if (_selectedIndex != index) {
-                //     //     setState(() {
-                //     //       _selectedIndex = index;
-                //     //     });
-                //     //   }
-                //     // },
-                //     itemBuilder: (context, itemIndex, realIndex) {
-                //       return Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: 10.0),
-                //         child: GestureDetector(
-                //             onTap: () {
-                //              // _controller.animateToItem(realIndex);
-                //             },
-                //             child: Container(child: Text('data'), color: Colors.red,)),
-                //       );
-                //     },
-                //   ),
-                // ),
                 CarouselSlider.builder(
                   itemCount: usState.length,
                   options: CarouselOptions(

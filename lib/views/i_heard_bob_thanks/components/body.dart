@@ -1,7 +1,6 @@
 import 'package:bobscapes/common_widget/disclaimer.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/home/home.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
@@ -75,8 +74,7 @@ class Body extends StatelessWidget {
               backgroundColor: Colors.white,
               padding: const EdgeInsets.all(0),
             ),
-            onPressed: () =>
-                Navigator.popAndPushNamed(context, HomeScreen.routeName),
+            onPressed: () => Navigator.pop(context),
             child: Text(
               'Back to home',
               style: TextStyle(

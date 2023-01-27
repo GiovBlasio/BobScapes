@@ -43,12 +43,12 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               padding: EdgeInsets.only(
                   left: getProportionateScreenWidth(15),
                   bottom: getProportionateScreenWidth(4),
-                  top: getProportionateScreenHeight(15)),
+                  top: getProportionateScreenHeight(10)),
               child: Text(
                 "Date",
                 style: TextStyle(
                     fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w700),
               ),
             ),
             const Spacer(),
@@ -56,12 +56,12 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               padding: EdgeInsets.only(
                   left: getProportionateScreenWidth(15),
                   bottom: getProportionateScreenWidth(4),
-                  top: getProportionateScreenHeight(15)),
+                  top: getProportionateScreenHeight(10)),
               child: Text(
                 "Time",
                 style: TextStyle(
                     fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w700),
               ),
             ),
             const Spacer()
@@ -143,8 +143,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 Text(
                   "Change",
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(13),
-                      fontWeight: FontWeight.w500),
+                      fontSize: getProportionateScreenWidth(12),
+                      fontWeight: FontWeight.w700),
                 )
               ],
             ),
@@ -154,7 +154,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
             Flexible(
               child: TextFormField(
                 style: TextStyle(
-                    fontSize: getProportionateScreenWidth(13.5),
+                    fontSize: getProportionateScreenWidth(12.5),
                     color: Colors.white,
                     fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
@@ -241,8 +241,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 Text(
                   "Change",
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(13),
-                      fontWeight: FontWeight.w500),
+                      fontSize: getProportionateScreenWidth(12),
+                      fontWeight: FontWeight.w700),
                 )
               ],
             ),
@@ -310,12 +310,12 @@ class _LocationFormState extends State<LocationForm> {
           padding: EdgeInsets.only(
               left: getProportionateScreenWidth(15),
               bottom: getProportionateScreenWidth(4),
-              top: getProportionateScreenHeight(20)),
+              top: getProportionateScreenHeight(10)),
           child: Text(
             "Latitude/Longitude",
             style: TextStyle(
                 fontSize: getProportionateScreenWidth(13),
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w700),
           ),
         ),
         Row(children: [
@@ -325,7 +325,10 @@ class _LocationFormState extends State<LocationForm> {
               children: [
                 Flexible(
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: getProportionateScreenWidth(14)),
                     cursorColor: Colors.white,
                     controller: controller,
                     readOnly: true,
@@ -385,8 +388,8 @@ class _LocationFormState extends State<LocationForm> {
                     Text(
                       "Change",
                       style: TextStyle(
-                          fontSize: getProportionateScreenWidth(13),
-                          fontWeight: FontWeight.w500),
+                          fontSize: getProportionateScreenWidth(12),
+                          fontWeight: FontWeight.w700),
                     )
                   ],
                 ),

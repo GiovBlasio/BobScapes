@@ -1,3 +1,5 @@
+import 'package:bobscapes/common_widget/disclaimer.dart';
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
 import 'package:bobscapes/views/hear_bob/hear_bob.dart';
@@ -5,8 +7,6 @@ import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
-
-import '../../../constants.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -29,22 +29,15 @@ class _BodyState extends State<Body> {
           Container(
             margin: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
-            // margin: const EdgeInsets.only(left: 20, right: 20),
             color: Colors.grey,
             height: imageHeight,
             width: double.infinity,
           ),
           IconButton(
-              // alignment: Alignment.bottomCenter,
+              splashRadius: 0.1,
               padding: EdgeInsets.zero,
               onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => Container(
-                      color: Colors.red,
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
+                  context: context, builder: (context) => const Disclaimer()),
               icon: const Icon(Icons.info_outline)),
           Flexible(
             child: Padding(
@@ -63,12 +56,8 @@ class _BodyState extends State<Body> {
                   HomeButton(
                       title: 'Hey, I heard a Bob!',
                       iconPath: "assets/icons/gps.svg",
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: ((context) => const IHeardBobScreen())
-                          //     _showModalBottomSheet(
-                          //           context,
-                          )),
+                      onPressed: () => Navigator.pushNamed(
+                          context, IHeardBobScreen.routeName)),
                   HomeButton(
                     title: 'Bob Sightings Map',
                     iconPath: "assets/icons/eye.svg",

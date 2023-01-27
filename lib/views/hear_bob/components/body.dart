@@ -1,7 +1,11 @@
 import 'package:bobscapes/common_widget/bottom_buttons.dart';
 import 'package:bobscapes/common_widget/custom_title.dart';
+import 'package:bobscapes/constants.dart';
+import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
+import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'custom_alert.dart';
 import 'custom_card.dart';
@@ -14,13 +18,16 @@ class Body extends StatelessWidget {
     return Stack(
       children: [
         ListView.separated(
-          padding:
-              const EdgeInsets.only(top: 65, left: 18, right: 18, bottom: 85),
-          itemCount: 4,
+          padding: EdgeInsets.only(
+              top: getProportionateScreenHeight(65),
+              left: getProportionateScreenWidth(18),
+              right: getProportionateScreenWidth(18),
+              bottom: getProportionateScreenHeight(85)),
+          itemCount: 2,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
               showDialog(
-                barrierColor: Colors.white.withOpacity(0.9),
+                  barrierColor: Colors.white.withOpacity(0.9),
                   context: context,
                   builder: (context) => const CustomAlert(
                         title: "Fall covey Call",
@@ -31,20 +38,158 @@ class Body extends StatelessWidget {
               title: "Male Bobwhite Spring Call",
             ),
           ),
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 25,
+          separatorBuilder: (context, index) => SizedBox(
+            height: getProportionateScreenHeight(25),
           ),
         ),
         const CustomTitle(title: "Hear Bob"),
         Positioned(
           bottom: 0,
-          child: BottomButtons(
-            title: "Bob Sightings Map",
-            onPress: () => Navigator.popAndPushNamed(
-                context, BobSightingsScreen.routeName),
-            icon: "assets/icons/eye.svg",
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () => Navigator.popAndPushNamed(
+                    context, BobSightingsScreen.routeName),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          spreadRadius: 4,
+                          blurRadius: 4,
+                          offset: Offset(0, -4),
+                        ),
+                      ]),
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                    ),
+                    elevation: 10,
+                    margin: const EdgeInsets.all(0),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: getProportionateScreenHeight(10)),
+                        width: SizeConfig.screenWidth / 2,
+                        height: getProportionateScreenHeight(75),
+                        color: Colors.white,
+                        child: Row(
+                          //crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // SvgPicture.asset(
+                            //   icon,
+                            //   height: getProportionateScreenHeight(0),
+                            //   color: Colors.white,
+                            // ),
+                            SizedBox(
+                              // color: Colors.red,
+                              width: getProportionateScreenWidth(120),
+                              child: Text(
+                                "Bob Sightings\nMap",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(16),
+                                    fontWeight: FontWeight.w500,
+                                    color: kPrimaryColor),
+                              ),
+                            ),
+                            SvgPicture.asset(
+                              "assets/icons/eye.svg",
+                              height: getProportionateScreenHeight(30),
+                              color: kPrimaryColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.popAndPushNamed(context, IHeardBobScreen.routeName);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          spreadRadius: 4,
+                          blurRadius: 4,
+                          offset: Offset(0, -4), // Shadow position
+                        ),
+                      ]),
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                    ),
+                    elevation: 10,
+                    margin: const EdgeInsets.all(0),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: getProportionateScreenHeight(10)),
+                        width: SizeConfig.screenWidth / 2,
+                        height: getProportionateScreenHeight(75),
+                        color: Colors.white,
+                        child: Row(
+                          //crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/gps.svg",
+                              height: getProportionateScreenHeight(30),
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: getProportionateScreenWidth(110),
+                              child: Text(
+                                "Hey, I heard Bob!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(16),
+                                    fontWeight: FontWeight.w500,
+                                    color: kPrimaryColor),
+                              ),
+                            ),
+                            SvgPicture.asset(
+                              "assets/icons/gps.svg",
+                              height: getProportionateScreenHeight(30),
+                              color: kPrimaryColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
+      //   Positioned(
+      //     bottom: 0,
+      //     child: BottomButtons(
+      //       title: "Bob Sightings Map",
+      //       onPress: () => Navigator.popAndPushNamed(
+      //           context, BobSightingsScreen.routeName),
+      //       icon: "assets/icons/eye.svg",
+      //     ),
+      //   ),
       ],
     );
   }

@@ -1,7 +1,7 @@
 import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
-import 'package:bobscapes/views/welcome/welcome.dart';
+import 'package:bobscapes/views/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,7 +25,8 @@ void main() {
 }
 
 const TextTheme textTheme = TextTheme(
-  titleLarge: TextStyle(color: Color(0xff8b8b8b), fontSize: 18),
+  titleLarge: TextStyle(
+      color: Color(0xff8b8b8b), fontSize: 18, fontFamily: 'FjallaOne'),
 );
 
 class MyApp extends StatelessWidget {
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bobscapes',
       theme: theme(context),
-      initialRoute: WelcomeScreen.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: routes,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [Locale('en'), Locale('it')],
@@ -54,69 +55,71 @@ ThemeData theme(BuildContext context) {
   return ThemeData(
     primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: const Color(0xfff0f0f0),
-    fontFamily: "Heebo",
     appBarTheme: appBarTheme(),
-    textTheme: Theme.of(context).textTheme.apply(bodyColor: kPrimaryColor),
-    //inputDecorationTheme: inputDecorationTheme(),
+    textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: kPrimaryColor,
+          fontFamily: 'Manrope',
+        ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
 
-InputDecorationTheme inputDecorationTheme() {
-  UnderlineInputBorder underlineInputBorder = underlineBorder(
-    color: kPrimaryColor,
-    width: 1.5,
-  );
-  UnderlineInputBorder errorInputBorder = underlineBorder(
-    color: kSecondaryColor,
-    width: 1.5,
-  );
-  UnderlineInputBorder focusedErrorBorder = underlineBorder(
-    color: kSecondaryColor,
-    width: 1.5,
-  );
-  return InputDecorationTheme(
-    labelStyle: const TextStyle(color: kPrimaryColor, fontFamily: "Heebo"),
-    hintStyle: TextStyle(
-      color: kPrimaryColor.withAlpha(177),
-      fontFamily: "Heebo",
-      fontSize: 13,
-    ),
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    contentPadding: const EdgeInsets.only(
-      left: 0,
-      top: 0,
-      bottom: 0,
-    ),
-    enabledBorder: underlineInputBorder,
-    focusedBorder: underlineInputBorder,
-    border: underlineInputBorder,
-    errorBorder: errorInputBorder,
-    focusedErrorBorder: focusedErrorBorder,
-  );
-}
+// InputDecorationTheme inputDecorationTheme() {
+//   UnderlineInputBorder underlineInputBorder = underlineBorder(
+//     color: kPrimaryColor,
+//     width: 1.5,
+//   );
+//   UnderlineInputBorder errorInputBorder = underlineBorder(
+//     color: kSecondaryColor,
+//     width: 1.5,
+//   );
+//   UnderlineInputBorder focusedErrorBorder = underlineBorder(
+//     color: kSecondaryColor,
+//     width: 1.5,
+//   );
+//   return InputDecorationTheme(
+//     labelStyle: const TextStyle(
+//       color: kPrimaryColor,
+//     ),
+//     hintStyle: TextStyle(
+//       color: kPrimaryColor.withAlpha(177),
+//       fontSize: 13,
+//     ),
+//     floatingLabelBehavior: FloatingLabelBehavior.always,
+//     contentPadding: const EdgeInsets.only(
+//       left: 0,
+//       top: 0,
+//       bottom: 0,
+//     ),
+//     enabledBorder: underlineInputBorder,
+//     focusedBorder: underlineInputBorder,
+//     border: underlineInputBorder,
+//     errorBorder: errorInputBorder,
+//     focusedErrorBorder: focusedErrorBorder,
+//   );
+// }
 
-OutlineInputBorder outlineBorder(
-    {required Color color, required double width}) {
-  return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(28),
-    borderSide: BorderSide(
-      width: width,
-      color: color,
-    ),
-    gapPadding: 10,
-  );
-}
+// OutlineInputBorder outlineBorder(
+//     {required Color color, required double width}) {
+//   return OutlineInputBorder(
+//     borderRadius: BorderRadius.circular(28),
+//     borderSide: BorderSide(
+//       width: width,
+//       color: color,
+//     ),
+//     gapPadding: 10,
+//   );
+// }
 
-UnderlineInputBorder underlineBorder(
-    {required Color color, required double width}) {
-  return UnderlineInputBorder(
-    borderSide: BorderSide(
-      width: width,
-      color: color,
-    ),
-  );
-}
+// UnderlineInputBorder underlineBorder(
+//     {required Color color, required double width}) {
+//   return UnderlineInputBorder(
+//     borderSide: BorderSide(
+//       width: width,
+//       color: color,
+//     ),
+//   );
+// }
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(

@@ -89,10 +89,7 @@ class BottomButtons extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: ((context) => const IHeardBobScreen()));
-            //  _showModalBottomSheet(context);
+            Navigator.popAndPushNamed(context, IHeardBobScreen.routeName);
           },
           child: Container(
             decoration: BoxDecoration(

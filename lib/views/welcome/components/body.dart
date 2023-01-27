@@ -1,11 +1,7 @@
-import 'dart:async';
-import 'dart:ui';
-
-import 'package:bobscapes/common_widget/logo_animated.dart';
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -15,369 +11,148 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  bool animate = false;
-  bool opacity = false;
+  int currentIndex = 0;
 
-  late double topLogo = getProportionateScreenHeight(110);
-  late double leftLogo = getProportionateScreenWidth(40);
-  late double bottomTextRow = getProportionateScreenHeight(-100);
-  late double bottomBackground = getProportionateScreenHeight(0);
-  late double imageWidth = SizeConfig.screenWidth;
-  late double iconSize = getProportionateScreenWidth(75);
-  late double textSize = getProportionateScreenWidth(35);
-  late double leftFirstPin = getProportionateScreenWidth(-50);
-  late double bottomMainPhrase = getProportionateScreenHeight(-200);
-  late double rightSecondPin = getProportionateScreenWidth(-60);
-
-  @override
-  void initState() {
-    super.initState();
-    _initialization();
-  }
-
-  void _initialization() async {
-    await Future.delayed(const Duration(milliseconds: 2000));
-
-    setState(() {
-      opacity = true;
-      topLogo = getProportionateScreenHeight(150);
-      bottomTextRow = getProportionateScreenHeight(30);
-      bottomBackground = getProportionateScreenHeight(100);
-    });
-
-    await Future.delayed(const Duration(milliseconds: 5000));
-
-    setState(() {
-      animate = true;
-      topLogo = getProportionateScreenHeight(130);
-      leftLogo = getProportionateScreenWidth(30);
-      imageWidth = imageWidth + 100;
-      iconSize = getProportionateScreenWidth(65);
-      textSize = getProportionateScreenWidth(33);
-      leftFirstPin = getProportionateScreenWidth(-17);
-      bottomMainPhrase = getProportionateScreenHeight(250);
-      rightSecondPin = getProportionateScreenWidth(10);
-    });
-
-    await Future.delayed(
-      const Duration(milliseconds: 5000),
-      () => Navigator.push(
-        context,
-        PageRouteBuilder(
-            transitionDuration: const Duration(seconds: 2),
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const HomeScreen(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              const begin = Offset(-1, 0);
-              const end = Offset.zero;
-              const curve = Curves.slowMiddle;
-
-              var tween =
-                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              final offsetAnimation = animation.drive(tween);
-
-              return SlideTransition(
-                position: offsetAnimation,
-                child: child,
-              );
-            }),
+  AnimatedContainer buildDot({required int index}) {
+    return AnimatedContainer(
+      duration: const Duration(seconds: 1),
+      margin: const EdgeInsets.only(right: 5),
+      height: 6,
+      width: currentIndex == index ? 20 : 6,
+      decoration: BoxDecoration(
+        color: currentIndex == index ? kPrimaryColor : const Color(0xffd8d8d8),
+        borderRadius: BorderRadius.circular(3),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Stack(
       children: [
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
-          bottom: bottomBackground,
-          child: AnimatedOpacity(
-            opacity: opacity ? 1 : 0,
-            duration: const Duration(seconds: 1),
-            child: AnimatedContainer(
-              duration: const Duration(seconds: 1),
-              width: imageWidth,
-              child: Image.asset(
-                "assets/images/bobwhite.jpg",
-              ),
-            ),
+        Opacity(
+          opacity: 0.5,
+          child: Image.asset(
+            "assets/images/Bob Scapes Background.jpg",
+            fit: BoxFit.fill,
+            height: SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
           ),
         ),
-        Positioned.fill(
-            child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 20,
-            sigmaY: 20,
-          ),
-          child: const SizedBox(),
-        )),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            top: topLogo,
-            left: leftLogo,
-            child: AnimatedOpacity(
-              opacity: opacity ? 1 : 0,
-              duration: const Duration(seconds: 1),
-              child: AnimatedLogo(
-                  iconColor: Colors.white,
-                  iconSize: iconSize,
-                  textSize: textSize,
-                  textColor: const Color(0xbbffffff),
-                  duration: const Duration(seconds: 1)),
-            )),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            top: getProportionateScreenHeight(290),
-            left: leftFirstPin,
-            child: SvgPicture.asset(
-              "assets/icons/pin.svg",
-              height: getProportionateScreenHeight(45),
-              color: Colors.white,
-            )),
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
-          // top: animate
-          //     ? getProportionateScreenHeight(375)
-          //     : SizeConfig.screenHeight,
-          left: getProportionateScreenHeight(25),
-          bottom: bottomMainPhrase,
-          child: Text(
-            "BOBWHITES\nIN OUR\nLANDSCAPES",
-            style: TextStyle(
-                height: 1,
-                fontSize: getProportionateScreenWidth(44),
-                color: Colors.white,
-                fontStyle: FontStyle.italic),
-          ),
-        ),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            top: animate
-                ? getProportionateScreenHeight(545)
-                : getProportionateScreenHeight(500),
-            right: rightSecondPin,
-            child: SvgPicture.asset(
-              "assets/icons/pin.svg",
-              height: getProportionateScreenHeight(70),
-              color: Colors.white,
-            )),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            bottom: bottomTextRow,
-            left: getProportionateScreenHeight(25),
-            right: getProportionateScreenHeight(25),
-            child: AnimatedOpacity(
-              opacity: opacity ? 1 : 0,
-              duration: const Duration(seconds: 2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Quail\nForever",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  Text("Landscape\nPartnership",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(14),
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic)),
-                  Text("Working Lands\nWildlife",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(14),
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic)),
-                ],
-              ),
-            ))
+        buildContent(context),
       ],
     );
   }
-}
 
-// class Welcome extends StatelessWidget {
-//   const Welcome({
-//     super.key,
-//     required this.animate,
-//   });
-
-//   final bool animate;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       children: [
-//         AnimatedPositioned(
-//           duration: const Duration(seconds: 1),
-//           bottom: animate ? 100 : 0,
-//           child: Image.asset(
-//             "assets/images/bobwhite.jpg",
-//             // width: SizeConfig.screenWidth,
-//             // height: SizeConfig.screenHeight,
-//           ),
-//         ),
-//         Positioned.fill(
-//             child: BackdropFilter(
-//           filter: ImageFilter.blur(
-//             sigmaX: 20,
-//             sigmaY: 20,
-//           ),
-//           child: SizedBox(),
-//         )),
-//         AnimatedPositioned(
-//             duration: const Duration(seconds: 1),
-//             top: animate
-//                 ? getProportionateScreenHeight(130)
-//                 : getProportionateScreenHeight(150),
-//             left: animate
-//                 ? getProportionateScreenWidth(30)
-//                 : getProportionateScreenWidth(40),
-//             child: AnimatedOpacity(
-//               opacity: animate ? 1 : 0,
-//               duration: Duration(seconds: 1),
-//               child: AnimatedLogo(
-//                   iconColor: Colors.white,
-//                   iconSize: animate
-//                       ? getProportionateScreenWidth(
-//                           65) //getProportionateScreenWidth(85)
-//                       : getProportionateScreenWidth(
-//                           75), //getProportionateScreenWidth(75),
-//                   textSize: animate
-//                       ? getProportionateScreenWidth(
-//                           33) //getProportionateScreenWidth(35)
-//                       : getProportionateScreenWidth(
-//                           35), //getProportionateScreenWidth(33),
-//                   textColor: const Color(0xbbffffff),
-//                   duration: const Duration(seconds: 1)),
-//             )),
-//         AnimatedPositioned(
-//             duration: const Duration(seconds: 1),
-//             top: getProportionateScreenHeight(290),
-//             left: animate
-//                 ? getProportionateScreenWidth(-17)
-//                 : getProportionateScreenWidth(-50),
-//             // right: getProportionateScreenWidth(5),
-//             child: SvgPicture.asset(
-//               "assets/icons/pin.svg",
-//               height: getProportionateScreenHeight(45),
-//               color: Colors.white,
-//             )),
-//         AnimatedPositioned(
-//           duration: const Duration(seconds: 1),
-//           top: animate
-//               ? getProportionateScreenHeight(375)
-//               : SizeConfig.screenHeight,
-//           left: getProportionateScreenHeight(25),
-//           // right: getProportionateScreenWidth(5),
-//           child: Text(
-//             "BOBWHITES\nIN OUR\nLANDSCAPES",
-//             style: TextStyle(
-//                 height: 1,
-//                 fontSize: getProportionateScreenWidth(44),
-//                 color: Colors.white,
-//                 fontStyle: FontStyle.italic),
-//           ),
-//         ),
-//         AnimatedPositioned(
-//             duration: Duration(seconds: 1),
-//             top: animate
-//                 ? getProportionateScreenHeight(545)
-//                 : getProportionateScreenHeight(500),
-//             right: animate
-//                 ? getProportionateScreenWidth(10)
-//                 : getProportionateScreenWidth(-60),
-//             // right: getProportionateScreenWidth(5),
-//             child: SvgPicture.asset(
-//               "assets/icons/pin.svg",
-//               height: getProportionateScreenHeight(70),
-//               color: Colors.white,
-//             )),
-//         AnimatedPositioned(
-//             duration: const Duration(seconds: 1),
-//             bottom: animate
-//                 ? getProportionateScreenHeight(30)
-//                 : getProportionateScreenHeight(-100),
-//             left: getProportionateScreenHeight(25),
-//             right: getProportionateScreenHeight(25),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 SizedBox(
-//                   //  width: 75,
-//                   child: Text(
-//                     "Quail\nForever",
-//                     textAlign: TextAlign.center,
-//                     style: TextStyle(
-//                         fontSize: getProportionateScreenWidth(14),
-//                         color: Colors.white,
-//                         fontStyle: FontStyle.italic),
-//                   ),
-//                 ),
-//                 SizedBox(
-//                   //  width: 80,
-//                   child: Text("Landscape\nPartnership",
-//                       textAlign: TextAlign.center,
-//                       style: TextStyle(
-//                           fontSize: getProportionateScreenWidth(14),
-//                           color: Colors.white,
-//                           fontStyle: FontStyle.italic)),
-//                 ),
-//                 SizedBox(
-//                   //width: 110,
-//                   child: Text("Working Lands\nWildlife",
-//                       textAlign: TextAlign.center,
-//                       style: TextStyle(
-//                           fontSize: getProportionateScreenWidth(14),
-//                           color: Colors.white,
-//                           fontStyle: FontStyle.italic)),
-//                 ),
-//               ],
-//             ))
-//       ],
-//     );
-//   }
-// }
-
-class Transition extends StatelessWidget {
-  const Transition({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: FloatingActionButton(onPressed: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-              transitionDuration: const Duration(seconds: 2),
-              pageBuilder: (context, animation, secondaryAnimation) =>
-                  const HomeScreen(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(-1, 0);
-                const end = Offset.zero;
-                const curve = Curves.slowMiddle;
-
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: curve));
-                final offsetAnimation = animation.drive(tween);
-
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: child,
-                );
-              }),
-        );
-      }),
+  SizedBox buildContent(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        children: [
+          Opacity(
+            opacity: 0,
+            child: Image.asset(
+              "assets/images/Bob Scapes Background.jpg",
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: PageView(
+              onPageChanged: (value) {
+                setState(() {
+                  currentIndex = value;
+                });
+              },
+              children: [
+                Column(
+                  children: const [
+                    Spacer(),
+                    Text(
+                      "Got It!",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "> Welcome to Bobwhites on our Landscapes.",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      "We appreciate your contribution to conservation!",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                    Spacer()
+                  ],
+                ),
+                Column(
+                  children: const [
+                    Spacer(),
+                    Text(
+                      ">Observe and Listen",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      "Your observation may be included in ongoing research and shared with scientists working to better understand Bobwhite distribution and resiliency on the landscape. Data will not be shared with the public.",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                    Spacer()
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(20)),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      2,
+                      (index) => buildDot(index: index),
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 3,
+                  ),
+                  TextButton(
+                    style: ButtonStyle(
+                      overlayColor: MaterialStateProperty.all(kPrimaryColor),
+                      shadowColor: MaterialStateProperty.all(Colors.grey),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                      minimumSize: MaterialStateProperty.all(Size(
+                          double.infinity, getProportionateScreenHeight(56))),
+                      backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+                    ),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, HomeScreen.routeName),
+                    child: Text(
+                      "Continue",
+                      style: TextStyle(
+                          fontSize: getProportionateScreenWidth(14),
+                          color: Colors.white),
+                    ),
+                  ),
+                  const Spacer()
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

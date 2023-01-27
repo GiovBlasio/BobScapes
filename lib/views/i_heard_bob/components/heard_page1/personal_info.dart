@@ -26,7 +26,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
         child: Container(
           padding: EdgeInsets.symmetric(
               horizontal: getProportionateScreenWidth(15),
-              vertical: getProportionateScreenHeight(20)),
+              vertical: getProportionateScreenHeight(15)),
           color: const Color(0x33c2c2c2),
           child: Row(
             children: [
@@ -76,7 +76,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               "You are",
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(12),
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w700, fontFamily: 'Manrope'),
             ),
           ),
           ClipRRect(
@@ -156,7 +156,7 @@ class _NameFormState extends State<NameForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Flexible(
         child: Form(
             child: TextFormField(
       controller: controller,
@@ -195,13 +195,12 @@ class _NameFormState extends State<NameForm> {
       decoration: InputDecoration(
         labelStyle: TextStyle(
             color: kPrimaryColor,
-            // fontFamily: "Heebo",
-            fontSize: getProportionateScreenWidth(14),
-            fontWeight: FontWeight.w500),
+            
+            fontSize: getProportionateScreenWidth(13),
+            fontWeight: FontWeight.w700),
         hintStyle: TextStyle(
           color: kPrimaryColor.withAlpha(177),
-          fontFamily: "Heebo",
-          fontSize: getProportionateScreenWidth(13),
+          fontSize: getProportionateScreenWidth(12),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.only(

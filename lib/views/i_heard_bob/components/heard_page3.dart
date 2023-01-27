@@ -56,30 +56,30 @@ class _HeardPage3State extends State<HeardPage3> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Register your sighting".toUpperCase(),
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: getProportionateScreenWidth(14)),
-                ),
-                IconButton(
-                  splashRadius: 0.1,
-                  icon: Icon(
-                    Icons.close,
-                    size: getProportionateScreenHeight(28),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         "Register your sighting".toUpperCase(),
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.w600,
+          //             fontSize: getProportionateScreenWidth(14)),
+          //       ),
+          //       IconButton(
+          //         splashRadius: 0.1,
+          //         icon: Icon(
+          //           Icons.close,
+          //           size: getProportionateScreenHeight(28),
+          //         ),
+          //         onPressed: () {
+          //           Navigator.pop(context);
+          //         },
+          //       )
+          //     ],
+          //   ),
+          // ),
           Flexible(
             child: SingleChildScrollView(
               child: Column(

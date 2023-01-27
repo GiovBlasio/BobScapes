@@ -1,10 +1,14 @@
+import 'package:bobscapes/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
+import 'package:bobscapes/views/hear_bob/hear_bob.dart';
 import 'package:bobscapes/views/i_heard_bob_thanks/i_heard_bob_thanks_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'heard_page1.dart';
@@ -19,89 +23,211 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  Widget page = const HeardPage1();
-  //double top = getProportionateScreenHeight(60);
+  PageController controller = PageController();
+
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: SizeConfig.screenWidth,
-      height: SizeConfig.screenHeight,
-      child: Stack(children: [
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
-          curve: Curves.linearToEaseOut,
-          bottom: 0,
-          left: 0,
-          //top: top,
-          right: 0,
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(5)),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    spreadRadius: 4,
-                    blurRadius: 4,
-                    offset: Offset(0, -4),
+    return Stack(
+      children: [
+        Positioned(
+            bottom: getProportionateScreenHeight(70),
+            top: getProportionateScreenHeight(50),
+            left: 0,
+            right: 0,
+            child: Center(
+              child: PageView(
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentIndex = value;
+                    });
+                  },
+                  controller: controller,
+                  children: const [
+                    Center(child: HeardPage1()),
+                    Center(child: HeardPage2()),
+                    Center(child: HeardPage3())
+                  ]),
+            )),
+        Positioned(
+            height: getProportionateScreenHeight(50),
+            width: SizeConfig.screenWidth,
+            child: const CustomTitle(title: "I Heard a Bob!")),
+        Positioned(
+            bottom: getProportionateScreenHeight(70),
+            right: 0,
+            left: 0,
+            child: buildButtons()),
+        Positioned(
+            bottom: 0,
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () => Navigator.popAndPushNamed(
+                      context, BobSightingsScreen.routeName),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            spreadRadius: 4,
+                            blurRadius: 4,
+                            offset: Offset(0, -4),
+                          ),
+                        ]),
+                    child: Card(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(30),
+                        ),
+                      ),
+                      elevation: 10,
+                      margin: const EdgeInsets.all(0),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(30),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: getProportionateScreenHeight(10)),
+                          width: SizeConfig.screenWidth / 2,
+                          height: getProportionateScreenHeight(75),
+                          color: Colors.white,
+                          child: Row(
+                            //crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // SvgPicture.asset(
+                              //   icon,
+                              //   height: getProportionateScreenHeight(0),
+                              //   color: Colors.white,
+                              // ),
+                              SizedBox(
+                                // color: Colors.red,
+                                width: getProportionateScreenWidth(120),
+                                child: Text(
+                                  "Bob Sightings\nMap",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: getProportionateScreenWidth(16),
+                                      fontWeight: FontWeight.w500,
+                                      color: kPrimaryColor),
+                                ),
+                              ),
+                              SvgPicture.asset(
+                                "assets/icons/eye.svg",
+                                height: getProportionateScreenHeight(30),
+                                color: kPrimaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ]),
-            child: Card(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30),
                 ),
-              ),
-              elevation: 10,
-              margin: const EdgeInsets.all(0),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(30),
+                InkWell(
+                  onTap: () => Navigator.popAndPushNamed(
+                      context, HearBobScreen.routeName),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            spreadRadius: 4,
+                            blurRadius: 4,
+                            offset: Offset(0, -4),
+                          ),
+                        ]),
+                    child: Card(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(30),
+                        ),
+                      ),
+                      elevation: 10,
+                      margin: const EdgeInsets.all(0),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(30),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: getProportionateScreenHeight(10)),
+                          width: SizeConfig.screenWidth / 2,
+                          height: getProportionateScreenHeight(75),
+                          color: Colors.white,
+                          child: Row(
+                            //crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // SvgPicture.asset(
+                              //   icon,
+                              //   height: getProportionateScreenHeight(0),
+                              //   color: Colors.white,
+                              // ),
+                              SizedBox(
+                                // color: Colors.red,
+                                width: getProportionateScreenWidth(90),
+                                child: Text(
+                                  "Hear Bob",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: getProportionateScreenWidth(16),
+                                      fontWeight: FontWeight.w500,
+                                      color: kPrimaryColor),
+                                ),
+                              ),
+                              SvgPicture.asset(
+                                "assets/icons/music.svg",
+                                height: getProportionateScreenHeight(30),
+                                color: kPrimaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: getProportionateScreenHeight(10)),
-                    //width: SizeConfig.screenWidth / 2,
-                    // height: 75,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [Flexible(child: page), buildButtons()],
-                    )),
-              ),
-            ),
-          ),
-        ),
-      ]),
+              ],
+            )),
+      ],
     );
   }
 
   Widget buildButtons() {
-    if (page.runtimeType == HeardPage1) {
+    if (currentIndex == 0) {
       return Container(
         color: Colors.transparent,
         padding: EdgeInsets.only(
             left: getProportionateScreenWidth(15),
             right: getProportionateScreenWidth(15),
             bottom: getProportionateScreenHeight(10)),
-        child: DefaultButton(
-            text: "Next",
-            press: () {
-              setState(() {
-                page = const HeardPage2();
-                // page = page.runtimeType == HeardPage1
-                //     ? HeardPage2()
-                //     : HeardPage3();
-                // top = getProportionateScreenHeight(285);
-                // top = page.runtimeType == HeardPage2
-                //     ? getProportionateScreenHeight(235)
-                //     : getProportionateScreenHeight(150);
-              });
-            }),
+        child: Row(
+          children: [
+            const Spacer(),
+            SizedBox(
+              width: (SizeConfig.screenWidth) / 2 -
+                  getProportionateScreenWidth(30),
+              child: DefaultButton(
+                  text: "Next",
+                  press: () {
+                    setState(() {
+                      controller.animateToPage(currentIndex + 1,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.linear);
+                    });
+                  }),
+            ),
+          ],
+        ),
       );
     }
-    if (page.runtimeType == HeardPage2) {
+    if (currentIndex == 1) {
       return Container(
         color: Colors.transparent,
         padding: EdgeInsets.only(
@@ -119,14 +245,9 @@ class _BodyState extends State<Body> {
                   text: "Back",
                   press: () {
                     setState(() {
-                      page = const HeardPage1();
-                      // page = page.runtimeType == HeardPage1
-                      //     ? HeardPage2()
-                      //     : HeardPage3();
-                      //     top = getProportionateScreenHeight(60);
-                      // top = page.runtimeType == HeardPage2
-                      //  F   ? getProportionateScreenHeight(235)
-                      //     : getProportionateScreenHeight(150);
+                      controller.animateToPage(currentIndex - 1,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.linear);
                     });
                   }),
             ),
@@ -138,23 +259,16 @@ class _BodyState extends State<Body> {
                   text: "Next",
                   press: () {
                     setState(() {
-                      page = const HeardPage3();
-                      // page = page.runtimeType == HeardPage1
-                      //     ? HeardPage2()
-                      //     : HeardPage3();
-                      //   top = getProportionateScreenHeight(180);
-                      // top = page.runtimeType == HeardPage2
-                      //     ? getProportionateScreenHeight(235)
-                      //     : getProportionateScreenHeight(150);
+                      controller.animateToPage(currentIndex + 1,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.linear);
                     });
                   }),
             ),
           ],
         ),
       );
-    }
-    // if (page.runtimeType == HeardPage3) {
-    else {
+    } else {
       return Container(
         color: Colors.transparent,
         padding: EdgeInsets.only(
@@ -173,14 +287,9 @@ class _BodyState extends State<Body> {
                   text: "Back",
                   press: () {
                     setState(() {
-                      page = const HeardPage2();
-                      // page = page.runtimeType == HeardPage1
-                      //     ? HeardPage2()
-                      //     : HeardPage3();
-                      //    top = getProportionateScreenHeight(285);
-                      // top = page.runtimeType == HeardPage2
-                      //     ? getProportionateScreenHeight(235)
-                      //     : getProportionateScreenHeight(150);
+                      controller.animateToPage(currentIndex - 1,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.linear);
                     });
                   }),
             ),
@@ -227,15 +336,14 @@ class DefaultButton extends StatelessWidget {
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
         minimumSize: MaterialStateProperty.all(
-            Size(double.infinity, getProportionateScreenHeight(56))),
+            Size(double.infinity, getProportionateScreenHeight(44))),
         backgroundColor: MaterialStateProperty.all(kPrimaryColor),
-        // padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
       ),
       onPressed: press,
       child: Text(
         text,
         style: TextStyle(
-            fontSize: getProportionateScreenWidth(18), color: Colors.white),
+            fontSize: getProportionateScreenWidth(14), color: Colors.white),
       ),
     );
   }
