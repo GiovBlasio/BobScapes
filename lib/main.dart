@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         );
       },
       debugShowCheckedModeBanner: false,
-      title: 'Bobscapes',
+      title: 'Bob Scapes',
       theme: theme(context),
       initialRoute: SplashScreen.routeName,
       routes: routes,

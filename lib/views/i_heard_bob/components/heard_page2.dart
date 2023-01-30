@@ -11,10 +11,12 @@ class HeardPage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(15), vertical: 0),
+          horizontal: getProportionateScreenWidth(15),
+          vertical: getProportionateScreenHeight(10)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           // Padding(
           //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
           //   child: Row(
@@ -39,6 +41,9 @@ class HeardPage2 extends StatelessWidget {
           //     ],
           //   ),
           // ),
+          SizedBox(
+            height: getProportionateScreenHeight(50),
+          ),
 
           CustomDropDownMenu(items: ['Family', '1', '2', '3']),
           Padding(

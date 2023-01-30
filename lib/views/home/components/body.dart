@@ -1,7 +1,8 @@
-import 'package:bobscapes/common_widget/disclaimer.dart';
+
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
+import 'package:bobscapes/views/common_widget/disclaimer.dart';
 import 'package:bobscapes/views/hear_bob/hear_bob.dart';
 import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';

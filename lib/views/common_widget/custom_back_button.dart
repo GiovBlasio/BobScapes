@@ -1,7 +1,7 @@
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({

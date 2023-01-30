@@ -1,6 +1,8 @@
-import 'package:bobscapes/common_widget/bottom_buttons.dart';
-import 'package:bobscapes/common_widget/custom_title.dart';
+import 'package:bobscapes/services/remote_services.dart';
+import 'package:bobscapes/views/common_widget/bottom_buttons.dart';
+import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
+import 'package:bobscapes/models/audio.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
 import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
@@ -10,36 +12,65 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'custom_alert.dart';
 import 'custom_card.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({super.key});
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  List<Audio> audio = [];
+
+  bool isLoaded = false;
+  @override
+  void initState() {
+    super.initState();
+    _initialization();
+  }
+
+  _initialization() async {
+    audio = await RemoteService().getAudio("");
+    if (audio.isNotEmpty) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ListView.separated(
-          padding: EdgeInsets.only(
-              top: getProportionateScreenHeight(65),
-              left: getProportionateScreenWidth(18),
-              right: getProportionateScreenWidth(18),
-              bottom: getProportionateScreenHeight(85)),
-          itemCount: 2,
-          itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              showDialog(
-                  barrierColor: Colors.white.withOpacity(0.9),
-                  context: context,
-                  builder: (context) => const CustomAlert(
-                        title: "Fall covey Call",
-                      ));
-            },
-            child: const CustomCard(
-              time: "3:24",
-              title: "Male Bobwhite Spring Call",
-            ),
+        Visibility(
+          visible: isLoaded,
+          replacement: const Center(
+            child: CircularProgressIndicator(),
           ),
-          separatorBuilder: (context, index) => SizedBox(
-            height: getProportionateScreenHeight(25),
+          child: ListView.separated(
+            padding: EdgeInsets.only(
+                top: getProportionateScreenHeight(65),
+                left: getProportionateScreenWidth(18),
+                right: getProportionateScreenWidth(18),
+                bottom: getProportionateScreenHeight(85)),
+            itemCount: audio.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                showDialog(
+                    barrierColor: Colors.white.withOpacity(0.9),
+                    context: context,
+                    builder: (context) => CustomAlert(
+                          title: audio[index].title,
+                        ));
+              },
+              child: CustomCard(
+                time: audio[index].time,
+                title: audio[index].title,
+              ),
+            ),
+            separatorBuilder: (context, index) => SizedBox(
+              height: getProportionateScreenHeight(25),
+            ),
           ),
         ),
         const CustomTitle(title: "Hear Bob"),
@@ -181,15 +212,15 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-      //   Positioned(
-      //     bottom: 0,
-      //     child: BottomButtons(
-      //       title: "Bob Sightings Map",
-      //       onPress: () => Navigator.popAndPushNamed(
-      //           context, BobSightingsScreen.routeName),
-      //       icon: "assets/icons/eye.svg",
-      //     ),
-      //   ),
+        //   Positioned(
+        //     bottom: 0,
+        //     child: BottomButtons(
+        //       title: "Bob Sightings Map",
+        //       onPress: () => Navigator.popAndPushNamed(
+        //           context, BobSightingsScreen.routeName),
+        //       icon: "assets/icons/eye.svg",
+        //     ),
+        //   ),
       ],
     );
   }

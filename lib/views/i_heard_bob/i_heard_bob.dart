@@ -1,5 +1,5 @@
-import 'package:bobscapes/common_widget/custom_back_button.dart';
-import 'package:bobscapes/common_widget/logo.dart';
+import 'package:bobscapes/views/common_widget/custom_back_button.dart';
+import 'package:bobscapes/views/common_widget/logo.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
@@ -13,18 +13,22 @@ class IHeardBobScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: getProportionateScreenWidth(80),
-        leading: const CustomBackButton(),
-        title: Logo(
-          iconColor: kPrimaryColor,
-          iconSize: getProportionateScreenWidth(38),
-          textSize: getProportionateScreenWidth(19),
-          textColor: kPrimaryColor,
+    return SafeArea(
+      child: Scaffold(
+        // resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          leadingWidth: getProportionateScreenWidth(80),
+          leading: const CustomBackButton(),
+          title: Logo(
+            iconColor: kPrimaryColor,
+            iconSize: getProportionateScreenWidth(38),
+            textSize: getProportionateScreenWidth(19),
+            textColor: kPrimaryColor,
+          ),
         ),
+        body: const Body(),
       ),
-      body: const Body(),
     );
   }
 }

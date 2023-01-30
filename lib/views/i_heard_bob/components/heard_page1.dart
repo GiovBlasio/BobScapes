@@ -33,62 +33,67 @@ class _HeardPage1State extends State<HeardPage1> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(15),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Padding(
-          //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Text(
-          //         "Register your sighting".toUpperCase(),
-          //         style: TextStyle(
-          //             fontWeight: FontWeight.w600,
-          //             fontSize: getProportionateScreenWidth(14)),
-          //       ),
-          //       IconButton(
-          //         splashRadius: 0.1,
-          //         icon: Icon(
-          //           Icons.close,
-          //           size: getProportionateScreenHeight(28),
-          //         ),
-          //         onPressed: () {
-          //           Navigator.pop(context);
-          //         },
-          //       )
-          //     ],
-          //   ),
-          // ),
-          Flexible(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  PersonalInfo(items: items),
-                  const LocationForm(),
-                  const DateAndTimeForm(),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: getProportionateScreenWidth(2))),
-                  CustomRadioButton(
-                      items: radioOptions,
-                      title:
-                          "Are bobwhites released at the sightings location?",
-                      id: 1),
-                  CustomRadioButton(
-                      items: radioOptions2,
-                      title: "Did you physically see any birds?",
-                      id: 2),
-                ],
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
+
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(15), vertical: getProportionateScreenHeight(10),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Padding(
+            //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Text(
+            //         "Register your sighting".toUpperCase(),
+            //         style: TextStyle(
+            //             fontWeight: FontWeight.w600,
+            //             fontSize: getProportionateScreenWidth(14)),
+            //       ),
+            //       IconButton(
+            //         splashRadius: 0.1,
+            //         icon: Icon(
+            //           Icons.close,
+            //           size: getProportionateScreenHeight(28),
+            //         ),
+            //         onPressed: () {
+            //           Navigator.pop(context);
+            //         },
+            //       )
+            //     ],
+            //   ),
+            // ),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PersonalInfo(items: items),
+                    const LocationForm(),
+                    const DateAndTimeForm(),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: getProportionateScreenWidth(2))),
+                    CustomRadioButton(
+                        items: radioOptions,
+                        title:
+                            "Are bobwhites released at the sightings location?",
+                        id: 1),
+                    CustomRadioButton(
+                        items: radioOptions2,
+                        title: "Did you physically see any birds?",
+                        id: 2),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

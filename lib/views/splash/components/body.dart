@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:bobscapes/common_widget/logo_animated.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/common_widget/logo_animated.dart';
 import 'package:bobscapes/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

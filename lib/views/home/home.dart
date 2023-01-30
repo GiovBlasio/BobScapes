@@ -1,6 +1,6 @@
-import 'package:bobscapes/common_widget/logo.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/common_widget/logo.dart';
 import 'package:flutter/material.dart';
 
 import 'components/body.dart';

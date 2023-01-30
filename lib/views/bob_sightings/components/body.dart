@@ -1,5 +1,5 @@
-import 'package:bobscapes/common_widget/bottom_buttons.dart';
-import 'package:bobscapes/common_widget/custom_title.dart';
+import 'package:bobscapes/views/common_widget/bottom_buttons.dart';
+import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/hear_bob/hear_bob.dart';

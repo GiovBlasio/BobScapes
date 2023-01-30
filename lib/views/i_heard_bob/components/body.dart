@@ -1,4 +1,5 @@
-import 'package:bobscapes/common_widget/custom_title.dart';
+import 'package:bobscapes/services/remote_services.dart';
+import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
@@ -27,29 +28,29 @@ class _BodyState extends State<Body> {
 
   int currentIndex = 0;
 
+  bool isLoaded = false;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Positioned(
-            bottom: getProportionateScreenHeight(70),
+            bottom: getProportionateScreenHeight(0),
             top: getProportionateScreenHeight(50),
             left: 0,
             right: 0,
-            child: Center(
-              child: PageView(
-                  onPageChanged: (value) {
-                    setState(() {
-                      currentIndex = value;
-                    });
-                  },
-                  controller: controller,
-                  children: const [
-                    Center(child: HeardPage1()),
-                    Center(child: HeardPage2()),
-                    Center(child: HeardPage3())
-                  ]),
-            )),
+            child: PageView(
+                onPageChanged: (value) {
+                  setState(() {
+                    currentIndex = value;
+                  });
+                },
+                controller: controller,
+                children: [
+                  Center(child: HeardPage1()),
+                  HeardPage2(),
+                  Center(child: HeardPage3())
+                ])),
         Positioned(
             height: getProportionateScreenHeight(50),
             width: SizeConfig.screenWidth,
@@ -195,6 +196,13 @@ class _BodyState extends State<Body> {
                 ),
               ],
             )),
+        if (isLoaded)
+          const Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+              backgroundColor: Colors.white,
+            ),
+          )
       ],
     );
   }
@@ -216,11 +224,13 @@ class _BodyState extends State<Body> {
               child: DefaultButton(
                   text: "Next",
                   press: () {
-                    setState(() {
-                      controller.animateToPage(currentIndex + 1,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.linear);
-                    });
+                    if (!isLoaded) {
+                      setState(() {
+                        controller.animateToPage(currentIndex + 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.linear);
+                      });
+                    }
                   }),
             ),
           ],
@@ -244,11 +254,13 @@ class _BodyState extends State<Body> {
               child: DefaultButton(
                   text: "Back",
                   press: () {
-                    setState(() {
-                      controller.animateToPage(currentIndex - 1,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.linear);
-                    });
+                    if (!isLoaded) {
+                      setState(() {
+                        controller.animateToPage(currentIndex - 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.linear);
+                      });
+                    }
                   }),
             ),
             const Spacer(),
@@ -258,11 +270,13 @@ class _BodyState extends State<Body> {
               child: DefaultButton(
                   text: "Next",
                   press: () {
-                    setState(() {
-                      controller.animateToPage(currentIndex + 1,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.linear);
-                    });
+                    if (!isLoaded) {
+                      setState(() {
+                        controller.animateToPage(currentIndex + 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.linear);
+                      });
+                    }
                   }),
             ),
           ],
@@ -286,11 +300,13 @@ class _BodyState extends State<Body> {
               child: DefaultButton(
                   text: "Back",
                   press: () {
-                    setState(() {
-                      controller.animateToPage(currentIndex - 1,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.linear);
-                    });
+                    if (!isLoaded) {
+                      setState(() {
+                        controller.animateToPage(currentIndex - 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.linear);
+                      });
+                    }
                   }),
             ),
             const Spacer(),
@@ -300,14 +316,22 @@ class _BodyState extends State<Body> {
                   getProportionateScreenWidth(30),
               child: DefaultButton(
                   text: "Send",
-                  press: () {
-                    //TODO inviare i dati all'API
-                    context.read<HeardPage3State>().resetAll();
-                    context.read<HeardPage1State>().resetAll();
-                    context.read<HeardPage2State>().resetAll();
+                  press: () async {
+                    if (!isLoaded) {
+                      setState(() {
+                        isLoaded = !isLoaded;
+                      });
+                      await RemoteService().sendData();
+                      setState(() {
+                        context.read<HeardPage3State>().resetAll();
+                        context.read<HeardPage1State>().resetAll();
+                        context.read<HeardPage2State>().resetAll();
 
-                    Navigator.popAndPushNamed(
-                        context, IHeardBobThanksScreen.routeName);
+                        Navigator.popAndPushNamed(
+                            context, IHeardBobThanksScreen.routeName);
+                      });
+                    }
+                    //  _changePage();
                   }),
             ),
           ],
@@ -315,6 +339,8 @@ class _BodyState extends State<Body> {
       );
     }
   }
+
+  void _changePage() {}
 }
 
 class DefaultButton extends StatelessWidget {

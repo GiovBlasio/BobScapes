@@ -1,4 +1,4 @@
-import 'package:bobscapes/common_widget/disclaimer.dart';
+import 'package:bobscapes/views/common_widget/disclaimer.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';

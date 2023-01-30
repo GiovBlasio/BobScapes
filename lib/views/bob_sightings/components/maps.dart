@@ -7,7 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../../../common_widget/disclaimer.dart';
+import '../../common_widget/disclaimer.dart';
 
 class Mappa extends StatefulWidget {
   const Mappa({

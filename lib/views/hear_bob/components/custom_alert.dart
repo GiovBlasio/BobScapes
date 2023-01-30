@@ -49,6 +49,12 @@ class _CustomAlertState extends State<CustomAlert> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    audioPlayer.stop();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
         child: Padding(
@@ -93,12 +99,15 @@ class _CustomAlertState extends State<CustomAlert> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                widget.title,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.7),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                              SizedBox(
+                                width: getProportionateScreenWidth(220),
+                                child: Text(
+                                  widget.title,
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: getProportionateScreenWidth(18),
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                               IconButton(
                                 icon: Icon(
@@ -132,8 +141,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 child: Slider(
                                     min: 0,
                                     value: position.inSeconds.toDouble(),
-                                    max: 100,
-                                    // max: duration.inSeconds.toDouble(),
+                                    max: duration.inSeconds.toDouble(),
                                     onChanged: (value) async {
                                       final position =
                                           Duration(seconds: value.toInt());
@@ -174,6 +182,7 @@ class _CustomAlertState extends State<CustomAlert> {
                               onTap: () {
                                 setState(() {
                                   position = Duration.zero;
+                                  audioPlayer.stop();
                                   isPlaying = false;
                                 });
                               },
@@ -195,7 +204,7 @@ class _CustomAlertState extends State<CustomAlert> {
                               ),
                             ),
                             InkWell(
-                              onTap: (() async {
+                              onTap: () async {
                                 if (isPlaying) {
                                   await audioPlayer.pause();
                                 } else {
@@ -204,7 +213,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 setState(() {
                                   isPlaying = !isPlaying;
                                 });
-                              }),
+                              },
                               child: Card(
                                 shape: const CircleBorder(),
                                 elevation: 8,
@@ -247,8 +256,8 @@ class _CustomAlertState extends State<CustomAlert> {
 
   Future setAudio() async {
     audioPlayer.setReleaseMode(ReleaseMode.LOOP);
-    String path = "";
-    File file = File(path);
-    audioPlayer.setUrl(file.path, isLocal: true);
+    final player = AudioCache(prefix: "assets/music/");
+    final url = await player.load("music.mp3");
+    audioPlayer.setUrl(url.path, isLocal: true);
   }
 }

@@ -35,7 +35,7 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
           child: Text(
             widget.title,
             style: TextStyle(
-              fontSize: getProportionateScreenWidth(13),
+              fontSize: getProportionateScreenWidth(12),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -73,7 +73,7 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(13),
+                                    fontSize: getProportionateScreenWidth(12),
                                     fontWeight: FontWeight.w500,
                                   ),
                                 )),

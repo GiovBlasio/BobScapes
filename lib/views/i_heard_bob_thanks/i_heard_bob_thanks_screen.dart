@@ -10,9 +10,11 @@ class IHeardBobThanksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: Body(),
+    return const SafeArea(
+      child: Scaffold(
+        backgroundColor: kPrimaryColor,
+        body: Body(),
+      ),
     );
   }
 }

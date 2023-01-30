@@ -3,7 +3,7 @@ import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../views/i_heard_bob/i_heard_bob.dart';
+import '../i_heard_bob/i_heard_bob.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({
