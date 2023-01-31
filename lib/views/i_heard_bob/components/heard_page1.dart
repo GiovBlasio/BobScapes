@@ -36,10 +36,12 @@ class _HeardPage1State extends State<HeardPage1> {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.transparent,
 
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(15), vertical: getProportionateScreenHeight(10),
+          horizontal: getProportionateScreenWidth(8),
+          vertical: getProportionateScreenHeight(10),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

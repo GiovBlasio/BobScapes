@@ -1,4 +1,3 @@
-
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
@@ -21,58 +20,99 @@ class _BodyState extends State<Body> {
       SizeConfig.screenHeight / 2 - getProportionateScreenHeight(45);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(25)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
-            color: Colors.grey,
-            height: imageHeight,
-            width: double.infinity,
+    return Stack(
+      children: [
+        Opacity(
+          opacity: 0.5,
+          child: Image.asset(
+            "assets/images/Bob Scapes Background.jpg",
+            fit: BoxFit.fill,
+            height: SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
           ),
-          IconButton(
-              splashRadius: 0.1,
-              padding: EdgeInsets.zero,
-              onPressed: () => showDialog(
-                  context: context, builder: (context) => const Disclaimer()),
-              icon: const Icon(Icons.info_outline)),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(20)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HomeButton(
-                    title: 'Hear Bob',
-                    iconPath: "assets/icons/music.svg",
-                    onPressed: () {
-                      Navigator.pushNamed(context, HearBobScreen.routeName);
-                    },
-                  ),
-                  HomeButton(
-                      title: 'Hey, I heard a Bob!',
-                      iconPath: "assets/icons/gps.svg",
-                      onPressed: () => Navigator.pushNamed(
-                          context, IHeardBobScreen.routeName)),
-                  HomeButton(
-                    title: 'Bob Sightings Map',
-                    iconPath: "assets/icons/eye.svg",
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, BobSightingsScreen.routeName);
-                    },
-                  ),
-                ],
+        ),
+        Container(
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              kColor2.withOpacity(0.6),
+              kColor1.withOpacity(0.6),
+             
+              kColor1,
+            ],
+          )),
+        ),
+        Padding(
+          padding:
+              EdgeInsets.symmetric(vertical: getProportionateScreenHeight(25)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Container(
+              //   margin: EdgeInsets.symmetric(
+              //       horizontal: getProportionateScreenWidth(20)),
+              //   color: Colors.grey,
+              //   height: imageHeight,
+              //   width: double.infinity,
+              // ),
+              const Spacer(
+                flex: 4,
               ),
-            ),
+              IconButton(
+                  splashRadius: 0.1,
+                  padding: EdgeInsets.zero,
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => const Disclaimer()),
+                  icon: const Icon(
+                    Icons.info_outline,
+                    color: Colors.white,
+                  )),
+              Flexible(
+                flex: 3,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(20)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      HomeButton(
+                        title: 'Hear Bob',
+                        iconPath: "assets/icons/music.svg",
+                        color: kColor1,
+                        onPressed: () {
+                          Navigator.pushNamed(context, HearBobScreen.routeName);
+                        },
+                      ),
+                      HomeButton(
+                          title: 'Hey, I heard a Bob!',
+                          iconPath: "assets/icons/gps.svg",
+                          color: kColor2,
+                          onPressed: () => Navigator.pushNamed(
+                              context, IHeardBobScreen.routeName)),
+                      HomeButton(
+                        title: 'Bob Sightings Map',
+                        iconPath: "assets/icons/eye.svg",
+                        color: kColor3,
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, BobSightingsScreen.routeName);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -97,24 +137,26 @@ class HomeButton extends StatelessWidget {
     required this.title,
     required this.iconPath,
     required this.onPressed,
+    required this.color,
     Key? key,
   }) : super(key: key);
 
   final String title;
   final String iconPath;
   final Function() onPressed;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(kPrimaryColor),
+        overlayColor: MaterialStateProperty.all(color),
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         minimumSize: MaterialStateProperty.all(
             Size(double.infinity, getProportionateScreenHeight(70))),
-        backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+        backgroundColor: MaterialStateProperty.all(color),
         padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
       ),
       onPressed: onPressed,
@@ -127,13 +169,14 @@ class HomeButton extends StatelessWidget {
             SvgPicture.asset(
               iconPath,
               height: getProportionateScreenHeight(35),
-              color: kPrimaryColor,
+              color: color,
             ),
             Text(
               title,
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(18),
-                  color: Colors.white),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700),
             ),
             SvgPicture.asset(
               iconPath,

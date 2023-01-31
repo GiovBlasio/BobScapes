@@ -16,12 +16,13 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          backgroundColor: kColor1,
           leading: Container(),
           title: Logo(
-            iconColor: kPrimaryColor,
+            iconColor: Colors.white,
             iconSize: getProportionateScreenWidth(38),
             textSize: getProportionateScreenWidth(19),
-            textColor: kPrimaryColor,
+            textColor: Colors.white,
           ),
         ),
         body: const Body(),

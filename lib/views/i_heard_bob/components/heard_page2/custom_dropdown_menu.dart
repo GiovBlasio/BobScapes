@@ -42,13 +42,14 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                left: getProportionateScreenWidth(10),
+               // left: getProportionateScreenWidth(10),
                 bottom: getProportionateScreenHeight(8)),
             child: Text(
               "What did you see?",
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(13),
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white),
             ),
           ),
           ClipRRect(
@@ -59,21 +60,28 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               height: getProportionateScreenHeight(35),
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(10)),
-              color: const Color(0x33c2c2c2),
+              color: Colors.white.withAlpha(200),
               child: DropdownButton(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   underline: Container(),
                   isExpanded: true,
                   value: dropdownvalue,
-                  icon: const Icon(Icons.keyboard_arrow_down),
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.black,
+                  ),
                   items: widget.items.map((String item) {
                     return DropdownMenuItem(
                       value: item,
-                      child: Text(
-                        item,
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(14),
-                            fontWeight: FontWeight.w500),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Text(
+                          item,
+                          style: TextStyle(
+                              fontSize: getProportionateScreenWidth(14),
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
                       ),
                     );
                   }).toList(),

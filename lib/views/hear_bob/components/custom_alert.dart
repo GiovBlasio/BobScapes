@@ -62,7 +62,7 @@ class _CustomAlertState extends State<CustomAlert> {
           vertical: getProportionateScreenHeight(35),
           horizontal: getProportionateScreenWidth(15)),
       child: Container(
-          height: getProportionateScreenHeight(190),
+          height: getProportionateScreenHeight(220),
           decoration: BoxDecoration(
             boxShadow: const [
               BoxShadow(
@@ -76,15 +76,15 @@ class _CustomAlertState extends State<CustomAlert> {
           child: Card(
               margin: const EdgeInsets.all(0),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40.0),
+                borderRadius: BorderRadius.circular(16.0),
               ),
               elevation: 10,
               child: ClipRRect(
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(40),
+                    Radius.circular(16),
                   ),
                   child: Container(
-                    color: kPrimaryColor,
+                    color: kColor3,
                     width: double.infinity,
                     //height: 350,
                     padding: EdgeInsets.symmetric(
@@ -92,27 +92,29 @@ class _CustomAlertState extends State<CustomAlert> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Spacer(),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: getProportionateScreenWidth(45),
+                              left: getProportionateScreenWidth(30),
                               right: getProportionateScreenWidth(10)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                width: getProportionateScreenWidth(220),
+                                //width: getProportionateScreenWidth(250),
                                 child: Text(
                                   widget.title,
                                   style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: getProportionateScreenWidth(18),
+                                      color: Colors.white,
+                                      fontSize: getProportionateScreenWidth(16),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
                               IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.close,
-                                  color: Colors.white.withOpacity(0.7),
+                                  color: Colors.white,
+                                  size: 30,
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -121,6 +123,7 @@ class _CustomAlertState extends State<CustomAlert> {
                             ],
                           ),
                         ),
+                        Spacer(),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -159,22 +162,25 @@ class _CustomAlertState extends State<CustomAlert> {
                                   Text(
                                     formatTime(position),
                                     style: TextStyle(
-                                        color: Colors.white.withOpacity(0.6),
-                                        fontSize: 12),
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                   Text(
                                     formatTime(
                                       duration - position,
                                     ),
                                     style: TextStyle(
-                                        color: Colors.white.withOpacity(0.6),
-                                        fontSize: 12),
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500),
                                   )
                                 ],
                               ),
                             )
                           ],
                         ),
+                        Spacer(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -191,7 +197,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 elevation: 8,
                                 child: Container(
                                   decoration: const BoxDecoration(
-                                    color: Colors.grey,
+                                    color: Colors.white,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -219,7 +225,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 elevation: 8,
                                 child: Container(
                                   decoration: const BoxDecoration(
-                                    color: Colors.grey,
+                                    color: Colors.white,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -234,6 +240,9 @@ class _CustomAlertState extends State<CustomAlert> {
                               ),
                             ),
                           ],
+                        ),
+                        Spacer(
+                          flex: 2,
                         )
                       ],
                     ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bobscapes/models/audio.dart';
+import 'package:bobscapes/models/marker.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteService {
@@ -14,15 +15,52 @@ class RemoteService {
   };
 
   Future<List<Audio>> getAudio(
-    String userSignature, [
+      // String userSignature,
+      [
     String url =
         'https://odoo14-cefpas.unitivastaging.it/api/v1/richiesta-forms',
   ]) async {
     return await Future.delayed(
         const Duration(seconds: 1),
         () => [
-              Audio(time: "3:24", title: "Male Bobwhite Spring Call"),
-              Audio(time: "3:10", title: "Fall covey Call")
+              Audio(
+                time: "3:24",
+                title: "Male Bobwhite Spring Call",
+              ),
+              Audio(
+                time: "3:10",
+                title: "Fall covey Call",
+              )
+            ]);
+    // Map<String, dynamic> param = {
+    //   "params": {"user_signature": userSignature}
+    // };
+
+    // Uri uri = Uri.parse(url);
+
+    // http.Response response =
+    //     await client.post(uri, headers: headers, body: json.encode(param));
+
+    // if (response.statusCode == 200) {
+    //   var json = response.body;
+
+    //   var map = jsonDecode(json);
+
+    //   return audioFromJson(jsonEncode(map['result']['user_forms']));
+    // } else {
+    //   throw Exception(response.statusCode);
+    // }
+  }
+
+  Future<List<Marker>> getMarker([
+    String url =
+        'https://odoo14-cefpas.unitivastaging.it/api/v1/richiesta-forms',
+  ]) async {
+    return await Future.delayed(
+        const Duration(seconds: 1),
+        () => [
+              Marker(longitude: 10, latitude: 30, state: "", sightings: 100),
+              Marker(longitude: 10, latitude: 20, state: "", sightings: 200),
             ]);
     // Map<String, dynamic> param = {
     //   "params": {"user_signature": userSignature}

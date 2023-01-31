@@ -29,14 +29,16 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              top: getProportionateScreenHeight(5),
-              left: getProportionateScreenWidth(15),
-              right: getProportionateScreenWidth(10)),
+            top: getProportionateScreenHeight(5),
+            //left: getProportionateScreenWidth(15),
+            // right: getProportionateScreenWidth(10)
+          ),
           child: Text(
             widget.title,
             style: TextStyle(
               fontSize: getProportionateScreenWidth(12),
               fontWeight: FontWeight.w500,
+              color: Colors.white,
             ),
           ),
         ),
@@ -54,7 +56,11 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                             Transform.scale(
                               scale: 1.3,
                               child: Radio(
-                                  activeColor: kPrimaryColor,
+                                  fillColor:
+                                      const MaterialStatePropertyAll(kColor3),
+                                  overlayColor: const MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                  activeColor: kColor3,
                                   value: item,
                                   groupValue: group,
                                   onChanged: (value) {
@@ -73,9 +79,11 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(12),
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                      fontSize: getProportionateScreenWidth(12),
+                                      fontWeight: FontWeight.w500,
+                                      color: group == item
+                                          ? kColor3
+                                          : Colors.white),
                                 )),
                           ],
                         ),

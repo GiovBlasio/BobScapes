@@ -30,7 +30,7 @@ class _BodyState extends State<Body> {
   }
 
   _initialization() async {
-    audio = await RemoteService().getAudio("");
+    audio = await RemoteService().getAudio();
     if (audio.isNotEmpty) {
       setState(() {
         isLoaded = true;
@@ -42,6 +42,30 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Opacity(
+          opacity: 0.5,
+          child: Image.asset(
+            "assets/images/Bob Scapes Background.jpg",
+            fit: BoxFit.fill,
+            height: SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
+          ),
+        ),
+        Container(
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              kColor2.withOpacity(0.6),
+              kColor1.withOpacity(0.6),
+              kColor1,
+              kColor1,
+            ],
+          )),
+        ),
         Visibility(
           visible: isLoaded,
           replacement: const Center(
@@ -73,7 +97,10 @@ class _BodyState extends State<Body> {
             ),
           ),
         ),
-        const CustomTitle(title: "Hear Bob"),
+        const CustomTitle(
+          title: "Hear Bob",
+          color: kColor1,
+        ),
         Positioned(
           bottom: 0,
           child: Row(

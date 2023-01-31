@@ -26,9 +26,9 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: getProportionateScreenWidth(10),
-        right: getProportionateScreenWidth(10),
-      ),
+          //    left: getProportionateScreenWidth(10),
+          // right: getProportionateScreenWidth(10),
+          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -37,12 +37,13 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               constraints: BoxConstraints(
                   maxWidth: widget.id != 5
                       ? getProportionateScreenWidth(200)
-                      : getProportionateScreenWidth(125)),
+                      : getProportionateScreenWidth(135)),
               child: Text(
                 widget.title,
                 style: TextStyle(
                     fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white),
               )),
           if (widget.id == 5)
             Tooltip(
@@ -50,7 +51,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   top: 20, bottom: 20, left: 25, right: 25),
               margin: const EdgeInsets.only(left: 90, right: 50),
               decoration: const BoxDecoration(
-                color: kPrimaryColor,
+                color: kColor2,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               showDuration: const Duration(seconds: 25),
@@ -64,16 +65,16 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
               child: const Icon(
                 Icons.info_outline,
-                color: kPrimaryColor,
+                color: Colors.white,
               ),
             ),
           const Spacer(),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 decoration: const BoxDecoration(
-                    color: Colors.black,
+                    color: kColor3,
                     borderRadius: BorderRadius.all(Radius.circular(3.5))),
                 width: getProportionateScreenWidth(20),
                 height: getProportionateScreenHeight(20),
@@ -99,6 +100,10 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   contextMenuBuilder: (context, editableTextState) {
                     return Container();
                   },
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                   enableInteractiveSelection: false,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
@@ -109,7 +114,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               ),
               Container(
                 decoration: const BoxDecoration(
-                    color: Colors.black,
+                    color: kColor3,
                     borderRadius: BorderRadius.all(Radius.circular(3.5))),
                 //color: Colors.black,
                 width: getProportionateScreenWidth(20),

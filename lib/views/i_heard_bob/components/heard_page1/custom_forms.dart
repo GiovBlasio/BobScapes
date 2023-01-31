@@ -41,27 +41,31 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  left: getProportionateScreenWidth(15),
+                  // left: getProportionateScreenWidth(15),
                   bottom: getProportionateScreenWidth(4),
                   top: getProportionateScreenHeight(10)),
               child: Text(
                 "Date",
                 style: TextStyle(
-                    fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w700),
+                  fontSize: getProportionateScreenWidth(13),
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
               ),
             ),
             const Spacer(),
             Padding(
               padding: EdgeInsets.only(
-                  left: getProportionateScreenWidth(15),
+                  // left: getProportionateScreenWidth(15),
                   bottom: getProportionateScreenWidth(4),
                   top: getProportionateScreenHeight(10)),
               child: Text(
                 "Time",
                 style: TextStyle(
-                    fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w700),
+                  fontSize: getProportionateScreenWidth(13),
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
               ),
             ),
             const Spacer()
@@ -79,20 +83,20 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 onSaved: (newValue) {},
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color(0xddc2c2c2),
+                  fillColor: Colors.white.withAlpha(200),
                   contentPadding: const EdgeInsets.only(
                     left: 0,
                     top: 0,
                     bottom: 0,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(8),
                     gapPadding: 20,
                     borderSide: BorderSide.none,
                   ),
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(8),
                       gapPadding: 20),
                   hintText: "",
                 ),
@@ -139,12 +143,17 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
             ),
             Column(
               children: [
-                SvgPicture.asset("assets/icons/edit.svg"),
+                SvgPicture.asset(
+                  "assets/icons/edit.svg",
+                  color: Colors.white,
+                ),
                 Text(
                   "Change",
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(12),
-                      fontWeight: FontWeight.w700),
+                    fontSize: getProportionateScreenWidth(12),
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),
@@ -154,25 +163,26 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
             Flexible(
               child: TextFormField(
                 style: TextStyle(
-                    fontSize: getProportionateScreenWidth(12.5),
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+                  fontSize: getProportionateScreenWidth(12.5),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color(0xddc2c2c2),
+                  fillColor: Colors.white.withAlpha(200),
                   contentPadding: const EdgeInsets.only(
                     left: 0,
                     top: 0,
                     bottom: 0,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(8),
                     gapPadding: 20,
                     borderSide: BorderSide.none,
                   ),
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(8),
                       gapPadding: 20),
                   hintText: "",
                 ),
@@ -188,7 +198,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                         return Theme(
                           data: Theme.of(context).copyWith(
                             colorScheme: const ColorScheme.light(
-                              primary: kPrimaryColor, // header background color
+                              primary: kColor1, // header background color
                               onPrimary: Colors.black, // header text color
                               //onSurface: Colors.green, // body text color
                             ),
@@ -237,12 +247,17 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
             ),
             Column(
               children: [
-                SvgPicture.asset("assets/icons/edit.svg"),
+                SvgPicture.asset(
+                  "assets/icons/edit.svg",
+                  color: Colors.white,
+                ),
                 Text(
                   "Change",
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(12),
-                      fontWeight: FontWeight.w700),
+                    fontSize: getProportionateScreenWidth(12),
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),
@@ -308,14 +323,15 @@ class _LocationFormState extends State<LocationForm> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              left: getProportionateScreenWidth(15),
+              //left: getProportionateScreenWidth(15),
               bottom: getProportionateScreenWidth(4),
               top: getProportionateScreenHeight(10)),
           child: Text(
             "Latitude/Longitude",
             style: TextStyle(
                 fontSize: getProportionateScreenWidth(13),
-                fontWeight: FontWeight.w700),
+                fontWeight: FontWeight.w700,
+                color: Colors.white),
           ),
         ),
         Row(children: [
@@ -326,10 +342,10 @@ class _LocationFormState extends State<LocationForm> {
                 Flexible(
                   child: TextFormField(
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: getProportionateScreenWidth(14)),
-                    cursorColor: Colors.white,
+                    cursorColor: Colors.black,
                     controller: controller,
                     readOnly: true,
                     onSaved: (newValue) {
@@ -348,32 +364,32 @@ class _LocationFormState extends State<LocationForm> {
                     },
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color(0xddc2c2c2),
+                      fillColor: Colors.white.withAlpha(200),
                       contentPadding: EdgeInsets.only(
                           left: getProportionateScreenWidth(20),
                           top: 0,
                           bottom: 0,
                           right: getProportionateScreenWidth(20)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(8),
                           gapPadding: 20,
                           borderSide: BorderSide
                               .none), //const BorderSide(color: Colors.grey)),
                       border: OutlineInputBorder(
                           borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(8),
                           gapPadding: 20),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(
                             right: getProportionateScreenWidth(10)),
                         child: SvgPicture.asset(
                           "assets/icons/gpsArrow.svg",
-                          color: Colors.white,
+                          color: kColor1,
                         ),
                       ),
                       suffixIconConstraints: BoxConstraints(
-                          maxHeight: getProportionateScreenHeight(25),
-                          maxWidth: getProportionateScreenWidth(25)),
+                          maxHeight: getProportionateScreenHeight(33),
+                          maxWidth: getProportionateScreenWidth(33)),
                       //suffixIconColor: Colors.white,
                       hintText: "",
                     ),
@@ -384,12 +400,16 @@ class _LocationFormState extends State<LocationForm> {
                 ),
                 Column(
                   children: [
-                    SvgPicture.asset("assets/icons/edit.svg"),
+                    SvgPicture.asset(
+                      "assets/icons/edit.svg",
+                      color: Colors.white,
+                    ),
                     Text(
                       "Change",
                       style: TextStyle(
                           fontSize: getProportionateScreenWidth(12),
-                          fontWeight: FontWeight.w700),
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
                     )
                   ],
                 ),

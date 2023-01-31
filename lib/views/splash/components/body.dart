@@ -66,24 +66,24 @@ class _BodyState extends State<Body> {
       () => Navigator.push(
         context,
         PageRouteBuilder(
-            transitionDuration: const Duration(seconds: 2),
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const WelcomeScreen(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              const begin = Offset(-1, 0);
-              const end = Offset.zero;
-              const curve = Curves.slowMiddle;
+          transitionDuration: const Duration(seconds: 2),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const WelcomeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(-1, 0);
+            const end = Offset.zero;
+            const curve = Curves.slowMiddle;
 
-              var tween =
-                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              final offsetAnimation = animation.drive(tween);
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            final offsetAnimation = animation.drive(tween);
 
-              return SlideTransition(
-                position: offsetAnimation,
-                child: child,
-              );
-            }),
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        ),
       ),
     );
   }

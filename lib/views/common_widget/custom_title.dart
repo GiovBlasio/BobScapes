@@ -5,16 +5,18 @@ import 'package:flutter/material.dart';
 class CustomTitle extends StatelessWidget {
   const CustomTitle({
     required this.title,
+    required this.color,
     Key? key,
   }) : super(key: key);
 
   final String title;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30),
+          bottom: Radius.circular(15),
         ),
       ),
       elevation: 10,
@@ -22,14 +24,14 @@ class CustomTitle extends StatelessWidget {
           horizontal: getProportionateScreenWidth(18), vertical: 0),
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(30),
+          bottom: Radius.circular(15),
         ),
         child: Container(
           padding:
               EdgeInsets.symmetric(vertical: getProportionateScreenHeight(10)),
           width: double.infinity,
           height: getProportionateScreenHeight(50),
-          color: kPrimaryColor,
+          color: color,
           child: Center(
             child: Text(
               title,

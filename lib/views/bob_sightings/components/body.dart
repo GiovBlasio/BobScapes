@@ -17,7 +17,10 @@ class Body extends StatelessWidget {
     return Stack(
       children: [
         const Mappa(),
-        const CustomTitle(title: "Bob Sightings Map"),
+        const CustomTitle(
+          title: "Bob Sightings Map",
+          color: kColor3,
+        ),
         Positioned(
           bottom: 0,
           child: Row(
@@ -156,7 +159,6 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-       
       ],
     );
   }

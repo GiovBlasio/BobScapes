@@ -34,6 +34,30 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Opacity(
+          opacity: 0.5,
+          child: Image.asset(
+            "assets/images/Bob Scapes Background.jpg",
+            fit: BoxFit.fill,
+            height: SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
+          ),
+        ),
+        Container(
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              kColor2.withOpacity(0.6),
+              kColor1.withOpacity(0.6),
+              kColor1,
+              kColor1,
+            ],
+          )),
+        ),
         Positioned(
             bottom: getProportionateScreenHeight(0),
             top: getProportionateScreenHeight(50),
@@ -46,15 +70,14 @@ class _BodyState extends State<Body> {
                   });
                 },
                 controller: controller,
-                children: [
-                  Center(child: HeardPage1()),
-                  HeardPage2(),
-                  Center(child: HeardPage3())
-                ])),
+                children: const [HeardPage1(), HeardPage2(), HeardPage3()])),
         Positioned(
             height: getProportionateScreenHeight(50),
             width: SizeConfig.screenWidth,
-            child: const CustomTitle(title: "I Heard a Bob!")),
+            child: const CustomTitle(
+              title: "I Heard a Bob!",
+              color: kColor2,
+            )),
         Positioned(
             bottom: getProportionateScreenHeight(70),
             right: 0,
@@ -216,22 +239,42 @@ class _BodyState extends State<Body> {
             right: getProportionateScreenWidth(15),
             bottom: getProportionateScreenHeight(10)),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Spacer(),
-            SizedBox(
-              width: (SizeConfig.screenWidth) / 2 -
-                  getProportionateScreenWidth(30),
-              child: DefaultButton(
-                  text: "Next",
-                  press: () {
-                    if (!isLoaded) {
-                      setState(() {
-                        controller.animateToPage(currentIndex + 1,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.linear);
-                      });
-                    }
-                  }),
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                shadowColor: MaterialStateProperty.all(Colors.grey),
+                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                //      borderRadius: BorderRadius.circular(20))),
+                // minimumSize: MaterialStateProperty.all(Size(
+                //     MediaQuery.of(context).size.width,
+                //     getProportionateScreenHeight(44))),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                if (!isLoaded) {
+                  setState(() {
+                    controller.animateToPage(currentIndex + 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.linear);
+                  });
+                }
+              },
+              child: Row(
+                children: [
+                  Text(
+                    "Next",
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(14),
+                        color: Colors.black),
+                  ),
+                  Icon(
+                    Icons.adaptive.arrow_forward,
+                    color: Colors.black,
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -248,37 +291,116 @@ class _BodyState extends State<Body> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              width: (SizeConfig.screenWidth) / 2 -
-                  getProportionateScreenWidth(30),
-              child: DefaultButton(
-                  text: "Back",
-                  press: () {
-                    if (!isLoaded) {
-                      setState(() {
-                        controller.animateToPage(currentIndex - 1,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.linear);
-                      });
-                    }
-                  }),
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                shadowColor: MaterialStateProperty.all(Colors.grey),
+                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                //      borderRadius: BorderRadius.circular(20))),
+                // minimumSize: MaterialStateProperty.all(Size(
+                //     MediaQuery.of(context).size.width,
+                //     getProportionateScreenHeight(44))),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                if (!isLoaded) {
+                  setState(() {
+                    controller.animateToPage(currentIndex - 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.linear);
+                  });
+                }
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.adaptive.arrow_back,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    "Back",
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(14),
+                        color: Colors.black),
+                  ),
+                  // Icon(
+                  //   Icons.adaptive.arrow_back,
+                  //   color: Colors.black,
+                  // )
+                ],
+              ),
             ),
+            // SizedBox(
+            //   width: (SizeConfig.screenWidth) / 2 -
+            //       getProportionateScreenWidth(30),
+            //   child: DefaultButton(
+            //       text: "Back",
+            //       press: () {
+            //         if (!isLoaded) {
+            //           setState(() {
+            //             controller.animateToPage(currentIndex - 1,
+            //                 duration: const Duration(seconds: 1),
+            //                 curve: Curves.linear);
+            //           });
+            //         }
+            //       }),
+            // ),
             const Spacer(),
-            SizedBox(
-              width: (SizeConfig.screenWidth) / 2 -
-                  getProportionateScreenWidth(30),
-              child: DefaultButton(
-                  text: "Next",
-                  press: () {
-                    if (!isLoaded) {
-                      setState(() {
-                        controller.animateToPage(currentIndex + 1,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.linear);
-                      });
-                    }
-                  }),
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                shadowColor: MaterialStateProperty.all(Colors.grey),
+                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                //      borderRadius: BorderRadius.circular(20))),
+                // minimumSize: MaterialStateProperty.all(Size(
+                //     MediaQuery.of(context).size.width,
+                //     getProportionateScreenHeight(44))),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                if (!isLoaded) {
+                  setState(() {
+                    controller.animateToPage(currentIndex + 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.linear);
+                  });
+                }
+              },
+              child: Row(
+                children: [
+                  // Icon(
+                  //   Icons.adaptive.arrow_back,
+                  //   color: Colors.black,
+                  // ),
+                  Text(
+                    "Next",
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(14),
+                        color: Colors.black),
+                  ),
+                  Icon(
+                    Icons.adaptive.arrow_forward,
+                    color: Colors.black,
+                  )
+                ],
+              ),
             ),
+
+            //   SizedBox(
+            //     width: (SizeConfig.screenWidth) / 2 -
+            //         getProportionateScreenWidth(30),
+            //     child: DefaultButton(
+            //         text: "Next",
+            //         press: () {
+            //           if (!isLoaded) {
+            //             setState(() {
+            //               controller.animateToPage(currentIndex + 1,
+            //                   duration: const Duration(seconds: 1),
+            //                   curve: Curves.linear);
+            //             });
+            //           }
+            //         }),
+            //   ),
           ],
         ),
       );
@@ -293,29 +415,69 @@ class _BodyState extends State<Body> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              color: Colors.transparent,
-              width: (SizeConfig.screenWidth) / 2 -
-                  getProportionateScreenWidth(30),
-              child: DefaultButton(
-                  text: "Back",
-                  press: () {
-                    if (!isLoaded) {
-                      setState(() {
-                        controller.animateToPage(currentIndex - 1,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.linear);
-                      });
-                    }
-                  }),
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                shadowColor: MaterialStateProperty.all(Colors.grey),
+                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                //      borderRadius: BorderRadius.circular(20))),
+                // minimumSize: MaterialStateProperty.all(Size(
+                //     MediaQuery.of(context).size.width,
+                //     getProportionateScreenHeight(44))),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                if (!isLoaded) {
+                  setState(() {
+                    controller.animateToPage(currentIndex - 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.linear);
+                  });
+                }
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.adaptive.arrow_back,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    "Back",
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(14),
+                        color: Colors.black),
+                  ),
+                  // Icon(
+                  //   Icons.adaptive.arrow_back,
+                  //   color: Colors.black,
+                  // )
+                ],
+              ),
             ),
+
+            // Container(
+            //   color: Colors.transparent,
+            //   width: (SizeConfig.screenWidth) / 2 -
+            //       getProportionateScreenWidth(30),
+            //   child: DefaultButton(
+            //       text: "Back",
+            //       press: () {
+            //         if (!isLoaded) {
+            //           setState(() {
+            //             controller.animateToPage(currentIndex - 1,
+            //                 duration: const Duration(seconds: 1),
+            //                 curve: Curves.linear);
+            //           });
+            //         }
+            //       }),
+            // ),
             const Spacer(),
             Container(
               color: Colors.transparent,
               width: (SizeConfig.screenWidth) / 2 -
                   getProportionateScreenWidth(30),
               child: DefaultButton(
-                  text: "Send",
+                  text: "Send data",
                   press: () async {
                     if (!isLoaded) {
                       setState(() {
@@ -340,7 +502,7 @@ class _BodyState extends State<Body> {
     }
   }
 
-  void _changePage() {}
+  // void _changePage() {}
 }
 
 class DefaultButton extends StatelessWidget {
@@ -357,19 +519,28 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(kPrimaryColor),
+        overlayColor: MaterialStateProperty.all(kColor2),
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         minimumSize: MaterialStateProperty.all(
             Size(double.infinity, getProportionateScreenHeight(44))),
-        backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+        backgroundColor: MaterialStateProperty.all(kColor2),
       ),
       onPressed: press,
-      child: Text(
-        text,
-        style: TextStyle(
-            fontSize: getProportionateScreenWidth(14), color: Colors.white),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: getProportionateScreenWidth(13), color: Colors.white),
+          ),
+          Icon(
+            Icons.adaptive.arrow_forward,
+            color: Colors.white,
+          )
+        ],
       ),
     );
   }

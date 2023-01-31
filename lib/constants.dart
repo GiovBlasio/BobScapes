@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'size_config.dart';
 
+const kColor1 = Color(0xFFFAA11C);
+const kColor2 = Color(0xFFE57823);
+const kColor3 = Color(0xFFA84E47);
+
 const kPrimaryColor = Color(0xff2c2c2c);
 const kPrimaryLightColor = Color(0xffece0d0);
 const kSecondaryColor = Color(0x772c2c2c);
@@ -30,7 +34,6 @@ final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Per favore, inserisci la tua email";
 const String kInvalidEmailError = "Per favore, inserisci un'email valida";
-
 
 class MyBehavior extends ScrollBehavior {
   @override

@@ -29,14 +29,15 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              top: getProportionateScreenHeight(5),
-              left: getProportionateScreenWidth(15),
+              top: getProportionateScreenHeight(8),
+             // left: getProportionateScreenWidth(15),
               right: getProportionateScreenWidth(10)),
           child: Text(
             widget.title,
             style: TextStyle(
               fontSize: getProportionateScreenWidth(12),
               fontWeight: FontWeight.w700,
+              color: Colors.white
             ),
           ),
         ),
@@ -53,16 +54,25 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                           children: [
                             Transform.scale(
                               scale: 1.3,
-                              child: Radio(
-                                  activeColor: kPrimaryColor,
-                                  value: item,
-                                  groupValue: group,
-                                  onChanged: (value) {
-                                    changeValue(widget.id, value!);
-                                    setState(() {
-                                      group = value;
-                                    });
-                                  }),
+                              child: Container(
+                                // color: Colors.red,
+                                child: Radio(
+                                    // focusColor: Colors.amber,
+                                    fillColor:
+                                        const MaterialStatePropertyAll(kColor3),
+                                    overlayColor:
+                                        const MaterialStatePropertyAll(
+                                            Colors.transparent),
+                                    activeColor: kColor3,
+                                    value: item,
+                                    groupValue: group,
+                                    onChanged: (value) {
+                                      changeValue(widget.id, value!);
+                                      setState(() {
+                                        group = value;
+                                      });
+                                    }),
+                              ),
                             ),
                             SizedBox(
                                 height: getProportionateScreenHeight(37),
@@ -72,9 +82,11 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(13),
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                      fontSize: getProportionateScreenWidth(13),
+                                      fontWeight: FontWeight.w700,
+                                      color: group == item
+                                          ? kColor3
+                                          : Colors.white),
                                 )),
                           ],
                         ),

@@ -17,7 +17,7 @@ class Disclaimer extends StatelessWidget {
         child: Card(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              top: Radius.circular(40),
+              top: Radius.circular(16),
             ),
           ),
           elevation: 10,
@@ -29,9 +29,9 @@ class Disclaimer extends StatelessWidget {
               //width: SizeConfig.screenWidth / 2,
               // height: 75,
               decoration: const BoxDecoration(
-                  color: kPrimaryColor,
+                  color: kColor3,
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(40))),
+                      BorderRadius.vertical(top: Radius.circular(16))),
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: getProportionateScreenWidth(10)),

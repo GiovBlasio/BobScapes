@@ -30,7 +30,7 @@ class Logo extends StatelessWidget {
           width: getProportionateScreenWidth(8),
         ),
         Text(
-          "BobScapes",
+          "BobScapes".toUpperCase(),
           style: TextStyle(
               fontSize: getProportionateScreenHeight(textSize),
               color: textColor,

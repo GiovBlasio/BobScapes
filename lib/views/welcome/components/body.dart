@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/home/home.dart';
@@ -15,13 +17,15 @@ class _BodyState extends State<Body> {
 
   AnimatedContainer buildDot({required int index}) {
     return AnimatedContainer(
-      duration: const Duration(seconds: 1),
-      margin: const EdgeInsets.only(right: 5),
-      height: 6,
-      width: currentIndex == index ? 20 : 6,
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.only(right: 8),
+      height: getProportionateScreenHeight(15),
+      width: currentIndex == index
+          ? getProportionateScreenWidth(45)
+          : getProportionateScreenWidth(15),
       decoration: BoxDecoration(
-        color: currentIndex == index ? kPrimaryColor : const Color(0xffd8d8d8),
-        borderRadius: BorderRadius.circular(3),
+        color: kColor3,
+        borderRadius: BorderRadius.circular(15),
       ),
     );
   }
@@ -39,6 +43,21 @@ class _BodyState extends State<Body> {
             width: SizeConfig.screenWidth,
           ),
         ),
+        Container(
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              kColor2.withOpacity(0.6),
+              kColor1.withOpacity(0.6),
+              kColor1,
+              kColor1,
+            ],
+          )),
+        ),
         buildContent(context),
       ],
     );
@@ -48,15 +67,13 @@ class _BodyState extends State<Body> {
     return SizedBox(
       width: double.infinity,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Opacity(
-            opacity: 0,
-            child: Image.asset(
-              "assets/images/Bob Scapes Background.jpg",
-            ),
+          const Spacer(
+            flex: 4,
           ),
-          Expanded(
-            flex: 1,
+          Flexible(
+            flex: 2,
             child: PageView(
               onPageChanged: (value) {
                 setState(() {
@@ -64,51 +81,78 @@ class _BodyState extends State<Body> {
                 });
               },
               children: [
-                Column(
-                  children: const [
-                    Spacer(),
-                    Text(
-                      "Got It!",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      "> Welcome to Bobwhites on our Landscapes.",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      "We appreciate your contribution to conservation!",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                    Spacer()
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(30)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Text(
+                      //   "Got It!",
+                      //   // textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //       fontSize: 14, fontWeight: FontWeight.w500),
+                      // ),
+                      Text(
+                        "> Welcome to\nBobwhites on our\nLandscapes.",
+                        //textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(25),
+                            fontWeight: FontWeight.w800,
+                            color: kColor3),
+                      ),
+                      Text(
+                        "We appreciate your contribution to conservation!",
+                        //textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(14),
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      // Spacer()
+                    ],
+                  ),
                 ),
-                Column(
-                  children: const [
-                    Spacer(),
-                    Text(
-                      ">Observe and Listen",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      "Your observation may be included in ongoing research and shared with scientists working to better understand Bobwhite distribution and resiliency on the landscape. Data will not be shared with the public.",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                    Spacer()
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(30)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Spacer(),
+                      Text(
+                        ">Observe and Listen",
+                        // textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(25),
+                            fontWeight: FontWeight.w800,
+                            color: kColor3),
+                      ),
+                      Text(
+                        "Your observation may be included in ongoing research and shared with scientists working to better understand Bobwhite distribution and resiliency on the landscape. Data will not be shared with the public.",
+                        // textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(14),
+                            fontWeight: FontWeight.w500),
+                      ),
+                      //     Spacer()
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
+          // Spacer(
+          //   flex: 1,
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: List.generate(
+          //     2,
+          //     (index) => buildDot(index: index),
+          //   ),
+          // ),
+          //   Spacer(),
           Expanded(
             flex: 1,
             child: Padding(
@@ -116,7 +160,9 @@ class _BodyState extends State<Body> {
                   horizontal: getProportionateScreenWidth(20)),
               child: Column(
                 children: [
-                  const Spacer(),
+                  const Spacer(
+                    flex: 1,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -125,28 +171,28 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   const Spacer(
-                    flex: 3,
+                    flex: 2,
                   ),
-                  TextButton(
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.all(kPrimaryColor),
-                      shadowColor: MaterialStateProperty.all(Colors.grey),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                      minimumSize: MaterialStateProperty.all(Size(
-                          double.infinity, getProportionateScreenHeight(56))),
-                      backgroundColor: MaterialStateProperty.all(kPrimaryColor),
-                    ),
-                    onPressed: () =>
-                        Navigator.pushNamed(context, HomeScreen.routeName),
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(14),
-                          color: Colors.white),
-                    ),
-                  ),
-                  const Spacer()
+                   TextButton(
+                     style: ButtonStyle(
+                       overlayColor: MaterialStateProperty.all(kPrimaryColor),
+                       shadowColor: MaterialStateProperty.all(Colors.grey),
+                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(20))),
+                       minimumSize: MaterialStateProperty.all(Size(
+                           double.infinity, getProportionateScreenHeight(56))),
+                       backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+                     ),
+                     onPressed: () =>
+                         Navigator.pushNamed(context, HomeScreen.routeName),
+                     child: Text(
+                       "Continue",
+                       style: TextStyle(
+                           fontSize: getProportionateScreenWidth(14),
+                           color: Colors.white),
+                     ),
+                   ),
+                  //  const Spacer()
                 ],
               ),
             ),

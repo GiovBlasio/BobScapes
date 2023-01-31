@@ -16,13 +16,14 @@ class BobSightingsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: kColor1,
           leadingWidth: getProportionateScreenWidth(80),
           leading: const CustomBackButton(),
           title: Logo(
-            iconColor: kPrimaryColor,
+            iconColor: Colors.white,
             iconSize: getProportionateScreenWidth(38),
             textSize: getProportionateScreenWidth(19),
-            textColor: kPrimaryColor,
+            textColor: Colors.white,
           ),
         ),
         body: const Body(),

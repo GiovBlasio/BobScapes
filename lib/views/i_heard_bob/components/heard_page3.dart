@@ -51,6 +51,7 @@ class _HeardPage3State extends State<HeardPage3> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.transparent,
       body: Container(
         padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(15), vertical: 0),
@@ -86,7 +87,7 @@ class _HeardPage3State extends State<HeardPage3> {
 
             Flexible(
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(top: getProportionateScreenHeight(50)),
+                // padding: EdgeInsets.only(top: getProportionateScreenHeight(50)),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,8 +103,7 @@ class _HeardPage3State extends State<HeardPage3> {
                         id: 2),
                     Flexible(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15)),
+                        padding: const EdgeInsets.only(top: 15),
                         child: Form(
                             child: TextFormField(
                           enabled: context.watch<HeardPage3State>().isEnable,
@@ -126,13 +126,13 @@ class _HeardPage3State extends State<HeardPage3> {
                             enabled: context.watch<HeardPage3State>().isEnable,
                             labelStyle: TextStyle(
                                 color: context.watch<HeardPage3State>().isEnable
-                                    ? kPrimaryColor
+                                    ? Colors.white
                                     : null,
                                 fontSize: getProportionateScreenWidth(18),
                                 fontWeight: FontWeight.w500),
                             hintStyle: TextStyle(
                               color: context.watch<HeardPage3State>().isEnable
-                                  ? kPrimaryColor
+                                  ? Colors.white
                                   : null,
                               fontSize: getProportionateScreenWidth(14),
                             ),
@@ -145,25 +145,25 @@ class _HeardPage3State extends State<HeardPage3> {
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: kPrimaryColor,
+                                color: Colors.white,
                               ),
                             ),
                             disabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: kPrimaryColor,
+                                // color: Colors.white,
                               ),
                             ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: kPrimaryColor,
+                                color: Colors.white,
                               ),
                             ),
                             border: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: kPrimaryColor,
+                                color: Colors.white,
                               ),
                             ),
                             errorBorder: const UnderlineInputBorder(
@@ -182,7 +182,7 @@ class _HeardPage3State extends State<HeardPage3> {
                             //   Icons.email,
                             //   color: kPrimaryColor,
                             // ),
-                            labelText: "Your email",
+                            labelText: "Your email (required)",
                             hintText: "hello@aol.com",
                           ),
                         )),
@@ -190,18 +190,20 @@ class _HeardPage3State extends State<HeardPage3> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(15),
+                          // left: getProportionateScreenWidth(15),
                           bottom: getProportionateScreenHeight(8),
                           top: getProportionateScreenHeight(20)),
                       child: Text(
                         "Leave a comment",
                         style: TextStyle(
                             fontSize: getProportionateScreenWidth(13),
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
                       ),
                     ),
                     Flexible(
                       child: TextFormField(
+                        expands: true,
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
                         controller: commentController,
@@ -217,48 +219,43 @@ class _HeardPage3State extends State<HeardPage3> {
                         },
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: const Color(0xbbf2f2f2),
+                          fillColor: Colors.white.withAlpha(200),
                           constraints: BoxConstraints(
                               maxHeight: getProportionateScreenHeight(100)),
                           labelStyle: TextStyle(
-                              color: kPrimaryColor,
+                              color: Colors.white,
                               // fontFamily: "Heebo",
                               fontSize: getProportionateScreenWidth(16),
                               fontWeight: FontWeight.w500),
                           hintStyle: TextStyle(
                             overflow: TextOverflow.visible,
-                            color: kPrimaryColor.withAlpha(177),
-                            fontFamily: "Heebo",
-                            fontSize: getProportionateScreenWidth(15),
+                            // color: Colors.black.withAlpha(177),
+                            fontSize: getProportionateScreenWidth(13),
                           ),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           contentPadding: EdgeInsets.only(
-                              left: getProportionateScreenWidth(20),
-                              right: getProportionateScreenWidth(20)
-                              // top: 20,
-                              //bottom: 20,
-                              ),
+                            left: getProportionateScreenWidth(10),
+                            right: getProportionateScreenWidth(10),
+                            //top: 100,
+                            // bottom: 75,
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              gapPadding: 20,
-                              borderSide:
-                                  const BorderSide(color: kPrimaryColor)),
+                            borderRadius: BorderRadius.circular(10),
+                            gapPadding: 20,
+                            borderSide: BorderSide.none,
+                          ),
                           border: OutlineInputBorder(
-                            borderSide: const BorderSide(color: kPrimaryColor),
+                            borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                             gapPadding: 20,
                           ),
-                          hintText: "Write here...",
+                          hintText: "Write here...\n\n\n",
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(10),
-                    ),
-                    // DefaultButton(
-                    //     text: "Invia",
-                    //     press: () => Navigator.popAndPushNamed(
-                    //         context, IHeardBobThanksScreen.routeName))
+                    // SizedBox(
+                    //   height: getProportionateScreenHeight(10),
+                    // ),
                   ],
                 ),
               ),

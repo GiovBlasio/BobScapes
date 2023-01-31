@@ -27,7 +27,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
           padding: EdgeInsets.symmetric(
               horizontal: getProportionateScreenWidth(15),
               vertical: getProportionateScreenHeight(15)),
-          color: const Color(0x33c2c2c2),
+          color: kColor2.withAlpha(45).withOpacity(0.5),
           child: Row(
             children: [
               const NameForm(),
@@ -76,7 +76,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               "You are",
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(12),
-                  fontWeight: FontWeight.w700, fontFamily: 'Manrope'),
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Manrope'),
             ),
           ),
           ClipRRect(
@@ -195,7 +196,6 @@ class _NameFormState extends State<NameForm> {
       decoration: InputDecoration(
         labelStyle: TextStyle(
             color: kPrimaryColor,
-            
             fontSize: getProportionateScreenWidth(13),
             fontWeight: FontWeight.w700),
         hintStyle: TextStyle(
@@ -238,7 +238,7 @@ class _NameFormState extends State<NameForm> {
             color: kSecondaryColor,
           ),
         ),
-        labelText: "Your name",
+        labelText: "Your name (required)",
         hintText: "Shane Mahoney",
       ),
     )));

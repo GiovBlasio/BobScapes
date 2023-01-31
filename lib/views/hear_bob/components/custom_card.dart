@@ -1,3 +1,4 @@
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -21,15 +22,15 @@ class CustomCard extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.all(0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         elevation: 8,
         child: ClipRRect(
           borderRadius: const BorderRadius.all(
-            Radius.circular(20),
+            Radius.circular(8),
           ),
           child: Container(
-            color: Colors.white,
+            color: kColor3,
             width: double.infinity,
             //height: 350,
             padding: EdgeInsets.symmetric(
@@ -73,7 +74,7 @@ class CustomCard extends StatelessWidget {
                         elevation: 8,
                         child: Container(
                           decoration: const BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.white,
                             shape: BoxShape.circle,
                           ),
                           padding: EdgeInsets.symmetric(
@@ -82,6 +83,7 @@ class CustomCard extends StatelessWidget {
                           child: Icon(
                             Icons.volume_up_outlined,
                             size: getProportionateScreenWidth(22),
+                            color: kColor3,
                           ),
                         ),
                       ),
@@ -97,12 +99,14 @@ class CustomCard extends StatelessWidget {
                             Text(
                               title,
                               style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(14)),
+                                  fontSize: getProportionateScreenWidth(14),
+                                  color: Colors.white),
                             ),
                             Text(
-                              time,
+                              '$time m',
                               style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(10)),
+                                  fontSize: getProportionateScreenWidth(10),
+                                  color: Colors.white),
                             ),
                           ],
                         ),
