@@ -126,8 +126,12 @@ AppBarTheme appBarTheme() {
     centerTitle: true,
     color: const Color(0xfff5f5f5),
     elevation: 3,
-    systemOverlayStyle:
-        const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
+    systemOverlayStyle: const SystemUiOverlayStyle(
+        //  systemNavigationBarIconBrightness: Brightness.light,
+        // systemNavigationBarColor: Colors.amber,
+
+        statusBarIconBrightness: Brightness.light,
+        statusBarColor: Colors.transparent),
     iconTheme: const IconThemeData(color: kPrimaryColor),
     titleTextStyle: textTheme.titleLarge,
   );

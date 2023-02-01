@@ -47,7 +47,7 @@ class CustomTitle extends StatelessWidget {
                     fontSize: getProportionateScreenWidth(18),
                     fontWeight: FontWeight.bold),
               ),
-              const Spacer(flex: 2,),
+              const Spacer(flex: 3,),
               SvgPicture.asset(
                 icon,
                 height: getProportionateScreenHeight(30),

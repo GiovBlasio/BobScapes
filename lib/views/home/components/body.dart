@@ -27,6 +27,8 @@ class _BodyState extends State<Body> {
           child: SvgPicture.asset(
             "assets/images/Welcome Background.svg",
             fit: BoxFit.cover,
+          // height: SizeConfig.screenHeight -200,
+          width: SizeConfig.screenWidth,
           ),
         ),
         // Container(
@@ -159,7 +161,7 @@ class HomeButton extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenHeight(20)),
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

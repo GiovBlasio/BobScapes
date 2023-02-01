@@ -94,9 +94,10 @@ class _BodyState extends State<Body> {
     SizeConfig().init(context);
     return Stack(
       children: [
-       SvgPicture.asset(
+        SvgPicture.asset(
           "assets/images/Welcome Background.svg",
           fit: BoxFit.cover,
+          width: SizeConfig.screenWidth,
         ),
         // Container(
         //   height: SizeConfig.screenHeight,

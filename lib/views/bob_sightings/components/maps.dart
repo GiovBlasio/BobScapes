@@ -80,6 +80,7 @@ class _MappaState extends State<Mappa> {
     'Cheyenne': LatLng(41.140259, -104.820236)
   };
 
+ // late Map<String, LatLng> usState = {};
   late final List<Marker> markers = [];
 
   late List<String> state = [];
@@ -111,28 +112,42 @@ class _MappaState extends State<Mappa> {
       index++;
     });
     state = usState.keys.toList();
+    //_initialization();
 
     super.initState();
   }
 
   _initialization() async {
     List<model.Marker> m = await RemoteService().getMarker();
+    setState(() {
+      for (model.Marker element in m) {
+        print(element.state);
+        state.add(element.state);
+        usState.putIfAbsent(
+          element.state,
+          () => LatLng(element.latitude, element.longitude),
+        );
 
-    for (model.Marker element in m) {
-      usState.putIfAbsent(
-        element.state,
-        () => LatLng(element.latitude, element.longitude),
-      );
-      markers.add(Marker(
-        point: LatLng(element.latitude, element.longitude),
-        builder: (context) => InkWell(
-          onTap: () => _showBottomSheet(context, element.state),
-          child: SvgPicture.asset(
-            "assets/icons/pin pieno.svg",
+        print(usState.keys);
+
+        markers.add(
+          Marker(
+            point: LatLng(element.latitude, element.longitude),
+            builder: (context) => InkWell(
+              onTap: () => _showBottomSheet(context, element.state),
+              child: SvgPicture.asset(
+                "assets/icons/pin pieno.svg",
+                color: element.state.length < 9
+                    ? kColor1
+                    : element.state.length < 13
+                        ? kColor2
+                        : kColor3,
+              ),
+            ),
           ),
-        ),
-      ));
-    }
+        );
+      }
+    });
   }
 
   @override
@@ -259,6 +274,7 @@ class _MappaState extends State<Mappa> {
     Geolocator.getPositionStream(locationSettings: settings).listen((position) {
       setState(() {
         currentLatLng = LatLng(position.latitude, position.longitude);
+        _mapController.move(currentLatLng, 5.5);
       });
     });
     // setState(() {});
@@ -270,13 +286,14 @@ class _MappaState extends State<Mappa> {
         backgroundColor: const Color.fromARGB(150, 158, 158, 158),
         context: context,
         builder: (ctx) {
-          return BottomSheet(usState: usState, item: index, sightings: index);
+          return BottomSheetCards(
+              usState: usState, item: index, sightings: index);
         });
   }
 }
 
-class BottomSheet extends StatefulWidget {
-  const BottomSheet({
+class BottomSheetCards extends StatefulWidget {
+  const BottomSheetCards({
     super.key,
     required this.usState,
     required this.item,
@@ -288,10 +305,10 @@ class BottomSheet extends StatefulWidget {
   final int sightings;
 
   @override
-  State<BottomSheet> createState() => _BottomSheetState();
+  State<BottomSheetCards> createState() => _BottomSheetCardsState();
 }
 
-class _BottomSheetState extends State<BottomSheet> {
+class _BottomSheetCardsState extends State<BottomSheetCards> {
   int currentIndex = 0;
 
   @override
@@ -335,65 +352,60 @@ class _BottomSheetState extends State<BottomSheet> {
               enlargeCenterPage: true,
               viewportFraction: 0.52),
           itemBuilder: (context, index, realIdx) {
-            return InkWell(
-              onTap: () {
-                // currentLatLng = LatLng(0, 0);
-                // setState(() {});
-              },
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
+            return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.all(20),
+                constraints: const BoxConstraints(
+                  minWidth: 150,
                 ),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.all(20),
-                  constraints: const BoxConstraints(
-                    minWidth: 150,
-                  ),
-                  decoration: BoxDecoration(
-                      color: currentIndex == index ? kColor1 : kColor2,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        widget.usState.keys.toList()[index],
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: getProportionateScreenWidth(14)),
-                      ),
-                      const Spacer(
-                        flex: 1,
-                      ),
-                      Text(
-                        "Bob has\nbeen heard",
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(12)),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "${widget.sightings}",
-                            style: TextStyle(
-                                fontSize: getProportionateScreenWidth(40),
-                                fontWeight: FontWeight.w300),
-                          ),
-                          SizedBox(
-                            width: getProportionateScreenWidth(5),
-                          ),
-                          Text(
-                            "times",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: getProportionateScreenWidth(12)),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                decoration: BoxDecoration(
+                    color: currentIndex == index ? kColor1 : kColor2,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.usState.keys.toList()[index],
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: getProportionateScreenWidth(14)),
+                    ),
+                    const Spacer(
+                      flex: 1,
+                    ),
+                    Text(
+                      "Bob has\nbeen heard",
+                      style:
+                          TextStyle(fontSize: getProportionateScreenWidth(12)),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      mainAxisSize: MainAxisSize.min,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          "${widget.sightings}",
+                          style: TextStyle(
+                              fontSize: getProportionateScreenWidth(40),
+                              fontWeight: FontWeight.w300),
+                        ),
+                        SizedBox(
+                          width: getProportionateScreenWidth(45),
+                        ),
+                        Text(
+                          "times",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: getProportionateScreenWidth(12)),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             );

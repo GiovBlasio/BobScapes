@@ -14,10 +14,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kColor1,
+          backgroundColor: kColor2,
           leading: Container(),
           title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg"),
         ),

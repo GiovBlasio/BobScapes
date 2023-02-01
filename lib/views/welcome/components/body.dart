@@ -38,6 +38,7 @@ class _BodyState extends State<Body> {
         SvgPicture.asset(
           "assets/images/Welcome Background.svg",
           fit: BoxFit.cover,
+          width: SizeConfig.screenWidth,
         ),
         // Container(
         //   height: SizeConfig.screenHeight,

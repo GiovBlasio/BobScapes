@@ -59,8 +59,8 @@ class RemoteService {
     return await Future.delayed(
         const Duration(seconds: 1),
         () => [
-              Marker(longitude: 10, latitude: 30, state: "", sightings: 100),
-              Marker(longitude: 10, latitude: 20, state: "", sightings: 200),
+              Marker(longitude: 10, latitude: 30, state: "Alabama", sightings: 100),
+              Marker(longitude: 10, latitude: 20, state: "Illinois", sightings: 200),
             ]);
     // Map<String, dynamic> param = {
     //   "params": {"user_signature": userSignature}

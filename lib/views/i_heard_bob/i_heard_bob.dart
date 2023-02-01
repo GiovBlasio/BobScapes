@@ -15,11 +15,13 @@ class IHeardBobScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         // resizeToAvoidBottomInset: false,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kColor1,
+          backgroundColor: kColor2,
           leadingWidth: getProportionateScreenWidth(80),
           leading: const CustomBackButton(),
           title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg"),
