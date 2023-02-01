@@ -1,46 +1,50 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'logo.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedLogo extends ImplicitlyAnimatedWidget {
-  const AnimatedLogo(
-      {required this.iconColor,
-      required this.iconSize,
-      required this.textSize,
-      required this.textColor,
-      super.key,
-      super.curve,
-      required super.duration,
-      super.onEnd});
+  const AnimatedLogo({
+    required this.logoHeight,
+    required this.logoWidth,
+    super.key,
+    super.curve,
+    required super.duration,
+    super.onEnd,
+  });
 
-  final Color iconColor;
-  final Color textColor;
-  final double iconSize;
-  final double textSize;
+  final double logoHeight;
+  final double logoWidth;
 
   @override
   AnimatedWidgetBaseState<AnimatedLogo> createState() => _AnimatedLogoState();
 }
 
 class _AnimatedLogoState extends AnimatedWidgetBaseState<AnimatedLogo> {
-  Tween<double>? _iconSize;
-  Tween<double>? _textSize;
+  Tween<double>? _logoHeight;
+  Tween<double>? _logoWidth;
 
   @override
   Widget build(BuildContext context) {
-    return Logo(
-      iconColor: Colors.white,
-      textColor: Colors.white,
-      iconSize: _iconSize!.evaluate(animation),
-      textSize: _textSize!.evaluate(animation),
+    return SvgPicture.asset(
+      "assets/images/logo-bobscapes.svg",
+      width: _logoWidth!.evaluate(animation),
+      height: _logoHeight!.evaluate(animation),
     );
+    // return Logo(
+    //   iconColor: widget.iconColor,
+    //   textColor: widget.textColor,
+    //   iconSize: _iconSize!.evaluate(animation),
+    //   textSize: _textSize!.evaluate(animation),
+    // );
   }
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _iconSize = visitor(_iconSize, widget.iconSize,
+    _logoHeight = visitor(_logoHeight, widget.logoHeight,
             (dynamic value) => Tween<double>(begin: value as double))
         as Tween<double>?;
-    _textSize = visitor(_textSize, widget.textSize,
+    _logoWidth = visitor(_logoWidth, widget.logoWidth,
             (dynamic value) => Tween<double>(begin: value as double))
         as Tween<double>?;
   }

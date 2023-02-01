@@ -13,9 +13,8 @@ class WelcomeScreen extends StatefulWidget {
 class _BodyState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-        child: Scaffold(
+    return const Scaffold(
       body: Body(),
-    ));
+    );
   }
 }

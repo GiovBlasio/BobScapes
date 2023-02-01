@@ -23,30 +23,27 @@ class _BodyState extends State<Body> {
     return Stack(
       children: [
         Opacity(
-          opacity: 0.5,
-          child: Image.asset(
-            "assets/images/Bob Scapes Background.jpg",
-            fit: BoxFit.fill,
-            height: SizeConfig.screenHeight,
-            width: SizeConfig.screenWidth,
+          opacity: 1,
+          child: SvgPicture.asset(
+            "assets/images/Welcome Background.svg",
+            fit: BoxFit.cover,
           ),
         ),
-        Container(
-          height: SizeConfig.screenHeight,
-          width: SizeConfig.screenWidth,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              kColor2.withOpacity(0.6),
-              kColor1.withOpacity(0.6),
-             
-              kColor1,
-            ],
-          )),
-        ),
-        Padding(
+        // Container(
+        //   height: SizeConfig.screenHeight,
+        //   width: SizeConfig.screenWidth,
+        //   decoration: BoxDecoration(
+        //       gradient: LinearGradient(
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //     colors: [
+        //       kColor2.withOpacity(0.6),
+        //       kColor1.withOpacity(0.6),
+        //       kColor1,
+        //     ],
+        //   )),
+        // ),
+         Padding(
           padding:
               EdgeInsets.symmetric(vertical: getProportionateScreenHeight(25)),
           child: Column(

@@ -3,6 +3,7 @@ import 'package:bobscapes/views/common_widget/logo.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'components/body.dart';
 
@@ -21,12 +22,7 @@ class IHeardBobScreen extends StatelessWidget {
           backgroundColor: kColor1,
           leadingWidth: getProportionateScreenWidth(80),
           leading: const CustomBackButton(),
-          title: Logo(
-            iconColor: Colors.white,
-            iconSize: getProportionateScreenWidth(38),
-            textSize: getProportionateScreenWidth(19),
-            textColor: Colors.white,
-          ),
+          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg"),
         ),
         body: const Body(),
       ),

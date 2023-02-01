@@ -33,6 +33,7 @@ class Logo extends StatelessWidget {
           "BobScapes".toUpperCase(),
           style: TextStyle(
               fontSize: getProportionateScreenHeight(textSize),
+              fontFamily: "FjallaOne",
               color: textColor,
               fontWeight: FontWeight.bold),
         ),

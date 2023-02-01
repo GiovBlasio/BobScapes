@@ -82,16 +82,20 @@ class _MappaState extends State<Mappa> {
 
   late final List<Marker> markers = [];
 
+  late List<String> state = [];
+  late List<int> sightings = [];
+
   late Marker current;
   int currentIndex = 0;
 
   @override
   void initState() {
+    int index = 1;
     usState.forEach((key, value) {
       markers.add(Marker(
         point: value,
         builder: (context) => InkWell(
-          onTap: () => _showBottomSheet(context),
+          onTap: () => _showBottomSheet(context, key),
           child: SvgPicture.asset(
             "assets/icons/pin pieno.svg",
             color: key.length < 9
@@ -102,7 +106,12 @@ class _MappaState extends State<Mappa> {
           ),
         ),
       ));
+
+      sightings.add((1.2 * index).toInt());
+      index++;
     });
+    state = usState.keys.toList();
+
     super.initState();
   }
 
@@ -117,7 +126,7 @@ class _MappaState extends State<Mappa> {
       markers.add(Marker(
         point: LatLng(element.latitude, element.longitude),
         builder: (context) => InkWell(
-          onTap: () => _showBottomSheet(context),
+          onTap: () => _showBottomSheet(context, element.state),
           child: SvgPicture.asset(
             "assets/icons/pin pieno.svg",
           ),
@@ -150,7 +159,7 @@ class _MappaState extends State<Mappa> {
           markers: markers,
         ),
         Positioned(
-          bottom: getProportionateScreenHeight(100),
+          bottom: getProportionateScreenHeight(85),
           right: getProportionateScreenWidth(10),
           left: 0,
           child: Row(
@@ -248,117 +257,152 @@ class _MappaState extends State<Mappa> {
     LocationSettings settings = const LocationSettings(
         accuracy: LocationAccuracy.high, distanceFilter: 100);
     Geolocator.getPositionStream(locationSettings: settings).listen((position) {
-      currentLatLng = LatLng(position.latitude, position.longitude);
+      setState(() {
+        currentLatLng = LatLng(position.latitude, position.longitude);
+      });
     });
-    setState(() {});
+    // setState(() {});
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void _showBottomSheet(BuildContext context, String key) {
+    int index = state.indexOf(key);
     showBottomSheet(
         backgroundColor: const Color.fromARGB(150, 158, 158, 158),
         context: context,
         builder: (ctx) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+          return BottomSheet(usState: usState, item: index, sightings: index);
+        });
+  }
+}
+
+class BottomSheet extends StatefulWidget {
+  const BottomSheet({
+    super.key,
+    required this.usState,
+    required this.item,
+    required this.sightings,
+  });
+
+  final Map<String, LatLng> usState;
+  final int item;
+  final int sightings;
+
+  @override
+  State<BottomSheet> createState() => _BottomSheetState();
+}
+
+class _BottomSheetState extends State<BottomSheet> {
+  int currentIndex = 0;
+
+  @override
+  void initState() {
+    currentIndex = widget.item;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          margin: EdgeInsets.symmetric(
+            vertical: getProportionateScreenHeight(8),
+          ),
+          height: getProportionateScreenHeight(4),
+          width: getProportionateScreenWidth(100),
+        ),
+        CarouselSlider.builder(
+          itemCount: widget.usState.length,
+          options: CarouselOptions(
+              initialPage: widget.item,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+              enlargeFactor: 0.45,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index % widget.usState.length;
+                  //print(currentIndex);
+                });
+              },
+              aspectRatio: 1.6,
+              enlargeCenterPage: true,
+              viewportFraction: 0.52),
+          itemBuilder: (context, index, realIdx) {
+            return InkWell(
+              onTap: () {
+                // currentLatLng = LatLng(0, 0);
+                // setState(() {});
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: const EdgeInsets.all(20),
+                  constraints: const BoxConstraints(
+                    minWidth: 150,
+                  ),
+                  decoration: BoxDecoration(
+                      color: currentIndex == index ? kColor1 : kColor2,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        widget.usState.keys.toList()[index],
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: getProportionateScreenWidth(14)),
+                      ),
+                      const Spacer(
+                        flex: 1,
+                      ),
+                      Text(
+                        "Bob has\nbeen heard",
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(12)),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "${widget.sightings}",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(40),
+                                fontWeight: FontWeight.w300),
+                          ),
+                          SizedBox(
+                            width: getProportionateScreenWidth(5),
+                          ),
+                          Text(
+                            "times",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: getProportionateScreenWidth(12)),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                margin: EdgeInsets.symmetric(
-                  vertical: getProportionateScreenHeight(8),
-                ),
-                height: getProportionateScreenHeight(4),
-                width: getProportionateScreenWidth(100),
               ),
-              CarouselSlider.builder(
-                itemCount: usState.length,
-                options: CarouselOptions(
-                    enlargeStrategy: CenterPageEnlargeStrategy.height,
-                    enlargeFactor: 0.45,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        currentIndex = index % usState.length;
-                        //print(currentIndex);
-                      });
-                    },
-                    aspectRatio: 1.6,
-                    enlargeCenterPage: true,
-                    viewportFraction: 0.52),
-                itemBuilder: (context, index, realIdx) {
-                  return InkWell(
-                    onTap: () {
-                      // currentLatLng = LatLng(0, 0);
-                      // setState(() {});
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        constraints: const BoxConstraints(
-                          minWidth: 150,
-                        ),
-                        decoration: BoxDecoration(
-                            color: currentIndex == index ? kColor1 : kColor2,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              usState.keys.toList()[index],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: getProportionateScreenWidth(14)),
-                            ),
-                            const Spacer(
-                              flex: 1,
-                            ),
-                            Text(
-                              "Bob has\nbeen heard",
-                              style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(12)),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "127",
-                                  style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(40),
-                                      fontWeight: FontWeight.w300),
-                                ),
-                                SizedBox(
-                                  width: getProportionateScreenWidth(5),
-                                ),
-                                Text(
-                                  "times",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize:
-                                          getProportionateScreenWidth(12)),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: getProportionateScreenHeight(18),
-              )
-            ],
-          );
-        });
+            );
+          },
+        ),
+        SizedBox(
+          height: getProportionateScreenHeight(18),
+        )
+      ],
+    );
   }
 }

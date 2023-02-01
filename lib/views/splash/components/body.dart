@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/logo_animated.dart';
 import 'package:bobscapes/views/home/home.dart';
@@ -20,13 +21,13 @@ class _BodyState extends State<Body> {
   bool animate = false;
   bool opacity = false;
 
-  late double topLogo = getProportionateScreenHeight(110);
-  late double leftLogo = getProportionateScreenWidth(40);
+  late double bottomLogo = getProportionateScreenHeight(405);
+  late double leftLogo = getProportionateScreenWidth(28);
   late double bottomTextRow = getProportionateScreenHeight(-100);
   late double bottomBackground = getProportionateScreenHeight(0);
   late double imageWidth = SizeConfig.screenWidth;
-  late double iconSize = getProportionateScreenWidth(75);
-  late double textSize = getProportionateScreenWidth(35);
+  late double logoHeight = getProportionateScreenWidth(95);
+  late double logoWidth = getProportionateScreenWidth(45);
   late double leftFirstPin = getProportionateScreenWidth(-50);
   late double bottomMainPhrase = getProportionateScreenHeight(-200);
   late double rightSecondPin = getProportionateScreenWidth(-60);
@@ -42,7 +43,7 @@ class _BodyState extends State<Body> {
 
     setState(() {
       opacity = true;
-      topLogo = getProportionateScreenHeight(150);
+      bottomLogo = getProportionateScreenHeight(380);
       bottomTextRow = getProportionateScreenHeight(30);
       bottomBackground = getProportionateScreenHeight(100);
     });
@@ -51,13 +52,13 @@ class _BodyState extends State<Body> {
 
     setState(() {
       animate = true;
-      topLogo = getProportionateScreenHeight(130);
-      leftLogo = getProportionateScreenWidth(30);
+      bottomLogo = getProportionateScreenHeight(360);
+      leftLogo = getProportionateScreenWidth(22);
       imageWidth = imageWidth + 100;
-      iconSize = getProportionateScreenWidth(65);
-      textSize = getProportionateScreenWidth(33);
+      logoHeight = getProportionateScreenWidth(85);
+      logoWidth = getProportionateScreenWidth(40);
       leftFirstPin = getProportionateScreenWidth(-17);
-      bottomMainPhrase = getProportionateScreenHeight(250);
+      bottomMainPhrase = getProportionateScreenHeight(180);
       rightSecondPin = getProportionateScreenWidth(10);
     });
 
@@ -93,107 +94,147 @@ class _BodyState extends State<Body> {
     SizeConfig().init(context);
     return Stack(
       children: [
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
-          bottom: bottomBackground,
-          child: AnimatedOpacity(
-            opacity: opacity ? 1 : 0,
-            duration: const Duration(seconds: 1),
-            child: AnimatedContainer(
-              duration: const Duration(seconds: 1),
-              width: imageWidth,
-              child: Image.asset(
-                "assets/images/Bob Scapes Background.jpg",
-              ),
-            ),
-          ),
+       SvgPicture.asset(
+          "assets/images/Welcome Background.svg",
+          fit: BoxFit.cover,
         ),
-        Positioned.fill(
-            child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 20,
-            sigmaY: 20,
-          ),
-          child: const SizedBox(),
-        )),
+        // Container(
+        //   height: SizeConfig.screenHeight,
+        //   width: SizeConfig.screenWidth,
+        //   decoration: BoxDecoration(
+        //       gradient: LinearGradient(
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //     colors: [
+        //       kColor2.withOpacity(0.6),
+        //       kColor1.withOpacity(0.6),
+        //       kColor1,
+        //       kColor1,
+        //     ],
+        //   )),
+        // ),
+        // // AnimatedPositioned(
+        //   duration: const Duration(seconds: 1),
+        //   bottom: bottomBackground,
+        //   child: AnimatedOpacity(
+        //     opacity: opacity ? 1 : 0,
+        //     duration: const Duration(seconds: 1),
+        //     child: AnimatedContainer(
+        //       duration: const Duration(seconds: 1),
+        //       width: imageWidth,
+        //       child: Image.asset(
+        //         "assets/images/Bob Scapes Background.jpg",
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // Positioned.fill(
+        //    child: BackdropFilter(
+        //   filter: ImageFilter.blur(
+        //     sigmaX: 20,
+        //     sigmaY: 20,
+        //   ),
+        //   child: const SizedBox(),
+        // )),
         AnimatedPositioned(
             duration: const Duration(seconds: 1),
-            top: topLogo,
+            bottom: bottomLogo,
             left: leftLogo,
             child: AnimatedOpacity(
               opacity: opacity ? 1 : 0,
               duration: const Duration(seconds: 1),
               child: AnimatedLogo(
-                  iconColor: Colors.white,
-                  iconSize: iconSize,
-                  textSize: textSize,
-                  textColor: const Color(0xbbffffff),
+                  logoHeight: logoHeight,
+                  logoWidth: logoWidth,
                   duration: const Duration(seconds: 1)),
             )),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            top: getProportionateScreenHeight(290),
-            left: leftFirstPin,
-            child: SvgPicture.asset(
-              "assets/icons/pin.svg",
-              height: getProportionateScreenHeight(45),
-              color: Colors.white,
-            )),
+        // AnimatedPositioned(
+        //     duration: const Duration(seconds: 1),
+        //     top: getProportionateScreenHeight(290),
+        //     left: leftFirstPin,
+        //     child: SvgPicture.asset(
+        //       "assets/icons/pin.svg",
+        //       height: getProportionateScreenHeight(45),
+        //       color: Colors.white,
+        //     )),
         AnimatedPositioned(
           duration: const Duration(seconds: 1),
           left: getProportionateScreenHeight(25),
           bottom: bottomMainPhrase,
-          child: Text(
-            "BOBWHITES\nIN OUR\nLANDSCAPES",
-            style: TextStyle(
-                height: 1,
-                fontSize: getProportionateScreenWidth(44),
-                color: Colors.white,
-                fontStyle: FontStyle.italic),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Bobwhites",
+                style: TextStyle(
+                    height: 1,
+                    fontSize: getProportionateScreenWidth(44),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "on our",
+                style: TextStyle(
+                  height: 1,
+                  fontSize: getProportionateScreenWidth(44),
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "landscapes",
+                style: TextStyle(
+                  height: 1,
+                  fontSize: getProportionateScreenWidth(44),
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            top: animate
-                ? getProportionateScreenHeight(545)
-                : getProportionateScreenHeight(500),
-            right: rightSecondPin,
-            child: SvgPicture.asset(
-              "assets/icons/pin.svg",
-              height: getProportionateScreenHeight(70),
-              color: Colors.white,
-            )),
+        // AnimatedPositioned(
+        //     duration: const Duration(seconds: 1),
+        //     top: animate
+        //         ? getProportionateScreenHeight(545)
+        //         : getProportionateScreenHeight(500),
+        //     right: rightSecondPin,
+        //     child: SvgPicture.asset(
+        //       "assets/icons/pin.svg",
+        //       height: getProportionateScreenHeight(70),
+        //       color: Colors.white,
+        //     )),
         AnimatedPositioned(
             duration: const Duration(seconds: 1),
             bottom: bottomTextRow,
-            left: getProportionateScreenHeight(25),
-            right: getProportionateScreenHeight(25),
+            left: getProportionateScreenHeight(0),
+            right: getProportionateScreenHeight(0),
             child: AnimatedOpacity(
               opacity: opacity ? 1 : 0,
               duration: const Duration(seconds: 2),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    "Quail\nForever",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
+                  const Spacer(),
+                  Image.asset(
+                    "assets/images/logo-quail.png",
+                    //height: 90,
+                    scale: 1.5,
                   ),
-                  Text("Landscape\nPartnership",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(14),
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic)),
-                  Text("Working Lands\nWildlife",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(14),
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic)),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  SvgPicture.asset(
+                    "assets/images/logo-landscape.svg",
+                  ),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  Image.asset(
+                    "assets/images/wlfw-logo.png",
+                    //height: 70,
+
+                    scale: 2,
+                  ),
+                  const Spacer()
                 ],
               ),
             ))

@@ -2,6 +2,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'components/body.dart';
 
@@ -18,12 +19,7 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kColor1,
           leading: Container(),
-          title: Logo(
-            iconColor: Colors.white,
-            iconSize: getProportionateScreenWidth(38),
-            textSize: getProportionateScreenWidth(19),
-            textColor: Colors.white,
-          ),
+          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg"),
         ),
         body: const Body(),
       ),

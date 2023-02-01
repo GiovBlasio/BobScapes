@@ -77,9 +77,10 @@ class _BodyState extends State<Body> {
             child: const CustomTitle(
               title: "I Heard a Bob!",
               color: kColor2,
+              icon: "assets/icons/gps.svg",
             )),
         Positioned(
-            bottom: getProportionateScreenHeight(70),
+            bottom: getProportionateScreenHeight(65),
             right: 0,
             left: 0,
             child: buildButtons()),
@@ -92,7 +93,7 @@ class _BodyState extends State<Body> {
                       context, BobSightingsScreen.routeName),
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(12),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.black12,
@@ -104,47 +105,41 @@ class _BodyState extends State<Body> {
                     child: Card(
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(30),
+                          top: Radius.circular(12),
                         ),
                       ),
                       elevation: 10,
                       margin: const EdgeInsets.all(0),
                       child: ClipRRect(
                         borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(30),
+                          top: Radius.circular(12),
                         ),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: getProportionateScreenHeight(10)),
                           width: SizeConfig.screenWidth / 2,
-                          height: getProportionateScreenHeight(75),
-                          color: Colors.white,
+                          height: getProportionateScreenHeight(63),
+                          color: kColor3,
                           child: Row(
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // SvgPicture.asset(
-                              //   icon,
-                              //   height: getProportionateScreenHeight(0),
-                              //   color: Colors.white,
-                              // ),
-                              SizedBox(
-                                // color: Colors.red,
-                                width: getProportionateScreenWidth(120),
-                                child: Text(
-                                  "Bob Sightings\nMap",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(16),
-                                      fontWeight: FontWeight.w500,
-                                      color: kPrimaryColor),
-                                ),
+                              const Spacer(
+                                flex: 2,
                               ),
+                              Text(
+                                "Bob Sightings Map",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(14),
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                              const Spacer(),
                               SvgPicture.asset(
                                 "assets/icons/eye.svg",
-                                height: getProportionateScreenHeight(30),
-                                color: kPrimaryColor,
+                                height: getProportionateScreenHeight(25),
+                                color: Colors.white,
                               ),
+                              const Spacer()
                             ],
                           ),
                         ),
@@ -157,7 +152,7 @@ class _BodyState extends State<Body> {
                       context, HearBobScreen.routeName),
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(12),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.black12,
@@ -169,47 +164,41 @@ class _BodyState extends State<Body> {
                     child: Card(
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(30),
+                          top: Radius.circular(12),
                         ),
                       ),
                       elevation: 10,
                       margin: const EdgeInsets.all(0),
                       child: ClipRRect(
                         borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(30),
+                          top: Radius.circular(12),
                         ),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: getProportionateScreenHeight(10)),
                           width: SizeConfig.screenWidth / 2,
-                          height: getProportionateScreenHeight(75),
-                          color: Colors.white,
+                          height: getProportionateScreenHeight(63),
+                          color: kColor1,
                           child: Row(
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // SvgPicture.asset(
-                              //   icon,
-                              //   height: getProportionateScreenHeight(0),
-                              //   color: Colors.white,
-                              // ),
-                              SizedBox(
-                                // color: Colors.red,
-                                width: getProportionateScreenWidth(90),
-                                child: Text(
-                                  "Hear Bob",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(16),
-                                      fontWeight: FontWeight.w500,
-                                      color: kPrimaryColor),
-                                ),
+                              const Spacer(
+                                flex: 2,
                               ),
+                              Text(
+                                "Hear Bob",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(14),
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                              const Spacer(),
                               SvgPicture.asset(
                                 "assets/icons/music.svg",
-                                height: getProportionateScreenHeight(30),
-                                color: kPrimaryColor,
+                                height: getProportionateScreenHeight(25),
+                                color: Colors.white,
                               ),
+                              const Spacer()
                             ],
                           ),
                         ),

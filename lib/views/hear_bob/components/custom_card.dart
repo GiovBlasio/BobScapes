@@ -46,18 +46,22 @@ class CustomCard extends StatelessWidget {
                       EdgeInsets.only(left: getProportionateScreenWidth(65)),
                   child: Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(4.0),
                       ),
                       elevation: 8,
                       child: ClipRRect(
                         borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
+                          Radius.circular(4),
                         ),
                         child: Container(
-                          padding: const EdgeInsets.all(15),
+                          //padding: const EdgeInsets.all(15),
                           color: Colors.grey,
                           height: getProportionateScreenHeight(150),
                           width: double.infinity,
+                          child: Image.asset(
+                            "assets/images/Bob Scapes Background.jpg",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       )),
                 ),

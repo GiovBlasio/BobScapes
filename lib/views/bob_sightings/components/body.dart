@@ -20,6 +20,7 @@ class Body extends StatelessWidget {
         const CustomTitle(
           title: "Bob Sightings Map",
           color: kColor3,
+          icon: "assets/icons/eye.svg",
         ),
         Positioned(
           bottom: 0,
@@ -30,7 +31,7 @@ class Body extends StatelessWidget {
                     Navigator.popAndPushNamed(context, HearBobScreen.routeName),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(12),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
@@ -42,47 +43,41 @@ class Body extends StatelessWidget {
                   child: Card(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30),
+                        top: Radius.circular(12),
                       ),
                     ),
                     elevation: 10,
                     margin: const EdgeInsets.all(0),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(30),
+                        top: Radius.circular(12),
                       ),
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             vertical: getProportionateScreenHeight(10)),
                         width: SizeConfig.screenWidth / 2,
-                        height: getProportionateScreenHeight(75),
-                        color: Colors.white,
+                        height: getProportionateScreenHeight(63),
+                        color: kColor1,
                         child: Row(
-                          //crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // SvgPicture.asset(
-                            //   icon,
-                            //   height: getProportionateScreenHeight(0),
-                            //   color: Colors.white,
-                            // ),
-                            SizedBox(
-                              // color: Colors.red,
-                              width: getProportionateScreenWidth(90),
-                              child: Text(
-                                "Hear Bob",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(16),
-                                    fontWeight: FontWeight.w500,
-                                    color: kPrimaryColor),
-                              ),
+                            const Spacer(
+                              flex: 2,
                             ),
+                            Text(
+                              "Hear Bob",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14),
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                            const Spacer(),
                             SvgPicture.asset(
                               "assets/icons/music.svg",
-                              height: getProportionateScreenHeight(30),
-                              color: kPrimaryColor,
+                              height: getProportionateScreenHeight(25),
+                              color: Colors.white,
                             ),
+                            const Spacer()
                           ],
                         ),
                       ),
@@ -97,7 +92,7 @@ class Body extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.teal,
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(12),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
@@ -109,46 +104,51 @@ class Body extends StatelessWidget {
                   child: Card(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30),
+                        top: Radius.circular(12),
                       ),
                     ),
                     elevation: 10,
                     margin: const EdgeInsets.all(0),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(30),
+                        top: Radius.circular(12),
                       ),
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             vertical: getProportionateScreenHeight(10)),
                         width: SizeConfig.screenWidth / 2,
-                        height: getProportionateScreenHeight(75),
-                        color: Colors.white,
+                        height: getProportionateScreenHeight(63),
+                        color: kColor2,
                         child: Row(
                           //crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          //  mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(
-                              "assets/icons/gps.svg",
-                              height: getProportionateScreenHeight(30),
-                              color: Colors.white,
+                            Spacer(
+                              flex: 2,
                             ),
+                            // SvgPicture.asset(
+                            //   "assets/icons/gps.svg",
+                            //   height: getProportionateScreenHeight(30),
+                            //   color: Colors.white,
+                            // ),
                             SizedBox(
-                              width: getProportionateScreenWidth(110),
+                              //  width: getProportionateScreenWidth(110),
                               child: Text(
                                 "Hey, I heard Bob!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(16),
+                                    fontSize: getProportionateScreenWidth(14),
                                     fontWeight: FontWeight.w500,
-                                    color: kPrimaryColor),
+                                    color: Colors.white),
                               ),
                             ),
+                            Spacer(),
                             SvgPicture.asset(
                               "assets/icons/gps.svg",
-                              height: getProportionateScreenHeight(30),
-                              color: kPrimaryColor,
+                              height: getProportionateScreenHeight(25),
+                              color: Colors.white,
                             ),
+                            Spacer()
                           ],
                         ),
                       ),
