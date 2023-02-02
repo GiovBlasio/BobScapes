@@ -23,7 +23,7 @@ class IHeardBobScreen extends StatelessWidget {
           backgroundColor: kColor2,
           leadingWidth: getProportionateScreenWidth(80),
           leading: const CustomBackButton(),
-          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg", height: getProportionateScreenHeight(25),),
+          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg", height: getProportionateScreenWidth(25),),
         ),
         body: const Body(),
       ),

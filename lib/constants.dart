@@ -80,7 +80,7 @@ const kAnimationDuration = Duration(milliseconds: 200);
 TextStyle headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(28),
   fontWeight: FontWeight.bold,
-  color: kPrimaryColor,
+  color: Colors.black,
   height: 1.5,
 );
 

@@ -1,4 +1,5 @@
 import 'package:bobscapes/services/remote_services.dart';
+import 'package:bobscapes/views/common_widget/bottom_buttons.dart';
 import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
@@ -35,28 +36,9 @@ class _BodyState extends State<Body> {
     return Stack(
       children: [
         Opacity(
-          opacity: 0.5,
-          child: Image.asset(
-            "assets/images/Bob Scapes Background.jpg",
-            fit: BoxFit.fill,
-            height: SizeConfig.screenHeight,
-            width: SizeConfig.screenWidth,
-          ),
-        ),
-        Container(
-          height: SizeConfig.screenHeight,
-          width: SizeConfig.screenWidth,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              kColor2.withOpacity(0.6),
-              kColor1.withOpacity(0.6),
-              kColor1,
-              kColor1,
-            ],
-          )),
+          opacity: 1,
+          child: SvgPicture.asset("assets/images/Welcome Background.svg",
+              fit: BoxFit.cover, width: double.infinity),
         ),
         Positioned(
             bottom: getProportionateScreenHeight(0),
@@ -80,7 +62,7 @@ class _BodyState extends State<Body> {
               icon: "assets/icons/gps.svg",
             )),
         Positioned(
-            bottom: getProportionateScreenHeight(65),
+            bottom: getProportionateScreenHeight(70),
             right: 0,
             left: 0,
             child: buildButtons()),
@@ -88,131 +70,145 @@ class _BodyState extends State<Body> {
             bottom: 0,
             child: Row(
               children: [
-                InkWell(
-                  onTap: () => Navigator.popAndPushNamed(
+                BottomButton(
+                  color: kColor3,
+                  title: "Bob Sightings Map",
+                  iconPath: "assets/icons/eye.svg",
+                  onPressed: () => Navigator.popAndPushNamed(
                       context, BobSightingsScreen.routeName),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 4,
-                            blurRadius: 4,
-                            offset: Offset(0, -4),
-                          ),
-                        ]),
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(12),
-                        ),
-                      ),
-                      elevation: 10,
-                      margin: const EdgeInsets.all(0),
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(12),
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: getProportionateScreenHeight(10)),
-                          width: SizeConfig.screenWidth / 2,
-                          height: getProportionateScreenHeight(63),
-                          color: kColor3,
-                          child: Row(
-                            children: [
-                              const Spacer(
-                                flex: 2,
-                              ),
-                              Text(
-                                "Bob Sightings Map",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(14),
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                              const Spacer(),
-                              SvgPicture.asset(
-                                "assets/icons/eye.svg",
-                                height: getProportionateScreenHeight(25),
-                                color: Colors.white,
-                              ),
-                              const Spacer()
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
-                InkWell(
-                  onTap: () => Navigator.popAndPushNamed(
+                BottomButton(
+                  color: kColor1,
+                  title: "Hear Bob",
+                  iconPath: "assets/icons/music.svg",
+                  onPressed: () => Navigator.popAndPushNamed(
                       context, HearBobScreen.routeName),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 4,
-                            blurRadius: 4,
-                            offset: Offset(0, -4),
-                          ),
-                        ]),
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(12),
-                        ),
-                      ),
-                      elevation: 10,
-                      margin: const EdgeInsets.all(0),
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(12),
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: getProportionateScreenHeight(10)),
-                          width: SizeConfig.screenWidth / 2,
-                          height: getProportionateScreenHeight(63),
-                          color: kColor1,
-                          child: Row(
-                            children: [
-                              const Spacer(
-                                flex: 2,
-                              ),
-                              Text(
-                                "Hear Bob",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(14),
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                              const Spacer(),
-                              SvgPicture.asset(
-                                "assets/icons/music.svg",
-                                height: getProportionateScreenHeight(25),
-                                color: Colors.white,
-                              ),
-                              const Spacer()
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
+                // InkWell(
+                //   onTap: () => Navigator.popAndPushNamed(
+                //       context, BobSightingsScreen.routeName),
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(12),
+                //         boxShadow: const [
+                //           BoxShadow(
+                //             color: Colors.black12,
+                //             spreadRadius: 4,
+                //             blurRadius: 4,
+                //             offset: Offset(0, -4),
+                //           ),
+                //         ]),
+                //     child: Card(
+                //       shape: const RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.vertical(
+                //           top: Radius.circular(12),
+                //         ),
+                //       ),
+                //       elevation: 10,
+                //       margin: const EdgeInsets.all(0),
+                //       child: ClipRRect(
+                //         borderRadius: const BorderRadius.vertical(
+                //           top: Radius.circular(12),
+                //         ),
+                //         child: Container(
+                //           padding: EdgeInsets.symmetric(
+                //               vertical: getProportionateScreenHeight(10)),
+                //           width: SizeConfig.screenWidth / 2,
+                //           height: getProportionateScreenHeight(63),
+                //           color: kColor3,
+                //           child: Row(
+                //             children: [
+                //               const Spacer(
+                //                 flex: 2,
+                //               ),
+                //               Text(
+                //                 "Bob Sightings Map",
+                //                 textAlign: TextAlign.center,
+                //                 style: TextStyle(
+                //                     fontSize: getProportionateScreenWidth(14),
+                //                     fontWeight: FontWeight.w500,
+                //                     color: Colors.white),
+                //               ),
+                //               const Spacer(),
+                //               SvgPicture.asset(
+                //                 "assets/icons/eye.svg",
+                //                 height: getProportionateScreenHeight(25),
+                //                 color: Colors.white,
+                //               ),
+                //               const Spacer()
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // InkWell(
+                //   onTap: () => Navigator.popAndPushNamed(
+                //       context, HearBobScreen.routeName),
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(12),
+                //         boxShadow: const [
+                //           BoxShadow(
+                //             color: Colors.black12,
+                //             spreadRadius: 4,
+                //             blurRadius: 4,
+                //             offset: Offset(0, -4),
+                //           ),
+                //         ]),
+                //     child: Card(
+                //       shape: const RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.vertical(
+                //           top: Radius.circular(12),
+                //         ),
+                //       ),
+                //       elevation: 10,
+                //       margin: const EdgeInsets.all(0),
+                //       child: ClipRRect(
+                //         borderRadius: const BorderRadius.vertical(
+                //           top: Radius.circular(12),
+                //         ),
+                //         child: Container(
+                //           padding: EdgeInsets.symmetric(
+                //               vertical: getProportionateScreenHeight(10)),
+                //           width: SizeConfig.screenWidth / 2,
+                //           height: getProportionateScreenHeight(63),
+                //           color: kColor1,
+                //           child: Row(
+                //             children: [
+                //               const Spacer(
+                //                 flex: 2,
+                //               ),
+                //               Text(
+                //                 "Hear Bob",
+                //                 textAlign: TextAlign.center,
+                //                 style: TextStyle(
+                //                     fontSize: getProportionateScreenWidth(14),
+                //                     fontWeight: FontWeight.w500,
+                //                     color: Colors.white),
+                //               ),
+                //               const Spacer(),
+                //               SvgPicture.asset(
+                //                 "assets/icons/music.svg",
+                //                 height: getProportionateScreenHeight(25),
+                //                 color: Colors.white,
+                //               ),
+                //               const Spacer()
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             )),
         if (isLoaded)
           const Center(
-            child: CircularProgressIndicator.adaptive(
-              valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
-              backgroundColor: Colors.white,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(kColor2),
+              backgroundColor: kColor1,
             ),
           )
       ],
@@ -319,21 +315,6 @@ class _BodyState extends State<Body> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   width: (SizeConfig.screenWidth) / 2 -
-            //       getProportionateScreenWidth(30),
-            //   child: DefaultButton(
-            //       text: "Back",
-            //       press: () {
-            //         if (!isLoaded) {
-            //           setState(() {
-            //             controller.animateToPage(currentIndex - 1,
-            //                 duration: const Duration(seconds: 1),
-            //                 curve: Curves.linear);
-            //           });
-            //         }
-            //       }),
-            // ),
             const Spacer(),
             TextButton(
               style: ButtonStyle(
@@ -357,10 +338,6 @@ class _BodyState extends State<Body> {
               },
               child: Row(
                 children: [
-                  // Icon(
-                  //   Icons.adaptive.arrow_back,
-                  //   color: Colors.black,
-                  // ),
                   Text(
                     "Next",
                     style: TextStyle(
@@ -374,22 +351,6 @@ class _BodyState extends State<Body> {
                 ],
               ),
             ),
-
-            //   SizedBox(
-            //     width: (SizeConfig.screenWidth) / 2 -
-            //         getProportionateScreenWidth(30),
-            //     child: DefaultButton(
-            //         text: "Next",
-            //         press: () {
-            //           if (!isLoaded) {
-            //             setState(() {
-            //               controller.animateToPage(currentIndex + 1,
-            //                   duration: const Duration(seconds: 1),
-            //                   curve: Curves.linear);
-            //             });
-            //           }
-            //         }),
-            //   ),
           ],
         ),
       );
@@ -436,30 +397,9 @@ class _BodyState extends State<Body> {
                         fontSize: getProportionateScreenWidth(14),
                         color: Colors.black),
                   ),
-                  // Icon(
-                  //   Icons.adaptive.arrow_back,
-                  //   color: Colors.black,
-                  // )
                 ],
               ),
             ),
-
-            // Container(
-            //   color: Colors.transparent,
-            //   width: (SizeConfig.screenWidth) / 2 -
-            //       getProportionateScreenWidth(30),
-            //   child: DefaultButton(
-            //       text: "Back",
-            //       press: () {
-            //         if (!isLoaded) {
-            //           setState(() {
-            //             controller.animateToPage(currentIndex - 1,
-            //                 duration: const Duration(seconds: 1),
-            //                 curve: Curves.linear);
-            //           });
-            //         }
-            //       }),
-            // ),
             const Spacer(),
             Container(
               color: Colors.transparent,
@@ -490,8 +430,6 @@ class _BodyState extends State<Body> {
       );
     }
   }
-
-  // void _changePage() {}
 }
 
 class DefaultButton extends StatelessWidget {

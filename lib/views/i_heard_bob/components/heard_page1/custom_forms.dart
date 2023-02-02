@@ -85,11 +85,9 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                   filled: true,
                   fillColor: Colors.white.withAlpha(200),
                   // TODO
-                  // contentPadding: const EdgeInsets.only(
-                  //   // left: 0,
-                  //   // top: 0,
-                  //   // bottom: 0,
-                  // ),
+                  contentPadding: EdgeInsets.all(
+                    getProportionateScreenWidth(12),
+                  ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     gapPadding: 20,
@@ -107,17 +105,16 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 onFieldSubmitted: (value) => {setState(() {})},
                 onTap: () async {
                   myDate = await showDatePicker(
-                    // locale: const Locale("it", "IT"),
                     builder: (context, child) => Theme(
                       data: Theme.of(context).copyWith(
                         colorScheme: const ColorScheme.light(
-                          primary: kPrimaryColor, // header background color
+                          primary: kColor1, // header background color
                           onPrimary: Colors.white, // header text color
-                          //onSurface: Colors.green, // body text color
+                          onSurface: Colors.black, // body text color
                         ),
                         textButtonTheme: TextButtonThemeData(
                           style: TextButton.styleFrom(
-                            foregroundColor: kPrimaryColor, // button text color
+                            foregroundColor: kColor1, // button text color
                           ),
                         ),
                       ),
@@ -173,11 +170,9 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                   filled: true,
                   fillColor: Colors.white.withAlpha(200),
                   // TODO
-                  // contentPadding: const EdgeInsets.only(
-                  //   left: 0,
-                  //   top: 0,
-                  //   bottom: 0,
-                  // ),
+                  contentPadding: EdgeInsets.all(
+                    getProportionateScreenWidth(12),
+                  ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     gapPadding: 20,
@@ -201,14 +196,15 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                         return Theme(
                           data: Theme.of(context).copyWith(
                             colorScheme: const ColorScheme.light(
+                              surface: kColor3,
                               primary: kColor1, // header background color
-                              onPrimary: Colors.black, // header text color
-                              //onSurface: Colors.green, // body text color
+                              onPrimary: Colors.white, // header text color
+                              onSurface: Colors.white, // body text color
                             ),
                             textButtonTheme: TextButtonThemeData(
                               style: TextButton.styleFrom(
                                 foregroundColor:
-                                    kPrimaryColor, // button text color
+                                    Colors.white, // button text color
                               ),
                             ),
                           ),
@@ -370,11 +366,9 @@ class _LocationFormState extends State<LocationForm> {
                       filled: true,
                       fillColor: Colors.white.withAlpha(200),
                       // TODO
-                      // contentPadding:  EdgeInsets.only(
-                         //left: getProportionateScreenWidth(20),
-                        // top: 12,
-                         //bottom: 12,
-                       //),
+                      contentPadding: EdgeInsets.all(
+                        getProportionateScreenWidth(12),
+                      ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           gapPadding: 20,

@@ -93,7 +93,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                 child: DropdownButton(
                     alignment: AlignmentDirectional.bottomEnd,
                     style: TextStyle(
-                      color: kPrimaryColor,
+                      color: Colors.black,
                       fontSize: getProportionateScreenWidth(13),
                       fontWeight: FontWeight.w500,
                     ),
@@ -202,32 +202,31 @@ class _NameFormState extends State<NameForm> {
             fontSize: getProportionateScreenWidth(13),
             fontWeight: FontWeight.w700),
         hintStyle: TextStyle(
-          color: kPrimaryColor.withAlpha(177),
+          color: Colors.black.withAlpha(177),
           fontSize: getProportionateScreenWidth(12),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         //TODO
-        // contentPadding: const EdgeInsets.only(
-        //   left: 0,
-        //   top: 0,
-        //   bottom: 0,
-        // ),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: getProportionateScreenHeight(8)
+          ),
+         
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             width: 1,
-            color: kPrimaryColor,
+            color: Colors.black,
           ),
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             width: 1,
-            color: kPrimaryColor,
+            color: Colors.black,
           ),
         ),
         border: const UnderlineInputBorder(
           borderSide: BorderSide(
             width: 1,
-            color: kPrimaryColor,
+            color: Colors.black,
           ),
         ),
         errorBorder: const UnderlineInputBorder(

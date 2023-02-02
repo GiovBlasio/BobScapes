@@ -57,7 +57,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                           children: [
                             Transform.scale(
                               //TODO
-                              scale: getProportionateScreenHeight(1.5),
+                              scale: getProportionateScreenHeight(1.3),
                               child: Radio(
                                   // focusColor: Colors.amber,
                                   fillColor:

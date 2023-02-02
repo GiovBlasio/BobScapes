@@ -53,11 +53,11 @@ class MyApp extends StatelessWidget {
 
 ThemeData theme(BuildContext context) {
   return ThemeData(
-    primaryColor: kPrimaryColor,
+    primaryColor: Colors.black,
     scaffoldBackgroundColor: const Color(0xfff0f0f0),
     appBarTheme: appBarTheme(),
     textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: kPrimaryColor,
+          bodyColor: Colors.black,
           fontFamily: 'Manrope',
         ),
     visualDensity: VisualDensity.adaptivePlatformDensity,

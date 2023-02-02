@@ -58,7 +58,7 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                       : Column(
                           children: [
                             Transform.scale(
-                              scale: getProportionateScreenHeight(1.5),
+                              scale: getProportionateScreenHeight(1.3),
                               child: Radio(
                                   fillColor:
                                       const MaterialStatePropertyAll(kColor3),

@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kColor2,
           leading: Container(),
-          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg", height: getProportionateScreenHeight(25),),
+          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg", height: getProportionateScreenWidth(25),),
         ),
         body: const Body(),
       ),
