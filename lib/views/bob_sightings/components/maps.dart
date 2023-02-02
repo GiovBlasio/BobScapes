@@ -82,6 +82,7 @@ class _MappaState extends State<Mappa> {
                   alignment: Alignment.bottomCenter,
                   padding: EdgeInsets.zero,
                   onPressed: () => showDialog(
+                      useSafeArea: false,
                       barrierColor: Colors.white70,
                       context: context,
                       builder: (context) => const Disclaimer()),
@@ -307,7 +308,6 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
               onPageChanged: (index, reason) {
                 setState(() {
                   currentIndex = index % widget.state.length;
-                  //print(currentIndex);
                 });
               },
               aspectRatio: 1.6,
@@ -334,7 +334,8 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                     Text(
                       widget.state[index],
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
                           fontSize: getProportionateScreenWidth(14)),
                     ),
                     const Spacer(
@@ -342,8 +343,10 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                     ),
                     Text(
                       "Bob has\nbeen heard",
-                      style:
-                          TextStyle(fontSize: getProportionateScreenWidth(12)),
+                      style: TextStyle(
+                          fontSize: getProportionateScreenWidth(12),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -354,7 +357,8 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                           "${widget.sightings[index]}",
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(40),
-                              fontWeight: FontWeight.w300),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           width: getProportionateScreenWidth(45),
@@ -363,6 +367,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                           "times",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
+                              color: Colors.white,
                               fontSize: getProportionateScreenWidth(12)),
                         ),
                       ],

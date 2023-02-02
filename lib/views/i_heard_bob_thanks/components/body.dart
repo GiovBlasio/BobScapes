@@ -65,7 +65,8 @@ class Body extends StatelessWidget {
                                 fontWeight: FontWeight.w600)),
                       ),
                       Padding(
-                        padding:  EdgeInsets.symmetric(  horizontal: getProportionateScreenHeight(25)),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getProportionateScreenHeight(25)),
                         child: Text(
                           "for\nsubmitting \nyour \nsighting!",
                           style: TextStyle(
@@ -81,6 +82,7 @@ class Body extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.zero,
                           onPressed: () => showDialog(
+                              useSafeArea: false,
                               barrierColor: Colors.white70,
                               context: context,
                               builder: (context) => const Disclaimer()),
