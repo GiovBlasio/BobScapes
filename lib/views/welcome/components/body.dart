@@ -157,7 +157,7 @@ class _BodyState extends State<Body> {
                       backgroundColor: MaterialStateProperty.all(kColor2),
                     ),
                     onPressed: () =>
-                        Navigator.pushNamed(context, HomeScreen.routeName),
+                        Navigator.popAndPushNamed(context, HomeScreen.routeName),
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [

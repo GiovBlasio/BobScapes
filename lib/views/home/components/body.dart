@@ -27,8 +27,8 @@ class _BodyState extends State<Body> {
           child: SvgPicture.asset(
             "assets/images/Welcome Background.svg",
             fit: BoxFit.cover,
-          // height: SizeConfig.screenHeight -200,
-          width: SizeConfig.screenWidth,
+            // height: SizeConfig.screenHeight -200,
+            width: SizeConfig.screenWidth,
           ),
         ),
         // Container(
@@ -45,7 +45,7 @@ class _BodyState extends State<Body> {
         //     ],
         //   )),
         // ),
-         Padding(
+        Padding(
           padding:
               EdgeInsets.symmetric(vertical: getProportionateScreenHeight(25)),
           child: Column(
@@ -67,6 +67,7 @@ class _BodyState extends State<Body> {
                   splashRadius: 0.1,
                   padding: EdgeInsets.zero,
                   onPressed: () => showDialog(
+                      useSafeArea: false,
                       context: context,
                       builder: (context) => const Disclaimer()),
                   icon: const Icon(

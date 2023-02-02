@@ -24,7 +24,7 @@ class CustomTitle extends StatelessWidget {
       ),
       elevation: 10,
       margin: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(18), vertical: 0),
+          horizontal: getProportionateScreenWidth(15), vertical: 0),
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(15),
@@ -33,25 +33,29 @@ class CustomTitle extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(vertical: getProportionateScreenHeight(10)),
           width: double.infinity,
-          height: getProportionateScreenHeight(50),
+          height: getProportionateScreenHeight(45),
           color: color,
           child: Row(
             children: [
               const Spacer(
-                flex: 5,
+                flex: 8,
               ),
               Text(
                 title,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: getProportionateScreenWidth(18),
+                    fontSize: getProportionateScreenWidth(16),
                     fontWeight: FontWeight.bold),
               ),
-              const Spacer(flex: 3,),
-              SvgPicture.asset(
-                icon,
-                height: getProportionateScreenHeight(30),
-                color: Colors.white,
+              const Spacer(
+                flex: 5,
+              ),
+              Flexible(
+                flex: 2,
+                child: SvgPicture.asset(
+                  icon,
+                  color: Colors.white,
+                ),
               ),
               const Spacer()
             ],

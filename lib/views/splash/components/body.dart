@@ -5,6 +5,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/logo_animated.dart';
 import 'package:bobscapes/views/home/home.dart';
+import 'package:bobscapes/views/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -26,7 +27,7 @@ class _BodyState extends State<Body> {
   late double bottomTextRow = getProportionateScreenHeight(-100);
   late double bottomBackground = getProportionateScreenHeight(0);
   late double imageWidth = SizeConfig.screenWidth;
-  late double logoHeight = getProportionateScreenWidth(95);
+  late double logoHeight = getProportionateScreenHeight(95);
   late double logoWidth = getProportionateScreenWidth(45);
   late double leftFirstPin = getProportionateScreenWidth(-50);
   late double bottomMainPhrase = getProportionateScreenHeight(-200);
@@ -39,7 +40,9 @@ class _BodyState extends State<Body> {
   }
 
   void _initialization() async {
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 2000), () {
+      SizeConfig().init(context);
+    });
 
     setState(() {
       opacity = true;
@@ -55,7 +58,7 @@ class _BodyState extends State<Body> {
       bottomLogo = getProportionateScreenHeight(360);
       leftLogo = getProportionateScreenWidth(22);
       imageWidth = imageWidth + 100;
-      logoHeight = getProportionateScreenWidth(85);
+      logoHeight = getProportionateScreenHeight(85);
       logoWidth = getProportionateScreenWidth(40);
       leftFirstPin = getProportionateScreenWidth(-17);
       bottomMainPhrase = getProportionateScreenHeight(180);
@@ -63,35 +66,37 @@ class _BodyState extends State<Body> {
     });
 
     await Future.delayed(
-      const Duration(milliseconds: 5000),
-      () => Navigator.push(
-        context,
-        PageRouteBuilder(
-          transitionDuration: const Duration(seconds: 2),
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const WelcomeScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(-1, 0);
-            const end = Offset.zero;
-            const curve = Curves.slowMiddle;
+        const Duration(milliseconds: 5000),
+        () => Navigator.of(context)
+          ..pushReplacement(
+            PageRouteBuilder(
+              transitionDuration: const Duration(seconds: 2),
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const WelcomeScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(-1, 0);
+                const end = Offset.zero;
+                const curve = Curves.slowMiddle;
 
-            var tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-            final offsetAnimation = animation.drive(tween);
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                final offsetAnimation = animation.drive(tween);
 
-            return SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            );
-          },
-        ),
-      ),
-    );
+                return SlideTransition(
+                  position: offsetAnimation,
+                  child: child,
+                );
+              },
+            ),
+          ));
   }
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    print(bottomLogo);
+    print(leftLogo);
+    print(bottomMainPhrase);
     return Stack(
       children: [
         SvgPicture.asset(

@@ -1,4 +1,3 @@
-import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,8 @@ class _HeardPage3State extends State<HeardPage3> {
       backgroundColor: Colors.transparent,
       body: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(15), vertical: 0),
+            horizontal: getProportionateScreenWidth(15),
+            vertical: getProportionateScreenHeight(0)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +87,7 @@ class _HeardPage3State extends State<HeardPage3> {
 
             Flexible(
               child: SingleChildScrollView(
-                // padding: EdgeInsets.only(top: getProportionateScreenHeight(50)),
+                 padding: EdgeInsets.only(top: getProportionateScreenHeight(10)),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,8 @@ class _HeardPage3State extends State<HeardPage3> {
                         id: 2),
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding: EdgeInsets.only(
+                            top: getProportionateScreenHeight(10)),
                         child: Form(
                             child: TextFormField(
                           enabled: context.watch<HeardPage3State>().isEnable,
@@ -128,14 +129,14 @@ class _HeardPage3State extends State<HeardPage3> {
                                 color: context.watch<HeardPage3State>().isEnable
                                     ? Colors.white
                                     : null,
-                                fontSize: getProportionateScreenWidth(18),
-                                fontWeight: FontWeight.w500),
+                                fontSize: getProportionateScreenWidth(16),
+                                fontWeight: FontWeight.w700),
                             hintStyle: TextStyle(
-                              color: context.watch<HeardPage3State>().isEnable
-                                  ? Colors.white
-                                  : null,
-                              fontSize: getProportionateScreenWidth(14),
-                            ),
+                                color: context.watch<HeardPage3State>().isEnable
+                                    ? Colors.white.withOpacity(0.6)
+                                    : null,
+                                fontSize: getProportionateScreenWidth(14),
+                                fontWeight: FontWeight.w300),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             contentPadding: const EdgeInsets.only(
                               left: 0,
@@ -182,7 +183,9 @@ class _HeardPage3State extends State<HeardPage3> {
                             //   Icons.email,
                             //   color: kPrimaryColor,
                             // ),
-                            labelText: "Your email (required)",
+                            labelText: context.watch<HeardPage3State>().isEnable
+                                ? "Your email (required)"
+                                : "Your email",
                             hintText: "hello@aol.com",
                           ),
                         )),
@@ -197,7 +200,7 @@ class _HeardPage3State extends State<HeardPage3> {
                         "Leave a comment",
                         style: TextStyle(
                             fontSize: getProportionateScreenWidth(13),
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                             color: Colors.white),
                       ),
                     ),

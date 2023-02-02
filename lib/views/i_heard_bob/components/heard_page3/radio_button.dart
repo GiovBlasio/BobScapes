@@ -36,8 +36,8 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
           child: Text(
             widget.title,
             style: TextStyle(
-              fontSize: getProportionateScreenWidth(12),
-              fontWeight: FontWeight.w500,
+              fontSize: getProportionateScreenWidth(13),
+              fontWeight: FontWeight.w700,
               color: Colors.white,
             ),
           ),
@@ -72,15 +72,15 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                                   }),
                             ),
                             SizedBox(
-                                height: getProportionateScreenHeight(37),
-                                width: getProportionateScreenWidth(68),
+                                height: getProportionateScreenHeight(40),
+                                width: getProportionateScreenWidth(80),
                                 child: Text(
                                   item,
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(12),
-                                      fontWeight: FontWeight.w500,
+                                      fontSize: getProportionateScreenWidth(13),
+                                      fontWeight: FontWeight.w700,
                                       color: group == item
                                           ? kColor3
                                           : Colors.white),

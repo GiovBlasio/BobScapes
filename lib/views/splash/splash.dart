@@ -1,4 +1,5 @@
 import 'package:bobscapes/constants.dart';
+import 'package:bobscapes/size_config.dart';
 
 import 'components/body.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,12 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return const SafeArea(
       top: false,
       bottom: false,
       child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.amber,
         body: Body(),
       ),
     );

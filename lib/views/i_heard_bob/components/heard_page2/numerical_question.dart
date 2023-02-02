@@ -24,118 +24,111 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-          //    left: getProportionateScreenWidth(10),
-          // right: getProportionateScreenWidth(10),
-          ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-              //color: Colors.amber,
-              constraints: BoxConstraints(
-                  maxWidth: widget.id != 5
-                      ? getProportionateScreenWidth(200)
-                      : getProportionateScreenWidth(135)),
-              child: Text(
-                widget.title,
-                style: TextStyle(
-                    fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white),
-              )),
-          if (widget.id == 5)
-            Tooltip(
-              padding: const EdgeInsets.only(
-                  top: 20, bottom: 20, left: 25, right: 25),
-              margin: const EdgeInsets.only(left: 90, right: 50),
-              decoration: const BoxDecoration(
-                color: kColor2,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              showDuration: const Duration(seconds: 25),
-              triggerMode: TooltipTriggerMode.tap,
-              verticalOffset: getProportionateScreenHeight(-165),
-              textStyle: TextStyle(
-                  color: Colors.white,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+            constraints: BoxConstraints(
+                maxWidth: widget.id != 5
+                    ? getProportionateScreenWidth(200)
+                    : getProportionateScreenWidth(135)),
+            child: Text(
+              widget.title,
+              style: TextStyle(
                   fontSize: getProportionateScreenWidth(13),
-                  fontWeight: FontWeight.w500),
-              message:
-                  'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
-              child: const Icon(
-                Icons.info_outline,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white),
+            )),
+        if (widget.id == 5)
+          Tooltip(
+            padding:
+                const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+            margin: const EdgeInsets.only(left: 90, right: 50),
+            decoration: const BoxDecoration(
+              color: kColor2,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            showDuration: const Duration(seconds: 25),
+            triggerMode: TooltipTriggerMode.tap,
+            verticalOffset: getProportionateScreenHeight(-165),
+            textStyle: TextStyle(
                 color: Colors.white,
+                fontSize: getProportionateScreenWidth(13),
+                fontWeight: FontWeight.w500),
+            message:
+                'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
+            child: const Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            ),
+          ),
+        const Spacer(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  color: kColor3,
+                  borderRadius: BorderRadius.all(Radius.circular(3.5))),
+              width: getProportionateScreenWidth(20),
+              height: getProportionateScreenHeight(20),
+              child: IconButton(
+                splashRadius: 0.1,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  setState(() {
+                    decrementCounter(widget.id);
+                  });
+                },
+                icon: Icon(
+                  Icons.remove,
+                  color: Colors.white,
+                  size: getProportionateScreenHeight(15),
+                ),
               ),
             ),
-          const Spacer(),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    color: kColor3,
-                    borderRadius: BorderRadius.all(Radius.circular(3.5))),
-                width: getProportionateScreenWidth(20),
-                height: getProportionateScreenHeight(20),
-                child: IconButton(
-                  splashRadius: 0.1,
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    setState(() {
-                      decrementCounter(widget.id);
-                    });
-                  },
-                  icon: Icon(
-                    Icons.remove,
-                    color: Colors.white,
-                    size: getProportionateScreenHeight(15),
-                  ),
+            SizedBox(
+              width: getProportionateScreenWidth(55),
+              child: TextFormField(
+                // toolbarOptions: const ToolbarOptions(),
+                contextMenuBuilder: (context, editableTextState) {
+                  return Container();
+                },
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+                enableInteractiveSelection: false,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                controller: controller,
+                readOnly: true,
+                decoration: const InputDecoration.collapsed(hintText: ""),
+              ),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                  color: kColor3,
+                  borderRadius: BorderRadius.all(Radius.circular(3.5))),
+              //color: Colors.black,
+              width: getProportionateScreenWidth(20),
+              height: getProportionateScreenHeight(20),
+              child: IconButton(
+                splashRadius: 0.1,
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  incrementCounter(widget.id);
+                },
+                icon: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 15,
                 ),
               ),
-              SizedBox(
-                width: getProportionateScreenWidth(55),
-                child: TextFormField(
-                  // toolbarOptions: const ToolbarOptions(),
-                  contextMenuBuilder: (context, editableTextState) {
-                    return Container();
-                  },
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  enableInteractiveSelection: false,
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.number,
-                  controller: controller,
-                  readOnly: true,
-                  decoration: const InputDecoration.collapsed(hintText: ""),
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                    color: kColor3,
-                    borderRadius: BorderRadius.all(Radius.circular(3.5))),
-                //color: Colors.black,
-                width: getProportionateScreenWidth(20),
-                height: getProportionateScreenHeight(20),
-                child: IconButton(
-                  splashRadius: 0.1,
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    incrementCounter(widget.id);
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 15,
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
+            ),
+          ],
+        )
+      ],
     );
   }
 

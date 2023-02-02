@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/models/audio.dart';
 import 'package:bobscapes/models/marker.dart';
 import 'package:http/http.dart' as http;
+import 'package:latlong2/latlong.dart';
 
 class RemoteService {
   var client = http.Client();
@@ -56,12 +58,21 @@ class RemoteService {
     String url =
         'https://odoo14-cefpas.unitivastaging.it/api/v1/richiesta-forms',
   ]) async {
+    int index = 0;
+    Map<String, Marker> map = state.map((key, value) {
+      index++;
+      return MapEntry<String, Marker>(
+          key,
+          Marker(
+              latitude: value.latitude,
+              longitude: value.longitude,
+              state: key,
+              sightings: index));
+    });
+
     return await Future.delayed(
-        const Duration(seconds: 1),
-        () => [
-              Marker(longitude: 10, latitude: 30, state: "Alabama", sightings: 100),
-              Marker(longitude: 10, latitude: 20, state: "Illinois", sightings: 200),
-            ]);
+        const Duration(seconds: 1), () => map.values.toList());
+
     // Map<String, dynamic> param = {
     //   "params": {"user_signature": userSignature}
     // };
@@ -76,7 +87,7 @@ class RemoteService {
 
     //   var map = jsonDecode(json);
 
-    //   return audioFromJson(jsonEncode(map['result']['user_forms']));
+    //   return markerFromJson(jsonEncode(map['result']['user_forms']));
     // } else {
     //   throw Exception(response.statusCode);
     // }
@@ -90,24 +101,13 @@ class RemoteService {
     return await Future.delayed(const Duration(seconds: 2), () => {});
     //   Uri uri = Uri.parse(url);
 
-    //   ///
-    //   /// Richiesta POST
-    //   ///
     //   http.Response response =
     //       await client.post(uri, headers: headers, body: json.encode(params));
 
-    //   ///
-    //   /// Se la richiesta non è andata a buon fine si lancia un'eccezione
-    //   ///
     //   if (response.statusCode == 200) {
-    //     ///
-    //     /// Stringa relativa alla risposta ottenuta dalla richiesta POST appena inviata
-    //     ///
+   
     //     var json = response.body;
 
-    //     ///
-    //     /// Decodifica della stringa ricevuta, in modo da poter leggere lo stato della richiesta
-    //     ///
     //     var map = jsonDecode(json);
     //     if (map['result']['status'] == 200) {
     //     } else {

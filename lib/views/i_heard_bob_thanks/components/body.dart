@@ -16,9 +16,9 @@ class Body extends StatelessWidget {
           opacity: 1,
           child: SvgPicture.asset(
             "assets/images/Welcome Background.svg",
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             // height: SizeConfig.screenHeight,
-            // width: SizeConfig.screenWidth,
+            width: double.infinity,
           ),
         ),
         // Container(
@@ -45,17 +45,18 @@ class Body extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Logo(
-                            iconColor: Colors.white,
-                            iconSize: 75,
-                            textSize: 33,
-                            textColor: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: SvgPicture.asset(
+                          "assets/images/logo-bobscapes.svg",
+                          height: getProportionateScreenHeight(85),
+                          width: getProportionateScreenWidth(40),
+                        ),
                       ),
                       const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getProportionateScreenHeight(25)),
                         child: Text("Thank you",
                             style: TextStyle(
                                 height: 1,
@@ -64,7 +65,7 @@ class Body extends StatelessWidget {
                                 fontWeight: FontWeight.w600)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding:  EdgeInsets.symmetric(  horizontal: getProportionateScreenHeight(25)),
                         child: Text(
                           "for\nsubmitting \nyour \nsighting!",
                           style: TextStyle(
