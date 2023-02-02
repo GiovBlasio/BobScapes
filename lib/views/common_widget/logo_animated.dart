@@ -1,6 +1,5 @@
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'logo.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedLogo extends ImplicitlyAnimatedWidget {

@@ -35,41 +35,40 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: getProportionateScreenHeight(65),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-               // left: getProportionateScreenWidth(10),
-                bottom: getProportionateScreenHeight(8)),
-            child: Text(
-              "What did you see?",
-              style: TextStyle(
-                  fontSize: getProportionateScreenWidth(13),
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+              // left: getProportionateScreenWidth(10),
+              bottom: getProportionateScreenHeight(8)),
+          child: Text(
+            "What did you see?",
+            style: TextStyle(
+                fontSize: getProportionateScreenWidth(13),
+                fontWeight: FontWeight.w700,
+                color: Colors.white),
           ),
-          ClipRRect(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            child: Container(
-              height: getProportionateScreenHeight(35),
-              padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(10)),
-              color: Colors.white.withAlpha(200),
+        ),
+        ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          child: Container(
+            height: getProportionateScreenHeight(35),
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(10)),
+            color: Colors.white.withAlpha(200),
+            child: DropdownButtonHideUnderline(
               child: DropdownButton(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  underline: Container(),
                   isExpanded: true,
                   value: dropdownvalue,
                   icon: const Icon(
                     Icons.keyboard_arrow_down,
                     color: Colors.black,
                   ),
+                  iconSize: getProportionateScreenHeight(24),
                   items: widget.items.map((String item) {
                     return DropdownMenuItem(
                       value: item,
@@ -93,8 +92,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                   }),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

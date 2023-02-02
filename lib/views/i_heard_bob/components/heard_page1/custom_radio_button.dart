@@ -30,18 +30,21 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
         Padding(
           padding: EdgeInsets.only(
               top: getProportionateScreenHeight(8),
-             // left: getProportionateScreenWidth(15),
+              bottom: getProportionateScreenHeight(8),
+              // left: getProportionateScreenWidth(15),
               right: getProportionateScreenWidth(10)),
           child: Text(
             widget.title,
             style: TextStyle(
-              fontSize: getProportionateScreenWidth(12),
-              fontWeight: FontWeight.w700,
-              color: Colors.white
-            ),
+                fontSize: getProportionateScreenWidth(12),
+                fontWeight: FontWeight.w700,
+                color: Colors.white),
           ),
         ),
         Row(
+            //TODO
+             crossAxisAlignment: CrossAxisAlignment.baseline,
+             textBaseline: TextBaseline.alphabetic,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.items
                 .map(
@@ -53,41 +56,35 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                       : Column(
                           children: [
                             Transform.scale(
-                              scale: 1.3,
-                              child: Container(
-                                // color: Colors.red,
-                                child: Radio(
-                                    // focusColor: Colors.amber,
-                                    fillColor:
-                                        const MaterialStatePropertyAll(kColor3),
-                                    overlayColor:
-                                        const MaterialStatePropertyAll(
-                                            Colors.transparent),
-                                    activeColor: kColor3,
-                                    value: item,
-                                    groupValue: group,
-                                    onChanged: (value) {
-                                      changeValue(widget.id, value!);
-                                      setState(() {
-                                        group = value;
-                                      });
-                                    }),
-                              ),
+                              //TODO
+                              scale: getProportionateScreenHeight(1.5),
+                              child: Radio(
+                                  // focusColor: Colors.amber,
+                                  fillColor:
+                                      const MaterialStatePropertyAll(kColor3),
+                                  overlayColor:
+                                      const MaterialStatePropertyAll(
+                                          Colors.transparent),
+                                  activeColor: kColor3,
+                                  value: item,
+                                  groupValue: group,
+                                  onChanged: (value) {
+                                    changeValue(widget.id, value!);
+                                    setState(() {
+                                      group = value;
+                                    });
+                                  }),
                             ),
-                            SizedBox(
-                                height: getProportionateScreenHeight(37),
-                                width: getProportionateScreenWidth(65),
-                                child: Text(
-                                  item,
-                                  softWrap: true,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(13),
-                                      fontWeight: FontWeight.w700,
-                                      color: group == item
-                                          ? kColor3
-                                          : Colors.white),
-                                )),
+                            Text(
+                              item,
+                              softWrap: true,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(13),
+                                  fontWeight: FontWeight.w700,
+                                  color:
+                                      group == item ? kColor3 : Colors.white),
+                            ),
                           ],
                         ),
                 )

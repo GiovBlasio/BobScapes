@@ -1,7 +1,6 @@
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
@@ -16,8 +15,9 @@ class CustomBackButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+           Icon(
             Icons.arrow_back_ios_rounded,
+            size: getProportionateScreenHeight(24),
             color: Colors.white,
           ),
           Text(

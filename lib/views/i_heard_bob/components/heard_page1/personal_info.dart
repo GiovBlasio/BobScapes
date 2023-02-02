@@ -89,28 +89,31 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(10)),
               color: Colors.white,
-              child: DropdownButton(
-                  style: TextStyle(
-                    color: kPrimaryColor,
-                    fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  underline: Container(),
-                  isExpanded: true,
-                  value: dropdownvalue,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  items: widget.items.map((String item) {
-                    return DropdownMenuItem(
-                      value: item,
-                      child: Text(item),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    changeValue(newValue!);
-                    setState(() {
-                      dropdownvalue = newValue;
-                    });
-                  }),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: getProportionateScreenWidth(13),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    // underline: Container(),
+                    isExpanded: true,
+                    value: dropdownvalue,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: widget.items.map((String item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      changeValue(newValue!);
+                      setState(() {
+                        dropdownvalue = newValue;
+                      });
+                    }),
+              ),
             ),
           ),
         ],
@@ -195,7 +198,7 @@ class _NameFormState extends State<NameForm> {
       },
       decoration: InputDecoration(
         labelStyle: TextStyle(
-            color: kPrimaryColor,
+            color: Colors.black,
             fontSize: getProportionateScreenWidth(13),
             fontWeight: FontWeight.w700),
         hintStyle: TextStyle(
@@ -203,11 +206,12 @@ class _NameFormState extends State<NameForm> {
           fontSize: getProportionateScreenWidth(12),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.only(
-          left: 0,
-          top: 0,
-          bottom: 0,
-        ),
+        //TODO
+        // contentPadding: const EdgeInsets.only(
+        //   left: 0,
+        //   top: 0,
+        //   bottom: 0,
+        // ),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             width: 1,

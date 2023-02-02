@@ -1,5 +1,4 @@
 import 'package:bobscapes/services/remote_services.dart';
-import 'package:bobscapes/views/common_widget/bottom_buttons.dart';
 import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/models/audio.dart';

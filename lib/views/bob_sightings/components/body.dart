@@ -1,4 +1,3 @@
-import 'package:bobscapes/views/common_widget/bottom_buttons.dart';
 import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
@@ -123,7 +122,7 @@ class Body extends StatelessWidget {
                           //crossAxisAlignment: CrossAxisAlignment.end,
                           //  mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Spacer(
+                            const Spacer(
                               flex: 2,
                             ),
                             // SvgPicture.asset(
@@ -142,13 +141,13 @@ class Body extends StatelessWidget {
                                     color: Colors.white),
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             SvgPicture.asset(
                               "assets/icons/gps.svg",
                               height: getProportionateScreenHeight(25),
                               color: Colors.white,
                             ),
-                            Spacer()
+                            const Spacer()
                           ],
                         ),
                       ),

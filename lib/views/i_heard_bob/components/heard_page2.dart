@@ -16,7 +16,7 @@ class HeardPage2 extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         // mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           // Padding(
           //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
           //   child: Row(
@@ -42,36 +42,41 @@ class HeardPage2 extends StatelessWidget {
           //   ),
           // ),
 
-          CustomDropDownMenu(items: ['Family', '1', '2', '3']),
+          const CustomDropDownMenu(items: ['Family', '1', '2', '3']),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: NumericalQuestion(
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(10)),
+            child: const NumericalQuestion(
               title: "How many birds?",
               id: 1,
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: NumericalQuestion(
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(10)),
+            child: const NumericalQuestion(
               title: "How many male?",
               id: 2,
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: NumericalQuestion(title: "How many female?", id: 3),
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(10)),
+            child: const NumericalQuestion(title: "How many female?", id: 3),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: NumericalQuestion(
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(10)),
+            child: const NumericalQuestion(
               title: "How many young birds?",
               id: 4,
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: NumericalQuestion(
-                title: "How many broods rappresented?", id: 5),
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(10)),
+            child: const NumericalQuestion(
+                title: "How many broods\nrappresented?", id: 5),
           ),
         ],
       ),

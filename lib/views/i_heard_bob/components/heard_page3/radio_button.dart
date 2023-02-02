@@ -29,20 +29,24 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            top: getProportionateScreenHeight(5),
+            top: getProportionateScreenHeight(8),
+            bottom: getProportionateScreenHeight(8),
             //left: getProportionateScreenWidth(15),
             // right: getProportionateScreenWidth(10)
           ),
           child: Text(
             widget.title,
             style: TextStyle(
-              fontSize: getProportionateScreenWidth(13),
+              fontSize: getProportionateScreenWidth(12),
               fontWeight: FontWeight.w700,
               color: Colors.white,
             ),
           ),
         ),
         Row(
+            //TODO
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.items
                 .map(
@@ -54,7 +58,7 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                       : Column(
                           children: [
                             Transform.scale(
-                              scale: 1.3,
+                              scale: getProportionateScreenHeight(1.5),
                               child: Radio(
                                   fillColor:
                                       const MaterialStatePropertyAll(kColor3),
@@ -71,20 +75,17 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                                     });
                                   }),
                             ),
-                            SizedBox(
-                                height: getProportionateScreenHeight(40),
-                                width: getProportionateScreenWidth(80),
-                                child: Text(
-                                  item,
-                                  softWrap: true,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(13),
-                                      fontWeight: FontWeight.w700,
-                                      color: group == item
-                                          ? kColor3
-                                          : Colors.white),
-                                )),
+                            Text(
+                              item,
+                              softWrap: true,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(13),
+                                  fontWeight: FontWeight.w700,
+                                  color: group == item
+                                      ? kColor3
+                                      : Colors.white),
+                            ),
                           ],
                         ),
                 )

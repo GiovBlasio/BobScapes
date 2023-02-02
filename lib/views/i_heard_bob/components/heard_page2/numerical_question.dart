@@ -41,9 +41,12 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             )),
         if (widget.id == 5)
           Tooltip(
-            padding:
-                const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
-            margin: const EdgeInsets.only(left: 90, right: 50),
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(20),
+                horizontal: getProportionateScreenWidth(20)),
+            margin: EdgeInsets.only(
+                left: getProportionateScreenWidth(90),
+                right: getProportionateScreenWidth(50)),
             decoration: const BoxDecoration(
               color: kColor2,
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -57,8 +60,9 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 fontWeight: FontWeight.w500),
             message:
                 'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
-            child: const Icon(
+            child: Icon(
               Icons.info_outline,
+              size: getProportionateScreenHeight(24),
               color: Colors.white,
             ),
           ),
@@ -73,6 +77,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               width: getProportionateScreenWidth(20),
               height: getProportionateScreenHeight(20),
               child: IconButton(
+                iconSize: getProportionateScreenHeight(15),
                 splashRadius: 0.1,
                 padding: EdgeInsets.zero,
                 onPressed: () {
@@ -80,22 +85,21 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                     decrementCounter(widget.id);
                   });
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.remove,
                   color: Colors.white,
-                  size: getProportionateScreenHeight(15),
                 ),
               ),
             ),
             SizedBox(
               width: getProportionateScreenWidth(55),
               child: TextFormField(
-                // toolbarOptions: const ToolbarOptions(),
                 contextMenuBuilder: (context, editableTextState) {
                   return Container();
                 },
-                style: const TextStyle(
+                style:  TextStyle(
                   color: Colors.white,
+                  fontSize: getProportionateScreenHeight(14),
                   fontWeight: FontWeight.w500,
                 ),
                 enableInteractiveSelection: false,
@@ -114,6 +118,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               width: getProportionateScreenWidth(20),
               height: getProportionateScreenHeight(20),
               child: IconButton(
+                iconSize: getProportionateScreenHeight(15),
                 splashRadius: 0.1,
                 padding: EdgeInsets.zero,
                 onPressed: () {
@@ -122,7 +127,6 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 icon: const Icon(
                   Icons.add,
                   color: Colors.white,
-                  size: 15,
                 ),
               ),
             ),

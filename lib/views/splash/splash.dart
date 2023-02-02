@@ -1,4 +1,3 @@
-import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 
 import 'components/body.dart';

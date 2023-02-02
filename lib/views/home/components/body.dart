@@ -64,16 +64,18 @@ class _BodyState extends State<Body> {
                 flex: 4,
               ),
               IconButton(
-                  splashRadius: 0.1,
-                  padding: EdgeInsets.zero,
-                  onPressed: () => showDialog(
-                      useSafeArea: false,
-                      context: context,
-                      builder: (context) => const Disclaimer()),
-                  icon: const Icon(
-                    Icons.info_outline,
-                    color: Colors.white,
-                  )),
+                splashRadius: 0.1,
+                padding: EdgeInsets.only(left: getProportionateScreenWidth(5)),
+                onPressed: () => showDialog(
+                    useSafeArea: false,
+                    context: context,
+                    builder: (context) => const Disclaimer()),
+                icon: const Icon(
+                  Icons.info_outline,
+                  color: Colors.white,
+                ),
+                iconSize: getProportionateScreenHeight(25),
+              ),
               Flexible(
                 flex: 3,
                 child: Padding(

@@ -87,7 +87,7 @@ class _HeardPage3State extends State<HeardPage3> {
 
             Flexible(
               child: SingleChildScrollView(
-                 padding: EdgeInsets.only(top: getProportionateScreenHeight(10)),
+                padding: EdgeInsets.only(top: getProportionateScreenHeight(10)),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +97,7 @@ class _HeardPage3State extends State<HeardPage3> {
                         title: "Did you want more information about Bobwhite?",
                         id: 1),
                     const CustomRadioButton(
-                        items: {'Yes', 'No', 'I\'m alredy registered', '1'},
+                        items: {'Yes', 'No', 'I\'m alredy\nregistered', '1'},
                         title:
                             "Want to learn more about Bobwhite cost sharing?",
                         id: 2),

@@ -1,4 +1,3 @@
-import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,6 +53,7 @@ class CustomTitle extends StatelessWidget {
                 flex: 2,
                 child: SvgPicture.asset(
                   icon,
+                  height: getProportionateScreenHeight(30),
                   color: Colors.white,
                 ),
               ),

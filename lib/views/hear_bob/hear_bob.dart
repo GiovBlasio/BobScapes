@@ -1,5 +1,4 @@
 import 'package:bobscapes/views/common_widget/custom_back_button.dart';
-import 'package:bobscapes/views/common_widget/logo.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,7 @@ class HearBobScreen extends StatelessWidget {
           backgroundColor: kColor2,
           leadingWidth: getProportionateScreenWidth(80),
           leading: const CustomBackButton(),
-          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg"),
+          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg", height: getProportionateScreenHeight(25),),
         ),
         body: const Body(),
       ),

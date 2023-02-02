@@ -1,4 +1,3 @@
-import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/views/welcome/components/body.dart';
 import 'package:flutter/material.dart';
 

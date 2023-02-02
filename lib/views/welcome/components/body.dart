@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';

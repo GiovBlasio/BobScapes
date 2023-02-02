@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bobscapes/constants.dart';
@@ -92,7 +91,7 @@ class _CustomAlertState extends State<CustomAlert> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Padding(
                           padding: EdgeInsets.only(
                               left: getProportionateScreenWidth(30),
@@ -123,7 +122,7 @@ class _CustomAlertState extends State<CustomAlert> {
                             ],
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -161,7 +160,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 children: [
                                   Text(
                                     formatTime(position),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500),
@@ -170,7 +169,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                     formatTime(
                                       duration - position,
                                     ),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500),
@@ -180,7 +179,7 @@ class _CustomAlertState extends State<CustomAlert> {
                             )
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -241,7 +240,7 @@ class _CustomAlertState extends State<CustomAlert> {
                             ),
                           ],
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 2,
                         )
                       ],

@@ -84,11 +84,12 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white.withAlpha(200),
-                  contentPadding: const EdgeInsets.only(
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                  ),
+                  // TODO
+                  // contentPadding: const EdgeInsets.only(
+                  //   // left: 0,
+                  //   // top: 0,
+                  //   // bottom: 0,
+                  // ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     gapPadding: 20,
@@ -145,6 +146,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               children: [
                 SvgPicture.asset(
                   "assets/icons/edit.svg",
+                  height: getProportionateScreenHeight(30),
                   color: Colors.white,
                 ),
                 Text(
@@ -170,11 +172,12 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white.withAlpha(200),
-                  contentPadding: const EdgeInsets.only(
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                  ),
+                  // TODO
+                  // contentPadding: const EdgeInsets.only(
+                  //   left: 0,
+                  //   top: 0,
+                  //   bottom: 0,
+                  // ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     gapPadding: 20,
@@ -249,6 +252,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               children: [
                 SvgPicture.asset(
                   "assets/icons/edit.svg",
+                  height: getProportionateScreenHeight(30),
                   color: Colors.white,
                 ),
                 Text(
@@ -365,11 +369,12 @@ class _LocationFormState extends State<LocationForm> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withAlpha(200),
-                      contentPadding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(20),
-                          top: 0,
-                          bottom: 0,
-                          right: getProportionateScreenWidth(20)),
+                      // TODO
+                      // contentPadding:  EdgeInsets.only(
+                         //left: getProportionateScreenWidth(20),
+                        // top: 12,
+                         //bottom: 12,
+                       //),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           gapPadding: 20,
@@ -402,6 +407,7 @@ class _LocationFormState extends State<LocationForm> {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/edit.svg",
+                      height: getProportionateScreenHeight(30),
                       color: Colors.white,
                     ),
                     Text(

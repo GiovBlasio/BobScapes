@@ -25,7 +25,7 @@ class _HeardPage1State extends State<HeardPage1> {
   final Set<String> radioOptions = {
     'Yes',
     'No',
-    'Within a half mile',
+    'Within a\n half mile',
     'Unsure'
   };
 

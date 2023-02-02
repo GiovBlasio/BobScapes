@@ -39,9 +39,12 @@ class Disclaimer extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(30)),
+                          left: getProportionateScreenWidth(30),
+                          right: getProportionateScreenWidth(10)),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
                             "Disclaimer",
