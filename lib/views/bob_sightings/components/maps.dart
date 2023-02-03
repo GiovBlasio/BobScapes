@@ -79,6 +79,7 @@ class _MappaState extends State<Mappa> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               IconButton(
+                iconSize: getProportionateScreenHeight(25),
                   alignment: Alignment.bottomCenter,
                   padding: EdgeInsets.zero,
                   onPressed: () => showDialog(

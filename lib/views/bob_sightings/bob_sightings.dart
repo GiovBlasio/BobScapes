@@ -23,7 +23,7 @@ class BobSightingsScreen extends StatelessWidget {
           leading: const CustomBackButton(),
           title: SvgPicture.asset(
             "assets/images/logo-bobscapes-white.svg",
-            height: getProportionateScreenWidth(25),
+            height: getProportionateScreenWidth(30),
           ),
         ),
         body: const Body(),

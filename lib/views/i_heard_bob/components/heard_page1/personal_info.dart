@@ -91,7 +91,9 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               color: Colors.white,
               child: DropdownButtonHideUnderline(
                 child: DropdownButton(
-                    alignment: AlignmentDirectional.bottomEnd,
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+
+                    // alignment: AlignmentDirectional.bottomEnd,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: getProportionateScreenWidth(13),
@@ -163,6 +165,7 @@ class _NameFormState extends State<NameForm> {
     return Flexible(
         child: Form(
             child: TextFormField(
+              enableInteractiveSelection: false,
       controller: controller,
       keyboardType: TextInputType.name,
       onSaved: (newValue) {
@@ -207,10 +210,9 @@ class _NameFormState extends State<NameForm> {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         //TODO
-          contentPadding: EdgeInsets.symmetric(
-            vertical: getProportionateScreenHeight(8)
-          ),
-         
+        contentPadding:
+            EdgeInsets.symmetric(vertical: getProportionateScreenHeight(8)),
+
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             width: 1,

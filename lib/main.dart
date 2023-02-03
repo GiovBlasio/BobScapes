@@ -45,14 +45,26 @@ class MyApp extends StatelessWidget {
       theme: theme(context),
       initialRoute: SplashScreen.routeName,
       routes: routes,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      supportedLocales: const [Locale('en'), Locale('it')],
+      // localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      // supportedLocales: const [Locale('en'), Locale('it')],
     );
   }
 }
 
 ThemeData theme(BuildContext context) {
   return ThemeData(
+    primarySwatch: MaterialColor(0xFFFAA11C, {
+      50: kColor1.withOpacity(0.10),
+      100: kColor1.withOpacity(0.20),
+      200: kColor1.withOpacity(0.30),
+      300: kColor1.withOpacity(0.40),
+      400: kColor1.withOpacity(0.50),
+      500: kColor1.withOpacity(0.60),
+      600: kColor1.withOpacity(0.70),
+      700: kColor1.withOpacity(0.80),
+      800: kColor1.withOpacity(0.90),
+      900: kColor1
+    }),
     primaryColor: Colors.black,
     scaffoldBackgroundColor: const Color(0xfff0f0f0),
     appBarTheme: appBarTheme(),

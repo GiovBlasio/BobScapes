@@ -61,7 +61,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
             color: Colors.white.withAlpha(200),
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   isExpanded: true,
                   value: dropdownvalue,
                   icon: const Icon(

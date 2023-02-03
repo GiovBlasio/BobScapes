@@ -16,16 +16,22 @@ class IHeardBobScreen extends StatelessWidget {
     return SafeArea(
       top: false,
       bottom: false,
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: kColor2,
-          leadingWidth: getProportionateScreenWidth(80),
-          leading: const CustomBackButton(),
-          title: SvgPicture.asset("assets/images/logo-bobscapes-white.svg", height: getProportionateScreenWidth(25),),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          // resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            backgroundColor: kColor2,
+            leadingWidth: getProportionateScreenWidth(80),
+            leading: const CustomBackButton(),
+            title: SvgPicture.asset(
+              "assets/images/logo-bobscapes-white.svg",
+              height: getProportionateScreenWidth(30),
+            ),
+          ),
+          body: const Body(),
         ),
-        body: const Body(),
       ),
     );
   }

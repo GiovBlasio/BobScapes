@@ -103,58 +103,126 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 controller: dateController,
                 readOnly: true,
                 onFieldSubmitted: (value) => {setState(() {})},
-                onTap: () async {
-                  myDate = await showDatePicker(
-                    builder: (context, child) => Theme(
-                      data: Theme.of(context).copyWith(
-                        colorScheme: const ColorScheme.light(
-                          primary: kColor1, // header background color
-                          onPrimary: Colors.white, // header text color
-                          onSurface: Colors.black, // body text color
-                        ),
-                        textButtonTheme: TextButtonThemeData(
-                          style: TextButton.styleFrom(
-                            foregroundColor: kColor1, // button text color
-                          ),
-                        ),
-                      ),
-                      child: child!,
-                    ),
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(DateTime.now().year),
-                    lastDate: DateTime(DateTime.now().year + 1),
-                  );
+                // onTap: () async {
+                //   myDate = await showDatePicker(
+                //     keyboardType: TextInputType.datetime,
+                //     initialEntryMode: DatePickerEntryMode.calendarOnly,
+                //     builder: (context, child) => Theme(
+                //       data: Theme.of(context).copyWith(
+                //         // textTheme: Theme.of(context).textTheme.apply(
+                //         //       bodyColor: Colors.white,
+                //         //     ),
+                //         textTheme: Theme.of(context).primaryTextTheme,
+                //         textSelectionTheme: const TextSelectionThemeData(
+                //           cursorColor: Colors.white,
+                //           selectionColor: Colors.transparent,
+                //         ),
+                //         colorScheme: const ColorScheme.light(
+                //           primary: kColor3, // header background color
 
-                  setState(() {
-                    String time = DateFormat('dd/MM/yy')
-                        .format(myDate!)
-                        .replaceRange(6, 6, '\'');
-                    changeDate(time);
-                    dateController.text = time;
-                  });
-                },
+                //           onPrimary: Colors.white, // header text color
+                //           onSurface: Colors.white, // body text color
+                //         ),
+                //         dialogBackgroundColor: kColor3,
+                //         textButtonTheme: TextButtonThemeData(
+                //           style: TextButton.styleFrom(
+                //             // backgroundColor:k,
+                //             foregroundColor: Colors.white, // button text color
+                //           ),
+                //         ),
+                //       ),
+                //       child: child!,
+                //     ),
+                //     context: context,
+                //     initialDate: DateTime.now(),
+                //     firstDate:
+                //         DateTime.now().subtract(const Duration(days: 30)),
+                //     lastDate: DateTime.now().add(const Duration(days: 0)),
+                //   );
+
+                //   setState(() {
+                //     String time = DateFormat("dd/MM/''yy").format(myDate!);
+
+                //     changeDate(time);
+                //     dateController.text = time;
+                //   });
+                // },
               ),
             ),
             SizedBox(
               width: getProportionateScreenWidth(10),
             ),
-            Column(
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/edit.svg",
-                  height: getProportionateScreenHeight(30),
-                  color: Colors.white,
-                ),
-                Text(
-                  "Change",
-                  style: TextStyle(
-                    fontSize: getProportionateScreenWidth(12),
-                    fontWeight: FontWeight.w700,
+            InkWell(
+              onTap: () async {
+                myDate = await showDatePicker(
+                  keyboardType: TextInputType.datetime,
+                  initialEntryMode: DatePickerEntryMode.calendarOnly,
+                  builder: (context, child) => Theme(
+                    data: Theme.of(context).copyWith(
+                      inputDecorationTheme: const InputDecorationTheme(
+                          filled: true,
+                          fillColor: Colors.white,
+                          labelStyle: TextStyle(color: kColor3)),
+                      textTheme: Theme.of(context).textTheme.apply(
+                            bodyColor: Colors.black,
+                          ),
+                      textSelectionTheme: const TextSelectionThemeData(
+                        cursorColor: Colors.black,
+                        selectionColor: Colors.transparent,
+                      ),
+                      colorScheme: const ColorScheme.light(
+                        primary: kColor3, // header background color
+                        onPrimary: Colors.white, // header text color
+
+                        // surface: Colors.re // body text color
+                      ),
+                      dialogBackgroundColor: Colors.white,
+                      // dialogTheme: DialogTheme(
+                      //   backgroundColor: Colors.white,
+                      // ),
+                      textButtonTheme: const TextButtonThemeData(
+                          // backgroundColor:k,
+                          style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStatePropertyAll(Colors.black),
+                              overlayColor: MaterialStatePropertyAll(
+                                  Colors.transparent)) // button text color
+                          ),
+                    ),
+                    child: GestureDetector(
+                        onTap: () => FocusScope.of(context).unfocus(),
+                        child: child!),
+                  ),
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now().subtract(const Duration(days: 30)),
+                  lastDate: DateTime.now().add(const Duration(days: 0)),
+                );
+                setState(() {
+                  String time = DateFormat("MM/dd/''yy").format(myDate!);
+                  changeDate(time);
+                  dateController.text = time;
+                });
+              },
+              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+              splashColor: Colors.transparent,
+              child: Column(
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/edit.svg",
+                    height: getProportionateScreenHeight(30),
                     color: Colors.white,
                   ),
-                )
-              ],
+                  Text(
+                    "Change",
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(12),
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               width: getProportionateScreenWidth(10),
@@ -189,77 +257,177 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                 readOnly: true,
                 onSaved: (newValue) {},
                 onFieldSubmitted: (value) => {setState(() {})},
-                onTap: () async {
-                  myTime = await showTimePicker(
-                      initialEntryMode: TimePickerEntryMode.inputOnly,
-                      builder: (BuildContext context, Widget? child) {
-                        return Theme(
-                          data: Theme.of(context).copyWith(
-                            colorScheme: const ColorScheme.light(
-                              surface: kColor3,
-                              primary: kColor1, // header background color
-                              onPrimary: Colors.white, // header text color
-                              onSurface: Colors.white, // body text color
-                            ),
-                            textButtonTheme: TextButtonThemeData(
-                              style: TextButton.styleFrom(
-                                foregroundColor:
-                                    Colors.white, // button text color
-                              ),
-                            ),
-                          ),
-                          child: Localizations.override(
-                            context: context,
-                            // locale: const Locale('it', 'IT'),
-                            child: MediaQuery(
-                              data: MediaQuery.of(context)
-                                  .copyWith(alwaysUse24HourFormat: true),
-                              child: child!,
-                            ),
-                          ),
-                        );
-                      },
-                      context: context,
-                      initialTime: TimeOfDay.now());
+                // onTap: () async {
+                //   myTime = await showTimePicker(
+                //       initialEntryMode: TimePickerEntryMode.inputOnly,
+                //       builder: (BuildContext context, Widget? child) {
+                //         return Theme(
+                //           data: Theme.of(context).copyWith(
+                //             textSelectionTheme: const TextSelectionThemeData(
+                //               cursorColor: Colors.white,
+                //             ),
+                //             timePickerTheme: TimePickerThemeData(
+                //               backgroundColor: kColor3,
+                //               hourMinuteColor: MaterialStateColor.resolveWith(
+                //                   (states) => Colors.white),
+                //               hourMinuteTextColor:
+                //                   MaterialStateColor.resolveWith((states) =>
+                //                       states.contains(MaterialState.selected)
+                //                           ? Colors.pink
+                //                           : Colors.black),
+                //             ),
+                //             textTheme: const TextTheme(
+                //               labelSmall: TextStyle(
+                //                 color: Colors.white,
+                //               ),
+                //               bodySmall: TextStyle(
+                //                 color: Colors.white,
+                //               ),
+                //             ),
+                //             textButtonTheme: TextButtonThemeData(
+                //                 style: ButtonStyle(
+                //               // backgroundColor: MaterialStateColor.resolveWith(
+                //               //     (states) => Colors.black),
+                //               foregroundColor: MaterialStateColor.resolveWith(
+                //                   (states) => Colors.white),
+                //               overlayColor: MaterialStateColor.resolveWith(
+                //                   (states) => Colors.transparent),
+                //             )),
+                //             colorScheme: const ColorScheme.light(
+                //               surface: kColor3,
+                //               primary: Colors.white, // header background color
+                //               // onPrimary: Colors.white, // header text color
+                //               // onSurface: Colors.white, // body text color
+                //             ),
+                //           ),
+                //           child: Localizations.override(
+                //             context: context,
+                //             // locale: const Locale('it', 'IT'),
+                //             child: MediaQuery(
+                //               data: MediaQuery.of(context)
+                //                   .copyWith(alwaysUse24HourFormat: false),
+                //               child: child!,
+                //             ),
+                //           ),
+                //         );
+                //       },
+                //       context: context,
+                //       initialTime: TimeOfDay.now());
 
-                  setState(() {
-                    DateTime date = DateTime.utc(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        myTime!.hour,
-                        myTime!.minute);
+                //   setState(() {
+                //     DateTime date = DateTime(
+                //         DateTime.now().year,
+                //         DateTime.now().month,
+                //         DateTime.now().day,
+                //         myTime!.hour,
+                //         myTime!.minute);
 
-                    String time = DateFormat('kk:mm')
-                        .format(date)
-                        .replaceRange(5, null, ' PM');
+                //     String time = DateFormat('hh:mm a').format(date);
 
-                    changeTime(time);
+                //     changeTime(time);
 
-                    timeController.text = time;
-                  });
-                },
+                //     timeController.text = time;
+                //   });
+                // },
               ),
             ),
             SizedBox(
               width: getProportionateScreenWidth(10),
             ),
-            Column(
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/edit.svg",
-                  height: getProportionateScreenHeight(30),
-                  color: Colors.white,
-                ),
-                Text(
-                  "Change",
-                  style: TextStyle(
-                    fontSize: getProportionateScreenWidth(12),
-                    fontWeight: FontWeight.w700,
+            InkWell(
+              onTap: () async {
+                myTime = await showTimePicker(
+                    initialEntryMode: TimePickerEntryMode.inputOnly,
+                    builder: (BuildContext context, Widget? child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          textSelectionTheme: const TextSelectionThemeData(
+                            cursorColor: Colors.white,
+                          ),
+                          timePickerTheme: TimePickerThemeData(
+                            backgroundColor: kColor3,
+                            hourMinuteColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.white),
+                            hourMinuteTextColor: MaterialStateColor.resolveWith(
+                                (states) =>
+                                    states.contains(MaterialState.selected)
+                                        ? Colors.pink
+                                        : Colors.black),
+                          ),
+                          textTheme: const TextTheme(
+                            labelSmall: TextStyle(
+                              color: Colors.white,
+                            ),
+                            bodySmall: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          textButtonTheme: TextButtonThemeData(
+                              style: ButtonStyle(
+                            // backgroundColor: MaterialStateColor.resolveWith(
+                            //     (states) => Colors.black),
+                            foregroundColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.white),
+                            overlayColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.transparent),
+                          )),
+                          colorScheme: const ColorScheme.light(
+                            surface: kColor3,
+                            primary: Colors.white, // header background color
+                            // onPrimary: Colors.white, // header text color
+                            // onSurface: Colors.white, // body text color
+                          ),
+                        ),
+                        child: Localizations.override(
+                          context: context,
+                          // locale: const Locale('it', 'IT'),
+                          child: MediaQuery(
+                            data: MediaQuery.of(context)
+                                .copyWith(alwaysUse24HourFormat: false),
+                            child: GestureDetector(
+                                onTap: () => FocusScope.of(context).unfocus(),
+                                child: child!),
+                          ),
+                        ),
+                      );
+                    },
+                    context: context,
+                    initialTime: TimeOfDay.now());
+
+                setState(() {
+                  DateTime date = DateTime(
+                      DateTime.now().year,
+                      DateTime.now().month,
+                      DateTime.now().day,
+                      myTime!.hour,
+                      myTime!.minute);
+
+                  String time = DateFormat('hh:mm a').format(date);
+
+                  changeTime(time);
+
+                  timeController.text = time;
+                });
+              },
+              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+              splashColor: Colors.transparent,
+              child: Column(
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/edit.svg",
+                    height: getProportionateScreenHeight(30),
                     color: Colors.white,
                   ),
-                )
-              ],
+                  Text(
+                    "Change",
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(12),
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               width: getProportionateScreenWidth(5),
@@ -355,13 +523,6 @@ class _LocationFormState extends State<LocationForm> {
                     validator: (value) {
                       return null;
                     },
-                    onTap: () {
-                      setState(() {
-                        String location = 'prova';
-                        changeLocation(location);
-                        controller.text = location;
-                      });
-                    },
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withAlpha(200),
@@ -397,21 +558,33 @@ class _LocationFormState extends State<LocationForm> {
                 SizedBox(
                   width: getProportionateScreenWidth(15),
                 ),
-                Column(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/edit.svg",
-                      height: getProportionateScreenHeight(30),
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Change",
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(12),
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white),
-                    )
-                  ],
+                InkWell(
+                  overlayColor:
+                      const MaterialStatePropertyAll(Colors.transparent),
+                  splashColor: Colors.transparent,
+                  onTap: () {
+                    setState(() {
+                      String location = 'prova';
+                      changeLocation(location);
+                      controller.text = location;
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/icons/edit.svg",
+                        height: getProportionateScreenHeight(30),
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Change",
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(12),
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   width: getProportionateScreenWidth(5),
