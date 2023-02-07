@@ -61,11 +61,11 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                               child: Radio(
                                   // focusColor: Colors.amber,
                                   fillColor:
-                                      const MaterialStatePropertyAll(kColor3),
+                                      const MaterialStatePropertyAll(kColor1),
                                   overlayColor:
                                       const MaterialStatePropertyAll(
                                           Colors.transparent),
-                                  activeColor: kColor3,
+                                  activeColor: kColor1,
                                   value: item,
                                   groupValue: group,
                                   onChanged: (value) {
@@ -83,7 +83,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                                   fontSize: getProportionateScreenWidth(13),
                                   fontWeight: FontWeight.w700,
                                   color:
-                                      group == item ? kColor3 : Colors.white),
+                                      group == item ? kPrimaryColor : Colors.white),
                             ),
                           ],
                         ),

@@ -1,4 +1,3 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
@@ -104,7 +103,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 child: Text(
                                   widget.title,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: kPrimaryColor,
                                       fontSize: getProportionateScreenWidth(16),
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -112,7 +111,7 @@ class _CustomAlertState extends State<CustomAlert> {
                               IconButton(
                                 icon: const Icon(
                                   Icons.close,
-                                  color: Colors.white,
+                                  color: kPrimaryColor,
                                   size: 30,
                                 ),
                                 onPressed: () {
@@ -133,9 +132,9 @@ class _CustomAlertState extends State<CustomAlert> {
                                 data: SliderThemeData(
                                     trackHeight: 2,
                                     inactiveTrackColor:
-                                        Colors.white.withOpacity(0.6),
-                                    activeTrackColor: Colors.white,
-                                    disabledThumbColor: Colors.white,
+                                        kPrimaryColor.withOpacity(0.6),
+                                    activeTrackColor: kColor1,
+                                    disabledThumbColor: kColor1,
                                     thumbShape: SliderComponentShape.noThumb,
                                     overlayShape: const RoundSliderOverlayShape(
                                         overlayRadius: 12),
@@ -161,7 +160,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                   Text(
                                     formatTime(position),
                                     style: const TextStyle(
-                                        color: Colors.white,
+                                        color: kPrimaryColor,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -170,7 +169,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                       duration - position,
                                     ),
                                     style: const TextStyle(
-                                        color: Colors.white,
+                                        color: kPrimaryColor,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500),
                                   )
@@ -196,7 +195,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 elevation: 8,
                                 child: Container(
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: kPrimaryColor,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -204,7 +203,10 @@ class _CustomAlertState extends State<CustomAlert> {
                                           getProportionateScreenWidth(8),
                                       vertical:
                                           getProportionateScreenHeight(8)),
-                                  child: const Icon(Icons.repeat),
+                                  child: const Icon(
+                                    Icons.repeat,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -224,7 +226,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 elevation: 8,
                                 child: Container(
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: kPrimaryColor,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -232,9 +234,10 @@ class _CustomAlertState extends State<CustomAlert> {
                                           getProportionateScreenWidth(8),
                                       vertical:
                                           getProportionateScreenHeight(8)),
-                                  child: Icon(isPlaying
-                                      ? Icons.pause
-                                      : Icons.play_arrow),
+                                  child: Icon(
+                                    isPlaying ? Icons.pause : Icons.play_arrow,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),

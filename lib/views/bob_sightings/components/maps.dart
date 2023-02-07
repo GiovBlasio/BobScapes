@@ -311,7 +311,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                   currentIndex = index % widget.state.length;
                 });
               },
-              aspectRatio: 1.6,
+              aspectRatio: 1.8,
               enlargeCenterPage: true,
               viewportFraction: 0.52),
           itemBuilder: (context, index, realIdx) {
@@ -323,10 +323,10 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.all(20),
                 constraints: const BoxConstraints(
-                  minWidth: 150,
+                  minWidth: 120,
                 ),
                 decoration: BoxDecoration(
-                    color: currentIndex == index ? kColor1 : kColor2,
+                    color: currentIndex == index ? kColor1 : Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,7 +336,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                       widget.state[index],
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                          color: kPrimaryColor,
                           fontSize: getProportionateScreenWidth(14)),
                     ),
                     const Spacer(
@@ -346,7 +346,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                       "Bob has\nbeen heard",
                       style: TextStyle(
                           fontSize: getProportionateScreenWidth(12),
-                          color: Colors.white,
+                          color: kPrimaryColor,
                           fontWeight: FontWeight.w400),
                     ),
                     Row(
@@ -358,7 +358,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                           "${widget.sightings[index]}",
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(40),
-                              color: Colors.white,
+                              color: kPrimaryColor,
                               fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
@@ -368,7 +368,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                           "times",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                              color: kPrimaryColor,
                               fontSize: getProportionateScreenWidth(12)),
                         ),
                       ],

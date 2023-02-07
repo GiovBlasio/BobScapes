@@ -46,6 +46,7 @@ class _BodyState extends State<Body> {
             left: 0,
             right: 0,
             child: PageView(
+              
                 onPageChanged: (value) {
                   setState(() {
                     currentIndex = value;

@@ -49,7 +49,7 @@ class Disclaimer extends StatelessWidget {
                           Text(
                             "Disclaimer",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: kPrimaryColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: getProportionateScreenWidth(20.5)),
                           ),
@@ -58,7 +58,7 @@ class Disclaimer extends StatelessWidget {
                             icon: Icon(
                               Icons.close,
                               size: getProportionateScreenHeight(30),
-                              color: Colors.white,
+                              color: kPrimaryColor,
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -76,7 +76,7 @@ class Disclaimer extends StatelessWidget {
                         child: Text(
                           "The exact location of the sightings will not be shared with the public.",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryColor,
                               fontWeight: FontWeight.w400,
                               fontSize: getProportionateScreenWidth(14.5)),
                         )),
@@ -89,7 +89,7 @@ class Disclaimer extends StatelessWidget {
                         child: Text(
                           "Contact information will only be shared if you selected \"Yes\" into the app.",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryColor,
                               fontWeight: FontWeight.w400,
                               fontSize: getProportionateScreenWidth(14.5)),
                         )),
@@ -102,7 +102,7 @@ class Disclaimer extends StatelessWidget {
                         child: Text(
                           "Information will be used to inform management recommendations with conservation partners such as Quail Forever, USDA's NRCS and Univeristy of Georgia Martin Game Lab.",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryColor,
                               fontWeight: FontWeight.w400,
                               fontSize: getProportionateScreenWidth(14.5)),
                         )),

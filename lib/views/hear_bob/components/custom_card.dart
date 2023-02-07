@@ -87,7 +87,7 @@ class CustomCard extends StatelessWidget {
                           child: Icon(
                             Icons.volume_up_outlined,
                             size: getProportionateScreenWidth(22),
-                            color: kColor3,
+                            color: kPrimaryColor,
                           ),
                         ),
                       ),
@@ -104,13 +104,14 @@ class CustomCard extends StatelessWidget {
                               title,
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(14),
-                                  color: Colors.white),
+                                  fontWeight: FontWeight.w600,
+                                  color: kPrimaryColor),
                             ),
                             Text(
                               '$time m',
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(10),
-                                  color: Colors.white),
+                                  color: kPrimaryColor),
                             ),
                           ],
                         ),

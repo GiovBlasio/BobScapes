@@ -18,11 +18,11 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kColor2,
+          backgroundColor: kAppbarColor,
           leading: Container(),
           title: SvgPicture.asset(
-            "assets/images/logo-bobscapes-white.svg",
-            height: getProportionateScreenHeight(30),
+            "assets/images/logo-bobscapes.svg",
+            height: getProportionateScreenWidth(30),
           ),
         ),
         body: const Body(),

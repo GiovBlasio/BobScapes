@@ -1,6 +1,7 @@
 import 'dart:async';
 
 
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/logo_animated.dart';
 import 'package:bobscapes/views/home/home.dart';
@@ -92,9 +93,7 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    // print(bottomLogo);
-    // print(leftLogo);
-    // print(bottomMainPhrase);
+    
     return Stack(
       children: [
         SvgPicture.asset(
@@ -173,15 +172,15 @@ class _BodyState extends State<Body> {
                 style: TextStyle(
                     height: 1,
                     fontSize: getProportionateScreenWidth(44),
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.w700),
               ),
               Text(
                 "on our",
                 style: TextStyle(
                   height: 1,
                   fontSize: getProportionateScreenWidth(44),
-                  color: Colors.white,
+                  color: kPrimaryColor,
                 ),
               ),
               Text(
@@ -189,7 +188,7 @@ class _BodyState extends State<Body> {
                 style: TextStyle(
                   height: 1,
                   fontSize: getProportionateScreenWidth(44),
-                  color: Colors.white,
+                  color: kPrimaryColor,
                 ),
               ),
             ],

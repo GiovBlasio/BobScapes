@@ -1,3 +1,4 @@
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,13 +61,13 @@ class BottomButton extends StatelessWidget {
                     style: TextStyle(
                         fontSize: getProportionateScreenWidth(14),
                         fontWeight: FontWeight.w500,
-                        color: Colors.white),
+                        color: kPrimaryColor),
                   ),
                   const Spacer(),
                   SvgPicture.asset(
                     iconPath,
                     height: getProportionateScreenHeight(25),
-                    color: Colors.white,
+                    color: kPrimaryColor,
                   ),
                   const Spacer()
                 ],

@@ -18,6 +18,8 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   late double imageHeight =
       SizeConfig.screenHeight / 2 - getProportionateScreenHeight(45);
+
+  bool isDisclaimer = false;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -45,75 +47,200 @@ class _BodyState extends State<Body> {
         //     ],
         //   )),
         // ),
-        Padding(
-          padding:
-              EdgeInsets.symmetric(vertical: getProportionateScreenHeight(25)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Container(
-              //   margin: EdgeInsets.symmetric(
-              //       horizontal: getProportionateScreenWidth(20)),
-              //   color: Colors.grey,
-              //   height: imageHeight,
-              //   width: double.infinity,
-              // ),
-              const Spacer(
-                flex: 4,
-              ),
-              IconButton(
-                splashRadius: 0.1,
-                padding: EdgeInsets.only(left: getProportionateScreenWidth(5)),
-                onPressed: () => showDialog(
-                    useSafeArea: false,
-                    context: context,
-                    builder: (context) => const Disclaimer()),
-                icon: const Icon(
-                  Icons.info_outline,
-                  color: Colors.white,
+        if (!isDisclaimer)
+          Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: getProportionateScreenHeight(25)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Container(
+                //   margin: EdgeInsets.symmetric(
+                //       horizontal: getProportionateScreenWidth(20)),
+                //   color: Colors.grey,
+                //   height: imageHeight,
+                //   width: double.infinity,
+                // ),
+                const Spacer(
+                  flex: 4,
                 ),
-                iconSize: getProportionateScreenHeight(25),
-              ),
-              Flexible(
-                flex: 3,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(20)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      HomeButton(
-                        title: 'Hear Bob',
-                        iconPath: "assets/icons/music.svg",
-                        color: kColor1,
-                        onPressed: () {
-                          Navigator.pushNamed(context, HearBobScreen.routeName);
-                        },
-                      ),
-                      HomeButton(
-                          title: 'Hey, I heard a Bob!',
-                          iconPath: "assets/icons/gps.svg",
-                          color: kColor2,
-                          onPressed: () => Navigator.pushNamed(
-                              context, IHeardBobScreen.routeName)),
-                      HomeButton(
-                        title: 'Bob Sightings Map',
-                        iconPath: "assets/icons/eye.svg",
-                        color: kColor3,
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, BobSightingsScreen.routeName);
-                        },
-                      ),
-                    ],
+                IconButton(
+                  splashRadius: 0.1,
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(5)),
+                  // onPressed: () => showDialog(
+                  //     useSafeArea: false,
+                  //     context: context,
+                  //     builder: (context) => const Disclaimer()),
+                  onPressed: () {
+                    setState(() {
+                      isDisclaimer = !isDisclaimer;
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.info_outline,
+                    color: kPrimaryColor,
+                  ),
+                  iconSize: getProportionateScreenHeight(25),
+                ),
+                Flexible(
+                  flex: 4,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(20)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        HomeButton(
+                          title: 'Hear Bob',
+                          iconPath: "assets/icons/music.svg",
+                          color: kColor1,
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, HearBobScreen.routeName);
+                          },
+                        ),
+                        HomeButton(
+                            title: 'Hey, I heard a Bob!',
+                            iconPath: "assets/icons/gps.svg",
+                            color: kColor2,
+                            onPressed: () => Navigator.pushNamed(
+                                context, IHeardBobScreen.routeName)),
+                        HomeButton(
+                          title: 'Bob Sightings Map',
+                          iconPath: "assets/icons/eye.svg",
+                          color: kColor3,
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, BobSightingsScreen.routeName);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        if (isDisclaimer)
+          Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              top: 0,
+              child: Stack(children: [
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    elevation: 10,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(15)),
+                    child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: getProportionateScreenHeight(15)),
+                        //width: SizeConfig.screenWidth / 2,
+                        // height: 75,
+                        decoration: const BoxDecoration(
+                            color: kColor3,
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16))),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getProportionateScreenWidth(10)),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: getProportionateScreenWidth(30),
+                                    right: getProportionateScreenWidth(10)),
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Text(
+                                      "Disclaimer",
+                                      style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: getProportionateScreenWidth(
+                                              20.5)),
+                                    ),
+                                    IconButton(
+                                      splashRadius: 0.1,
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: getProportionateScreenHeight(30),
+                                        color: kPrimaryColor,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          isDisclaimer = !isDisclaimer;
+                                        });
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: getProportionateScreenWidth(30),
+                                      top: getProportionateScreenHeight(30),
+                                      bottom: getProportionateScreenHeight(5),
+                                      right: getProportionateScreenWidth(40)),
+                                  child: Text(
+                                    "The exact location of the sightings will not be shared with the public.",
+                                    style: TextStyle(
+                                        color: kPrimaryColor,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize:
+                                            getProportionateScreenWidth(14.5)),
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: getProportionateScreenWidth(30),
+                                      top: getProportionateScreenHeight(20),
+                                      bottom: getProportionateScreenHeight(5),
+                                      right: getProportionateScreenWidth(40)),
+                                  child: Text(
+                                    "Contact information will only be shared if you selected \"Yes\" into the app.",
+                                    style: TextStyle(
+                                        color: kPrimaryColor,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize:
+                                            getProportionateScreenWidth(14.5)),
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: getProportionateScreenWidth(30),
+                                      top: getProportionateScreenHeight(20),
+                                      bottom: getProportionateScreenHeight(30),
+                                      right: getProportionateScreenWidth(40)),
+                                  child: Text(
+                                    "Information will be used to inform management recommendations with conservation partners such as Quail Forever, USDA's NRCS and Univeristy of Georgia Martin Game Lab.",
+                                    style: TextStyle(
+                                        color: kPrimaryColor,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize:
+                                            getProportionateScreenWidth(14.5)),
+                                  )),
+                            ],
+                          ),
+                        )),
+                  ),
+                ),
+              ]))
       ],
     );
   }
@@ -152,12 +279,13 @@ class HomeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
+        elevation: MaterialStateProperty.all(8),
         overlayColor: MaterialStateProperty.all(color),
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         minimumSize: MaterialStateProperty.all(
-            Size(double.infinity, getProportionateScreenHeight(70))),
+            Size(double.infinity, getProportionateScreenHeight(80))),
         backgroundColor: MaterialStateProperty.all(color),
         padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
       ),
@@ -177,13 +305,13 @@ class HomeButton extends StatelessWidget {
               title,
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(18),
-                  color: Colors.white,
+                  color: kPrimaryColor,
                   fontWeight: FontWeight.w700),
             ),
             SvgPicture.asset(
               iconPath,
               height: getProportionateScreenHeight(35),
-              color: Colors.white,
+              color: kPrimaryColor,
             ),
           ],
         ),

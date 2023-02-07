@@ -64,8 +64,9 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Flexible(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -82,16 +83,16 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
           ),
           ClipRRect(
             borderRadius: const BorderRadius.all(
-              Radius.circular(10),
+              Radius.circular(0),
             ),
             child: Container(
-              height: getProportionateScreenHeight(35),
+              height: getProportionateScreenHeight(50),
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(10)),
               color: Colors.white,
               child: DropdownButtonHideUnderline(
                 child: DropdownButton(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    borderRadius: const BorderRadius.all(Radius.circular(0)),
 
                     // alignment: AlignmentDirectional.bottomEnd,
                     style: TextStyle(
@@ -106,7 +107,23 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                     items: widget.items.map((String item) {
                       return DropdownMenuItem(
                         value: item,
-                        child: Text(item),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: kPrimaryColor,
+                              size: getProportionateScreenWidth(15),
+                            ),
+                            SizedBox(
+                              width: getProportionateScreenWidth(5),
+                            ),
+                            Text(
+                              item,
+                              style: const TextStyle(color: kPrimaryColor),
+                            ),
+                          ],
+                        ),
                       );
                     }).toList(),
                     onChanged: (String? newValue) {
@@ -165,7 +182,7 @@ class _NameFormState extends State<NameForm> {
     return Flexible(
         child: Form(
             child: TextFormField(
-              enableInteractiveSelection: false,
+      enableInteractiveSelection: false,
       controller: controller,
       keyboardType: TextInputType.name,
       onSaved: (newValue) {

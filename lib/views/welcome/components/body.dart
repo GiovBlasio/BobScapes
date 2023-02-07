@@ -1,4 +1,3 @@
-
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/home/home.dart';
@@ -24,7 +23,7 @@ class _BodyState extends State<Body> {
           ? getProportionateScreenWidth(45)
           : getProportionateScreenWidth(15),
       decoration: BoxDecoration(
-        color: kColor3,
+        color: kPrimaryColor,
         borderRadius: BorderRadius.circular(15),
       ),
     );
@@ -65,11 +64,17 @@ class _BodyState extends State<Body> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          Spacer(),
+          SvgPicture.asset(
+            "assets/images/logo-bobscapes.svg",
+            width: 45,
+            height: 45,
+          ),
           const Spacer(
             flex: 3,
           ),
           Flexible(
-            flex: 2,
+            flex: 5,
             child: PageView(
               onPageChanged: (value) {
                 setState(() {
@@ -79,45 +84,73 @@ class _BodyState extends State<Body> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(30)),
+                      horizontal: getProportionateScreenWidth(45)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "> Welcome to\nBobwhites on our\nLandscapes.",
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(25),
-                            fontWeight: FontWeight.w800,
-                            color: kColor3),
+                      Flexible(
+                        flex: 13,
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(25),
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w500),
+                            children: const [
+                              TextSpan(text: '> Welcome to\n'),
+                              TextSpan(
+                                  text: 'BOBSCAPES',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                  )),
+                              TextSpan(
+                                text:
+                                    ',\na Mobile App to Track\nBobwhite Quail on\nOur Landscapes',
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Text(
-                        "We appreciate your contribution to conservation!",
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(14),
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
+                      Spacer(),
+                      Flexible(
+                        flex: 3,
+                        child: Text(
+                          "We appreciate your\n contribution to conservation!",
+                          style: TextStyle(
+                              fontSize: getProportionateScreenWidth(14),
+                              fontWeight: FontWeight.w500,
+                              color: kPrimaryColor),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(30)),
+                      horizontal: getProportionateScreenWidth(45)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        ">Observe and Listen",
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(25),
-                            fontWeight: FontWeight.w800,
-                            color: kColor3),
+                      Flexible(
+                        flex: 3,
+                        child: Text(
+                          ">Spotting Bob",
+                          style: TextStyle(
+                              fontSize: getProportionateScreenWidth(25),
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor),
+                        ),
                       ),
-                      Text(
-                        "Your observation may be included in ongoing research and shared with scientists working to better understand Bobwhite distribution and resiliency on the landscape. Data will not be shared with the public.",
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(14),
-                            fontWeight: FontWeight.w500),
+                      Spacer(),
+                      Flexible(
+                        flex: 15,
+                        child: Text(
+                          "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhites that you\nhave heard or spotted in your\n landscape",
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: getProportionateScreenWidth(14),
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ],
                   ),
@@ -126,15 +159,12 @@ class _BodyState extends State<Body> {
             ),
           ),
           Flexible(
-            flex: 2,
+            flex: 3,
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(20)),
               child: Column(
                 children: [
-                  // const Spacer(
-                  //   flex: 1,
-                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -143,35 +173,42 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   const Spacer(
-                    flex: 1,
+                    flex: 3,
                   ),
                   TextButton(
                     style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.all(kColor2),
+                      overlayColor: MaterialStateProperty.all(Colors.white),
                       shadowColor: MaterialStateProperty.all(Colors.grey),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8))),
+                          borderRadius: BorderRadius.circular(12))),
                       minimumSize: MaterialStateProperty.all(Size(
-                          double.infinity, getProportionateScreenHeight(56))),
-                      backgroundColor: MaterialStateProperty.all(kColor2),
+                          double.infinity, getProportionateScreenHeight(75))),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
-                    onPressed: () =>
-                        Navigator.popAndPushNamed(context, HomeScreen.routeName),
+                    onPressed: () => Navigator.popAndPushNamed(
+                        context, HomeScreen.routeName),
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Spacer(
-                          flex: 2,
+                          flex: 3,
                         ),
                         Text(
                           "Enter",
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(20),
                               fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                              color: kPrimaryColor),
                         ),
-                        const Spacer(
+                        Spacer(
                           flex: 2,
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Icon(
+                            Icons.adaptive.arrow_forward,
+                            color: kPrimaryColor,
+                          ),
                         ),
                       ],
                     ),
