@@ -1,6 +1,8 @@
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class CustomDropDownMenu extends StatefulWidget {
@@ -45,41 +47,64 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
           child: Text(
             "What did you see?",
             style: TextStyle(
-                fontSize: getProportionateScreenWidth(13),
-                fontWeight: FontWeight.w700,
-                color: Colors.white),
+                fontSize: getProportionateScreenWidth(12),
+                fontWeight: FontWeight.w500,
+                color: kTextColor),
           ),
         ),
         ClipRRect(
           borderRadius: const BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(0),
           ),
           child: Container(
-            height: getProportionateScreenHeight(35),
+            height: getProportionateScreenHeight(50),
             padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(10)),
+                horizontal: getProportionateScreenWidth(0)),
             color: Colors.white.withAlpha(200),
             child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+              child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: kTextColor, width: 0.3)),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: getProportionateScreenHeight(12),
+                        horizontal: getProportionateScreenWidth(12)),
+                    border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: kTextColor, width: 0.3)),
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(0)),
+                  style: TextStyle(
+                    color: kTextColor,
+                    fontSize: getProportionateScreenWidth(13),
+                    fontWeight: FontWeight.w500,
+                  ),
                   isExpanded: true,
                   value: dropdownvalue,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.keyboard_arrow_down,
-                    color: Colors.black,
+                    color: kTextColor,
+                    size: getProportionateScreenWidth(28),
                   ),
-                  iconSize: getProportionateScreenHeight(24),
+                  //iconSize: getProportionateScreenHeight(24),
                   items: widget.items.map((String item) {
                     return DropdownMenuItem(
                       value: item,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 5),
-                        child: Text(
-                          item,
-                          style: TextStyle(
-                              fontSize: getProportionateScreenWidth(14),
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset("assets/icons/icon-bird.svg"),
+                            SizedBox(
+                              width: getProportionateScreenWidth(5),
+                            ),
+                            Text(
+                              item,
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14),
+                                  fontWeight: FontWeight.w500,
+                                  color: kTextColor),
+                            ),
+                          ],
                         ),
                       ),
                     );

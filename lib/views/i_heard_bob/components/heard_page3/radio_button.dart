@@ -31,20 +31,17 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
           padding: EdgeInsets.only(
             top: getProportionateScreenHeight(8),
             bottom: getProportionateScreenHeight(8),
-            //left: getProportionateScreenWidth(15),
-            // right: getProportionateScreenWidth(10)
           ),
           child: Text(
             widget.title,
             style: TextStyle(
               fontSize: getProportionateScreenWidth(12),
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              color: kTextColor,
             ),
           ),
         ),
         Row(
-            //TODO
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,13 +55,13 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                       : Column(
                           children: [
                             Transform.scale(
-                              scale: getProportionateScreenHeight(1.3),
+                              scale: getProportionateScreenHeight(1.5),
                               child: Radio(
                                   fillColor:
-                                      const MaterialStatePropertyAll(kColor3),
+                                      const MaterialStatePropertyAll(kColor1),
                                   overlayColor: const MaterialStatePropertyAll(
                                       Colors.transparent),
-                                  activeColor: kColor3,
+                                  activeColor: kColor1,
                                   value: item,
                                   groupValue: group,
                                   onChanged: (value) {
@@ -81,10 +78,10 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(13),
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w600,
                                   color: group == item
-                                      ? kColor3
-                                      : Colors.white),
+                                      ? kTextColor
+                                      : kTextColor),
                             ),
                           ],
                         ),

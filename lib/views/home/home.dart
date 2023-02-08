@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
       top: false,
       bottom: false,
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: kAppbarColor,

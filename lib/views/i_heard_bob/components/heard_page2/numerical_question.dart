@@ -2,6 +2,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class NumericalQuestion extends StatefulWidget {
@@ -36,8 +37,8 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               widget.title,
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(13),
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
+                  fontWeight: FontWeight.w500,
+                  color: kTextColor),
             )),
         if (widget.id == 5)
           Tooltip(
@@ -55,15 +56,14 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             triggerMode: TooltipTriggerMode.tap,
             verticalOffset: getProportionateScreenHeight(-165),
             textStyle: TextStyle(
-                color: Colors.white,
+                color: kPrimaryColor,
                 fontSize: getProportionateScreenWidth(13),
                 fontWeight: FontWeight.w500),
             message:
                 'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
-            child: Icon(
-              Icons.info_outline,
-              size: getProportionateScreenHeight(24),
-              color: Colors.white,
+            child: SvgPicture.asset(
+              "assets/icons/icon-info.svg",
+              height: getProportionateScreenHeight(15),
             ),
           ),
         const Spacer(),
@@ -71,25 +71,24 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   color: kColor3,
-                  borderRadius: BorderRadius.all(Radius.circular(3.5))),
+                  border: Border.all(color: kTextColor, width: 0.4),
+                  borderRadius: const BorderRadius.all(Radius.circular(3.5))),
               width: getProportionateScreenWidth(20),
               height: getProportionateScreenHeight(20),
               child: IconButton(
-                iconSize: getProportionateScreenHeight(15),
-                splashRadius: 0.1,
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  setState(() {
-                    decrementCounter(widget.id);
-                  });
-                },
-                icon: const Icon(
-                  Icons.remove,
-                  color: Colors.white,
-                ),
-              ),
+                  splashRadius: 0.1,
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    setState(() {
+                      decrementCounter(widget.id);
+                    });
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/icon-minus.svg",
+                    width: getProportionateScreenWidth(13),
+                  )),
             ),
             SizedBox(
               width: getProportionateScreenWidth(55),
@@ -97,8 +96,8 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 contextMenuBuilder: (context, editableTextState) {
                   return Container();
                 },
-                style:  TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: kTextColor,
                   fontSize: getProportionateScreenHeight(14),
                   fontWeight: FontWeight.w500,
                 ),
@@ -111,24 +110,23 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               ),
             ),
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   color: kColor3,
-                  borderRadius: BorderRadius.all(Radius.circular(3.5))),
-              //color: Colors.black,
+                  border: Border.all(color: kTextColor, width: 0.4),
+                  borderRadius: const BorderRadius.all(Radius.circular(3.5))),
               width: getProportionateScreenWidth(20),
               height: getProportionateScreenHeight(20),
               child: IconButton(
-                iconSize: getProportionateScreenHeight(15),
-                splashRadius: 0.1,
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  incrementCounter(widget.id);
-                },
-                icon: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
+                  iconSize: getProportionateScreenHeight(15),
+                  splashRadius: 0.1,
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    incrementCounter(widget.id);
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/icon-plus.svg",
+                    width: getProportionateScreenWidth(13),
+                  )),
             ),
           ],
         )

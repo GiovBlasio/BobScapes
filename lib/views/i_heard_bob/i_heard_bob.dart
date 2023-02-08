@@ -22,7 +22,7 @@ class IHeardBobScreen extends StatelessWidget {
           // resizeToAvoidBottomInset: false,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            backgroundColor: kColor2,
+            backgroundColor: kAppbarColor,
             leadingWidth: getProportionateScreenWidth(80),
             leading: const CustomBackButton(),
             title: SvgPicture.asset(

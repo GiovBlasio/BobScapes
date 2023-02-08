@@ -96,7 +96,8 @@ class _MappaState extends State<Mappa> {
                 height: getProportionateScreenHeight(41),
                 child: FittedBox(
                   child: FloatingActionButton(
-                    backgroundColor: _liveUpdate ? Colors.white : kColor2,
+                 //   backgroundColor: _liveUpdate ? Colors.white : kColor2,
+                 backgroundColor: Colors.white,
                     onPressed: () {
                       _getLocation().then((value) => currentLatLng =
                           LatLng(value.latitude, value.longitude));
@@ -104,7 +105,8 @@ class _MappaState extends State<Mappa> {
                     },
                     child: SvgPicture.asset(
                       "assets/icons/gpsArrow.svg",
-                      color: _liveUpdate ? kColor2 : Colors.white,
+                    //  color: _liveUpdate ? kColor2 : Colors.white,
+                    color: kColor1,
                       height: getProportionateScreenHeight(30),
                       width: getProportionateScreenWidth(30),
                     ),

@@ -2,6 +2,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class PersonalInfo extends StatefulWidget {
@@ -71,14 +72,14 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                left: getProportionateScreenWidth(10),
+                left: getProportionateScreenWidth(15),
                 bottom: getProportionateScreenHeight(8)),
             child: Text(
               "You are",
               style: TextStyle(
                   fontSize: getProportionateScreenWidth(12),
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Manrope'),
+                  fontWeight: FontWeight.w500,
+                  color: kTextColor),
             ),
           ),
           ClipRRect(
@@ -88,39 +89,49 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
             child: Container(
               height: getProportionateScreenHeight(50),
               padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(10)),
-              color: Colors.white,
+                  horizontal: getProportionateScreenWidth(15)),
+              //color: Colors.red,
               child: DropdownButtonHideUnderline(
-                child: DropdownButton(
+                child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: kTextColor, width: 0.3)),
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: getProportionateScreenHeight(12),
+                          horizontal: getProportionateScreenWidth(12)),
+                      border: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: kTextColor, width: 0.3)),
+                    ),
                     borderRadius: const BorderRadius.all(Radius.circular(0)),
 
                     // alignment: AlignmentDirectional.bottomEnd,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: kTextColor,
                       fontSize: getProportionateScreenWidth(13),
                       fontWeight: FontWeight.w500,
                     ),
                     // underline: Container(),
                     isExpanded: true,
                     value: dropdownvalue,
-                    icon: const Icon(Icons.keyboard_arrow_down),
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: kTextColor,
+                    ),
                     items: widget.items.map((String item) {
                       return DropdownMenuItem(
                         value: item,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
-                              Icons.person,
-                              color: kPrimaryColor,
-                              size: getProportionateScreenWidth(15),
-                            ),
+                            SvgPicture.asset("assets/icons/icon_customers.svg"),
                             SizedBox(
                               width: getProportionateScreenWidth(5),
                             ),
                             Text(
                               item,
-                              style: const TextStyle(color: kPrimaryColor),
+                              style: const TextStyle(color: kTextColor),
                             ),
                           ],
                         ),
@@ -181,87 +192,91 @@ class _NameFormState extends State<NameForm> {
   Widget build(BuildContext context) {
     return Flexible(
         child: Form(
-            child: TextFormField(
-      enableInteractiveSelection: false,
-      controller: controller,
-      keyboardType: TextInputType.name,
-      onSaved: (newValue) {
-        //email = newValue ?? "";
-      },
-      onChanged: (value) {
-        changeName(value);
+            child: Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+      child: TextFormField(
+        enableInteractiveSelection: false,
+        controller: controller,
+        keyboardType: TextInputType.name,
+        onSaved: (newValue) {
+          //email = newValue ?? "";
+        },
+        onChanged: (value) {
+          changeName(value);
 
-        // if (value.isNotEmpty) {
-        //   setState(() {
-        //     errors.remove(kEmailNullError);
-        //   });
-        // }
-        // if (emailValidatorRegExp.hasMatch(value)) {
-        //   setState(() {
-        //     errors.remove(kInvalidEmailError);
-        //   });
-        // }
-      },
-      validator: (value) {
-        // if (value!.isEmpty) {
-        //   setState(() {
-        //     errors.add(kEmailNullError);
-        //   });
-        //   return "";
-        // } else if (!emailValidatorRegExp.hasMatch(value)) {
-        //   setState(() {
-        //     errors.add(kInvalidEmailError);
-        //   });
-        //   return "";
-        // }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelStyle: TextStyle(
-            color: Colors.black,
-            fontSize: getProportionateScreenWidth(13),
-            fontWeight: FontWeight.w700),
-        hintStyle: TextStyle(
-          color: Colors.black.withAlpha(177),
-          fontSize: getProportionateScreenWidth(12),
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        //TODO
-        contentPadding:
-            EdgeInsets.symmetric(vertical: getProportionateScreenHeight(8)),
+          // if (value.isNotEmpty) {
+          //   setState(() {
+          //     errors.remove(kEmailNullError);
+          //   });
+          // }
+          // if (emailValidatorRegExp.hasMatch(value)) {
+          //   setState(() {
+          //     errors.remove(kInvalidEmailError);
+          //   });
+          // }
+        },
+        validator: (value) {
+          // if (value!.isEmpty) {
+          //   setState(() {
+          //     errors.add(kEmailNullError);
+          //   });
+          //   return "";
+          // } else if (!emailValidatorRegExp.hasMatch(value)) {
+          //   setState(() {
+          //     errors.add(kInvalidEmailError);
+          //   });
+          //   return "";
+          // }
+          return null;
+        },
+        decoration: InputDecoration(
+          labelStyle: TextStyle(
+              color: kTextColor,
+              fontSize: getProportionateScreenWidth(15),
+              fontWeight: FontWeight.w500),
+          hintStyle: TextStyle(
+            color: kTextColor.withAlpha(177),
+            fontSize: getProportionateScreenWidth(12),
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          
+          contentPadding:
+              EdgeInsets.symmetric(vertical: getProportionateScreenHeight(8)),
 
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: Colors.black,
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 1,
+              color: kTextColor,
+            ),
           ),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: Colors.black,
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 1,
+              color: kTextColor,
+            ),
           ),
-        ),
-        border: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: Colors.black,
+          border: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 1,
+              color: kTextColor,
+            ),
           ),
-        ),
-        errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            width: 1.5,
-            color: kSecondaryColor,
+          errorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 1.5,
+              color: Colors.red,
+            ),
           ),
-        ),
-        focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            width: 1.5,
-            color: kSecondaryColor,
+          focusedErrorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              width: 1.5,
+              color: Colors.red,
+            ),
           ),
+          labelText: "Your name (required)",
+          hintText: "Shane Mahoney",
         ),
-        labelText: "Your name (required)",
-        hintText: "Shane Mahoney",
       ),
     )));
   }

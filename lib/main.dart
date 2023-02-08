@@ -53,17 +53,17 @@ class MyApp extends StatelessWidget {
 
 ThemeData theme(BuildContext context) {
   return ThemeData(
-    primarySwatch: MaterialColor(0xFFFAA11C, {
-      50: kColor1.withOpacity(0.10),
-      100: kColor1.withOpacity(0.20),
-      200: kColor1.withOpacity(0.30),
-      300: kColor1.withOpacity(0.40),
-      400: kColor1.withOpacity(0.50),
-      500: kColor1.withOpacity(0.60),
-      600: kColor1.withOpacity(0.70),
-      700: kColor1.withOpacity(0.80),
-      800: kColor1.withOpacity(0.90),
-      900: kColor1
+    primarySwatch: MaterialColor(0xFF2C2C2C, {
+      50: kPrimaryColor.withOpacity(0.10),
+      100: kPrimaryColor.withOpacity(0.20),
+      200: kPrimaryColor.withOpacity(0.30),
+      300: kPrimaryColor.withOpacity(0.40),
+      400: kPrimaryColor.withOpacity(0.50),
+      500: kPrimaryColor.withOpacity(0.60),
+      600: kPrimaryColor.withOpacity(0.70),
+      700: kPrimaryColor.withOpacity(0.80),
+      800: kPrimaryColor.withOpacity(0.90),
+      900: kPrimaryColor
     }),
     primaryColor: Colors.black,
     scaffoldBackgroundColor: const Color(0xfff0f0f0),

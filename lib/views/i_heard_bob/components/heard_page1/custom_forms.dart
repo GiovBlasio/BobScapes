@@ -34,531 +34,453 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-              // left: getProportionateScreenWidth(15),
-              bottom: getProportionateScreenWidth(4),
-              top: getProportionateScreenHeight(10)),
-          child: Row(
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                "Date",
-                style: TextStyle(
-                  fontSize: getProportionateScreenWidth(13),
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: getProportionateScreenWidth(4),
+                    top: getProportionateScreenHeight(10)),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Date",
+                      style: TextStyle(
+                        fontSize: getProportionateScreenWidth(13),
+                        fontWeight: FontWeight.w500,
+                        color: kTextColor,
+                      ),
+                    ),
+                    const Spacer(),
+                    InkWell(
+                      onTap: () => _showDatePicker(),
+                      overlayColor:
+                          const MaterialStatePropertyAll(Colors.transparent),
+                      splashColor: Colors.transparent,
+                      child: SvgPicture.asset(
+                        "assets/icons/icon-edit.svg",
+                        height: getProportionateScreenHeight(12),
+                        color: kColor1,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => _showDatePicker(),
+                      overlayColor:
+                          const MaterialStatePropertyAll(Colors.transparent),
+                      splashColor: Colors.transparent,
+                      child: Column(
+                        children: [
+                          Text(
+                            "change",
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(12),
+                              fontWeight: FontWeight.w700,
+                              color: kTextColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              InkWell(
-                onTap: () async {
-                  myTime = await showTimePicker(
-                      initialEntryMode: TimePickerEntryMode.inputOnly,
-                      builder: (BuildContext context, Widget? child) {
-                        return Theme(
-                          data: Theme.of(context).copyWith(
-                            textSelectionTheme: const TextSelectionThemeData(
-                              cursorColor: Colors.white,
-                            ),
-                            timePickerTheme: TimePickerThemeData(
-                              backgroundColor: kColor3,
-                              hourMinuteColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.white),
-                              hourMinuteTextColor:
-                                  MaterialStateColor.resolveWith((states) =>
-                                      states.contains(MaterialState.selected)
-                                          ? Colors.pink
-                                          : Colors.black),
-                            ),
-                            textTheme: const TextTheme(
-                              labelSmall: TextStyle(
-                                color: Colors.white,
-                              ),
-                              bodySmall: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            textButtonTheme: TextButtonThemeData(
-                                style: ButtonStyle(
-                              // backgroundColor: MaterialStateColor.resolveWith(
-                              //     (states) => Colors.black),
-                              foregroundColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.white),
-                              overlayColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.transparent),
-                            )),
-                            colorScheme: const ColorScheme.light(
-                              surface: kColor3,
-                              primary: Colors.white, // header background color
-                              // onPrimary: Colors.white, // header text color
-                              // onSurface: Colors.white, // body text color
-                            ),
-                          ),
-                          child: Localizations.override(
-                            context: context,
-                            // locale: const Locale('it', 'IT'),
-                            child: MediaQuery(
-                              data: MediaQuery.of(context)
-                                  .copyWith(alwaysUse24HourFormat: false),
-                              child: GestureDetector(
-                                  onTap: () => FocusScope.of(context).unfocus(),
-                                  child: child!),
-                            ),
-                          ),
-                        );
-                      },
-                      context: context,
-                      initialTime: TimeOfDay.now());
-
-                  setState(() {
-                    DateTime date = DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        myTime!.hour,
-                        myTime!.minute);
-
-                    String time = DateFormat('hh:mm a').format(date);
-
-                    changeTime(time);
-
-                    timeController.text = time;
-                  });
-                },
-                overlayColor:
-                    const MaterialStatePropertyAll(Colors.transparent),
-                splashColor: Colors.transparent,
-                child: Column(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/edit.svg",
-                      height: getProportionateScreenHeight(30),
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Change",
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(12),
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
+              Flexible(
+                child: TextFormField(
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(13),
+                    color: kTextColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
+                      child: SvgPicture.asset(
+                        "assets/icons/icon-calendar.svg",
                       ),
-                    )
-                  ],
+                    ),
+                    prefixIconConstraints: BoxConstraints(
+                        maxHeight: getProportionateScreenHeight(28),
+                        maxWidth: getProportionateScreenWidth(28)),
+                    filled: true,
+                    fillColor: Colors.white.withAlpha(200),
+                    contentPadding: EdgeInsets.all(
+                      getProportionateScreenWidth(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                      gapPadding: 20,
+                      borderSide:
+                          const BorderSide(color: kTextColor, width: 0.3),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kTextColor, width: 0.3),
+                        borderRadius: BorderRadius.circular(0),
+                        gapPadding: 20),
+                    hintText: "",
+                  ),
+                  controller: dateController,
+                  readOnly: true,
+                  onSaved: (newValue) {},
+                  onFieldSubmitted: (value) => {setState(() {})},
                 ),
               ),
             ],
           ),
-        ),
-        Flexible(
-          child: TextFormField(
-            style: TextStyle(
-              fontSize: getProportionateScreenWidth(12.5),
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white.withAlpha(200),
-              // TODO
-              contentPadding: EdgeInsets.all(
-                getProportionateScreenWidth(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                gapPadding: 20,
-                borderSide: BorderSide.none,
-              ),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(8),
-                  gapPadding: 20),
-              hintText: "",
-            ),
-            textAlign: TextAlign.center,
-            controller: timeController,
-            readOnly: true,
-            onSaved: (newValue) {},
-            onFieldSubmitted: (value) => {setState(() {})},
+          SizedBox(
+            height: getProportionateScreenHeight(10),
           ),
-        ),
-        SizedBox(
-          width: getProportionateScreenWidth(10),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              // left: getProportionateScreenWidth(15),
-              bottom: getProportionateScreenWidth(4),
-              top: getProportionateScreenHeight(10)),
-          child: Row(
+          Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                "Time",
-                style: TextStyle(
-                  fontSize: getProportionateScreenWidth(13),
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: getProportionateScreenWidth(4),
+                    top: getProportionateScreenHeight(10)),
+                child: Row(
+                  children: [
+                    Text(
+                      "Time",
+                      style: TextStyle(
+                        fontSize: getProportionateScreenWidth(13),
+                        fontWeight: FontWeight.w500,
+                        color: kTextColor,
+                      ),
+                    ),
+                    const Spacer(),
+                    InkWell(
+                      onTap: () => _showTimePicker(),
+                      overlayColor:
+                          const MaterialStatePropertyAll(Colors.transparent),
+                      splashColor: Colors.transparent,
+                      child: SvgPicture.asset(
+                        "assets/icons/icon-edit.svg",
+                        height: getProportionateScreenHeight(12),
+                        color: kColor1,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => _showTimePicker(),
+                      overlayColor:
+                          const MaterialStatePropertyAll(Colors.transparent),
+                      splashColor: Colors.transparent,
+                      child: Column(
+                        children: [
+                          Text(
+                            "change",
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(12),
+                              fontWeight: FontWeight.w700,
+                              color: kTextColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              InkWell(
-                onTap: () async {
-                  myDate = await showDatePicker(
-                    keyboardType: TextInputType.datetime,
-                    initialEntryMode: DatePickerEntryMode.calendarOnly,
-                    builder: (context, child) => Theme(
-                      data: Theme.of(context).copyWith(
-                        inputDecorationTheme: const InputDecorationTheme(
-                            filled: true,
-                            fillColor: Colors.white,
-                            labelStyle: TextStyle(color: kColor3)),
-                        textTheme: Theme.of(context).textTheme.apply(
-                              bodyColor: Colors.black,
-                            ),
-                        textSelectionTheme: const TextSelectionThemeData(
-                          cursorColor: Colors.black,
-                          selectionColor: Colors.transparent,
-                        ),
-                        colorScheme: const ColorScheme.light(
-                          primary: kColor3, // header background color
-                          onPrimary: Colors.white, // header text color
-
-                          // surface: Colors.re // body text color
-                        ),
-                        dialogBackgroundColor: Colors.white,
-                        // dialogTheme: DialogTheme(
-                        //   backgroundColor: Colors.white,
-                        // ),
-                        textButtonTheme: const TextButtonThemeData(
-                            // backgroundColor:k,
-                            style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStatePropertyAll(Colors.black),
-                                overlayColor: MaterialStatePropertyAll(
-                                    Colors.transparent)) // button text color
-                            ),
+              Flexible(
+                child: TextFormField(
+                  style: TextStyle(
+                      fontSize: getProportionateScreenWidth(13),
+                      color: kTextColor,
+                      fontWeight: FontWeight.w600),
+                  cursorColor: Colors.white,
+                  onSaved: (newValue) {},
+                  decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
+                      child: SvgPicture.asset(
+                        "assets/icons/icon-clock.svg",
                       ),
-                      child: GestureDetector(
-                          onTap: () => FocusScope.of(context).unfocus(),
-                          child: child!),
                     ),
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate:
-                        DateTime.now().subtract(const Duration(days: 30)),
-                    lastDate: DateTime.now().add(const Duration(days: 0)),
-                  );
-                  setState(() {
-                    String time = DateFormat("MM/dd/''yy").format(myDate!);
-                    changeDate(time);
-                    dateController.text = time;
-                  });
-                },
-                overlayColor:
-                    const MaterialStatePropertyAll(Colors.transparent),
-                splashColor: Colors.transparent,
-                child: Column(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/edit.svg",
-                      height: getProportionateScreenHeight(30),
-                      color: Colors.white,
+                    prefixIconConstraints: BoxConstraints(
+                        maxHeight: getProportionateScreenHeight(28),
+                        maxWidth: getProportionateScreenWidth(28)),
+                    filled: true,
+                    fillColor: Colors.white.withAlpha(200),
+                    contentPadding: EdgeInsets.all(
+                      getProportionateScreenWidth(12),
                     ),
-                    Text(
-                      "Change",
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(12),
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                      gapPadding: 20,
+                      borderSide:
+                          const BorderSide(color: kTextColor, width: 0.3),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kTextColor, width: 0.3),
+                        borderRadius: BorderRadius.circular(0),
+                        gapPadding: 20),
+                    hintText: "",
+                  ),
+                  controller: timeController,
+                  readOnly: true,
+                  onFieldSubmitted: (value) => {setState(() {})},
                 ),
               ),
             ],
           ),
-        ),
-        Flexible(
-          child: TextFormField(
-            style: TextStyle(
-                fontSize: getProportionateScreenWidth(13.5),
-                color: Colors.white,
-                fontWeight: FontWeight.w600),
-            cursorColor: Colors.white,
-            onSaved: (newValue) {},
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white.withAlpha(200),
-              // TODO
-              contentPadding: EdgeInsets.all(
-                getProportionateScreenWidth(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                gapPadding: 20,
-                borderSide: BorderSide.none,
-              ),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(8),
-                  gapPadding: 20),
-              hintText: "",
-            ),
-            textAlign: TextAlign.center,
-            controller: dateController,
-            readOnly: true,
-            onFieldSubmitted: (value) => {setState(() {})},
-          ),
-        ),
-        // Row(
-        //   children: [
-        //     Flexible(
-        //       child: TextFormField(
-        //         style: TextStyle(
-        //             fontSize: getProportionateScreenWidth(13.5),
-        //             color: Colors.white,
-        //             fontWeight: FontWeight.w600),
-        //         cursorColor: Colors.white,
-        //         onSaved: (newValue) {},
-        //         decoration: InputDecoration(
-        //           filled: true,
-        //           fillColor: Colors.white.withAlpha(200),
-        //           // TODO
-        //           contentPadding: EdgeInsets.all(
-        //             getProportionateScreenWidth(12),
-        //           ),
-        //           focusedBorder: OutlineInputBorder(
-        //             borderRadius: BorderRadius.circular(8),
-        //             gapPadding: 20,
-        //             borderSide: BorderSide.none,
-        //           ),
-        //           border: OutlineInputBorder(
-        //               borderSide: BorderSide.none,
-        //               borderRadius: BorderRadius.circular(8),
-        //               gapPadding: 20),
-        //           hintText: "",
-        //         ),
-        //         textAlign: TextAlign.center,
-        //         controller: dateController,
-        //         readOnly: true,
-        //         onFieldSubmitted: (value) => {setState(() {})},
-        //       ),
-        //     ),
-        //     SizedBox(
-        //       width: getProportionateScreenWidth(10),
-        //     ),
-        //     InkWell(
-        //       onTap: () async {
-        //         myDate = await showDatePicker(
-        //           keyboardType: TextInputType.datetime,
-        //           initialEntryMode: DatePickerEntryMode.calendarOnly,
-        //           builder: (context, child) => Theme(
-        //             data: Theme.of(context).copyWith(
-        //               inputDecorationTheme: const InputDecorationTheme(
-        //                   filled: true,
-        //                   fillColor: Colors.white,
-        //                   labelStyle: TextStyle(color: kColor3)),
-        //               textTheme: Theme.of(context).textTheme.apply(
-        //                     bodyColor: Colors.black,
-        //                   ),
-        //               textSelectionTheme: const TextSelectionThemeData(
-        //                 cursorColor: Colors.black,
-        //                 selectionColor: Colors.transparent,
-        //               ),
-        //               colorScheme: const ColorScheme.light(
-        //                 primary: kColor3, // header background color
-        //                 onPrimary: Colors.white, // header text color
+          // Row(
+          //   children: [
+          //     Flexible(
+          //       child: TextFormField(
+          //         style: TextStyle(
+          //             fontSize: getProportionateScreenWidth(13.5),
+          //             color: Colors.white,
+          //             fontWeight: FontWeight.w600),
+          //         cursorColor: Colors.white,
+          //         onSaved: (newValue) {},
+          //         decoration: InputDecoration(
+          //           filled: true,
+          //           fillColor: Colors.white.withAlpha(200),
+          //           // TODO
+          //           contentPadding: EdgeInsets.all(
+          //             getProportionateScreenWidth(12),
+          //           ),
+          //           focusedBorder: OutlineInputBorder(
+          //             borderRadius: BorderRadius.circular(8),
+          //             gapPadding: 20,
+          //             borderSide: BorderSide.none,
+          //           ),
+          //           border: OutlineInputBorder(
+          //               borderSide: BorderSide.none,
+          //               borderRadius: BorderRadius.circular(8),
+          //               gapPadding: 20),
+          //           hintText: "",
+          //         ),
+          //         textAlign: TextAlign.center,
+          //         controller: dateController,
+          //         readOnly: true,
+          //         onFieldSubmitted: (value) => {setState(() {})},
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       width: getProportionateScreenWidth(10),
+          //     ),
+          //     InkWell(
+          //       onTap: () async {
+          //         myDate = await showDatePicker(
+          //           keyboardType: TextInputType.datetime,
+          //           initialEntryMode: DatePickerEntryMode.calendarOnly,
+          //           builder: (context, child) => Theme(
+          //             data: Theme.of(context).copyWith(
+          //               inputDecorationTheme: const InputDecorationTheme(
+          //                   filled: true,
+          //                   fillColor: Colors.white,
+          //                   labelStyle: TextStyle(color: kColor3)),
+          //               textTheme: Theme.of(context).textTheme.apply(
+          //                     bodyColor: Colors.black,
+          //                   ),
+          //               textSelectionTheme: const TextSelectionThemeData(
+          //                 cursorColor: Colors.black,
+          //                 selectionColor: Colors.transparent,
+          //               ),
+          //               colorScheme: const ColorScheme.light(
+          //                 primary: kColor3, // header background color
+          //                 onPrimary: Colors.white, // header text color
 
-        //                 // surface: Colors.re // body text color
-        //               ),
-        //               dialogBackgroundColor: Colors.white,
-        //               // dialogTheme: DialogTheme(
-        //               //   backgroundColor: Colors.white,
-        //               // ),
-        //               textButtonTheme: const TextButtonThemeData(
-        //                   // backgroundColor:k,
-        //                   style: ButtonStyle(
-        //                       foregroundColor:
-        //                           MaterialStatePropertyAll(Colors.black),
-        //                       overlayColor: MaterialStatePropertyAll(
-        //                           Colors.transparent)) // button text color
-        //                   ),
-        //             ),
-        //             child: GestureDetector(
-        //                 onTap: () => FocusScope.of(context).unfocus(),
-        //                 child: child!),
-        //           ),
-        //           context: context,
-        //           initialDate: DateTime.now(),
-        //           firstDate: DateTime.now().subtract(const Duration(days: 30)),
-        //           lastDate: DateTime.now().add(const Duration(days: 0)),
-        //         );
-        //         setState(() {
-        //           String time = DateFormat("MM/dd/''yy").format(myDate!);
-        //           changeDate(time);
-        //           dateController.text = time;
-        //         });
-        //       },
-        //       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-        //       splashColor: Colors.transparent,
-        //       child: Column(
-        //         children: [
-        //           SvgPicture.asset(
-        //             "assets/icons/edit.svg",
-        //             height: getProportionateScreenHeight(30),
-        //             color: Colors.white,
-        //           ),
-        //           Text(
-        //             "Change",
-        //             style: TextStyle(
-        //               fontSize: getProportionateScreenWidth(12),
-        //               fontWeight: FontWeight.w700,
-        //               color: Colors.white,
-        //             ),
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //     SizedBox(
-        //       width: getProportionateScreenWidth(10),
-        //     ),
-        //     Flexible(
-        //       child: TextFormField(
-        //         style: TextStyle(
-        //           fontSize: getProportionateScreenWidth(12.5),
-        //           color: Colors.white,
-        //           fontWeight: FontWeight.w600,
-        //         ),
-        //         decoration: InputDecoration(
-        //           filled: true,
-        //           fillColor: Colors.white.withAlpha(200),
-        //           // TODO
-        //           contentPadding: EdgeInsets.all(
-        //             getProportionateScreenWidth(12),
-        //           ),
-        //           focusedBorder: OutlineInputBorder(
-        //             borderRadius: BorderRadius.circular(8),
-        //             gapPadding: 20,
-        //             borderSide: BorderSide.none,
-        //           ),
-        //           border: OutlineInputBorder(
-        //               borderSide: BorderSide.none,
-        //               borderRadius: BorderRadius.circular(8),
-        //               gapPadding: 20),
-        //           hintText: "",
-        //         ),
-        //         textAlign: TextAlign.center,
-        //         controller: timeController,
-        //         readOnly: true,
-        //         onSaved: (newValue) {},
-        //         onFieldSubmitted: (value) => {setState(() {})},
-        //       ),
-        //     ),
-        //     SizedBox(
-        //       width: getProportionateScreenWidth(10),
-        //     ),
-        //     InkWell(
-        //       onTap: () async {
-        //         myTime = await showTimePicker(
-        //             initialEntryMode: TimePickerEntryMode.inputOnly,
-        //             builder: (BuildContext context, Widget? child) {
-        //               return Theme(
-        //                 data: Theme.of(context).copyWith(
-        //                   textSelectionTheme: const TextSelectionThemeData(
-        //                     cursorColor: Colors.white,
-        //                   ),
-        //                   timePickerTheme: TimePickerThemeData(
-        //                     backgroundColor: kColor3,
-        //                     hourMinuteColor: MaterialStateColor.resolveWith(
-        //                         (states) => Colors.white),
-        //                     hourMinuteTextColor: MaterialStateColor.resolveWith(
-        //                         (states) =>
-        //                             states.contains(MaterialState.selected)
-        //                                 ? Colors.pink
-        //                                 : Colors.black),
-        //                   ),
-        //                   textTheme: const TextTheme(
-        //                     labelSmall: TextStyle(
-        //                       color: Colors.white,
-        //                     ),
-        //                     bodySmall: TextStyle(
-        //                       color: Colors.white,
-        //                     ),
-        //                   ),
-        //                   textButtonTheme: TextButtonThemeData(
-        //                       style: ButtonStyle(
-        //                     // backgroundColor: MaterialStateColor.resolveWith(
-        //                     //     (states) => Colors.black),
-        //                     foregroundColor: MaterialStateColor.resolveWith(
-        //                         (states) => Colors.white),
-        //                     overlayColor: MaterialStateColor.resolveWith(
-        //                         (states) => Colors.transparent),
-        //                   )),
-        //                   colorScheme: const ColorScheme.light(
-        //                     surface: kColor3,
-        //                     primary: Colors.white, // header background color
-        //                     // onPrimary: Colors.white, // header text color
-        //                     // onSurface: Colors.white, // body text color
-        //                   ),
-        //                 ),
-        //                 child: Localizations.override(
-        //                   context: context,
-        //                   // locale: const Locale('it', 'IT'),
-        //                   child: MediaQuery(
-        //                     data: MediaQuery.of(context)
-        //                         .copyWith(alwaysUse24HourFormat: false),
-        //                     child: GestureDetector(
-        //                         onTap: () => FocusScope.of(context).unfocus(),
-        //                         child: child!),
-        //                   ),
-        //                 ),
-        //               );
-        //             },
-        //             context: context,
-        //             initialTime: TimeOfDay.now());
+          //                 // surface: Colors.re // body text color
+          //               ),
+          //               dialogBackgroundColor: Colors.white,
+          //               // dialogTheme: DialogTheme(
+          //               //   backgroundColor: Colors.white,
+          //               // ),
+          //               textButtonTheme: const TextButtonThemeData(
+          //                   // backgroundColor:k,
+          //                   style: ButtonStyle(
+          //                       foregroundColor:
+          //                           MaterialStatePropertyAll(Colors.black),
+          //                       overlayColor: MaterialStatePropertyAll(
+          //                           Colors.transparent)) // button text color
+          //                   ),
+          //             ),
+          //             child: GestureDetector(
+          //                 onTap: () => FocusScope.of(context).unfocus(),
+          //                 child: child!),
+          //           ),
+          //           context: context,
+          //           initialDate: DateTime.now(),
+          //           firstDate: DateTime.now().subtract(const Duration(days: 30)),
+          //           lastDate: DateTime.now().add(const Duration(days: 0)),
+          //         );
+          //         setState(() {
+          //           String time = DateFormat("MM/dd/''yy").format(myDate!);
+          //           changeDate(time);
+          //           dateController.text = time;
+          //         });
+          //       },
+          //       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+          //       splashColor: Colors.transparent,
+          //       child: Column(
+          //         children: [
+          //           SvgPicture.asset(
+          //             "assets/icons/edit.svg",
+          //             height: getProportionateScreenHeight(30),
+          //             color: Colors.white,
+          //           ),
+          //           Text(
+          //             "Change",
+          //             style: TextStyle(
+          //               fontSize: getProportionateScreenWidth(12),
+          //               fontWeight: FontWeight.w700,
+          //               color: Colors.white,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       width: getProportionateScreenWidth(10),
+          //     ),
+          //     Flexible(
+          //       child: TextFormField(
+          //         style: TextStyle(
+          //           fontSize: getProportionateScreenWidth(12.5),
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.w600,
+          //         ),
+          //         decoration: InputDecoration(
+          //           filled: true,
+          //           fillColor: Colors.white.withAlpha(200),
+          //           // TODO
+          //           contentPadding: EdgeInsets.all(
+          //             getProportionateScreenWidth(12),
+          //           ),
+          //           focusedBorder: OutlineInputBorder(
+          //             borderRadius: BorderRadius.circular(8),
+          //             gapPadding: 20,
+          //             borderSide: BorderSide.none,
+          //           ),
+          //           border: OutlineInputBorder(
+          //               borderSide: BorderSide.none,
+          //               borderRadius: BorderRadius.circular(8),
+          //               gapPadding: 20),
+          //           hintText: "",
+          //         ),
+          //         textAlign: TextAlign.center,
+          //         controller: timeController,
+          //         readOnly: true,
+          //         onSaved: (newValue) {},
+          //         onFieldSubmitted: (value) => {setState(() {})},
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       width: getProportionateScreenWidth(10),
+          //     ),
+          //     InkWell(
+          //       onTap: () async {
+          //         myTime = await showTimePicker(
+          //             initialEntryMode: TimePickerEntryMode.inputOnly,
+          //             builder: (BuildContext context, Widget? child) {
+          //               return Theme(
+          //                 data: Theme.of(context).copyWith(
+          //                   textSelectionTheme: const TextSelectionThemeData(
+          //                     cursorColor: Colors.white,
+          //                   ),
+          //                   timePickerTheme: TimePickerThemeData(
+          //                     backgroundColor: kColor3,
+          //                     hourMinuteColor: MaterialStateColor.resolveWith(
+          //                         (states) => Colors.white),
+          //                     hourMinuteTextColor: MaterialStateColor.resolveWith(
+          //                         (states) =>
+          //                             states.contains(MaterialState.selected)
+          //                                 ? Colors.pink
+          //                                 : Colors.black),
+          //                   ),
+          //                   textTheme: const TextTheme(
+          //                     labelSmall: TextStyle(
+          //                       color: Colors.white,
+          //                     ),
+          //                     bodySmall: TextStyle(
+          //                       color: Colors.white,
+          //                     ),
+          //                   ),
+          //                   textButtonTheme: TextButtonThemeData(
+          //                       style: ButtonStyle(
+          //                     // backgroundColor: MaterialStateColor.resolveWith(
+          //                     //     (states) => Colors.black),
+          //                     foregroundColor: MaterialStateColor.resolveWith(
+          //                         (states) => Colors.white),
+          //                     overlayColor: MaterialStateColor.resolveWith(
+          //                         (states) => Colors.transparent),
+          //                   )),
+          //                   colorScheme: const ColorScheme.light(
+          //                     surface: kColor3,
+          //                     primary: Colors.white, // header background color
+          //                     // onPrimary: Colors.white, // header text color
+          //                     // onSurface: Colors.white, // body text color
+          //                   ),
+          //                 ),
+          //                 child: Localizations.override(
+          //                   context: context,
+          //                   // locale: const Locale('it', 'IT'),
+          //                   child: MediaQuery(
+          //                     data: MediaQuery.of(context)
+          //                         .copyWith(alwaysUse24HourFormat: false),
+          //                     child: GestureDetector(
+          //                         onTap: () => FocusScope.of(context).unfocus(),
+          //                         child: child!),
+          //                   ),
+          //                 ),
+          //               );
+          //             },
+          //             context: context,
+          //             initialTime: TimeOfDay.now());
 
-        //         setState(() {
-        //           DateTime date = DateTime(
-        //               DateTime.now().year,
-        //               DateTime.now().month,
-        //               DateTime.now().day,
-        //               myTime!.hour,
-        //               myTime!.minute);
+          //         setState(() {
+          //           DateTime date = DateTime(
+          //               DateTime.now().year,
+          //               DateTime.now().month,
+          //               DateTime.now().day,
+          //               myTime!.hour,
+          //               myTime!.minute);
 
-        //           String time = DateFormat('hh:mm a').format(date);
+          //           String time = DateFormat('hh:mm a').format(date);
 
-        //           changeTime(time);
+          //           changeTime(time);
 
-        //           timeController.text = time;
-        //         });
-        //       },
-        //       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-        //       splashColor: Colors.transparent,
-        //       child: Column(
-        //         children: [
-        //           SvgPicture.asset(
-        //             "assets/icons/edit.svg",
-        //             height: getProportionateScreenHeight(30),
-        //             color: Colors.white,
-        //           ),
-        //           Text(
-        //             "Change",
-        //             style: TextStyle(
-        //               fontSize: getProportionateScreenWidth(12),
-        //               fontWeight: FontWeight.w700,
-        //               color: Colors.white,
-        //             ),
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //     SizedBox(
-        //       width: getProportionateScreenWidth(5),
-        //     )
-        //   ],
-        // ),
-      ],
+          //           timeController.text = time;
+          //         });
+          //       },
+          //       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+          //       splashColor: Colors.transparent,
+          //       child: Column(
+          //         children: [
+          //           SvgPicture.asset(
+          //             "assets/icons/edit.svg",
+          //             height: getProportionateScreenHeight(30),
+          //             color: Colors.white,
+          //           ),
+          //           Text(
+          //             "Change",
+          //             style: TextStyle(
+          //               fontSize: getProportionateScreenWidth(12),
+          //               fontWeight: FontWeight.w700,
+          //               color: Colors.white,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       width: getProportionateScreenWidth(5),
+          //     )
+          //   ],
+          // ),
+        ],
+      ),
     );
   }
 
@@ -576,6 +498,126 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 
   void changeTime(String time) {
     context.read<HeardPage1State>().changeTime(time);
+  }
+
+  _showTimePicker() async {
+    myTime = await showTimePicker(
+        initialEntryMode: TimePickerEntryMode.inputOnly,
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              textSelectionTheme: const TextSelectionThemeData(
+                cursorColor: kPrimaryColor,
+              ),
+              timePickerTheme: TimePickerThemeData(
+                backgroundColor: kColor3,
+                hourMinuteColor:
+                    MaterialStateColor.resolveWith((states) => Colors.white),
+                hourMinuteTextColor: MaterialStateColor.resolveWith((states) =>
+                    states.contains(MaterialState.selected)
+                        ? Colors.pink
+                        : Colors.black),
+              ),
+              textTheme: const TextTheme(
+                labelSmall: TextStyle(
+                  color: kPrimaryColor,
+                ),
+                bodySmall: TextStyle(
+                  color: kPrimaryColor,
+                ),
+              ),
+              textButtonTheme: TextButtonThemeData(
+                  style: ButtonStyle(
+                // backgroundColor: MaterialStateColor.resolveWith(
+                //     (states) => Colors.black),
+                foregroundColor:
+                    MaterialStateColor.resolveWith((states) => kPrimaryColor),
+                overlayColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.transparent),
+              )),
+              colorScheme: const ColorScheme.light(
+                surface: kPrimaryColor,
+                primary: kPrimaryColor, // header background color
+                // onPrimary: Colors.white, // header text color
+                // onSurface: Colors.white, // body text color
+              ),
+            ),
+            child: Localizations.override(
+              context: context,
+              // locale: const Locale('it', 'IT'),
+              child: MediaQuery(
+                data: MediaQuery.of(context)
+                    .copyWith(alwaysUse24HourFormat: false),
+                child: GestureDetector(
+                    onTap: () => FocusScope.of(context).unfocus(),
+                    child: child!),
+              ),
+            ),
+          );
+        },
+        context: context,
+        initialTime: TimeOfDay.now());
+
+    setState(() {
+      DateTime date = DateTime(DateTime.now().year, DateTime.now().month,
+          DateTime.now().day, myTime!.hour, myTime!.minute);
+
+      String time = DateFormat('hh:mm a').format(date);
+
+      changeTime(time);
+
+      timeController.text = time;
+    });
+  }
+
+  _showDatePicker() async {
+    myDate = await showDatePicker(
+      keyboardType: TextInputType.datetime,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (context, child) => Theme(
+        data: Theme.of(context).copyWith(
+          inputDecorationTheme: const InputDecorationTheme(
+              filled: true,
+              fillColor: kPrimaryColor,
+              labelStyle: TextStyle(color: kColor3)),
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: kPrimaryColor,
+              ),
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Colors.black,
+            selectionColor: Colors.transparent,
+          ),
+          colorScheme: const ColorScheme.light(
+            primary: kColor2, // header background color
+            onPrimary: kPrimaryColor, // header text color
+
+            // surface: Colors.re // body text color
+          ),
+          dialogBackgroundColor: Colors.white,
+          // dialogTheme: DialogTheme(
+          //   backgroundColor: Colors.white,
+          // ),
+          textButtonTheme: const TextButtonThemeData(
+              // backgroundColor:k,
+              style: ButtonStyle(
+                  foregroundColor: MaterialStatePropertyAll(Colors.black),
+                  overlayColor: MaterialStatePropertyAll(
+                      Colors.transparent)) // button text color
+              ),
+        ),
+        child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(), child: child!),
+      ),
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now().subtract(const Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 0)),
+    );
+    setState(() {
+      String time = DateFormat("MM/dd/''yy").format(myDate!);
+      changeDate(time);
+      dateController.text = time;
+    });
   }
 }
 
@@ -1169,158 +1211,3 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //   }
 // }
 
-class LocationForm extends StatefulWidget {
-  const LocationForm({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<LocationForm> createState() => _LocationFormState();
-}
-
-class _LocationFormState extends State<LocationForm> {
-  TextEditingController controller = TextEditingController();
-
-  @override
-  void initState() {
-    _initialization();
-    super.initState();
-  }
-
-  void changeLocation(String location) {
-    context.read<HeardPage1State>().changeLocation(location);
-  }
-
-  void _initialization() {
-    String location =
-        Provider.of<HeardPage1State>(context, listen: false).location;
-
-    if (location != '') controller = TextEditingController(text: location);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-              //left: getProportionateScreenWidth(15),
-              bottom: getProportionateScreenWidth(4),
-              top: getProportionateScreenHeight(10)),
-          child: Row(
-            children: [
-              Text(
-                "Latitude/Longitude",
-                style: TextStyle(
-                    fontSize: getProportionateScreenWidth(13),
-                    fontWeight: FontWeight.w700,
-                    color: kPrimaryColor),
-              ),
-              Spacer(),
-              InkWell(
-                overlayColor:
-                    const MaterialStatePropertyAll(Colors.transparent),
-                splashColor: Colors.transparent,
-                onTap: () {
-                  setState(() {
-                    String location = 'prova';
-                    changeLocation(location);
-                    controller.text = location;
-                  });
-                },
-                child: Column(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/edit.svg",
-                      height: getProportionateScreenHeight(18),
-                      color: kColor1,
-                    ),
-                  ],
-                ),
-              ),
-              InkWell(
-                  overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    setState(() {
-                      String location = 'prova';
-                      changeLocation(location);
-                      controller.text = location;
-                    });
-                  },
-                  child: Text(
-                    "Change",
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(10),
-                        fontWeight: FontWeight.w700,
-                        color: kPrimaryColor),
-                  )),
-            ],
-          ),
-        ),
-        Row(children: [
-          Expanded(
-            child: Form(
-                child: Row(
-              children: [
-                Flexible(
-                  child: TextFormField(
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: getProportionateScreenWidth(14)),
-                    cursorColor: Colors.black,
-                    controller: controller,
-                    readOnly: true,
-                    onSaved: (newValue) {
-                      //  location = newValue ?? "";
-                    },
-                    onChanged: (value) {},
-                    validator: (value) {
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white.withAlpha(200),
-                      // TODO
-                      contentPadding: EdgeInsets.all(
-                        getProportionateScreenWidth(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          gapPadding: 20,
-                          borderSide: BorderSide
-                              .none), //const BorderSide(color: Colors.grey)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(0),
-                          gapPadding: 20),
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.only(
-                            left: getProportionateScreenWidth(5)),
-                        child: SvgPicture.asset(
-                          "assets/icons/gpsArrow.svg",
-                          color: kPrimaryColor,
-                        ),
-                      ),
-                      prefixIconConstraints: BoxConstraints(
-                          maxHeight: getProportionateScreenHeight(23),
-                          maxWidth: getProportionateScreenWidth(23)),
-                      //suffixIconColor: Colors.white,
-                      hintText: "",
-                    ),
-                  ),
-                ),
-                // SizedBox(
-                //   width: getProportionateScreenWidth(15),
-                // ),
-              ],
-            )),
-          ),
-        ]),
-      ],
-    );
-  }
-}

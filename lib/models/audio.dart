@@ -10,17 +10,20 @@ class Audio {
   Audio({
     required this.time,
     required this.title,
-    //  required this.state,
+    required this.path,
+    required this.pathImage,
   });
 
   final String time;
   final String title;
-  //final String state;
+  final String path;
+  final String pathImage;
 
   factory Audio.fromJson(Map<String, dynamic> json) => Audio(
         time: json["time"],
         title: json["title"],
-        // state: json["stato_compilazione"],
+        path: json["path"],
+        pathImage: json["path"],
       );
 
   Map<String, dynamic> toJson() => {

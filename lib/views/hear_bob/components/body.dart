@@ -20,9 +20,20 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  List<Audio> audio = [];
+  List<Audio> audio = [
+    Audio(
+        time: "4",
+        title: "Male Bobwhite Spring Call",
+        path: "male-bobwhite-spring-call.mp3",
+        pathImage: "assets/images/bobwhite.jpg"),
+    Audio(
+        time: "6",
+        title: "Fall covey Call",
+        path: "fall-covey-call.mp3",
+        pathImage: "assets/images/covata.jpg")
+  ];
 
-  bool isLoaded = false;
+  bool isLoaded = true;
   @override
   void initState() {
     super.initState();
@@ -30,12 +41,12 @@ class _BodyState extends State<Body> {
   }
 
   _initialization() async {
-    audio = await RemoteService().getAudio();
-    if (audio.isNotEmpty) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
+    //audio = await RemoteService().getAudio();
+    // if (audio.isNotEmpty) {
+    //   setState(() {
+    //     isLoaded = true;
+    //   });
+    // }
   }
 
   @override
@@ -44,12 +55,10 @@ class _BodyState extends State<Body> {
       children: [
         Opacity(
           opacity: 1,
-          child: SvgPicture.asset(
-            "assets/images/Welcome Background.svg",
-            fit: BoxFit.cover,
-           // height: SizeConfig.screenHeight,
-            width: double.infinity
-          ),
+          child: SvgPicture.asset("assets/images/sfondo3.svg",
+              fit: BoxFit.cover,
+              // height: SizeConfig.screenHeight,
+              width: double.infinity),
         ),
         Visibility(
           visible: isLoaded,
@@ -66,15 +75,17 @@ class _BodyState extends State<Body> {
             itemBuilder: (context, index) => InkWell(
               onTap: () {
                 showDialog(
-                    barrierColor: Colors.white.withOpacity(0.9),
+                    barrierColor: Colors.white.withOpacity(0.7),
                     context: context,
                     builder: (context) => CustomAlert(
                           title: audio[index].title,
+                          path: audio[index].path,
                         ));
               },
               child: CustomCard(
                 time: audio[index].time,
                 title: audio[index].title,
+                path: audio[index].pathImage,
               ),
             ),
             separatorBuilder: (context, index) => SizedBox(

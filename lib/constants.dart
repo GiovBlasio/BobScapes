@@ -9,13 +9,14 @@ import 'size_config.dart';
 const kColor1 = Color(0xFFFF9B00);
 const kColor2 = Color(0xFFFCF5A9);
 const kColor3 = Color(0xFFFFFFFF);
+const kTextColor = Color(0xFF552D00);
+const kTextLightColor = Color(0xFF7D6042);
+const kAppbarColor = Color(0xFFFFE439);
 
 const kPrimaryColor = Color(0xff2c2c2c);
 const kPrimaryLightColor = Color(0xffece0d0);
 const kSecondaryColor = Color(0x772c2c2c);
-const kTextColor = Color(0xff2c2c2c);
-const kTextLightColor = Color(0xFF666362);
-const kAppbarColor = Color(0xFFFFE439);
+
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,

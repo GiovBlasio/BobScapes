@@ -43,7 +43,7 @@ class CustomTitle extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                    color: kPrimaryColor,
+                    color: kTextColor,
                     fontSize: getProportionateScreenWidth(16),
                     fontWeight: FontWeight.bold),
               ),
@@ -55,7 +55,7 @@ class CustomTitle extends StatelessWidget {
                 child: SvgPicture.asset(
                   icon,
                   height: getProportionateScreenHeight(30),
-                  color: kPrimaryColor,
+                  color: kTextColor,
                 ),
               ),
               const Spacer()

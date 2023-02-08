@@ -20,10 +20,10 @@ class _BodyState extends State<Body> {
       margin: const EdgeInsets.only(right: 8),
       height: getProportionateScreenHeight(15),
       width: currentIndex == index
-          ? getProportionateScreenWidth(45)
+          ? getProportionateScreenWidth(15)
           : getProportionateScreenWidth(15),
       decoration: BoxDecoration(
-        color: kPrimaryColor,
+        color: currentIndex == index ? kTextColor : kTextLightColor,
         borderRadius: BorderRadius.circular(15),
       ),
     );
@@ -34,7 +34,7 @@ class _BodyState extends State<Body> {
     return Stack(
       children: [
         SvgPicture.asset(
-          "assets/images/Welcome Background.svg",
+          "assets/images/sfondo2.svg",
           fit: BoxFit.cover,
           width: SizeConfig.screenWidth,
         ),
@@ -71,7 +71,7 @@ class _BodyState extends State<Body> {
             height: 45,
           ),
           const Spacer(
-            flex: 3,
+            flex: 4,
           ),
           Flexible(
             flex: 5,
@@ -93,8 +93,8 @@ class _BodyState extends State<Body> {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                                fontSize: getProportionateScreenWidth(25),
-                                color: kPrimaryColor,
+                                fontSize: getProportionateScreenWidth(26),
+                                color: kTextColor,
                                 fontWeight: FontWeight.w500),
                             children: const [
                               TextSpan(text: '> Welcome to\n'),
@@ -102,6 +102,7 @@ class _BodyState extends State<Body> {
                                   text: 'BOBSCAPES',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
+                                    color: kPrimaryColor
                                   )),
                               TextSpan(
                                 text:
@@ -117,9 +118,9 @@ class _BodyState extends State<Body> {
                         child: Text(
                           "We appreciate your\n contribution to conservation!",
                           style: TextStyle(
-                              fontSize: getProportionateScreenWidth(14),
+                              fontSize: getProportionateScreenWidth(16),
                               fontWeight: FontWeight.w500,
-                              color: kPrimaryColor),
+                              color: kTextColor),
                         ),
                       ),
                     ],
@@ -136,7 +137,7 @@ class _BodyState extends State<Body> {
                         child: Text(
                           ">Spotting Bob",
                           style: TextStyle(
-                              fontSize: getProportionateScreenWidth(25),
+                              fontSize: getProportionateScreenWidth(26),
                               fontWeight: FontWeight.w600,
                               color: kPrimaryColor),
                         ),
@@ -145,10 +146,10 @@ class _BodyState extends State<Body> {
                       Flexible(
                         flex: 15,
                         child: Text(
-                          "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhites that you\nhave heard or spotted in your\n landscape",
+                          "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhite that you\nhave heard or spotted in your\n landscape",
                           style: TextStyle(
                               color: kPrimaryColor,
-                              fontSize: getProportionateScreenWidth(14),
+                              fontSize: getProportionateScreenWidth(16),
                               fontWeight: FontWeight.w500),
                         ),
                       ),
@@ -198,16 +199,16 @@ class _BodyState extends State<Body> {
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(20),
                               fontWeight: FontWeight.w600,
-                              color: kPrimaryColor),
+                              color: kTextColor),
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 2,
                         ),
                         Flexible(
                           flex: 1,
                           child: Icon(
                             Icons.adaptive.arrow_forward,
-                            color: kPrimaryColor,
+                            color: kTextColor,
                           ),
                         ),
                       ],

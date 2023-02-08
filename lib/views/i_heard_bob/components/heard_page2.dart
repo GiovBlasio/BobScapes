@@ -1,3 +1,4 @@
+import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,21 @@ class HeardPage2 extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Register your sighting",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: kTextColor,
+                    fontSize: getProportionateScreenWidth(18)),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: getProportionateScreenHeight(10),
+          ),
           // Padding(
           //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
           //   child: Row(
@@ -41,11 +57,17 @@ class HeardPage2 extends StatelessWidget {
           //     ],
           //   ),
           // ),
-
-          const CustomDropDownMenu(items: ['Family', '1', '2', '3']),
+          SizedBox(
+            height: getProportionateScreenHeight(10),
+          ),
+          const CustomDropDownMenu(items: ['Family (Covey)', '1', '2', '3']),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
+          const Divider(),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(10)),
+                vertical: getProportionateScreenHeight(15)),
             child: const NumericalQuestion(
               title: "How many birds?",
               id: 1,
@@ -53,7 +75,7 @@ class HeardPage2 extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(10)),
+                vertical: getProportionateScreenHeight(15)),
             child: const NumericalQuestion(
               title: "How many male?",
               id: 2,
@@ -61,12 +83,12 @@ class HeardPage2 extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(10)),
+                vertical: getProportionateScreenHeight(15)),
             child: const NumericalQuestion(title: "How many female?", id: 3),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(10)),
+                vertical: getProportionateScreenHeight(15)),
             child: const NumericalQuestion(
               title: "How many young birds?",
               id: 4,
@@ -74,7 +96,7 @@ class HeardPage2 extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(10)),
+                vertical: getProportionateScreenHeight(15)),
             child: const NumericalQuestion(
                 title: "How many broods\nrappresented?", id: 5),
           ),

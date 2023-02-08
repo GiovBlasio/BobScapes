@@ -2,14 +2,17 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAlert extends StatefulWidget {
   const CustomAlert({
     required this.title,
+    required this.path,
     Key? key,
   }) : super(key: key);
 
   final String title;
+  final String path;
 
   @override
   State<CustomAlert> createState() => _CustomAlertState();
@@ -57,19 +60,19 @@ class _CustomAlertState extends State<CustomAlert> {
     return Center(
         child: Padding(
       padding: EdgeInsets.symmetric(
-          vertical: getProportionateScreenHeight(35),
+          vertical: getProportionateScreenHeight(0),
           horizontal: getProportionateScreenWidth(15)),
       child: Container(
-          height: getProportionateScreenHeight(220),
+          height: getProportionateScreenHeight(240),
           decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black38,
-                spreadRadius: 8,
-                blurRadius: 10,
-              ),
-            ],
-            borderRadius: BorderRadius.circular(40.0),
+            // boxShadow: const [
+            //   BoxShadow(
+            //     color: Colors.black38,
+            //     spreadRadius: 3,
+            //     blurRadius: 8,
+            //   ),
+            // ],
+            borderRadius: BorderRadius.circular(16.0),
           ),
           child: Card(
               margin: const EdgeInsets.all(0),
@@ -86,42 +89,36 @@ class _CustomAlertState extends State<CustomAlert> {
                     width: double.infinity,
                     //height: 350,
                     padding: EdgeInsets.symmetric(
-                        vertical: getProportionateScreenHeight(15)),
+                        vertical: getProportionateScreenHeight(0)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: getProportionateScreenWidth(30),
-                              right: getProportionateScreenWidth(10)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                //width: getProportionateScreenWidth(250),
-                                child: Text(
-                                  widget.title,
-                                  style: TextStyle(
-                                      color: kPrimaryColor,
-                                      fontSize: getProportionateScreenWidth(16),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.close,
-                                  color: kPrimaryColor,
-                                  size: 30,
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              )
-                            ],
+                        // const Spacer(),
+                        IconButton(
+                          icon: SvgPicture.asset(
+                            "assets/icons/icon-close.svg",
+                            height: getProportionateScreenHeight(20),
                           ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
-                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.title,
+                              style: TextStyle(
+                                  color: kTextColor,
+                                  fontSize: getProportionateScreenWidth(16),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        const Spacer(
+                          flex: 6,
+                        ),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -132,7 +129,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 data: SliderThemeData(
                                     trackHeight: 2,
                                     inactiveTrackColor:
-                                        kPrimaryColor.withOpacity(0.6),
+                                        kTextColor.withOpacity(0.8),
                                     activeTrackColor: kColor1,
                                     disabledThumbColor: kColor1,
                                     thumbShape: SliderComponentShape.noThumb,
@@ -159,18 +156,20 @@ class _CustomAlertState extends State<CustomAlert> {
                                 children: [
                                   Text(
                                     formatTime(position),
-                                    style: const TextStyle(
-                                        color: kPrimaryColor,
-                                        fontSize: 12,
+                                    style: TextStyle(
+                                        color: kTextColor,
+                                        fontSize:
+                                            getProportionateScreenWidth(12),
                                         fontWeight: FontWeight.w500),
                                   ),
                                   Text(
                                     formatTime(
                                       duration - position,
                                     ),
-                                    style: const TextStyle(
-                                        color: kPrimaryColor,
-                                        fontSize: 12,
+                                    style: TextStyle(
+                                        color: kTextColor,
+                                        fontSize:
+                                            getProportionateScreenWidth(12),
                                         fontWeight: FontWeight.w500),
                                   )
                                 ],
@@ -178,7 +177,7 @@ class _CustomAlertState extends State<CustomAlert> {
                             )
                           ],
                         ),
-                        const Spacer(),
+                        const Spacer(flex: 2),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -195,7 +194,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 elevation: 8,
                                 child: Container(
                                   decoration: const BoxDecoration(
-                                    color: kPrimaryColor,
+                                    color: Colors.white,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -203,9 +202,9 @@ class _CustomAlertState extends State<CustomAlert> {
                                           getProportionateScreenWidth(8),
                                       vertical:
                                           getProportionateScreenHeight(8)),
-                                  child: const Icon(
-                                    Icons.repeat,
-                                    color: Colors.white,
+                                  child: SvgPicture.asset(
+                                    "assets/icons/icon-repeate.svg",
+                                    height: getProportionateScreenHeight(20),
                                   ),
                                 ),
                               ),
@@ -226,7 +225,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 elevation: 8,
                                 child: Container(
                                   decoration: const BoxDecoration(
-                                    color: kPrimaryColor,
+                                    color: Colors.white,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -234,17 +233,24 @@ class _CustomAlertState extends State<CustomAlert> {
                                           getProportionateScreenWidth(8),
                                       vertical:
                                           getProportionateScreenHeight(8)),
-                                  child: Icon(
-                                    isPlaying ? Icons.pause : Icons.play_arrow,
-                                    color: Colors.white,
-                                  ),
+                                  child: !isPlaying
+                                      ? const Icon(
+                                          Icons.play_arrow,
+                                          color: kTextColor,
+                                          size: 20,
+                                        )
+                                      : SvgPicture.asset(
+                                          "assets/icons/icon-stop.svg",
+                                          height:
+                                              getProportionateScreenHeight(20),
+                                        ),
                                 ),
                               ),
                             ),
                           ],
                         ),
                         const Spacer(
-                          flex: 2,
+                          flex: 5,
                         )
                       ],
                     ),
@@ -268,7 +274,8 @@ class _CustomAlertState extends State<CustomAlert> {
   Future setAudio() async {
     audioPlayer.setReleaseMode(ReleaseMode.LOOP);
     final player = AudioCache(prefix: "assets/music/");
-    final url = await player.load("music.mp3");
+
+    final url = await player.load(widget.path);
     audioPlayer.setUrl(url.path, isLocal: true);
   }
 }

@@ -18,7 +18,7 @@ class HearBobScreen extends StatelessWidget {
       bottom: false,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: kColor2,
+          backgroundColor: kAppbarColor,
           leadingWidth: getProportionateScreenWidth(80),
           leading: const CustomBackButton(),
           title: SvgPicture.asset(

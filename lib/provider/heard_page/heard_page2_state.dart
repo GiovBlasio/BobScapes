@@ -6,7 +6,7 @@ class HeardPage2State with ChangeNotifier {
   int _youngCounter = 0;
   int _totalCounter = 0;
   int _broodsCounter = 0;
-  String _whatSee = 'Family';
+  String _whatSee = 'Family (Covey)';
 
   int get total => _maleCounter + _femaleCounter + _youngCounter;
   int get maleCounter => _maleCounter;

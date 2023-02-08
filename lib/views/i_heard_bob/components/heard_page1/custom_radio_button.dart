@@ -24,72 +24,86 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
   late String group = groupValue(widget.id);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-              top: getProportionateScreenHeight(8),
-              bottom: getProportionateScreenHeight(8),
-              // left: getProportionateScreenWidth(15),
-              right: getProportionateScreenWidth(10)),
-          child: Text(
-            widget.title,
-            style: TextStyle(
-                fontSize: getProportionateScreenWidth(12),
-                fontWeight: FontWeight.w700,
-                color: Colors.white),
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(0)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: getProportionateScreenHeight(8),
+                bottom: getProportionateScreenHeight(8),
+                right: getProportionateScreenWidth(10)),
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                    fontSize: getProportionateScreenWidth(14),
+                    fontWeight: FontWeight.w600,
+                    color: kTextColor),
+                children: [
+                  TextSpan(
+                    text: widget.title,
+                  ),
+                  if (widget.id == 1)
+                    const TextSpan(
+                        text: ' (required)',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                        )),
+                ],
+              ),
+            ),
           ),
-        ),
-        Row(
-            //TODO
-             crossAxisAlignment: CrossAxisAlignment.baseline,
-             textBaseline: TextBaseline.alphabetic,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: widget.items
-                .map(
-                  (item) => (item == '1' || item == '2')
-                      ? SizedBox(
-                          height: getProportionateScreenHeight(45),
-                          width: getProportionateScreenWidth(65),
-                        )
-                      : Column(
-                          children: [
-                            Transform.scale(
-                              //TODO
-                              scale: getProportionateScreenHeight(1.3),
-                              child: Radio(
-                                  // focusColor: Colors.amber,
-                                  fillColor:
-                                      const MaterialStatePropertyAll(kColor1),
-                                  overlayColor:
-                                      const MaterialStatePropertyAll(
-                                          Colors.transparent),
-                                  activeColor: kColor1,
-                                  value: item,
-                                  groupValue: group,
-                                  onChanged: (value) {
-                                    changeValue(widget.id, value!);
-                                    setState(() {
-                                      group = value;
-                                    });
-                                  }),
-                            ),
-                            Text(
-                              item,
-                              softWrap: true,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(13),
-                                  fontWeight: FontWeight.w700,
-                                  color:
-                                      group == item ? kPrimaryColor : Colors.white),
-                            ),
-                          ],
-                        ),
-                )
-                .toList()),
-      ],
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: widget.items
+                  .map(
+                    (item) => (item == '1' || item == '2')
+                        ? SizedBox(
+                            height: getProportionateScreenHeight(45),
+                            width: getProportionateScreenWidth(65),
+                          )
+                        : Column(
+                            children: [
+                              Transform.scale(
+                                scale: getProportionateScreenHeight(1.5),
+                                child: Radio(
+                                    fillColor:
+                                        const MaterialStatePropertyAll(kColor1),
+                                    overlayColor:
+                                        const MaterialStatePropertyAll(
+                                            Colors.transparent),
+                                    splashRadius: 0.1,
+                                    activeColor: kColor1,
+                                    value: item,
+                                    groupValue: group,
+                                    onChanged: (value) {
+                                      changeValue(widget.id, value!);
+                                      setState(() {
+                                        group = value;
+                                      });
+                                    }),
+                              ),
+                              Text(
+                                item,
+                                softWrap: true,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(13),
+                                    fontWeight: FontWeight.w700,
+                                    color: group == item
+                                        ? kTextColor
+                                        : kTextColor),
+                              ),
+                            ],
+                          ),
+                  )
+                  .toList()),
+        ],
+      ),
     );
   }
 
@@ -115,5 +129,43 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
         context.read<HeardPage1State>().changePhysicallySee(value);
         break;
     }
+  }
+}
+
+class CustomRadio extends StatefulWidget {
+  final int value;
+  final int groupValue;
+  final void Function(int) onChanged;
+  const CustomRadio(
+      {Key? key,
+      required this.value,
+      required this.groupValue,
+      required this.onChanged})
+      : super(key: key);
+
+  @override
+  State<CustomRadio> createState() => _CustomRadioState();
+}
+
+class _CustomRadioState extends State<CustomRadio> {
+  @override
+  Widget build(BuildContext context) {
+    bool selected = (widget.value == widget.groupValue);
+
+    return InkWell(
+      onTap: () => widget.onChanged(widget.value),
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: selected ? Colors.white : Colors.grey[200]),
+        child: Icon(
+          Icons.circle,
+          size: 30,
+          color: selected ? Colors.deepPurple : Colors.grey[200],
+        ),
+      ),
+    );
   }
 }

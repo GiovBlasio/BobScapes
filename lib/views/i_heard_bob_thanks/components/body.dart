@@ -60,7 +60,7 @@ class Body extends StatelessWidget {
                             style: TextStyle(
                                 height: 1,
                                 fontSize: getProportionateScreenWidth(40),
-                                color: Colors.white,
+                                color: kPrimaryColor,
                                 fontWeight: FontWeight.w600)),
                       ),
                       Padding(
@@ -71,13 +71,13 @@ class Body extends StatelessWidget {
                           style: TextStyle(
                             height: 1,
                             fontSize: getProportionateScreenWidth(40),
-                            color: Colors.white,
+                            color: kPrimaryColor,
                           ),
                         ),
                       ),
                       const Spacer(),
                       IconButton(
-                          color: Colors.white,
+                          color: kPrimaryColor,
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.zero,
                           onPressed: () => showDialog(
@@ -88,15 +88,15 @@ class Body extends StatelessWidget {
                           icon: const Icon(Icons.info_outline)),
                       TextButton(
                         style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(kColor2),
+                          overlayColor: MaterialStateProperty.all(kColor3),
                           shadowColor: MaterialStateProperty.all(Colors.grey),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
+                                  borderRadius: BorderRadius.circular(8))),
                           minimumSize: MaterialStateProperty.all(Size(
                               double.infinity,
                               getProportionateScreenHeight(65))),
-                          backgroundColor: MaterialStateProperty.all(kColor2),
+                          backgroundColor: MaterialStateProperty.all(kColor3),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.all(0)),
                         ),
@@ -106,7 +106,7 @@ class Body extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: getProportionateScreenWidth(20),
-                              color: Colors.white),
+                              color: kPrimaryColor),
                         ),
                       ),
                     ],

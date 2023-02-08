@@ -1,23 +1,26 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
     required this.title,
     required this.time,
+    required this.path,
     Key? key,
   }) : super(key: key);
 
   final String title;
   final String time;
+  final String path;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         // color: Colors.red,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Card(
         margin: const EdgeInsets.all(0),
@@ -46,12 +49,12 @@ class CustomCard extends StatelessWidget {
                       EdgeInsets.only(left: getProportionateScreenWidth(65)),
                   child: Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4.0),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       elevation: 8,
                       child: ClipRRect(
                         borderRadius: const BorderRadius.all(
-                          Radius.circular(4),
+                          Radius.circular(12),
                         ),
                         child: Container(
                           //padding: const EdgeInsets.all(15),
@@ -59,7 +62,7 @@ class CustomCard extends StatelessWidget {
                           height: getProportionateScreenHeight(150),
                           width: double.infinity,
                           child: Image.asset(
-                            "assets/images/Bob Scapes Background.jpg",
+                            path,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -77,19 +80,17 @@ class CustomCard extends StatelessWidget {
                         shape: const CircleBorder(),
                         elevation: 8,
                         child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(8),
-                              vertical: getProportionateScreenHeight(8)),
-                          child: Icon(
-                            Icons.volume_up_outlined,
-                            size: getProportionateScreenWidth(22),
-                            color: kPrimaryColor,
-                          ),
-                        ),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getProportionateScreenWidth(8),
+                                vertical: getProportionateScreenHeight(8)),
+                            child: SvgPicture.asset(
+                              "assets/icons/icon-sound.svg",
+                              height: getProportionateScreenHeight(18),
+                            )),
                       ),
                       Container(
                         //width: 245,
@@ -104,14 +105,14 @@ class CustomCard extends StatelessWidget {
                               title,
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(14),
-                                  fontWeight: FontWeight.w600,
-                                  color: kPrimaryColor),
+                                  fontWeight: FontWeight.w700,
+                                  color: kTextColor),
                             ),
                             Text(
-                              '$time m',
+                              '$time s',
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(10),
-                                  color: kPrimaryColor),
+                                  color: kTextColor),
                             ),
                           ],
                         ),

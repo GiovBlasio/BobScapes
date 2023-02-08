@@ -74,7 +74,7 @@ class Disclaimer extends StatelessWidget {
                             bottom: getProportionateScreenHeight(5),
                             right: getProportionateScreenWidth(40)),
                         child: Text(
-                          "The exact location of the sightings will not be shared with the public.",
+                          "The exact location of your sightings will not be shared with the public.",
                           style: TextStyle(
                               color: kPrimaryColor,
                               fontWeight: FontWeight.w400,
@@ -87,25 +87,24 @@ class Disclaimer extends StatelessWidget {
                             bottom: getProportionateScreenHeight(5),
                             right: getProportionateScreenWidth(40)),
                         child: Text(
-                          "Contact information will only be shared if you selected \"Yes\" into the app.",
+                          "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                           style: TextStyle(
                               color: kPrimaryColor,
                               fontWeight: FontWeight.w400,
                               fontSize: getProportionateScreenWidth(14.5)),
-                        )),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            left: getProportionateScreenWidth(30),
-                            top: getProportionateScreenHeight(20),
-                            bottom: getProportionateScreenHeight(30),
-                            right: getProportionateScreenWidth(40)),
-                        child: Text(
-                          "Information will be used to inform management recommendations with conservation partners such as Quail Forever, USDA's NRCS and Univeristy of Georgia Martin Game Lab.",
-                          style: TextStyle(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.w400,
-                              fontSize: getProportionateScreenWidth(14.5)),
-                        )),
+                        )), // Padding(
+                    //     padding: EdgeInsets.only(
+                    //         left: getProportionateScreenWidth(30),
+                    //         top: getProportionateScreenHeight(20),
+                    //         bottom: getProportionateScreenHeight(30),
+                    //         right: getProportionateScreenWidth(40)),
+                    //     child: Text(
+                    //       "Information will be used to inform management recommendations with conservation partners such as Quail Forever, USDA's NRCS and Univeristy of Georgia Martin Game Lab.",
+                    //       style: TextStyle(
+                    //           color: kPrimaryColor,
+                    //           fontWeight: FontWeight.w400,
+                    //           fontSize: getProportionateScreenWidth(14.5)),
+                    //     )),
                   ],
                 ),
               )),

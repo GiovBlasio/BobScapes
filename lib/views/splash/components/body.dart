@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/logo_animated.dart';
@@ -93,14 +92,27 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Stack(
       children: [
-        SvgPicture.asset(
-          "assets/images/Welcome Background.svg",
-          fit: BoxFit.cover,
-          width: SizeConfig.screenWidth,
+        AnimatedOpacity(
+          opacity: animate ? 0 : 1,
+          duration: const Duration(seconds: 1),
+          child: SvgPicture.asset(
+            "assets/images/sfondo1.svg",
+            fit: BoxFit.cover,
+            width: SizeConfig.screenWidth,
+          ),
         ),
+        AnimatedOpacity(
+          opacity: animate ? 1 : 0,
+          duration: const Duration(seconds: 1),
+          child: SvgPicture.asset(
+            "assets/images/sfondo-welcome2.svg",
+            fit: BoxFit.cover,
+            width: SizeConfig.screenWidth,
+          ),
+        ),
+
         // Container(
         //   height: SizeConfig.screenHeight,
         //   width: SizeConfig.screenWidth,
@@ -217,25 +229,25 @@ class _BodyState extends State<Body> {
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const Spacer(),
-                  Image.asset(
-                    "assets/images/logo-quail.png",
-                    //height: 90,
-                    scale: 1.5,
+                  SvgPicture.asset(
+                    "assets/images/wlfw.svg",
+                    //height: 70,
+
+                    // scale: 2,
                   ),
                   const Spacer(
                     flex: 2,
                   ),
                   SvgPicture.asset(
-                    "assets/images/logo-landscape.svg",
+                    "assets/images/quail-forever.svg",
                   ),
                   const Spacer(
                     flex: 2,
                   ),
                   Image.asset(
-                    "assets/images/wlfw-logo.png",
-                    //height: 70,
-
-                    scale: 2,
+                    "assets/images/gamelabmartin.png",
+                    //height: 90,
+                    scale: 3,
                   ),
                   const Spacer()
                 ],

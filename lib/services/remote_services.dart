@@ -24,13 +24,15 @@ class RemoteService {
         const Duration(seconds: 1),
         () => [
               Audio(
-                time: "3:24",
-                title: "Male Bobwhite Spring Call",
-              ),
+                  time: "3:24",
+                  title: "Male Bobwhite Spring Call",
+                  path: "",
+                  pathImage: ""),
               Audio(
-                time: "3:10",
-                title: "Fall covey Call",
-              )
+                  time: "3:10",
+                  title: "Fall covey Call",
+                  path: "",
+                  pathImage: "")
             ]);
     // Map<String, dynamic> param = {
     //   "params": {"user_signature": userSignature}
@@ -103,7 +105,7 @@ class RemoteService {
     //       await client.post(uri, headers: headers, body: json.encode(params));
 
     //   if (response.statusCode == 200) {
-   
+
     //     var json = response.body;
 
     //     var map = jsonDecode(json);
