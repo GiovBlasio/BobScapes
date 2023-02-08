@@ -190,94 +190,93 @@ class _NameFormState extends State<NameForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-        child: Form(
-            child: Padding(
+    return Form(
+        child: Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+      EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
       child: TextFormField(
-        enableInteractiveSelection: false,
-        controller: controller,
-        keyboardType: TextInputType.name,
-        onSaved: (newValue) {
-          //email = newValue ?? "";
-        },
-        onChanged: (value) {
-          changeName(value);
+    enableInteractiveSelection: false,
+    controller: controller,
+    keyboardType: TextInputType.name,
+    onSaved: (newValue) {
+      //email = newValue ?? "";
+    },
+    onChanged: (value) {
+      changeName(value);
 
-          // if (value.isNotEmpty) {
-          //   setState(() {
-          //     errors.remove(kEmailNullError);
-          //   });
-          // }
-          // if (emailValidatorRegExp.hasMatch(value)) {
-          //   setState(() {
-          //     errors.remove(kInvalidEmailError);
-          //   });
-          // }
-        },
-        validator: (value) {
-          // if (value!.isEmpty) {
-          //   setState(() {
-          //     errors.add(kEmailNullError);
-          //   });
-          //   return "";
-          // } else if (!emailValidatorRegExp.hasMatch(value)) {
-          //   setState(() {
-          //     errors.add(kInvalidEmailError);
-          //   });
-          //   return "";
-          // }
-          return null;
-        },
-        decoration: InputDecoration(
-          labelStyle: TextStyle(
-              color: kTextColor,
-              fontSize: getProportionateScreenWidth(15),
-              fontWeight: FontWeight.w500),
-          hintStyle: TextStyle(
-            color: kTextColor.withAlpha(177),
-            fontSize: getProportionateScreenWidth(12),
-          ),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          
-          contentPadding:
-              EdgeInsets.symmetric(vertical: getProportionateScreenHeight(8)),
+      // if (value.isNotEmpty) {
+      //   setState(() {
+      //     errors.remove(kEmailNullError);
+      //   });
+      // }
+      // if (emailValidatorRegExp.hasMatch(value)) {
+      //   setState(() {
+      //     errors.remove(kInvalidEmailError);
+      //   });
+      // }
+    },
+    validator: (value) {
+      // if (value!.isEmpty) {
+      //   setState(() {
+      //     errors.add(kEmailNullError);
+      //   });
+      //   return "";
+      // } else if (!emailValidatorRegExp.hasMatch(value)) {
+      //   setState(() {
+      //     errors.add(kInvalidEmailError);
+      //   });
+      //   return "";
+      // }
+      return null;
+    },
+    decoration: InputDecoration(
+      labelStyle: TextStyle(
+          color: kTextColor,
+          fontSize: getProportionateScreenWidth(15),
+          fontWeight: FontWeight.w500),
+      hintStyle: TextStyle(
+        color: kTextColor.withAlpha(177),
+        fontSize: getProportionateScreenWidth(12),
+      ),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      
+      contentPadding:
+          EdgeInsets.symmetric(vertical: getProportionateScreenHeight(8)),
 
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: kTextColor,
-            ),
-          ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: kTextColor,
-            ),
-          ),
-          border: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: kTextColor,
-            ),
-          ),
-          errorBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1.5,
-              color: Colors.red,
-            ),
-          ),
-          focusedErrorBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 1.5,
-              color: Colors.red,
-            ),
-          ),
-          labelText: "Your name (required)",
-          hintText: "Shane Mahoney",
+      enabledBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          width: 1,
+          color: kTextColor,
         ),
       ),
-    )));
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          width: 1,
+          color: kTextColor,
+        ),
+      ),
+      border: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          width: 1,
+          color: kTextColor,
+        ),
+      ),
+      errorBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          width: 1.5,
+          color: Colors.red,
+        ),
+      ),
+      focusedErrorBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          width: 1.5,
+          color: Colors.red,
+        ),
+      ),
+      labelText: "Your name (required)",
+      hintText: "Shane Mahoney",
+    ),
+      ),
+    ));
   }
 }

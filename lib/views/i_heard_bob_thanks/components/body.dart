@@ -14,8 +14,9 @@ class Body extends StatelessWidget {
         Opacity(
           opacity: 1,
           child: SvgPicture.asset(
-            "assets/images/Welcome Background.svg",
-            fit: BoxFit.cover,
+            //TODO
+            "assets/images/sfondo5.svg",
+            fit: BoxFit.scaleDown,
             // height: SizeConfig.screenHeight,
             width: double.infinity,
           ),
@@ -35,43 +36,43 @@ class Body extends StatelessWidget {
         //   )),
         // ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          padding:  EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10), vertical: getProportionateScreenHeight(15)),
           child: Column(
             children: [
-              const Spacer(),
+              const Spacer(flex: 2,),
               Flexible(
-                  flex: 2,
+                  flex: 5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding:  EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
                         child: SvgPicture.asset(
                           "assets/images/logo-bobscapes.svg",
                           height: getProportionateScreenHeight(85),
                           width: getProportionateScreenWidth(40),
                         ),
                       ),
-                      const Spacer(),
+                      const Spacer(flex: 5,),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenHeight(25)),
+                            horizontal: getProportionateScreenHeight(40)),
                         child: Text("Thank you",
                             style: TextStyle(
                                 height: 1,
                                 fontSize: getProportionateScreenWidth(40),
-                                color: kPrimaryColor,
+                                color: kTextColor,
                                 fontWeight: FontWeight.w600)),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenHeight(25)),
+                            horizontal: getProportionateScreenHeight(40)),
                         child: Text(
                           "for\nsubmitting \nyour \nsighting!",
                           style: TextStyle(
                             height: 1,
                             fontSize: getProportionateScreenWidth(40),
-                            color: kPrimaryColor,
+                            color: kTextColor,
                           ),
                         ),
                       ),
@@ -86,6 +87,7 @@ class Body extends StatelessWidget {
                               context: context,
                               builder: (context) => const Disclaimer()),
                           icon: const Icon(Icons.info_outline)),
+                      Spacer(flex: 2,),
                       TextButton(
                         style: ButtonStyle(
                           overlayColor: MaterialStateProperty.all(kColor3),

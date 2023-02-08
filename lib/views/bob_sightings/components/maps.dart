@@ -328,7 +328,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                   minWidth: 120,
                 ),
                 decoration: BoxDecoration(
-                    color: currentIndex == index ? kColor1 : Colors.white,
+                    color: currentIndex == index ? kColor3 : Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,7 +338,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                       widget.state[index],
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
+                          color: kTextColor,
                           fontSize: getProportionateScreenWidth(14)),
                     ),
                     const Spacer(
@@ -348,7 +348,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                       "Bob has\nbeen heard",
                       style: TextStyle(
                           fontSize: getProportionateScreenWidth(12),
-                          color: kPrimaryColor,
+                          color: kTextColor,
                           fontWeight: FontWeight.w400),
                     ),
                     Row(
@@ -360,7 +360,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                           "${widget.sightings[index]}",
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(40),
-                              color: kPrimaryColor,
+                              color: kTextColor,
                               fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
@@ -370,7 +370,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                           "times",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: kPrimaryColor,
+                              color: kTextColor,
                               fontSize: getProportionateScreenWidth(12)),
                         ),
                       ],

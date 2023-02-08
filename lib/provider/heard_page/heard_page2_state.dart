@@ -87,7 +87,7 @@ class HeardPage2State with ChangeNotifier {
     _youngCounter = 0;
     _totalCounter = 0;
     _broodsCounter = 0;
-    _whatSee = 'Family';
+    _whatSee = 'Family (Covey)';
     notifyListeners();
   }
 }

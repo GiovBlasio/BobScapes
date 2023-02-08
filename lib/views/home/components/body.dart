@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
@@ -16,23 +18,34 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  late double imageHeight =
-      SizeConfig.screenHeight / 2 - getProportionateScreenHeight(45);
-
   bool isDisclaimer = false;
+
+  bool discalimerClosed = false;
+  bool showQuail = true;
+
+  late Timer timer;
   @override
   Widget build(BuildContext context) {
+    discalimerClosed = false;
     return Stack(
       children: [
-        Opacity(
-          opacity: 1,
+        Positioned.fill(
           child: SvgPicture.asset(
             "assets/images/sfondo2.svg",
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             // height: SizeConfig.screenHeight -200,
             width: SizeConfig.screenWidth,
           ),
         ),
+        if (showQuail && !isDisclaimer)
+          Positioned(
+            bottom: getProportionateScreenHeight(180),
+            left: getProportionateScreenWidth(100),
+            child: SvgPicture.asset(
+              "assets/images/baby-quail.svg",
+              height: getProportionateScreenHeight(300),
+            ),
+          ),
         // Container(
         //   height: SizeConfig.screenHeight,
         //   width: SizeConfig.screenWidth,
@@ -70,8 +83,8 @@ class _BodyState extends State<Body> {
                   children: [
                     IconButton(
                       splashRadius: 0.1,
-                      padding:
-                          EdgeInsets.only(left: getProportionateScreenWidth(15)),
+                      padding: EdgeInsets.only(
+                          left: getProportionateScreenWidth(15)),
                       // onPressed: () => showDialog(
                       //     useSafeArea: false,
                       //     context: context,
@@ -110,8 +123,28 @@ class _BodyState extends State<Body> {
                             title: 'Hey, I heard a Bob!',
                             iconPath: "assets/icons/gps.svg",
                             color: kColor2,
-                            onPressed: () => Navigator.pushNamed(
-                                context, IHeardBobScreen.routeName)),
+                            onPressed: () async {
+                              setState(() {
+                                showQuail = false;
+                              });
+                              showDialog(
+                                  barrierDismissible: false,
+                                  barrierColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) =>
+                                      _showDisclaimer(context));
+
+                              timer = Timer(const Duration(seconds: 25), () {
+                                setState(() {
+                                  showQuail = true;
+                                });
+                                if (!discalimerClosed) {
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(
+                                      context, IHeardBobScreen.routeName);
+                                }
+                              });
+                            }),
                         HomeButton(
                           title: 'Bob Sightings Map',
                           iconPath: "assets/icons/eye.svg",
@@ -135,6 +168,13 @@ class _BodyState extends State<Body> {
               right: 0,
               top: 0,
               child: Stack(children: [
+                Positioned(
+                  top: getProportionateScreenHeight(250),
+                  left: getProportionateScreenWidth(25),
+                  child: SvgPicture.asset(
+                    "assets/images/baby-quail-reverse.svg",
+                  ),
+                ),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -247,6 +287,116 @@ class _BodyState extends State<Body> {
               ]))
       ],
     );
+  }
+
+  Stack _showDisclaimer(BuildContext context) {
+    return Stack(children: [
+      Positioned(
+        top: getProportionateScreenHeight(220),
+        left: getProportionateScreenWidth(25),
+        child: SvgPicture.asset(
+          "assets/images/baby-quail-reverse.svg",
+        ),
+      ),
+      Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: Card(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(16),
+            ),
+          ),
+          elevation: 10,
+          margin:
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+          child: Container(
+              padding: EdgeInsets.symmetric(
+                  vertical: getProportionateScreenHeight(15)),
+              decoration: const BoxDecoration(
+                  color: kColor3,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(16))),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(10)),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: getProportionateScreenWidth(30),
+                          right: getProportionateScreenWidth(10)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            "Disclaimer",
+                            style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: getProportionateScreenWidth(20.5)),
+                          ),
+                          IconButton(
+                            splashRadius: 0.1,
+                            icon: Icon(
+                              Icons.close,
+                              size: getProportionateScreenHeight(30),
+                              color: kPrimaryColor,
+                            ),
+                            onPressed: () async {
+                              Navigator.pop(context);
+                              Navigator.pushNamed(
+                                  context, IHeardBobScreen.routeName);
+                              setState(() {
+                                timer.cancel();
+                              });
+                              await Future.delayed(
+                                  const Duration(milliseconds: 500));
+                              setState(() {
+                                showQuail = true;
+
+                                discalimerClosed = true;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            left: getProportionateScreenWidth(30),
+                            top: getProportionateScreenHeight(30),
+                            bottom: getProportionateScreenHeight(5),
+                            right: getProportionateScreenWidth(40)),
+                        child: Text(
+                          "The exact location of your sightings will not be shared with the public.",
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.w400,
+                              fontSize: getProportionateScreenWidth(14.5)),
+                        )),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            left: getProportionateScreenWidth(30),
+                            top: getProportionateScreenHeight(20),
+                            bottom: getProportionateScreenHeight(5),
+                            right: getProportionateScreenWidth(40)),
+                        child: Text(
+                          "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.w400,
+                              fontSize: getProportionateScreenWidth(14.5)),
+                        )), // Padding(
+                  ],
+                ),
+              )),
+        ),
+      ),
+    ]);
   }
 }
 

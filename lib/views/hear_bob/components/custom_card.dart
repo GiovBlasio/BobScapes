@@ -56,14 +56,15 @@ class CustomCard extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
-                        child: Container(
-                          //padding: const EdgeInsets.all(15),
-                          color: Colors.grey,
-                          height: getProportionateScreenHeight(150),
-                          width: double.infinity,
+                        //TODO
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
                           child: Image.asset(
                             path,
-                            fit: BoxFit.cover,
+
+                            // fit: BoxFit.contain,
+                            height: getProportionateScreenHeight(200),
+                          //  width: SizeConfig.screenWidth
                           ),
                         ),
                       )),

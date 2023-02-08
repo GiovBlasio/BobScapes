@@ -99,7 +99,7 @@ class _BodyState extends State<Body> {
           duration: const Duration(seconds: 1),
           child: SvgPicture.asset(
             "assets/images/sfondo1.svg",
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             width: SizeConfig.screenWidth,
           ),
         ),
@@ -108,7 +108,7 @@ class _BodyState extends State<Body> {
           duration: const Duration(seconds: 1),
           child: SvgPicture.asset(
             "assets/images/sfondo-welcome2.svg",
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             width: SizeConfig.screenWidth,
           ),
         ),

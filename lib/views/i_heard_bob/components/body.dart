@@ -76,494 +76,9 @@ class _BodyState extends State<Body> {
                 },
                 controller: controller,
                 children: [
-                  Scaffold(
-                    resizeToAvoidBottomInset: false,
-                    backgroundColor: Colors.transparent,
-                    body: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: SingleChildScrollView(
-                            padding: EdgeInsets.only(
-                                bottom: getProportionateScreenHeight(75),
-                                top: getProportionateScreenHeight(15)),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      right: getProportionateScreenWidth(8),
-                                      left: getProportionateScreenWidth(15)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Register your sighting",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: kTextColor,
-                                            fontSize:
-                                                getProportionateScreenWidth(
-                                                    18)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: getProportionateScreenHeight(10),
-                                ),
-                                Container(
-                                  color: kColor3,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Divider(
-                                        height: 0,
-                                        color: kColor1,
-                                      ),
-                                      SizedBox(
-                                        height:
-                                            getProportionateScreenHeight(20),
-                                      ),
-                                      const NameForm(),
-                                      SizedBox(
-                                        height:
-                                            getProportionateScreenHeight(20),
-                                      ),
-                                      CustomDropDownMenu(items: itemsPage1),
-                                      SizedBox(
-                                        height:
-                                            getProportionateScreenHeight(20),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: kColor1,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: getProportionateScreenHeight(20),
-                                ),
-                                const LocationForm(),
-                                SizedBox(
-                                  height: getProportionateScreenHeight(10),
-                                ),
-                                const DateAndTimeForm(),
-                                SizedBox(
-                                  height: getProportionateScreenHeight(20),
-                                ),
-                                const Divider(),
-                                CustomRadioButton(
-                                    items: radioOptionsPage1,
-                                    title:
-                                        "Are bobwhites released at the sightings location?",
-                                    id: 1),
-                                Divider(),
-                                CustomRadioButton(
-                                    items: radioOptions2Page1,
-                                    title: "Did you physically see any birds?",
-                                    id: 2),
-                                Container(
-                                  color: Colors.transparent,
-                                  padding: EdgeInsets.only(
-                                    left: getProportionateScreenWidth(15),
-                                    right: getProportionateScreenWidth(15),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      TextButton(
-                                        style: ButtonStyle(
-                                          overlayColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shadowColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.grey),
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                        ),
-                                        onPressed: () {
-                                          if (!isLoaded) {
-                                            setState(() {
-                                              controller.animateToPage(
-                                                  currentIndex + 1,
-                                                  duration: const Duration(
-                                                      seconds: 1),
-                                                  curve: Curves.linear);
-                                            });
-                                          }
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Next",
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      getProportionateScreenWidth(
-                                                          14),
-                                                  color: kTextColor),
-                                            ),
-                                            Icon(
-                                              Icons.adaptive.arrow_forward,
-                                              color: kTextColor,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: getProportionateScreenHeight(15),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Register your sighting",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: kTextColor,
-                                  fontSize: getProportionateScreenWidth(18)),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: getProportionateScreenHeight(15),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15)),
-                        child: const heard2.CustomDropDownMenu(
-                            items: ['Family (Covey)', '1', '2', '3']),
-                      ),
-                      SizedBox(
-                        height: getProportionateScreenHeight(15),
-                      ),
-                      const Divider(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15),
-                            vertical: getProportionateScreenHeight(15)),
-                        child: const NumericalQuestion(
-                          title: "How many birds?",
-                          id: 1,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15),
-                            vertical: getProportionateScreenHeight(15)),
-                        child: const NumericalQuestion(
-                          title: "How many male?",
-                          id: 2,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15),
-                            vertical: getProportionateScreenHeight(15)),
-                        child: const NumericalQuestion(
-                            title: "How many female?", id: 3),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15),
-                            vertical: getProportionateScreenHeight(15)),
-                        child: const NumericalQuestion(
-                          title: "How many young birds?",
-                          id: 4,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(15),
-                            vertical: getProportionateScreenHeight(15)),
-                        child: const NumericalQuestion(
-                            title: "How many broods\nrappresented?", id: 5),
-                      ),
-                      const Spacer(),
-                      Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.only(
-                            left: getProportionateScreenWidth(15),
-                            right: getProportionateScreenWidth(15),
-                            bottom: getProportionateScreenHeight(10)),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                shadowColor:
-                                    MaterialStateProperty.all(Colors.grey),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                              ),
-                              onPressed: () {
-                                if (!isLoaded) {
-                                  setState(() {
-                                    controller.animateToPage(currentIndex - 1,
-                                        duration: const Duration(seconds: 1),
-                                        curve: Curves.linear);
-                                  });
-                                }
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.adaptive.arrow_back,
-                                    color: Colors.black,
-                                  ),
-                                  Text(
-                                    "Back",
-                                    style: TextStyle(
-                                        fontSize:
-                                            getProportionateScreenWidth(14),
-                                        color: Colors.black),
-                                  ),
-                                  // Icon(
-                                  //   Icons.adaptive.arrow_back,
-                                  //   color: Colors.black,
-                                  // )
-                                ],
-                              ),
-                            ),
-                            const Spacer(),
-                            TextButton(
-                              style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                shadowColor:
-                                    MaterialStateProperty.all(Colors.grey),
-                                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                //      borderRadius: BorderRadius.circular(20))),
-                                // minimumSize: MaterialStateProperty.all(Size(
-                                //     MediaQuery.of(context).size.width,
-                                //     getProportionateScreenHeight(44))),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                              ),
-                              onPressed: () {
-                                if (!isLoaded) {
-                                  setState(() {
-                                    controller.animateToPage(currentIndex + 1,
-                                        duration: const Duration(seconds: 1),
-                                        curve: Curves.linear);
-                                  });
-                                }
-                              },
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Next",
-                                    style: TextStyle(
-                                        fontSize:
-                                            getProportionateScreenWidth(14),
-                                        color: Colors.black),
-                                  ),
-                                  Icon(
-                                    Icons.adaptive.arrow_forward,
-                                    color: Colors.black,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer()
-                    ],
-                  ),
-                  Scaffold(
-                    resizeToAvoidBottomInset: true,
-                    backgroundColor: Colors.transparent,
-                    body: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: getProportionateScreenWidth(15),
-                          vertical: getProportionateScreenHeight(0)),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: SingleChildScrollView(
-                              padding: EdgeInsets.only(
-                                  top: getProportionateScreenHeight(15),
-                                  bottom: getProportionateScreenHeight(80)),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Register your sighting",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: kTextColor,
-                                            fontSize:
-                                                getProportionateScreenWidth(
-                                                    18)),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  const CustomRadioButton(
-                                      items: {'Yes', 'No', '1', '2'},
-                                      title:
-                                          "Did you want more information about Bobwhite?",
-                                      id: 1),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Divider(),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  const CustomRadioButton(
-                                      items: {
-                                        'Yes',
-                                        'No',
-                                        'I\'m alredy\nregistered',
-                                        '1'
-                                      },
-                                      title:
-                                          "Want to learn more about Bobwhite Cost Share?",
-                                      id: 2),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  const EmailForm(),
-                                  const CommentForm(),
-                                  Container(
-                                    color: Colors.transparent,
-                                    padding: EdgeInsets.only(
-                                        // left: getProportionateScreenWidth(15),
-                                        // right: getProportionateScreenWidth(15),
-                                        top:
-                                            getProportionateScreenHeight(20)),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        TextButton(
-                                          style: ButtonStyle(
-                                            overlayColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.transparent),
-                                            shadowColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.grey),
-                                            //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                            //      borderRadius: BorderRadius.circular(20))),
-                                            // minimumSize: MaterialStateProperty.all(Size(
-                                            //     MediaQuery.of(context).size.width,
-                                            //     getProportionateScreenHeight(44))),
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.transparent),
-                                          ),
-                                          onPressed: () {
-                                            if (!isLoaded) {
-                                              setState(() {
-                                                controller.animateToPage(
-                                                    currentIndex - 1,
-                                                    duration: const Duration(
-                                                        seconds: 1),
-                                                    curve: Curves.linear);
-                                              });
-                                            }
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.adaptive.arrow_back,
-                                                color: Colors.black,
-                                              ),
-                                              Text(
-                                                "Back",
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        getProportionateScreenWidth(
-                                                            14),
-                                                    color: Colors.black),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Container(
-                                          color: Colors.transparent,
-                                          width: (SizeConfig.screenWidth) / 2 -
-                                              getProportionateScreenWidth(30),
-                                          child: DefaultButton(
-                                              text: "Send data",
-                                              press: () async {
-                                                if (!isLoaded) {
-                                                  setState(() {
-                                                    isLoaded = !isLoaded;
-                                                  });
-                                                  await RemoteService()
-                                                      .sendData();
-                                                  setState(() {
-                                                    context
-                                                        .read<HeardPage3State>()
-                                                        .resetAll();
-                                                    context
-                                                        .read<HeardPage1State>()
-                                                        .resetAll();
-                                                    context
-                                                        .read<HeardPage2State>()
-                                                        .resetAll();
-
-                                                    Navigator.popAndPushNamed(
-                                                        context,
-                                                        IHeardBobThanksScreen
-                                                            .routeName);
-                                                  });
-                                                }
-                                                //  _changePage();
-                                              }),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  _buildPage1(),
+                  _buildPage2(),
+                  _buildPage3(context),
                 ])),
         Positioned(
             height: getProportionateScreenHeight(50),
@@ -722,6 +237,493 @@ class _BodyState extends State<Body> {
     );
   }
 
+  Scaffold _buildPage3(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.transparent,
+      body: Container(
+        padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(15),
+            vertical: getProportionateScreenHeight(0)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    top: getProportionateScreenHeight(15),
+                    bottom: getProportionateScreenHeight(80)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Register your sighting",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: kTextColor,
+                              fontSize: getProportionateScreenWidth(18)),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    const CustomRadioButton(
+                        items: {'Yes', 'No', '1', '2'},
+                        title: "Did you want more information about Bobwhite?",
+                        id: 1),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Divider(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    const CustomRadioButton(
+                        items: {'Yes', 'No', 'I\'m alredy\nregistered', '1'},
+                        title: "Want to learn more about Bobwhite Cost Share?",
+                        id: 2),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const EmailForm(),
+                    const CommentForm(),
+                    Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.only(
+                          // left: getProportionateScreenWidth(15),
+                          // right: getProportionateScreenWidth(15),
+                          top: getProportionateScreenHeight(20)),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              shadowColor:
+                                  MaterialStateProperty.all(Colors.grey),
+                              //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                              //      borderRadius: BorderRadius.circular(20))),
+                              // minimumSize: MaterialStateProperty.all(Size(
+                              //     MediaQuery.of(context).size.width,
+                              //     getProportionateScreenHeight(44))),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
+                            onPressed: () {
+                              if (!isLoaded) {
+                                setState(() {
+                                  controller.animateToPage(currentIndex - 1,
+                                      duration: const Duration(seconds: 1),
+                                      curve: Curves.linear);
+                                });
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/icons/icon-back-form.svg",
+                                  height: getProportionateScreenHeight(14),
+                                ),
+                                SizedBox(
+                                  width: getProportionateScreenHeight(5),
+                                ),
+                                Text(
+                                  "Back",
+                                  style: TextStyle(
+                                      fontSize: getProportionateScreenWidth(14),
+                                      color: kTextColor),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            color: Colors.transparent,
+                            width: (SizeConfig.screenWidth) / 2 -
+                                getProportionateScreenWidth(30),
+                            child: DefaultButton(
+                                text: "Send data",
+                                press: () async {
+                                  if (!isLoaded) {
+                                    setState(() {
+                                      isLoaded = !isLoaded;
+                                    });
+                                    //TODO controllare se name  e email sono stati inseriti
+                                    await RemoteService().sendData();
+                                    setState(() {
+                                      context
+                                          .read<HeardPage3State>()
+                                          .resetAll();
+                                      context
+                                          .read<HeardPage1State>()
+                                          .resetAll();
+                                      context
+                                          .read<HeardPage2State>()
+                                          .resetAll();
+
+                                      Navigator.popAndPushNamed(context,
+                                          IHeardBobThanksScreen.routeName);
+                                    });
+                                  }
+                                  //  _changePage();
+                                }),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Scaffold _buildPage1() {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.transparent,
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                  bottom: getProportionateScreenHeight(75),
+                  top: getProportionateScreenHeight(15)),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: getProportionateScreenWidth(8),
+                        left: getProportionateScreenWidth(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Register your sighting",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: kTextColor,
+                              fontSize: getProportionateScreenWidth(18)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: getProportionateScreenHeight(10),
+                  ),
+                  Container(
+                    color: kColor3,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Divider(
+                          height: 0,
+                          color: kColor1,
+                          thickness: 2,
+                        ),
+                        SizedBox(
+                          height: getProportionateScreenHeight(20),
+                        ),
+                        const NameForm(),
+                        SizedBox(
+                          height: getProportionateScreenHeight(20),
+                        ),
+                        CustomDropDownMenu(items: itemsPage1),
+                        SizedBox(
+                          height: getProportionateScreenHeight(20),
+                        ),
+                        const Divider(
+                          height: 0,
+                          color: kColor1,
+                          thickness: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: getProportionateScreenHeight(20),
+                  ),
+                  const LocationForm(),
+                  SizedBox(
+                    height: getProportionateScreenHeight(10),
+                  ),
+                  const DateAndTimeForm(),
+                  SizedBox(
+                    height: getProportionateScreenHeight(20),
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: getProportionateScreenWidth(15),
+                        left: getProportionateScreenWidth(15)),
+                    child: CustomRadioButton(
+                        items: radioOptionsPage1,
+                        title:
+                            "Are bobwhites released at the sightings location?",
+                        id: 1),
+                  ),
+                  Divider(),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: getProportionateScreenWidth(8),
+                        left: getProportionateScreenWidth(15)),
+                    child: CustomRadioButton(
+                        items: radioOptions2Page1,
+                        title: "Did you physically see any birds?",
+                        id: 2),
+                  ),
+                  Container(
+                    color: Colors.transparent,
+                    padding: EdgeInsets.only(
+                      left: getProportionateScreenWidth(15),
+                      right: getProportionateScreenWidth(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            shadowColor: MaterialStateProperty.all(Colors.grey),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
+                          onPressed: () {
+                            if (!isLoaded) {
+                              setState(() {
+                                controller.animateToPage(currentIndex + 1,
+                                    duration: const Duration(seconds: 1),
+                                    curve: Curves.linear);
+                              });
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Next",
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(14),
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                width: getProportionateScreenHeight(5),
+                              ),
+                              SvgPicture.asset(
+                                "assets/icons/icon-next-form.svg",
+                                height: getProportionateScreenHeight(14),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Stack _buildPage2() {
+    return Stack(
+      // mainAxisSize: MainAxisSize.min,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // SizedBox(
+        //   height: getProportionateScreenHeight(15),
+        // ),
+        Positioned(
+          top: getProportionateScreenHeight(15),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(15)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Register your sighting",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: kTextColor,
+                      fontSize: getProportionateScreenWidth(18)),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: getProportionateScreenHeight(15),
+        ),
+        Positioned(
+            right: 0,
+            left: 0,
+            top: getProportionateScreenHeight(25),
+            bottom: getProportionateScreenHeight(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15)),
+                  child: const heard2.CustomDropDownMenu(
+                      items: ['Family (Covey)', '1', '2', '3']),
+                ),
+                SizedBox(
+                  height: getProportionateScreenHeight(10),
+                ),
+                const Divider(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15),
+                      vertical: getProportionateScreenHeight(15)),
+                  child: const NumericalQuestion(
+                    title: "How many birds?",
+                    id: 1,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15),
+                      vertical: getProportionateScreenHeight(15)),
+                  child: const NumericalQuestion(
+                    title: "How many male?",
+                    id: 2,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15),
+                      vertical: getProportionateScreenHeight(15)),
+                  child:
+                      const NumericalQuestion(title: "How many female?", id: 3),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15),
+                      vertical: getProportionateScreenHeight(15)),
+                  child: const NumericalQuestion(
+                    title: "How many young birds?",
+                    id: 4,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(15),
+                      vertical: getProportionateScreenHeight(15)),
+                  child: const NumericalQuestion(
+                      title: "How many broods\nrappresented?", id: 5),
+                ),
+                const Spacer(),
+                Container(
+                  color: Colors.transparent,
+                  padding: EdgeInsets.only(
+                      left: getProportionateScreenWidth(15),
+                      right: getProportionateScreenWidth(15),
+                      bottom: getProportionateScreenHeight(10)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          shadowColor: MaterialStateProperty.all(Colors.grey),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
+                        onPressed: () {
+                          if (!isLoaded) {
+                            setState(() {
+                              controller.animateToPage(currentIndex - 1,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.linear);
+                            });
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/icon-back-form.svg",
+                              height: getProportionateScreenHeight(14),
+                            ),
+                            SizedBox(
+                              width: getProportionateScreenHeight(5),
+                            ),
+                            Text(
+                              "Back",
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14),
+                                  color: kTextColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          shadowColor: MaterialStateProperty.all(Colors.grey),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
+                        onPressed: () {
+                          if (!isLoaded) {
+                            setState(() {
+                              controller.animateToPage(currentIndex + 1,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.linear);
+                            });
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Next",
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14),
+                                  color: kTextColor),
+                            ),
+                            SizedBox(
+                              width: getProportionateScreenHeight(5),
+                            ),
+                            SvgPicture.asset(
+                              "assets/icons/icon-next-form.svg",
+                              height: getProportionateScreenHeight(14),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+              ],
+            )),
+      ],
+    );
+  }
+
   Widget buildButtons() {
     if (currentIndex == 0) {
       return Container(
@@ -759,11 +761,14 @@ class _BodyState extends State<Body> {
                     "Next",
                     style: TextStyle(
                         fontSize: getProportionateScreenWidth(14),
-                        color: Colors.black),
+                        color: kTextColor),
                   ),
-                  Icon(
-                    Icons.adaptive.arrow_forward,
-                    color: Colors.black,
+                  SizedBox(
+                    width: getProportionateScreenHeight(5),
+                  ),
+                  SvgPicture.asset(
+                    "assets/icons/icon-next-form.svg",
+                    height: getProportionateScreenHeight(14),
                   )
                 ],
               ),
@@ -805,15 +810,18 @@ class _BodyState extends State<Body> {
               },
               child: Row(
                 children: [
-                  Icon(
-                    Icons.adaptive.arrow_back,
-                    color: Colors.black,
+                  SvgPicture.asset(
+                    "assets/icons/icon-back-form.svg",
+                    height: getProportionateScreenHeight(14),
+                  ),
+                  SizedBox(
+                    width: getProportionateScreenHeight(5),
                   ),
                   Text(
                     "Back",
                     style: TextStyle(
                         fontSize: getProportionateScreenWidth(14),
-                        color: Colors.black),
+                        color: kTextColor),
                   ),
                   // Icon(
                   //   Icons.adaptive.arrow_back,
@@ -849,11 +857,14 @@ class _BodyState extends State<Body> {
                     "Next",
                     style: TextStyle(
                         fontSize: getProportionateScreenWidth(14),
-                        color: Colors.black),
+                        color: kTextColor),
                   ),
-                  Icon(
-                    Icons.adaptive.arrow_forward,
-                    color: Colors.black,
+                  SizedBox(
+                    width: getProportionateScreenHeight(5),
+                  ),
+                  SvgPicture.asset(
+                    "assets/icons/icon-next-form.svg",
+                    height: getProportionateScreenHeight(14),
                   )
                 ],
               ),
@@ -894,15 +905,18 @@ class _BodyState extends State<Body> {
               },
               child: Row(
                 children: [
-                  Icon(
-                    Icons.adaptive.arrow_back,
-                    color: Colors.black,
+                  SvgPicture.asset(
+                    "assets/icons/icon-back-form.svg",
+                    height: getProportionateScreenHeight(14),
+                  ),
+                  SizedBox(
+                    width: getProportionateScreenHeight(5),
                   ),
                   Text(
                     "Back",
                     style: TextStyle(
                         fontSize: getProportionateScreenWidth(14),
-                        color: Colors.black),
+                        color: kTextColor),
                   ),
                 ],
               ),
@@ -953,6 +967,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
+        elevation: MaterialStateProperty.all(5),
         overlayColor: MaterialStateProperty.all(kAppbarColor),
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
@@ -971,10 +986,13 @@ class DefaultButton extends StatelessWidget {
                 fontSize: getProportionateScreenWidth(13),
                 color: kPrimaryColor),
           ),
-          Icon(
-            Icons.adaptive.arrow_forward,
-            color: kPrimaryColor,
-          )
+          SizedBox(
+            width: getProportionateScreenHeight(5),
+          ),
+          SvgPicture.asset(
+            "assets/icons/icon-arrow.svg",
+            height: getProportionateScreenHeight(14),
+          ),
         ],
       ),
     );

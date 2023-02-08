@@ -98,7 +98,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 },
                 style: TextStyle(
                   color: kTextColor,
-                  fontSize: getProportionateScreenHeight(14),
+                  fontSize: getProportionateScreenWidth(14),
                   fontWeight: FontWeight.w500,
                 ),
                 enableInteractiveSelection: false,

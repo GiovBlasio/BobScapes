@@ -24,7 +24,8 @@ class _BodyState extends State<Body> {
           : getProportionateScreenWidth(15),
       decoration: BoxDecoration(
         color: currentIndex == index ? kTextColor : kTextLightColor,
-        borderRadius: BorderRadius.circular(15),
+       // borderRadius: BorderRadius.circular(15),
+        shape: BoxShape.circle
       ),
     );
   }
@@ -33,26 +34,13 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SvgPicture.asset(
-          "assets/images/sfondo2.svg",
-          fit: BoxFit.cover,
-          width: SizeConfig.screenWidth,
+        Positioned.fill(
+          child: SvgPicture.asset(
+            "assets/images/sfondo2.svg",
+            fit: BoxFit.fill,
+            width: SizeConfig.screenWidth,
+          ),
         ),
-        // Container(
-        //   height: SizeConfig.screenHeight,
-        //   width: SizeConfig.screenWidth,
-        //   decoration: BoxDecoration(
-        //       gradient: LinearGradient(
-        //     begin: Alignment.topCenter,
-        //     end: Alignment.bottomCenter,
-        //     colors: [
-        //       kColor2.withOpacity(0.6),
-        //       kColor1.withOpacity(0.6),
-        //       kColor1,
-        //       kColor1,
-        //     ],
-        //   )),
-        // ),
         buildContent(context),
       ],
     );
@@ -101,9 +89,8 @@ class _BodyState extends State<Body> {
                               TextSpan(
                                   text: 'BOBSCAPES',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    color: kPrimaryColor
-                                  )),
+                                      fontWeight: FontWeight.w700,
+                                      color: kPrimaryColor)),
                               TextSpan(
                                 text:
                                     ',\na Mobile App to Track\nBobwhite Quail on\nOur Landscapes',
@@ -186,8 +173,9 @@ class _BodyState extends State<Body> {
                           double.infinity, getProportionateScreenHeight(75))),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
-                    onPressed: () => Navigator.popAndPushNamed(
-                        context, HomeScreen.routeName),
+                    // TODO POP AND PUSH
+                    onPressed: () =>
+                        Navigator.pushNamed(context, HomeScreen.routeName),
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -206,10 +194,7 @@ class _BodyState extends State<Body> {
                         ),
                         Flexible(
                           flex: 1,
-                          child: Icon(
-                            Icons.adaptive.arrow_forward,
-                            color: kTextColor,
-                          ),
+                          child: SvgPicture.asset("assets/icons/icon-arrow.svg", height: getProportionateScreenHeight(20),)
                         ),
                       ],
                     ),
