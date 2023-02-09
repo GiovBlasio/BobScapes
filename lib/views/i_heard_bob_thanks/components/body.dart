@@ -16,9 +16,9 @@ class Body extends StatelessWidget {
           child: SvgPicture.asset(
             //TODO
             "assets/images/sfondo5.svg",
-            fit: BoxFit.scaleDown,
+            fit: BoxFit.fill,
             // height: SizeConfig.screenHeight,
-            width: double.infinity,
+            width: SizeConfig.screenWidth,
           ),
         ),
         // Container(

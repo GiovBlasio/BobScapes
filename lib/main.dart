@@ -5,6 +5,7 @@ import 'package:bobscapes/views/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'constants.dart';
@@ -33,20 +34,25 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, child) {
-        return ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: child!,
-        );
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'Bob Scapes',
-      theme: theme(context),
-      initialRoute: SplashScreen.routeName,
-      routes: routes,
-      // localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      // supportedLocales: const [Locale('en'), Locale('it')],
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) => MaterialApp(
+        builder: (context, child) {
+          return ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: child!,
+          );
+        },
+        debugShowCheckedModeBanner: false,
+        title: 'Bob Scapes',
+        theme: theme(context),
+        initialRoute: SplashScreen.routeName,
+        routes: routes,
+        // localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        // supportedLocales: const [Locale('en'), Locale('it')],
+      ),
     );
   }
 }

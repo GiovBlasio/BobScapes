@@ -60,7 +60,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                 ),
                 const Spacer(),
                 SvgPicture.asset(
-                  "assets/images/baby-quail.svg",
+                  "assets/icons/mini-quail.svg",
                   height: getProportionateScreenHeight(90),
                 )
               ],

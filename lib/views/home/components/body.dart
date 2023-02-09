@@ -7,6 +7,7 @@ import 'package:bobscapes/views/common_widget/disclaimer.dart';
 import 'package:bobscapes/views/hear_bob/hear_bob.dart';
 import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_svg/svg.dart';
 
@@ -33,82 +34,61 @@ class _BodyState extends State<Body> {
           child: SvgPicture.asset(
             "assets/images/sfondo2.svg",
             fit: BoxFit.fill,
-            // height: SizeConfig.screenHeight -200,
             width: SizeConfig.screenWidth,
           ),
         ),
         if (showQuail && !isDisclaimer)
           Positioned(
-            bottom: getProportionateScreenHeight(180),
-            left: getProportionateScreenWidth(100),
-            child: SvgPicture.asset(
-              "assets/images/baby-quail.svg",
-              height: getProportionateScreenHeight(300),
+            bottom: 245,
+            left: 40,
+            right: 20,
+            child: Image.asset(
+              "assets/images/quail.png",
+              height: 200,
             ),
           ),
-        // Container(
-        //   height: SizeConfig.screenHeight,
-        //   width: SizeConfig.screenWidth,
-        //   decoration: BoxDecoration(
-        //       gradient: LinearGradient(
-        //     begin: Alignment.topCenter,
-        //     end: Alignment.bottomCenter,
-        //     colors: [
-        //       kColor2.withOpacity(0.6),
-        //       kColor1.withOpacity(0.6),
-        //       kColor1,
-        //     ],
-        //   )),
-        // ),
         if (!isDisclaimer)
-          Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(25)),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Container(
-                //   margin: EdgeInsets.symmetric(
-                //       horizontal: getProportionateScreenWidth(20)),
-                //   color: Colors.grey,
-                //   height: imageHeight,
-                //   width: double.infinity,
-                // ),
-                const Spacer(
-                  flex: 6,
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      splashRadius: 0.1,
-                      padding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(15)),
-                      // onPressed: () => showDialog(
-                      //     useSafeArea: false,
-                      //     context: context,
-                      //     builder: (context) => const Disclaimer()),
-                      onPressed: () {
-                        setState(() {
-                          isDisclaimer = !isDisclaimer;
-                        });
-                      },
-                      icon: SvgPicture.asset(
-                        "assets/icons/icon-info.svg",
-                        height: getProportionateScreenHeight(23),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 25),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //  const Spacer(
+                  //   flex: 6,
+                  // ),
+                  Row(
+                    children: [
+                      IconButton(
+                        splashRadius: 0.1,
+                        padding: EdgeInsets.only(
+                            left: getProportionateScreenWidth(15)),
+                        // onPressed: () => showDialog(
+                        //     useSafeArea: false,
+                        //     context: context,
+                        //     builder: (context) => const Disclaimer()),
+                        onPressed: () {
+                          setState(() {
+                            isDisclaimer = !isDisclaimer;
+                          });
+                        },
+                        icon: SvgPicture.asset(
+                          "assets/icons/icon-info.svg",
+                          height: getProportionateScreenHeight(23),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-
-                Flexible(
-                  flex: 4,
-                  child: Padding(
+                    ],
+                  ),
+                  Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: getProportionateScreenWidth(20)),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         HomeButton(
                           title: 'Hear Bob',
@@ -118,6 +98,9 @@ class _BodyState extends State<Body> {
                             Navigator.pushNamed(
                                 context, HearBobScreen.routeName);
                           },
+                        ),
+                        SizedBox(
+                          height: 15,
                         ),
                         HomeButton(
                             title: 'Hey, I heard a Bob!',
@@ -145,6 +128,9 @@ class _BodyState extends State<Body> {
                                 }
                               });
                             }),
+                        SizedBox(
+                          height: 15,
+                        ),
                         HomeButton(
                           title: 'Bob Sightings Map',
                           iconPath: "assets/icons/eye.svg",
@@ -157,8 +143,8 @@ class _BodyState extends State<Body> {
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         if (isDisclaimer)
@@ -167,18 +153,21 @@ class _BodyState extends State<Body> {
               left: 0,
               right: 0,
               top: 0,
-              child: Stack(children: [
+              child: Stack(alignment: Alignment.bottomCenter, children: [
                 Positioned(
-                  top: getProportionateScreenHeight(250),
-                  left: getProportionateScreenWidth(25),
-                  child: SvgPicture.asset(
-                    "assets/images/baby-quail-reverse.svg",
+                  bottom: 400,
+                  left: 25,
+                  child: Image.asset(
+                    "assets/images/quail-reflected.png",
+                    height: 200,
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
+                  // bottom: 0,
+                  // top: 300,
+                  height: 525-72,
+                  left: 25,
+                  right: 25,
                   child: Card(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -187,12 +176,12 @@ class _BodyState extends State<Body> {
                     ),
                     elevation: 10,
                     margin: EdgeInsets.symmetric(
-                        horizontal: getProportionateScreenWidth(15)),
+                        horizontal: getProportionateScreenWidth(0)),
                     child: Container(
                         padding: EdgeInsets.symmetric(
                             vertical: getProportionateScreenHeight(15)),
-                        //width: SizeConfig.screenWidth / 2,
-                        // height: 75,
+
+                        //  height: 75 +239,
                         decoration: const BoxDecoration(
                             color: kColor3,
                             borderRadius: BorderRadius.vertical(
@@ -216,17 +205,16 @@ class _BodyState extends State<Body> {
                                     Text(
                                       "Disclaimer",
                                       style: TextStyle(
-                                          color: kPrimaryColor,
+                                          color: kTextColor,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: getProportionateScreenWidth(
-                                              20.5)),
+                                          fontSize: 20),
                                     ),
                                     IconButton(
                                       splashRadius: 0.1,
                                       icon: Icon(
                                         Icons.close,
-                                        size: getProportionateScreenHeight(30),
-                                        color: kPrimaryColor,
+                                        size: 30,
+                                        color: kTextColor,
                                       ),
                                       onPressed: () {
                                         setState(() {
@@ -240,13 +228,13 @@ class _BodyState extends State<Body> {
                               Padding(
                                   padding: EdgeInsets.only(
                                       left: getProportionateScreenWidth(30),
-                                      top: getProportionateScreenHeight(30),
-                                      bottom: getProportionateScreenHeight(5),
+                                      top: 30,
+                                      bottom: 5,
                                       right: getProportionateScreenWidth(40)),
                                   child: Text(
                                     "The exact location of your sightings will not be shared with the public.",
                                     style: TextStyle(
-                                        color: kPrimaryColor,
+                                        color: kTextColor,
                                         fontWeight: FontWeight.w400,
                                         fontSize:
                                             getProportionateScreenWidth(14.5)),
@@ -254,31 +242,16 @@ class _BodyState extends State<Body> {
                               Padding(
                                   padding: EdgeInsets.only(
                                       left: getProportionateScreenWidth(30),
-                                      top: getProportionateScreenHeight(20),
-                                      bottom: getProportionateScreenHeight(5),
+                                      top: 20,
+                                      bottom: 5,
                                       right: getProportionateScreenWidth(40)),
                                   child: Text(
                                     "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                     style: TextStyle(
-                                        color: kPrimaryColor,
+                                        color: kTextColor,
                                         fontWeight: FontWeight.w400,
-                                        fontSize:
-                                            getProportionateScreenWidth(14.5)),
+                                        fontSize: 14.5),
                                   )),
-                              //   Padding(
-                              //       padding: EdgeInsets.only(
-                              //           left: getProportionateScreenWidth(30),
-                              //           top: getProportionateScreenHeight(20),
-                              //           bottom: getProportionateScreenHeight(30),
-                              //           right: getProportionateScreenWidth(40)),
-                              //       child: Text(
-                              //         "Information will be used to inform management recommendations with conservation partners such as Quail Forever, USDA's NRCS and Univeristy of Georgia Martin Game Lab.",
-                              //         style: TextStyle(
-                              //             color: kPrimaryColor,
-                              //             fontWeight: FontWeight.w400,
-                              //             fontSize:
-                              //                 getProportionateScreenWidth(14.5)),
-                              //       )),
                             ],
                           ),
                         )),
@@ -438,8 +411,7 @@ class HomeButton extends StatelessWidget {
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-        minimumSize: MaterialStateProperty.all(
-            Size(double.infinity, getProportionateScreenHeight(75))),
+        minimumSize: MaterialStateProperty.all(Size(double.infinity, 75)),
         backgroundColor: MaterialStateProperty.all(color),
         padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
       ),

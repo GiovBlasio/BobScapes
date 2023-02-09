@@ -24,6 +24,7 @@ import 'heard_page2/custom_dropdown_menu.dart' as heard2;
 import 'heard_page3.dart';
 import 'heard_page3/comment_form.dart';
 import 'heard_page3/email_form.dart';
+import 'heard_page3/radio_button.dart' as heard3;
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -33,7 +34,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  PageController controller = PageController();
+  PageController pageController = PageController();
 
   int currentIndex = 0;
 
@@ -54,6 +55,42 @@ class _BodyState extends State<Body> {
 
   final Set<String> radioOptions2Page1 = {'Yes', 'No', '1', '2'};
 
+  TextEditingController emailController = TextEditingController();
+
+  late bool isEnabled = true;
+
+  final _keyEmail = GlobalKey<FormState>();
+
+  final _keyName = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    _initialization();
+    super.initState();
+  }
+
+  TextEditingController controller = TextEditingController();
+
+  void changeName(String name) {
+    context.read<HeardPage1State>().changeName(name);
+  }
+
+  void changeEmail(String email) {
+    context.read<HeardPage3State>().changeEmail(email);
+  }
+
+  void _initialization() {
+    isEnabled = Provider.of<HeardPage3State>(context, listen: false).isEnable;
+
+    String email = Provider.of<HeardPage3State>(context, listen: false).email;
+
+    if (email != '' && isEnabled) {
+      emailController = TextEditingController(text: email);
+    }
+    String name = Provider.of<HeardPage1State>(context, listen: false).name;
+    if (name != '') controller = TextEditingController(text: name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -64,22 +101,23 @@ class _BodyState extends State<Body> {
               fit: BoxFit.cover, width: double.infinity),
         ),
         Positioned(
-            bottom: getProportionateScreenHeight(0),
-            top: getProportionateScreenHeight(50),
-            left: 0,
-            right: 0,
-            child: PageView(
-                onPageChanged: (value) {
-                  setState(() {
-                    currentIndex = value;
-                  });
-                },
-                controller: controller,
-                children: [
-                  _buildPage1(),
-                  _buildPage2(),
-                  _buildPage3(context),
-                ])),
+          bottom: getProportionateScreenHeight(0),
+          top: getProportionateScreenHeight(50),
+          left: 0,
+          right: 0,
+          child: PageView(
+              onPageChanged: (value) {
+                setState(() {
+                  currentIndex = value;
+                });
+              },
+              controller: pageController,
+              children: [
+                _buildPage1(),
+                _buildPage2(),
+                _buildPage3(context),
+              ]),
+        ),
         Positioned(
             height: getProportionateScreenHeight(50),
             width: SizeConfig.screenWidth,
@@ -106,124 +144,6 @@ class _BodyState extends State<Body> {
                   onPressed: () => Navigator.popAndPushNamed(
                       context, HearBobScreen.routeName),
                 ),
-                // InkWell(
-                //   onTap: () => Navigator.popAndPushNamed(
-                //       context, BobSightingsScreen.routeName),
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(12),
-                //         boxShadow: const [
-                //           BoxShadow(
-                //             color: Colors.black12,
-                //             spreadRadius: 4,
-                //             blurRadius: 4,
-                //             offset: Offset(0, -4),
-                //           ),
-                //         ]),
-                //     child: Card(
-                //       shape: const RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.vertical(
-                //           top: Radius.circular(12),
-                //         ),
-                //       ),
-                //       elevation: 10,
-                //       margin: const EdgeInsets.all(0),
-                //       child: ClipRRect(
-                //         borderRadius: const BorderRadius.vertical(
-                //           top: Radius.circular(12),
-                //         ),
-                //         child: Container(
-                //           padding: EdgeInsets.symmetric(
-                //               vertical: getProportionateScreenHeight(10)),
-                //           width: SizeConfig.screenWidth / 2,
-                //           height: getProportionateScreenHeight(63),
-                //           color: kColor3,
-                //           child: Row(
-                //             children: [
-                //               const Spacer(
-                //                 flex: 2,
-                //               ),
-                //               Text(
-                //                 "Bob Sightings Map",
-                //                 textAlign: TextAlign.center,
-                //                 style: TextStyle(
-                //                     fontSize: getProportionateScreenWidth(14),
-                //                     fontWeight: FontWeight.w500,
-                //                     color: Colors.white),
-                //               ),
-                //               const Spacer(),
-                //               SvgPicture.asset(
-                //                 "assets/icons/eye.svg",
-                //                 height: getProportionateScreenHeight(25),
-                //                 color: Colors.white,
-                //               ),
-                //               const Spacer()
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // InkWell(
-                //   onTap: () => Navigator.popAndPushNamed(
-                //       context, HearBobScreen.routeName),
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(12),
-                //         boxShadow: const [
-                //           BoxShadow(
-                //             color: Colors.black12,
-                //             spreadRadius: 4,
-                //             blurRadius: 4,
-                //             offset: Offset(0, -4),
-                //           ),
-                //         ]),
-                //     child: Card(
-                //       shape: const RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.vertical(
-                //           top: Radius.circular(12),
-                //         ),
-                //       ),
-                //       elevation: 10,
-                //       margin: const EdgeInsets.all(0),
-                //       child: ClipRRect(
-                //         borderRadius: const BorderRadius.vertical(
-                //           top: Radius.circular(12),
-                //         ),
-                //         child: Container(
-                //           padding: EdgeInsets.symmetric(
-                //               vertical: getProportionateScreenHeight(10)),
-                //           width: SizeConfig.screenWidth / 2,
-                //           height: getProportionateScreenHeight(63),
-                //           color: kColor1,
-                //           child: Row(
-                //             children: [
-                //               const Spacer(
-                //                 flex: 2,
-                //               ),
-                //               Text(
-                //                 "Hear Bob",
-                //                 textAlign: TextAlign.center,
-                //                 style: TextStyle(
-                //                     fontSize: getProportionateScreenWidth(14),
-                //                     fontWeight: FontWeight.w500,
-                //                     color: Colors.white),
-                //               ),
-                //               const Spacer(),
-                //               SvgPicture.asset(
-                //                 "assets/icons/music.svg",
-                //                 height: getProportionateScreenHeight(25),
-                //                 color: Colors.white,
-                //               ),
-                //               const Spacer()
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             )),
         if (isLoaded)
@@ -271,28 +191,28 @@ class _BodyState extends State<Body> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    const CustomRadioButton(
+                    const heard3.CustomRadioButton(
                         items: {'Yes', 'No', '1', '2'},
                         title: "Did you want more information about Bobwhite?",
                         id: 1),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Divider(),
-                    SizedBox(
+                    const Divider(),
+                    const SizedBox(
                       height: 15,
                     ),
-                    const CustomRadioButton(
+                    const heard3.CustomRadioButton(
                         items: {'Yes', 'No', 'I\'m alredy\nregistered', '1'},
                         title: "Want to learn more about Bobwhite Cost Share?",
                         id: 2),
                     const SizedBox(
                       height: 15,
                     ),
-                    const EmailForm(),
+                    _buildEmailForm(context),
                     const CommentForm(),
                     Container(
                       color: Colors.transparent,
@@ -321,7 +241,7 @@ class _BodyState extends State<Body> {
                             onPressed: () {
                               if (!isLoaded) {
                                 setState(() {
-                                  controller.animateToPage(currentIndex - 1,
+                                  pageController.animateToPage(currentIndex - 1,
                                       duration: const Duration(seconds: 1),
                                       curve: Curves.linear);
                                 });
@@ -353,28 +273,162 @@ class _BodyState extends State<Body> {
                             child: DefaultButton(
                                 text: "Send data",
                                 press: () async {
+                                  String name =
+                                      context.read<HeardPage1State>().name;
+                                  String email =
+                                      context.read<HeardPage3State>().email;
+                                  String time =
+                                      context.read<HeardPage1State>().time;
+                                  String title =
+                                      context.read<HeardPage1State>().title;
+                                  double latitude = context
+                                              .read<HeardPage1State>()
+                                              .latitude ==
+                                          ''
+                                      ? 1000
+                                      : double.parse(context
+                                          .read<HeardPage1State>()
+                                          .latitude);
+                                  double longitude = context
+                                              .read<HeardPage1State>()
+                                              .longitude ==
+                                          ''
+                                      ? 1000
+                                      : double.parse(context
+                                          .read<HeardPage1State>()
+                                          .longitude);
+
+                                  String date =
+                                      context.read<HeardPage1State>().date;
+                                  String physicallySee = context
+                                      .read<HeardPage1State>()
+                                      .physicallySee;
+                                  String releasedLocation = context
+                                      .read<HeardPage1State>()
+                                      .releasedIntoLocation;
+                                  String whatSee =
+                                      context.read<HeardPage2State>().whatSee;
+                                  int manyBirds =
+                                      context.read<HeardPage2State>().total;
+                                  int manyMale = context
+                                      .read<HeardPage2State>()
+                                      .maleCounter;
+                                  int manyFemale = context
+                                      .read<HeardPage2State>()
+                                      .femaleCounter;
+                                  int manyYoung = context
+                                      .read<HeardPage2State>()
+                                      .youngCounter;
+                                  int manyBroods = context
+                                      .read<HeardPage2State>()
+                                      .broodsCounter;
+
+                                  String moreInfo =
+                                      context.read<HeardPage3State>().moreInfo;
+                                  String learnMore =
+                                      context.read<HeardPage3State>().learnMore;
+                                  String comment =
+                                      context.read<HeardPage3State>().comment;
+
+                                  Map<String, dynamic> params = {
+                                    "name": name,
+                                    "email": email,
+                                    "time": time,
+                                    "title": title,
+                                    "latitude": latitude,
+                                    "longitude": longitude,
+                                    "date": date,
+                                    "physicallySee": physicallySee,
+                                    "releasedLocation": releasedLocation,
+                                    "whatSee": whatSee,
+                                    "mayBirds": manyBirds,
+                                    "manyMale": manyMale,
+                                    "manyFemale": manyFemale,
+                                    "manyYoung": manyYoung,
+                                    "manyBroods": manyBroods,
+                                    "moreInformation": moreInfo,
+                                    "learnMore": learnMore,
+                                    "comment": comment
+                                  };
+
                                   if (!isLoaded) {
                                     setState(() {
                                       isLoaded = !isLoaded;
                                     });
-                                    //TODO controllare se name  e email sono stati inseriti
-                                    await RemoteService().sendData();
-                                    setState(() {
-                                      context
-                                          .read<HeardPage3State>()
-                                          .resetAll();
-                                      context
-                                          .read<HeardPage1State>()
-                                          .resetAll();
-                                      context
-                                          .read<HeardPage2State>()
-                                          .resetAll();
 
-                                      Navigator.popAndPushNamed(context,
-                                          IHeardBobThanksScreen.routeName);
-                                    });
+                                    print(_keyEmail.currentState!.validate());
+                                    print(_keyName.currentState?.validate());
+                                    if (_keyEmail.currentState != null &&
+                                        _keyEmail.currentState!.validate() &&
+                                        _keyName.currentState != null &&
+                                        _keyName.currentState!.validate() &&
+                                        latitude != 1000) {
+                                      await RemoteService().sendData(params);
+                                      setState(() {
+                                        context
+                                            .read<HeardPage3State>()
+                                            .resetAll();
+                                        context
+                                            .read<HeardPage1State>()
+                                            .resetAll();
+                                        context
+                                            .read<HeardPage2State>()
+                                            .resetAll();
+
+                                        Navigator.popAndPushNamed(context,
+                                            IHeardBobThanksScreen.routeName);
+                                      });
+                                    } else {
+                                      setState(() {
+                                        isLoaded = !isLoaded;
+                                      });
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            // set up the buttons
+                                            // Widget cancelButton = TextButton(
+                                            //   child: const Text("Cancel"),
+                                            //   onPressed: () {},
+                                            // );
+                                            Widget continueButton = TextButton(
+                                              child: const Text(
+                                                "OK",
+                                                style: TextStyle(
+                                                    color: kTextColor),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            );
+
+                                            // set up the AlertDialog
+                                            AlertDialog alert = AlertDialog(
+                                              backgroundColor: kColor3,
+                                              title: Text(
+                                                "BobScapes",
+                                                style: TextStyle(
+                                                    color: kTextColor,
+                                                    fontSize:
+                                                        getProportionateScreenWidth(
+                                                            18)),
+                                              ),
+                                              content: Text(
+                                                "You entered your name or email incorrectly, please try again.",
+                                                style: TextStyle(
+                                                    color: kTextColor,
+                                                    fontSize:
+                                                        getProportionateScreenWidth(
+                                                            14)),
+                                              ),
+                                              actions: [
+                                                continueButton,
+                                              ],
+                                            );
+
+                                            return alert;
+                                          });
+                                    }
                                   }
-                                  //  _changePage();
                                 }),
                           ),
                         ],
@@ -386,6 +440,128 @@ class _BodyState extends State<Body> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Form _buildEmailForm(BuildContext context) {
+    return Form(
+      key: _keyEmail,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          RichText(
+            text: TextSpan(
+              style: TextStyle(
+                  fontSize: getProportionateScreenWidth(15),
+                  color: context.watch<HeardPage3State>().isEnable
+                      ? kTextColor
+                      : kTextColor.withOpacity(0.6),
+                  fontWeight: FontWeight.w400),
+              children: [
+                const TextSpan(text: 'Your email '),
+                if (context.watch<HeardPage3State>().isEnable)
+                  const TextSpan(
+                      text: '(required)',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w300, color: kTextColor)),
+              ],
+            ),
+          ),
+          Flexible(
+            child: TextFormField(
+              style: const TextStyle(
+                  color: kTextColor, fontWeight: FontWeight.w500),
+              enableInteractiveSelection: false,
+              cursorColor: kTextColor,
+              enabled: context.watch<HeardPage3State>().isEnable,
+              keyboardType: TextInputType.emailAddress,
+              controller: context.watch<HeardPage3State>().isEnable
+                  ? emailController
+                  : TextEditingController(text: ''),
+
+              //onSaved: (newValue) {},
+              onChanged: (value) {
+                changeEmail(value);
+              },
+              validator: (value) {
+                if (!_validateEmail(value!) &&
+                    Provider.of<HeardPage3State>(context, listen: false)
+                        .isEnable) {
+                  return 'Enter correct email';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                enabled: context.watch<HeardPage3State>().isEnable,
+                labelStyle: TextStyle(
+                    color: context.watch<HeardPage3State>().isEnable
+                        ? kTextColor
+                        : null,
+                    fontSize: getProportionateScreenWidth(16),
+                    fontWeight: FontWeight.w500),
+                hintStyle: TextStyle(
+                    color: context.watch<HeardPage3State>().isEnable
+                        ? kTextColor.withOpacity(0.6)
+                        : null,
+                    fontSize: getProportionateScreenWidth(14),
+                    fontWeight: FontWeight.w300),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                contentPadding: EdgeInsets.all(
+                  getProportionateScreenWidth(8),
+                ),
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: kTextColor,
+                  ),
+                ),
+                disabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1,
+                    // color: Colors.white,
+                  ),
+                ),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: kTextColor,
+                  ),
+                ),
+                border: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: kTextColor,
+                  ),
+                ),
+                errorBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1.5,
+                    color: Colors.red,
+                  ),
+                ),
+                focusedErrorBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1.5,
+                    color: Colors.red,
+                  ),
+                ),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getProportionateScreenWidth(5)),
+                  child: SvgPicture.asset(
+                    "assets/icons/icon-mail.svg",
+                  ),
+                ),
+                prefixIconConstraints: BoxConstraints(
+                    maxHeight: getProportionateScreenHeight(28),
+                    maxWidth: getProportionateScreenWidth(28)),
+                hintText: "hello@aol.com",
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -438,7 +614,73 @@ class _BodyState extends State<Body> {
                         SizedBox(
                           height: getProportionateScreenHeight(20),
                         ),
-                        const NameForm(),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getProportionateScreenWidth(15)),
+                          child: Form(
+                            key: _keyName,
+                            child: TextFormField(
+                              enableInteractiveSelection: false,
+                              controller: controller,
+                              keyboardType: TextInputType.name,
+                              onChanged: (value) {
+                                changeName(value);
+                              },
+                              validator: (value) {
+                                if (value!.isEmpty || value == '') {
+                                  return "Enter correct name";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                labelStyle: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: getProportionateScreenWidth(15),
+                                    fontWeight: FontWeight.w500),
+                                hintStyle: TextStyle(
+                                  color: kTextColor.withAlpha(177),
+                                  fontSize: getProportionateScreenWidth(12),
+                                ),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: getProportionateScreenHeight(8)),
+                                 enabledBorder: const UnderlineInputBorder(
+                                   borderSide: BorderSide(
+                                     width: 1,
+                                     color: kTextColor,
+                                   ),
+                                 ),
+                                 focusedBorder: const UnderlineInputBorder(
+                                   borderSide: BorderSide(
+                                     width: 1,
+                                     color: kTextColor,
+                                   ),
+                                 ),
+                                 border: const UnderlineInputBorder(
+                                   borderSide: BorderSide(
+                                     width: 1,
+                                     color: kTextColor,
+                                   ),
+                                 ),
+                                 errorBorder: const UnderlineInputBorder(
+                                   borderSide: BorderSide(
+                                     width: 1.5,
+                                     color: Colors.red,
+                                   ),
+                                 ),
+                                 focusedErrorBorder: const UnderlineInputBorder(
+                                   borderSide: BorderSide(
+                                     width: 1.5,
+                                     color: Colors.red,
+                                   ),
+                                 ),
+                                labelText: "Your name (required)",
+                                hintText: "Shane Mahoney",
+                              ),
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: getProportionateScreenHeight(20),
                         ),
@@ -476,7 +718,7 @@ class _BodyState extends State<Body> {
                             "Are bobwhites released at the sightings location?",
                         id: 1),
                   ),
-                  Divider(),
+                  const Divider(),
                   Padding(
                     padding: EdgeInsets.only(
                         right: getProportionateScreenWidth(8),
@@ -506,7 +748,7 @@ class _BodyState extends State<Body> {
                           onPressed: () {
                             if (!isLoaded) {
                               setState(() {
-                                controller.animateToPage(currentIndex + 1,
+                                pageController.animateToPage(currentIndex + 1,
                                     duration: const Duration(seconds: 1),
                                     curve: Curves.linear);
                               });
@@ -654,7 +896,7 @@ class _BodyState extends State<Body> {
                         onPressed: () {
                           if (!isLoaded) {
                             setState(() {
-                              controller.animateToPage(currentIndex - 1,
+                              pageController.animateToPage(currentIndex - 1,
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.linear);
                             });
@@ -690,7 +932,7 @@ class _BodyState extends State<Body> {
                         onPressed: () {
                           if (!isLoaded) {
                             setState(() {
-                              controller.animateToPage(currentIndex + 1,
+                              pageController.animateToPage(currentIndex + 1,
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.linear);
                             });
@@ -724,232 +966,237 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Widget buildButtons() {
-    if (currentIndex == 0) {
-      return Container(
-        color: Colors.transparent,
-        padding: EdgeInsets.only(
-          left: getProportionateScreenWidth(15),
-          right: getProportionateScreenWidth(15),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TextButton(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                shadowColor: MaterialStateProperty.all(Colors.grey),
-                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                //      borderRadius: BorderRadius.circular(20))),
-                // minimumSize: MaterialStateProperty.all(Size(
-                //     MediaQuery.of(context).size.width,
-                //     getProportionateScreenHeight(44))),
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-              ),
-              onPressed: () {
-                if (!isLoaded) {
-                  setState(() {
-                    controller.animateToPage(currentIndex + 1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.linear);
-                  });
-                }
-              },
-              child: Row(
-                children: [
-                  Text(
-                    "Next",
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                        color: kTextColor),
-                  ),
-                  SizedBox(
-                    width: getProportionateScreenHeight(5),
-                  ),
-                  SvgPicture.asset(
-                    "assets/icons/icon-next-form.svg",
-                    height: getProportionateScreenHeight(14),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-    if (currentIndex == 1) {
-      return Container(
-        color: Colors.transparent,
-        padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(15),
-            right: getProportionateScreenWidth(15),
-            bottom: getProportionateScreenHeight(10)),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                shadowColor: MaterialStateProperty.all(Colors.grey),
-                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                //      borderRadius: BorderRadius.circular(20))),
-                // minimumSize: MaterialStateProperty.all(Size(
-                //     MediaQuery.of(context).size.width,
-                //     getProportionateScreenHeight(44))),
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-              ),
-              onPressed: () {
-                if (!isLoaded) {
-                  setState(() {
-                    controller.animateToPage(currentIndex - 1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.linear);
-                  });
-                }
-              },
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    "assets/icons/icon-back-form.svg",
-                    height: getProportionateScreenHeight(14),
-                  ),
-                  SizedBox(
-                    width: getProportionateScreenHeight(5),
-                  ),
-                  Text(
-                    "Back",
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                        color: kTextColor),
-                  ),
-                  // Icon(
-                  //   Icons.adaptive.arrow_back,
-                  //   color: Colors.black,
-                  // )
-                ],
-              ),
-            ),
-            const Spacer(),
-            TextButton(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                shadowColor: MaterialStateProperty.all(Colors.grey),
-                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                //      borderRadius: BorderRadius.circular(20))),
-                // minimumSize: MaterialStateProperty.all(Size(
-                //     MediaQuery.of(context).size.width,
-                //     getProportionateScreenHeight(44))),
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-              ),
-              onPressed: () {
-                if (!isLoaded) {
-                  setState(() {
-                    controller.animateToPage(currentIndex + 1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.linear);
-                  });
-                }
-              },
-              child: Row(
-                children: [
-                  Text(
-                    "Next",
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                        color: kTextColor),
-                  ),
-                  SizedBox(
-                    width: getProportionateScreenHeight(5),
-                  ),
-                  SvgPicture.asset(
-                    "assets/icons/icon-next-form.svg",
-                    height: getProportionateScreenHeight(14),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Container(
-        color: Colors.transparent,
-        padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(15),
-            right: getProportionateScreenWidth(15),
-            bottom: getProportionateScreenHeight(10)),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                shadowColor: MaterialStateProperty.all(Colors.grey),
-                //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                //      borderRadius: BorderRadius.circular(20))),
-                // minimumSize: MaterialStateProperty.all(Size(
-                //     MediaQuery.of(context).size.width,
-                //     getProportionateScreenHeight(44))),
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-              ),
-              onPressed: () {
-                if (!isLoaded) {
-                  setState(() {
-                    controller.animateToPage(currentIndex - 1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.linear);
-                  });
-                }
-              },
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    "assets/icons/icon-back-form.svg",
-                    height: getProportionateScreenHeight(14),
-                  ),
-                  SizedBox(
-                    width: getProportionateScreenHeight(5),
-                  ),
-                  Text(
-                    "Back",
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                        color: kTextColor),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            Container(
-              color: Colors.transparent,
-              width: (SizeConfig.screenWidth) / 2 -
-                  getProportionateScreenWidth(30),
-              child: DefaultButton(
-                  text: "Send data",
-                  press: () async {
-                    if (!isLoaded) {
-                      setState(() {
-                        isLoaded = !isLoaded;
-                      });
-                      await RemoteService().sendData();
-                      setState(() {
-                        context.read<HeardPage3State>().resetAll();
-                        context.read<HeardPage1State>().resetAll();
-                        context.read<HeardPage2State>().resetAll();
+  // Widget buildButtons() {
+  //   if (currentIndex == 0) {
+  //     return Container(
+  //       color: Colors.transparent,
+  //       padding: EdgeInsets.only(
+  //         left: getProportionateScreenWidth(15),
+  //         right: getProportionateScreenWidth(15),
+  //       ),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.end,
+  //         children: [
+  //           TextButton(
+  //             style: ButtonStyle(
+  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
+  //               shadowColor: MaterialStateProperty.all(Colors.grey),
+  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+  //               //      borderRadius: BorderRadius.circular(20))),
+  //               // minimumSize: MaterialStateProperty.all(Size(
+  //               //     MediaQuery.of(context).size.width,
+  //               //     getProportionateScreenHeight(44))),
+  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
+  //             ),
+  //             onPressed: () {
+  //               if (!isLoaded) {
+  //                 setState(() {
+  //                   pageController.animateToPage(currentIndex + 1,
+  //                       duration: const Duration(seconds: 1),
+  //                       curve: Curves.linear);
+  //                 });
+  //               }
+  //             },
+  //             child: Row(
+  //               children: [
+  //                 Text(
+  //                   "Next",
+  //                   style: TextStyle(
+  //                       fontSize: getProportionateScreenWidth(14),
+  //                       color: kTextColor),
+  //                 ),
+  //                 SizedBox(
+  //                   width: getProportionateScreenHeight(5),
+  //                 ),
+  //                 SvgPicture.asset(
+  //                   "assets/icons/icon-next-form.svg",
+  //                   height: getProportionateScreenHeight(14),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   }
+  //   if (currentIndex == 1) {
+  //     return Container(
+  //       color: Colors.transparent,
+  //       padding: EdgeInsets.only(
+  //           left: getProportionateScreenWidth(15),
+  //           right: getProportionateScreenWidth(15),
+  //           bottom: getProportionateScreenHeight(10)),
+  //       child: Row(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           TextButton(
+  //             style: ButtonStyle(
+  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
+  //               shadowColor: MaterialStateProperty.all(Colors.grey),
+  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+  //               //      borderRadius: BorderRadius.circular(20))),
+  //               // minimumSize: MaterialStateProperty.all(Size(
+  //               //     MediaQuery.of(context).size.width,
+  //               //     getProportionateScreenHeight(44))),
+  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
+  //             ),
+  //             onPressed: () {
+  //               if (!isLoaded) {
+  //                 setState(() {
+  //                   pageController.animateToPage(currentIndex - 1,
+  //                       duration: const Duration(seconds: 1),
+  //                       curve: Curves.linear);
+  //                 });
+  //               }
+  //             },
+  //             child: Row(
+  //               children: [
+  //                 SvgPicture.asset(
+  //                   "assets/icons/icon-back-form.svg",
+  //                   height: getProportionateScreenHeight(14),
+  //                 ),
+  //                 SizedBox(
+  //                   width: getProportionateScreenHeight(5),
+  //                 ),
+  //                 Text(
+  //                   "Back",
+  //                   style: TextStyle(
+  //                       fontSize: getProportionateScreenWidth(14),
+  //                       color: kTextColor),
+  //                 ),
+  //                 // Icon(
+  //                 //   Icons.adaptive.arrow_back,
+  //                 //   color: Colors.black,
+  //                 // )
+  //               ],
+  //             ),
+  //           ),
+  //           const Spacer(),
+  //           TextButton(
+  //             style: ButtonStyle(
+  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
+  //               shadowColor: MaterialStateProperty.all(Colors.grey),
+  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+  //               //      borderRadius: BorderRadius.circular(20))),
+  //               // minimumSize: MaterialStateProperty.all(Size(
+  //               //     MediaQuery.of(context).size.width,
+  //               //     getProportionateScreenHeight(44))),
+  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
+  //             ),
+  //             onPressed: () {
+  //               if (!isLoaded) {
+  //                 setState(() {
+  //                   pageController.animateToPage(currentIndex + 1,
+  //                       duration: const Duration(seconds: 1),
+  //                       curve: Curves.linear);
+  //                 });
+  //               }
+  //             },
+  //             child: Row(
+  //               children: [
+  //                 Text(
+  //                   "Next",
+  //                   style: TextStyle(
+  //                       fontSize: getProportionateScreenWidth(14),
+  //                       color: kTextColor),
+  //                 ),
+  //                 SizedBox(
+  //                   width: getProportionateScreenHeight(5),
+  //                 ),
+  //                 SvgPicture.asset(
+  //                   "assets/icons/icon-next-form.svg",
+  //                   height: getProportionateScreenHeight(14),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   } else {
+  //     return Container(
+  //       color: Colors.transparent,
+  //       padding: EdgeInsets.only(
+  //           left: getProportionateScreenWidth(15),
+  //           right: getProportionateScreenWidth(15),
+  //           bottom: getProportionateScreenHeight(10)),
+  //       child: Row(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           TextButton(
+  //             style: ButtonStyle(
+  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
+  //               shadowColor: MaterialStateProperty.all(Colors.grey),
+  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+  //               //      borderRadius: BorderRadius.circular(20))),
+  //               // minimumSize: MaterialStateProperty.all(Size(
+  //               //     MediaQuery.of(context).size.width,
+  //               //     getProportionateScreenHeight(44))),
+  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
+  //             ),
+  //             onPressed: () {
+  //               if (!isLoaded) {
+  //                 setState(() {
+  //                   pageController.animateToPage(currentIndex - 1,
+  //                       duration: const Duration(seconds: 1),
+  //                       curve: Curves.linear);
+  //                 });
+  //               }
+  //             },
+  //             child: Row(
+  //               children: [
+  //                 SvgPicture.asset(
+  //                   "assets/icons/icon-back-form.svg",
+  //                   height: getProportionateScreenHeight(14),
+  //                 ),
+  //                 SizedBox(
+  //                   width: getProportionateScreenHeight(5),
+  //                 ),
+  //                 Text(
+  //                   "Back",
+  //                   style: TextStyle(
+  //                       fontSize: getProportionateScreenWidth(14),
+  //                       color: kTextColor),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //           const Spacer(),
+  //           Container(
+  //             color: Colors.transparent,
+  //             width: (SizeConfig.screenWidth) / 2 -
+  //                 getProportionateScreenWidth(30),
+  //             child: DefaultButton(
+  //                 text: "Send data",
+  //                 press: () async {
+  //                   if (!isLoaded) {
+  //                     setState(() {
+  //                       isLoaded = !isLoaded;
+  //                     });
+  //                     //TODO
+  //                     await RemoteService().sendData({});
+  //                     setState(() {
+  //                       context.read<HeardPage3State>().resetAll();
+  //                       context.read<HeardPage1State>().resetAll();
+  //                       context.read<HeardPage2State>().resetAll();
 
-                        Navigator.popAndPushNamed(
-                            context, IHeardBobThanksScreen.routeName);
-                      });
-                    }
-                    //  _changePage();
-                  }),
-            ),
-          ],
-        ),
-      );
-    }
+  //                       Navigator.popAndPushNamed(
+  //                           context, IHeardBobThanksScreen.routeName);
+  //                     });
+  //                   }
+  //                   //  _changePage();
+  //                 }),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   }
+  // }
+
+  bool _validateEmail(String email) {
+    return emailValidatorRegExp.hasMatch(email);
   }
 }
 

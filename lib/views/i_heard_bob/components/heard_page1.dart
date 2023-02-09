@@ -115,7 +115,7 @@ class _HeardPage1State extends State<HeardPage1> {
                             title:
                                 "Are bobwhites released at the sightings location?",
                             id: 1),
-                        Divider(),
+                        const Divider(),
                         CustomRadioButton(
                             items: radioOptions2,
                             title: "Did you physically see any birds?",

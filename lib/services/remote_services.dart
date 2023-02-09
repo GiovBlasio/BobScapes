@@ -94,10 +94,10 @@ class RemoteService {
   }
 
   Future<void> sendData(
-      //   Map params, [
-      //   String url =
-      //       'https://odoo14-cefpas.unitivastaging.it/api/v1/compilazione-questionario',]
-      ) async {
+    Map params, [
+    String url =
+        'https://odoo14-cefpas.unitivastaging.it/api/v1/compilazione-questionario',
+  ]) async {
     return await Future.delayed(const Duration(seconds: 2), () => {});
     //   Uri uri = Uri.parse(url);
 

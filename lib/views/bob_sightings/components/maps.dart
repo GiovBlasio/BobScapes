@@ -50,7 +50,6 @@ class _MappaState extends State<Mappa> {
           onMapEvent: (event) {
             zoom = event.zoom;
           },
-          //screenSize: ,
           maxBounds: LatLngBounds(LatLng(0, -180.0), LatLng(75, -40.781693)),
           minZoom: 3.5,
           maxZoom: 18,
@@ -79,7 +78,7 @@ class _MappaState extends State<Mappa> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               IconButton(
-                iconSize: getProportionateScreenHeight(25),
+                  iconSize: getProportionateScreenHeight(25),
                   alignment: Alignment.bottomCenter,
                   padding: EdgeInsets.zero,
                   onPressed: () => showDialog(
@@ -96,17 +95,17 @@ class _MappaState extends State<Mappa> {
                 height: getProportionateScreenHeight(41),
                 child: FittedBox(
                   child: FloatingActionButton(
-                 //   backgroundColor: _liveUpdate ? Colors.white : kColor2,
-                 backgroundColor: Colors.white,
+                    //   backgroundColor: _liveUpdate ? Colors.white : kColor2,
+                    backgroundColor: Colors.white,
                     onPressed: () {
                       _getLocation().then((value) => currentLatLng =
                           LatLng(value.latitude, value.longitude));
                       // liveLocation();
                     },
                     child: SvgPicture.asset(
-                      "assets/icons/gpsArrow.svg",
-                    //  color: _liveUpdate ? kColor2 : Colors.white,
-                    color: kColor1,
+                      "assets/icons/icon-geolocalization.svg",
+                      //  color: _liveUpdate ? kColor2 : Colors.white,
+                      color: kColor1,
                       height: getProportionateScreenHeight(30),
                       width: getProportionateScreenWidth(30),
                     ),
@@ -144,7 +143,7 @@ class _MappaState extends State<Mappa> {
         builder: (context) => GestureDetector(
           onTap: () => _showBottomSheet(context, element.state),
           child: SvgPicture.asset(
-            "assets/icons/pin pieno.svg",
+            "assets/icons/icon-pointer.svg",
             height: element.sightings < 9
                 ? 40
                 : element.sightings < 25
@@ -182,7 +181,8 @@ class _MappaState extends State<Mappa> {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
-      Geolocator.requestPermission();
+      await Geolocator.requestPermission();
+      permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         return Future.error("Location permission are denied");
       }
@@ -196,35 +196,12 @@ class _MappaState extends State<Mappa> {
     currentLatLng = LatLng(position.latitude, position.longitude);
     if (current != null && markers.contains(current)) markers.remove(current);
     current = Marker(
-        height: 60,
-        width: 60,
+        height: 75,
+        width: 75,
         point: currentLatLng,
         builder: (BuildContext context) {
-          return Center(
-            child: Stack(
-              children: [
-                Center(
-                  child: Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: kColor1.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    height: 15,
-                    width: 15,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: kColor1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          return SvgPicture.asset(
+            "assets/icons/icon-pin-here.svg",
           );
         });
     markers.add(current!);
@@ -234,18 +211,6 @@ class _MappaState extends State<Mappa> {
     });
     return position;
   }
-
-  // void liveLocation() {
-  //   LocationSettings settings = const LocationSettings(
-  //       accuracy: LocationAccuracy.high, distanceFilter: 100);
-  //   Geolocator.getPositionStream(locationSettings: settings).listen((position) {
-  //     setState(() {
-  //       currentLatLng = LatLng(position.latitude, position.longitude);
-  //       _mapController.move(currentLatLng, 5.5);
-  //     });
-  //   });
-  // setState(() {});
-  // }
 
   void _showBottomSheet(BuildContext context, String key) {
     int index = state.indexOf(key);

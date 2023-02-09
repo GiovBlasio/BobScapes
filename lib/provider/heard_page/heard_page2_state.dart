@@ -8,7 +8,7 @@ class HeardPage2State with ChangeNotifier {
   int _broodsCounter = 0;
   String _whatSee = 'Family (Covey)';
 
-  int get total => _maleCounter + _femaleCounter + _youngCounter;
+  int get total => _maleCounter + _femaleCounter;
   int get maleCounter => _maleCounter;
   int get femaleCounter => _femaleCounter;
   int get youngCounter => _youngCounter;
@@ -60,7 +60,7 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void incrementYoungCounter() {
-    if (total < _totalCounter) {
+    if (_youngCounter < _totalCounter) {
       _youngCounter++;
     }
     notifyListeners();

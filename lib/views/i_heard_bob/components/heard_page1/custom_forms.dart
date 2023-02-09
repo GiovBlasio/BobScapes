@@ -21,7 +21,9 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
   DateTime? myDate = DateTime.now();
   TimeOfDay? myTime = TimeOfDay.now();
 
-  String time = DateFormat('dd-MM-yyyy - kk:mm').format(DateTime.now());
+  String date = DateFormat("MM/dd/''yy").format(DateTime.now());
+
+  String time = DateFormat('hh:mm a').format(DateTime.now());
 
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
@@ -100,8 +102,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                   ),
                   decoration: InputDecoration(
                     prefixIcon: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(5)),
                       child: SvgPicture.asset(
                         "assets/icons/icon-calendar.svg",
                       ),
@@ -198,8 +200,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                   onSaved: (newValue) {},
                   decoration: InputDecoration(
                     prefixIcon: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(5)),
                       child: SvgPicture.asset(
                         "assets/icons/icon-clock.svg",
                       ),
@@ -489,11 +491,23 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
   }
 
   void _initialization() {
-    String date = Provider.of<HeardPage1State>(context, listen: false).date;
-    if (date != '') dateController = TextEditingController(text: date);
+    String localDate =
+        Provider.of<HeardPage1State>(context, listen: false).date;
+    if (localDate != '') {
+      dateController = TextEditingController(text: localDate);
+    } else {
+      dateController = TextEditingController(text: date);
+      changeDate(date);
+    }
 
-    String time = Provider.of<HeardPage1State>(context, listen: false).time;
-    if (time != '') timeController = TextEditingController(text: time);
+    String localTime =
+        Provider.of<HeardPage1State>(context, listen: false).time;
+    if (localTime != '') {
+      timeController = TextEditingController(text: localTime);
+    } else {
+      timeController = TextEditingController(text: time);
+      changeTime(time);
+    }
   }
 
   void changeTime(String time) {

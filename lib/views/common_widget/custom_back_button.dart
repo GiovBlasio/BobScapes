@@ -15,13 +15,23 @@ class CustomBackButton extends StatelessWidget {
       onTap: () => Navigator.pop(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.baseline,
+        // textBaseline: TextBaseline.ideographic,
         children: [
-          SvgPicture.asset("assets/icons/icon-back.svg"),
-          Text(
+          SvgPicture.asset(
+            "assets/icons/icon-back.svg",
+            height: 13,
+            width: 16,
+          ),
+          const SizedBox(
+            width: 4,
+          ),
+          const Text(
             "BACK",
             style: TextStyle(
+                //height: 16,
                 fontWeight: FontWeight.w700,
-                fontSize: getProportionateScreenWidth(12),
+                fontSize: 12,
                 color: kPrimaryColor),
           ),
         ],

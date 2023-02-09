@@ -59,13 +59,11 @@ class CustomCard extends StatelessWidget {
                         //TODO
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
-                          child: Image.asset(
-                            path,
+                          child: Image.asset(path,
 
-                            // fit: BoxFit.contain,
-                            height: getProportionateScreenHeight(200),
-                          //  width: SizeConfig.screenWidth
-                          ),
+                              // fit: BoxFit.contain,
+                              // height: getProportionateScreenHeight(200),
+                              width: SizeConfig.screenWidth),
                         ),
                       )),
                 ),

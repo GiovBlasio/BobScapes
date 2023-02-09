@@ -30,15 +30,31 @@ class _LocationFormState extends State<LocationForm> {
     super.initState();
   }
 
-  void changeLocation(String location) {
+  void changeLocation(String location, String latitude, String longitude) {
+    context.read<HeardPage1State>().changeLatitude(latitude);
+    context.read<HeardPage1State>().changeLongitude(longitude);
     context.read<HeardPage1State>().changeLocation(location);
   }
 
-  void _initialization() {
+  void _initialization() async {
     String location =
         Provider.of<HeardPage1State>(context, listen: false).location;
 
-    if (location != '') controller = TextEditingController(text: location);
+    if (location != '') {
+      controller = TextEditingController(text: location);
+    } else {
+      Position point = await _getLocation();
+
+      String latitude = convertLatLng(point.latitude, true);
+
+      String longitude = convertLatLng(point.longitude, false);
+      String liveLocation = '$latitude/$longitude';
+      changeLocation(liveLocation, point.latitude.toStringAsFixed(3),
+          point.longitude.toStringAsFixed(3));
+
+      controller = TextEditingController(text: liveLocation);
+      setState(() {});
+    }
   }
 
   @override
@@ -133,8 +149,7 @@ class _LocationFormState extends State<LocationForm> {
                             gapPadding: 20),
                         prefixIcon: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(5)
-                              ),
+                              horizontal: getProportionateScreenWidth(5)),
                           child: SvgPicture.asset(
                             "assets/icons/icon-geolocalization.svg",
                           ),
@@ -174,7 +189,10 @@ class _LocationFormState extends State<LocationForm> {
 
                       String longitude = convertLatLng(point.longitude, false);
                       String location = '$latitude/$longitude';
-                      changeLocation(point.latitude.toString());
+                      changeLocation(
+                          location,
+                          point.latitude.toStringAsFixed(3),
+                          point.longitude.toStringAsFixed(3));
                       controller.text = location;
                     });
                     Navigator.of(context).pop();
@@ -217,15 +235,17 @@ class _LocationFormState extends State<LocationForm> {
                                   String longitude =
                                       convertLatLng(point.longitude, false);
                                   String location = '$latitude/$longitude';
-                                  changeLocation(point.latitude.toString());
+                                  changeLocation(
+                                      location,
+                                      point.latitude.toString(),
+                                      point.longitude.toString());
                                   controller.text = location;
                                   Navigator.of(context).pop();
                                 });
                               });
                             },
                             child: SvgPicture.asset(
-                              "assets/icons/gpsArrow.svg",
-                              //  color: _liveUpdate ? kColor2 : Colors.white,
+                              "assets/icons/icon-geolocalization.svg",
                               color: kColor1,
                               height: getProportionateScreenHeight(30),
                               width: getProportionateScreenWidth(30),
@@ -242,11 +262,6 @@ class _LocationFormState extends State<LocationForm> {
         ],
       ),
     );
-    // setState(() {
-    //   String location = 'prova';
-    //   changeLocation(location);
-    //   controller.text = location;
-    // });
   }
 
   Future<Position> _getLocation() async {
@@ -259,7 +274,8 @@ class _LocationFormState extends State<LocationForm> {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
-      Geolocator.requestPermission();
+      await Geolocator.requestPermission();
+      permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         return Future.error("Location permission are denied");
       }

@@ -1,5 +1,6 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/common_widget/custom_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,10 +21,11 @@ class HomeScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: kAppbarColor,
-          leading: Container(),
+          leading: const CustomBackButton(),
+          leadingWidth: 80,
           title: SvgPicture.asset(
             "assets/images/logo-bobscapes.svg",
-            height: getProportionateScreenWidth(30),
+            height: 34.23,
           ),
         ),
         body: const Body(),

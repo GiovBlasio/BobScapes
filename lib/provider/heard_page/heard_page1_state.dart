@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 class HeardPage1State with ChangeNotifier {
   String _name = '';
-  String _type = 'Landowner';
-  // String _latitude = '';
-  // String _longitude = '';
+  String _title = 'Landowner';
+  String _latitude = '';
+  String _longitude = '';
   String _location = '';
   String _date = '';
   String _time = '';
@@ -15,9 +15,9 @@ class HeardPage1State with ChangeNotifier {
   String get physicallySee => _physicallySee;
   String get time => _time;
   String get date => _date;
-  // String get longitude => _longitude;
-  // String get latitude => _latitude;
-  String get type => _type;
+  String get longitude => _longitude;
+  String get latitude => _latitude;
+  String get title => _title;
   String get name => _name;
 
   String get location => _location;
@@ -37,15 +37,15 @@ class HeardPage1State with ChangeNotifier {
     notifyListeners();
   }
 
-  // void changeLatitude(String value) {
-  //   _latitude = value;
-  //   notifyListeners();
-  // }
+  void changeLatitude(String value) {
+    _latitude = value;
+    notifyListeners();
+  }
 
-  // void changeLongitude(String value) {
-  //   _longitude = value;
-  //   notifyListeners();
-  // }
+  void changeLongitude(String value) {
+    _longitude = value;
+    notifyListeners();
+  }
 
   void changeDate(String value) {
     _date = value;
@@ -53,7 +53,7 @@ class HeardPage1State with ChangeNotifier {
   }
 
   void changeType(String value) {
-    _type = value;
+    _title = value;
     notifyListeners();
   }
 
@@ -69,9 +69,9 @@ class HeardPage1State with ChangeNotifier {
 
   void resetAll() {
     _name = '';
-    _type = 'Landowner';
-    // String _latitude = '';
-    // String _longitude = '';
+    _title = 'Landowner';
+    _latitude = '';
+    _longitude = '';
     _location = '';
     _date = '';
     _time = '';
