@@ -38,7 +38,6 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      //crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           mainAxisSize: MainAxisSize.min,
@@ -47,9 +46,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(
-                      // left: getProportionateScreenWidth(10),
-                      bottom: getProportionateScreenHeight(8)),
+                  padding:
+                      EdgeInsets.only(bottom: getProportionateScreenHeight(8)),
                   child: Text(
                     "What did you see?",
                     style: TextStyle(
@@ -74,7 +72,6 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
           top: getProportionateScreenHeight(55),
           right: 0,
           left: 0,
-          // bottom: 0,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(
               Radius.circular(0),

@@ -1,6 +1,7 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/common_widget/custom_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,8 +26,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(0)),
+      padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +39,6 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
               text: TextSpan(
                 style: TextStyle(
                     fontSize: getProportionateScreenWidth(14),
-                   // fontWeight: FontWeight.w500,
                     color: kTextColor),
                 children: [
                   TextSpan(
@@ -55,6 +54,9 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
@@ -68,25 +70,15 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                           )
                         : Column(
                             children: [
-                              Transform.scale(
-                                scale: getProportionateScreenHeight(1.5),
-                                child: Radio(
-                                    fillColor:
-                                        const MaterialStatePropertyAll(kColor1),
-                                    overlayColor:
-                                        const MaterialStatePropertyAll(
-                                            Colors.transparent),
-                                    splashRadius: 0.1,
-                                    activeColor: kColor1,
-                                    value: item,
-                                    groupValue: group,
-                                    onChanged: (value) {
-                                      changeValue(widget.id, value!);
-                                      setState(() {
-                                        group = value;
-                                      });
-                                    }),
-                              ),
+                              CustomRadio(
+                                  value: item,
+                                  groupValue: group,
+                                  onChanged: (value) {
+                                    changeValue(widget.id, value!);
+                                    setState(() {
+                                      group = value;
+                                    });
+                                  }),
                               Text(
                                 item,
                                 softWrap: true,
@@ -132,40 +124,40 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
   }
 }
 
-class CustomRadio extends StatefulWidget {
-  final int value;
-  final int groupValue;
-  final void Function(int) onChanged;
-  const CustomRadio(
-      {Key? key,
-      required this.value,
-      required this.groupValue,
-      required this.onChanged})
-      : super(key: key);
+// class CustomRadio extends StatefulWidget {
+//   final dynamic value;
+//   final dynamic groupValue;
+//   final void Function(dynamic) onChanged;
+//   const CustomRadio(
+//       {Key? key,
+//       required this.value,
+//       required this.groupValue,
+//       required this.onChanged})
+//       : super(key: key);
 
-  @override
-  State<CustomRadio> createState() => _CustomRadioState();
-}
+//   @override
+//   State<CustomRadio> createState() => _CustomRadioState();
+// }
 
-class _CustomRadioState extends State<CustomRadio> {
-  @override
-  Widget build(BuildContext context) {
-    bool selected = (widget.value == widget.groupValue);
+// class _CustomRadioState extends State<CustomRadio> {
+//   @override
+//   Widget build(BuildContext context) {
+//     bool selected = (widget.value == widget.groupValue);
 
-    return InkWell(
-      onTap: () => widget.onChanged(widget.value),
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: selected ? Colors.white : Colors.grey[200]),
-        child: Icon(
-          Icons.circle,
-          size: 30,
-          color: selected ? Colors.deepPurple : Colors.grey[200],
-        ),
-      ),
-    );
-  }
-}
+//     return InkWell(
+//       onTap: () => widget.onChanged(widget.value),
+//       child: Container(
+//         margin: const EdgeInsets.all(4),
+//         padding: const EdgeInsets.all(4),
+//         decoration: BoxDecoration(
+//             shape: BoxShape.circle,
+//             color: selected ? Colors.white : Colors.grey[200]),
+//         child: Icon(
+//           Icons.circle,
+//           size: 30,
+//           color: selected ? Colors.deepPurple : Colors.grey[200],
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -11,19 +11,17 @@ import 'package:bobscapes/views/hear_bob/hear_bob.dart';
 import 'package:bobscapes/views/i_heard_bob_thanks/i_heard_bob_thanks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'heard_page1.dart';
 import 'heard_page1/custom_forms.dart';
 import 'heard_page1/custom_radio_button.dart';
 import 'heard_page1/location_form.dart';
 import 'heard_page1/personal_info.dart';
-import 'heard_page2.dart';
 import 'heard_page2/numerical_question.dart';
 import 'heard_page2/custom_dropdown_menu.dart' as heard2;
-import 'heard_page3.dart';
 import 'heard_page3/comment_form.dart';
-import 'heard_page3/email_form.dart';
 import 'heard_page3/radio_button.dart' as heard3;
 
 class Body extends StatefulWidget {
@@ -82,12 +80,13 @@ class _BodyState extends State<Body> {
   void _initialization() {
     isEnabled = Provider.of<HeardPage3State>(context, listen: false).isEnable;
 
+    String name = Provider.of<HeardPage1State>(context, listen: false).name;
+
     String email = Provider.of<HeardPage3State>(context, listen: false).email;
 
     if (email != '' && isEnabled) {
       emailController = TextEditingController(text: email);
     }
-    String name = Provider.of<HeardPage1State>(context, listen: false).name;
     if (name != '') controller = TextEditingController(text: name);
   }
 
@@ -217,8 +216,6 @@ class _BodyState extends State<Body> {
                     Container(
                       color: Colors.transparent,
                       padding: EdgeInsets.only(
-                          // left: getProportionateScreenWidth(15),
-                          // right: getProportionateScreenWidth(15),
                           top: getProportionateScreenHeight(20)),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -230,11 +227,6 @@ class _BodyState extends State<Body> {
                                   MaterialStateProperty.all(Colors.transparent),
                               shadowColor:
                                   MaterialStateProperty.all(Colors.grey),
-                              //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              //      borderRadius: BorderRadius.circular(20))),
-                              // minimumSize: MaterialStateProperty.all(Size(
-                              //     MediaQuery.of(context).size.width,
-                              //     getProportionateScreenHeight(44))),
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.transparent),
                             ),
@@ -300,6 +292,8 @@ class _BodyState extends State<Body> {
 
                                   String date =
                                       context.read<HeardPage1State>().date;
+
+                                  String datetime = _buildDate(date, time);
                                   String physicallySee = context
                                       .read<HeardPage1State>()
                                       .physicallySee;
@@ -330,14 +324,24 @@ class _BodyState extends State<Body> {
                                   String comment =
                                       context.read<HeardPage3State>().comment;
 
+                                  List<Placemark> placemarks =
+                                      await placemarkFromCoordinates(
+                                          latitude, longitude);
+
+                                  String locality = placemarks
+                                      .reversed.last.administrativeArea!;
+
+                                  name.replaceAll("'","'\\''");
+
+                                  print(name);
+
                                   Map<String, dynamic> params = {
                                     "name": name,
                                     "email": email,
-                                    "time": time,
                                     "title": title,
                                     "latitude": latitude,
                                     "longitude": longitude,
-                                    "date": date,
+                                    "datetime": datetime,
                                     "physicallySee": physicallySee,
                                     "releasedLocation": releasedLocation,
                                     "whatSee": whatSee,
@@ -348,7 +352,8 @@ class _BodyState extends State<Body> {
                                     "manyBroods": manyBroods,
                                     "moreInformation": moreInfo,
                                     "learnMore": learnMore,
-                                    "comment": comment
+                                    "comment": comment,
+                                    "state": locality
                                   };
 
                                   if (!isLoaded) {
@@ -356,28 +361,73 @@ class _BodyState extends State<Body> {
                                       isLoaded = !isLoaded;
                                     });
 
-                                    print(_keyEmail.currentState!.validate());
-                                    print(_keyName.currentState?.validate());
                                     if (_keyEmail.currentState != null &&
                                         _keyEmail.currentState!.validate() &&
-                                        _keyName.currentState != null &&
-                                        _keyName.currentState!.validate() &&
+                                        name != '' &&
                                         latitude != 1000) {
-                                      await RemoteService().sendData(params);
-                                      setState(() {
-                                        context
-                                            .read<HeardPage3State>()
-                                            .resetAll();
-                                        context
-                                            .read<HeardPage1State>()
-                                            .resetAll();
-                                        context
-                                            .read<HeardPage2State>()
-                                            .resetAll();
+                                      bool isSended = await RemoteService()
+                                          .sendData(params);
+                                      if (isSended) {
+                                        setState(() {
+                                          context
+                                              .read<HeardPage3State>()
+                                              .resetAll();
+                                          context
+                                              .read<HeardPage1State>()
+                                              .resetAll();
+                                          context
+                                              .read<HeardPage2State>()
+                                              .resetAll();
 
-                                        Navigator.popAndPushNamed(context,
-                                            IHeardBobThanksScreen.routeName);
-                                      });
+                                          Navigator.popAndPushNamed(context,
+                                              IHeardBobThanksScreen.routeName);
+                                        });
+                                      } else {
+                                        await Future.delayed(
+                                            Duration.zero,
+                                            () => showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  Widget continueButton =
+                                                      TextButton(
+                                                    child: const Text(
+                                                      "OK",
+                                                      style: TextStyle(
+                                                          color: kTextColor),
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  );
+                                                  AlertDialog alert =
+                                                      AlertDialog(
+                                                    backgroundColor: kColor3,
+                                                    title: Text(
+                                                      "BobScapes",
+                                                      style: TextStyle(
+                                                          color: kTextColor,
+                                                          fontSize:
+                                                              getProportionateScreenWidth(
+                                                                  18)),
+                                                    ),
+                                                    content: Text(
+                                                      "a problem occurred while sending the data, please try again later.",
+                                                      style: TextStyle(
+                                                          color: kTextColor,
+                                                          fontSize:
+                                                              getProportionateScreenWidth(
+                                                                  14)),
+                                                    ),
+                                                    actions: [
+                                                      continueButton,
+                                                    ],
+                                                  );
+
+                                                  return alert;
+                                                }));
+                                      }
                                     } else {
                                       setState(() {
                                         isLoaded = !isLoaded;
@@ -385,11 +435,6 @@ class _BodyState extends State<Body> {
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
-                                            // set up the buttons
-                                            // Widget cancelButton = TextButton(
-                                            //   child: const Text("Cancel"),
-                                            //   onPressed: () {},
-                                            // );
                                             Widget continueButton = TextButton(
                                               child: const Text(
                                                 "OK",
@@ -400,8 +445,6 @@ class _BodyState extends State<Body> {
                                                 Navigator.of(context).pop();
                                               },
                                             );
-
-                                            // set up the AlertDialog
                                             AlertDialog alert = AlertDialog(
                                               backgroundColor: kColor3,
                                               title: Text(
@@ -520,7 +563,6 @@ class _BodyState extends State<Body> {
                 disabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     width: 1,
-                    // color: Colors.white,
                   ),
                 ),
                 focusedBorder: const UnderlineInputBorder(
@@ -645,36 +687,36 @@ class _BodyState extends State<Body> {
                                     FloatingLabelBehavior.always,
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: getProportionateScreenHeight(8)),
-                                 enabledBorder: const UnderlineInputBorder(
-                                   borderSide: BorderSide(
-                                     width: 1,
-                                     color: kTextColor,
-                                   ),
-                                 ),
-                                 focusedBorder: const UnderlineInputBorder(
-                                   borderSide: BorderSide(
-                                     width: 1,
-                                     color: kTextColor,
-                                   ),
-                                 ),
-                                 border: const UnderlineInputBorder(
-                                   borderSide: BorderSide(
-                                     width: 1,
-                                     color: kTextColor,
-                                   ),
-                                 ),
-                                 errorBorder: const UnderlineInputBorder(
-                                   borderSide: BorderSide(
-                                     width: 1.5,
-                                     color: Colors.red,
-                                   ),
-                                 ),
-                                 focusedErrorBorder: const UnderlineInputBorder(
-                                   borderSide: BorderSide(
-                                     width: 1.5,
-                                     color: Colors.red,
-                                   ),
-                                 ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1,
+                                    color: kTextColor,
+                                  ),
+                                ),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1,
+                                    color: kTextColor,
+                                  ),
+                                ),
+                                border: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1,
+                                    color: kTextColor,
+                                  ),
+                                ),
+                                errorBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1.5,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                focusedErrorBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1.5,
+                                    color: Colors.red,
+                                  ),
+                                ),
                                 labelText: "Your name (required)",
                                 hintText: "Shane Mahoney",
                               ),
@@ -787,12 +829,7 @@ class _BodyState extends State<Body> {
 
   Stack _buildPage2() {
     return Stack(
-      // mainAxisSize: MainAxisSize.min,
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // SizedBox(
-        //   height: getProportionateScreenHeight(15),
-        // ),
         Positioned(
           top: getProportionateScreenHeight(15),
           child: Padding(
@@ -966,237 +1003,20 @@ class _BodyState extends State<Body> {
     );
   }
 
-  // Widget buildButtons() {
-  //   if (currentIndex == 0) {
-  //     return Container(
-  //       color: Colors.transparent,
-  //       padding: EdgeInsets.only(
-  //         left: getProportionateScreenWidth(15),
-  //         right: getProportionateScreenWidth(15),
-  //       ),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.end,
-  //         children: [
-  //           TextButton(
-  //             style: ButtonStyle(
-  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
-  //               shadowColor: MaterialStateProperty.all(Colors.grey),
-  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-  //               //      borderRadius: BorderRadius.circular(20))),
-  //               // minimumSize: MaterialStateProperty.all(Size(
-  //               //     MediaQuery.of(context).size.width,
-  //               //     getProportionateScreenHeight(44))),
-  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
-  //             ),
-  //             onPressed: () {
-  //               if (!isLoaded) {
-  //                 setState(() {
-  //                   pageController.animateToPage(currentIndex + 1,
-  //                       duration: const Duration(seconds: 1),
-  //                       curve: Curves.linear);
-  //                 });
-  //               }
-  //             },
-  //             child: Row(
-  //               children: [
-  //                 Text(
-  //                   "Next",
-  //                   style: TextStyle(
-  //                       fontSize: getProportionateScreenWidth(14),
-  //                       color: kTextColor),
-  //                 ),
-  //                 SizedBox(
-  //                   width: getProportionateScreenHeight(5),
-  //                 ),
-  //                 SvgPicture.asset(
-  //                   "assets/icons/icon-next-form.svg",
-  //                   height: getProportionateScreenHeight(14),
-  //                 )
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  //   if (currentIndex == 1) {
-  //     return Container(
-  //       color: Colors.transparent,
-  //       padding: EdgeInsets.only(
-  //           left: getProportionateScreenWidth(15),
-  //           right: getProportionateScreenWidth(15),
-  //           bottom: getProportionateScreenHeight(10)),
-  //       child: Row(
-  //         mainAxisSize: MainAxisSize.min,
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           TextButton(
-  //             style: ButtonStyle(
-  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
-  //               shadowColor: MaterialStateProperty.all(Colors.grey),
-  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-  //               //      borderRadius: BorderRadius.circular(20))),
-  //               // minimumSize: MaterialStateProperty.all(Size(
-  //               //     MediaQuery.of(context).size.width,
-  //               //     getProportionateScreenHeight(44))),
-  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
-  //             ),
-  //             onPressed: () {
-  //               if (!isLoaded) {
-  //                 setState(() {
-  //                   pageController.animateToPage(currentIndex - 1,
-  //                       duration: const Duration(seconds: 1),
-  //                       curve: Curves.linear);
-  //                 });
-  //               }
-  //             },
-  //             child: Row(
-  //               children: [
-  //                 SvgPicture.asset(
-  //                   "assets/icons/icon-back-form.svg",
-  //                   height: getProportionateScreenHeight(14),
-  //                 ),
-  //                 SizedBox(
-  //                   width: getProportionateScreenHeight(5),
-  //                 ),
-  //                 Text(
-  //                   "Back",
-  //                   style: TextStyle(
-  //                       fontSize: getProportionateScreenWidth(14),
-  //                       color: kTextColor),
-  //                 ),
-  //                 // Icon(
-  //                 //   Icons.adaptive.arrow_back,
-  //                 //   color: Colors.black,
-  //                 // )
-  //               ],
-  //             ),
-  //           ),
-  //           const Spacer(),
-  //           TextButton(
-  //             style: ButtonStyle(
-  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
-  //               shadowColor: MaterialStateProperty.all(Colors.grey),
-  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-  //               //      borderRadius: BorderRadius.circular(20))),
-  //               // minimumSize: MaterialStateProperty.all(Size(
-  //               //     MediaQuery.of(context).size.width,
-  //               //     getProportionateScreenHeight(44))),
-  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
-  //             ),
-  //             onPressed: () {
-  //               if (!isLoaded) {
-  //                 setState(() {
-  //                   pageController.animateToPage(currentIndex + 1,
-  //                       duration: const Duration(seconds: 1),
-  //                       curve: Curves.linear);
-  //                 });
-  //               }
-  //             },
-  //             child: Row(
-  //               children: [
-  //                 Text(
-  //                   "Next",
-  //                   style: TextStyle(
-  //                       fontSize: getProportionateScreenWidth(14),
-  //                       color: kTextColor),
-  //                 ),
-  //                 SizedBox(
-  //                   width: getProportionateScreenHeight(5),
-  //                 ),
-  //                 SvgPicture.asset(
-  //                   "assets/icons/icon-next-form.svg",
-  //                   height: getProportionateScreenHeight(14),
-  //                 )
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   } else {
-  //     return Container(
-  //       color: Colors.transparent,
-  //       padding: EdgeInsets.only(
-  //           left: getProportionateScreenWidth(15),
-  //           right: getProportionateScreenWidth(15),
-  //           bottom: getProportionateScreenHeight(10)),
-  //       child: Row(
-  //         mainAxisSize: MainAxisSize.min,
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           TextButton(
-  //             style: ButtonStyle(
-  //               overlayColor: MaterialStateProperty.all(Colors.transparent),
-  //               shadowColor: MaterialStateProperty.all(Colors.grey),
-  //               //  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-  //               //      borderRadius: BorderRadius.circular(20))),
-  //               // minimumSize: MaterialStateProperty.all(Size(
-  //               //     MediaQuery.of(context).size.width,
-  //               //     getProportionateScreenHeight(44))),
-  //               backgroundColor: MaterialStateProperty.all(Colors.transparent),
-  //             ),
-  //             onPressed: () {
-  //               if (!isLoaded) {
-  //                 setState(() {
-  //                   pageController.animateToPage(currentIndex - 1,
-  //                       duration: const Duration(seconds: 1),
-  //                       curve: Curves.linear);
-  //                 });
-  //               }
-  //             },
-  //             child: Row(
-  //               children: [
-  //                 SvgPicture.asset(
-  //                   "assets/icons/icon-back-form.svg",
-  //                   height: getProportionateScreenHeight(14),
-  //                 ),
-  //                 SizedBox(
-  //                   width: getProportionateScreenHeight(5),
-  //                 ),
-  //                 Text(
-  //                   "Back",
-  //                   style: TextStyle(
-  //                       fontSize: getProportionateScreenWidth(14),
-  //                       color: kTextColor),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //           const Spacer(),
-  //           Container(
-  //             color: Colors.transparent,
-  //             width: (SizeConfig.screenWidth) / 2 -
-  //                 getProportionateScreenWidth(30),
-  //             child: DefaultButton(
-  //                 text: "Send data",
-  //                 press: () async {
-  //                   if (!isLoaded) {
-  //                     setState(() {
-  //                       isLoaded = !isLoaded;
-  //                     });
-  //                     //TODO
-  //                     await RemoteService().sendData({});
-  //                     setState(() {
-  //                       context.read<HeardPage3State>().resetAll();
-  //                       context.read<HeardPage1State>().resetAll();
-  //                       context.read<HeardPage2State>().resetAll();
-
-  //                       Navigator.popAndPushNamed(
-  //                           context, IHeardBobThanksScreen.routeName);
-  //                     });
-  //                   }
-  //                   //  _changePage();
-  //                 }),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  // }
-
   bool _validateEmail(String email) {
     return emailValidatorRegExp.hasMatch(email);
+  }
+
+  String _buildDate(String date, String time) {
+    date = date.replaceAll('\'', '20');
+
+    DateTime d = DateFormat.yMd().parse(date);
+    DateTime t = DateFormat.jm().parse(time);
+    DateTime dt = DateTime.utc(d.year, d.month, d.day, t.hour, t.minute);
+
+    String dts = dt.toString().replaceFirst(' ', 'T');
+
+    return dts;
   }
 }
 

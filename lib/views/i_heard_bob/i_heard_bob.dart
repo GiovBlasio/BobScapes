@@ -19,7 +19,6 @@ class IHeardBobScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          // resizeToAvoidBottomInset: false,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             backgroundColor: kAppbarColor,
@@ -27,7 +26,7 @@ class IHeardBobScreen extends StatelessWidget {
             leading: const CustomBackButton(),
             title: SvgPicture.asset(
               "assets/images/logo-bobscapes.svg",
-              height: getProportionateScreenWidth(30),
+              height: 34.23,
             ),
           ),
           body: const Body(),

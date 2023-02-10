@@ -1,9 +1,6 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
 import 'heard_page3/comment_form.dart';
 import 'heard_page3/email_form.dart';
@@ -48,7 +45,7 @@ class HeardPage3 extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       const CustomRadioButton(
@@ -56,11 +53,11 @@ class HeardPage3 extends StatelessWidget {
                           title:
                               "Did you want more information about Bobwhite?",
                           id: 1),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
-                      Divider(),
-                      SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 15,
                       ),
                       const CustomRadioButton(

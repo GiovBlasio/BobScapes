@@ -112,45 +112,6 @@ class _BodyState extends State<Body> {
             width: SizeConfig.screenWidth,
           ),
         ),
-
-        // Container(
-        //   height: SizeConfig.screenHeight,
-        //   width: SizeConfig.screenWidth,
-        //   decoration: BoxDecoration(
-        //       gradient: LinearGradient(
-        //     begin: Alignment.topCenter,
-        //     end: Alignment.bottomCenter,
-        //     colors: [
-        //       kColor2.withOpacity(0.6),
-        //       kColor1.withOpacity(0.6),
-        //       kColor1,
-        //       kColor1,
-        //     ],
-        //   )),
-        // ),
-        // // AnimatedPositioned(
-        //   duration: const Duration(seconds: 1),
-        //   bottom: bottomBackground,
-        //   child: AnimatedOpacity(
-        //     opacity: opacity ? 1 : 0,
-        //     duration: const Duration(seconds: 1),
-        //     child: AnimatedContainer(
-        //       duration: const Duration(seconds: 1),
-        //       width: imageWidth,
-        //       child: Image.asset(
-        //         "assets/images/Bob Scapes Background.jpg",
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Positioned.fill(
-        //    child: BackdropFilter(
-        //   filter: ImageFilter.blur(
-        //     sigmaX: 20,
-        //     sigmaY: 20,
-        //   ),
-        //   child: const SizedBox(),
-        // )),
         AnimatedPositioned(
             duration: const Duration(seconds: 1),
             bottom: bottomLogo,
@@ -163,15 +124,6 @@ class _BodyState extends State<Body> {
                   logoWidth: logoWidth,
                   duration: const Duration(seconds: 1)),
             )),
-        // AnimatedPositioned(
-        //     duration: const Duration(seconds: 1),
-        //     top: getProportionateScreenHeight(290),
-        //     left: leftFirstPin,
-        //     child: SvgPicture.asset(
-        //       "assets/icons/pin.svg",
-        //       height: getProportionateScreenHeight(45),
-        //       color: Colors.white,
-        //     )),
         AnimatedPositioned(
           duration: const Duration(seconds: 1),
           left: getProportionateScreenHeight(25),
@@ -206,17 +158,6 @@ class _BodyState extends State<Body> {
             ],
           ),
         ),
-        // AnimatedPositioned(
-        //     duration: const Duration(seconds: 1),
-        //     top: animate
-        //         ? getProportionateScreenHeight(545)
-        //         : getProportionateScreenHeight(500),
-        //     right: rightSecondPin,
-        //     child: SvgPicture.asset(
-        //       "assets/icons/pin.svg",
-        //       height: getProportionateScreenHeight(70),
-        //       color: Colors.white,
-        //     )),
         AnimatedPositioned(
             duration: const Duration(seconds: 1),
             bottom: bottomTextRow,
@@ -226,14 +167,10 @@ class _BodyState extends State<Body> {
               opacity: opacity ? 1 : 0,
               duration: const Duration(seconds: 2),
               child: Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const Spacer(),
                   SvgPicture.asset(
                     "assets/images/wlfw.svg",
-                    //height: 70,
-
-                    // scale: 2,
                   ),
                   const Spacer(
                     flex: 2,

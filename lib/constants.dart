@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import 'size_config.dart';
-
-// const kColor1 = Color(0xFFFAA11C);
-// const kColor2 = Color(0xFFE57823);
-// const kColor3 = Color(0xFFA84E47);
 
 const kColor1 = Color(0xFFFF9B00);
 const kColor2 = Color(0xFFFCF5A9);
@@ -12,19 +7,7 @@ const kColor3 = Color(0xFFFFFFFF);
 const kTextColor = Color(0xFF552D00);
 const kTextLightColor = Color(0xFF7D6042);
 const kAppbarColor = Color(0xFFFFE439);
-
 const kPrimaryColor = Color(0xff2c2c2c);
-const kPrimaryLightColor = Color(0xffece0d0);
-const kSecondaryColor = Color(0x772c2c2c);
-
-const kPrimaryGradientColor = LinearGradient(
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-  colors: [
-    Color(0xff2c2c2c),
-    Color(0xffece0d0),
-  ],
-);
 
 Map<String, LatLng> state = {
   'Alabama': LatLng(32.3668052, -86.2999689),
@@ -79,20 +62,8 @@ Map<String, LatLng> state = {
   'Wyoming': LatLng(41.140259, -104.820236)
 };
 
-const kDefaultPaddin = 20.0;
-const kAnimationDuration = Duration(milliseconds: 200);
-
-TextStyle headingStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
-  fontWeight: FontWeight.bold,
-  color: Colors.black,
-  height: 1.5,
-);
-
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-const String kEmailNullError = "Per favore, inserisci la tua email";
-const String kInvalidEmailError = "Per favore, inserisci un'email valida";
 
 class MyBehavior extends ScrollBehavior {
   @override

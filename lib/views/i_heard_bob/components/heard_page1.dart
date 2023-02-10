@@ -1,16 +1,11 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-
-// import '../../../provider/page_changer.dart';
 
 import 'heard_page1/custom_forms.dart';
 import 'heard_page1/custom_radio_button.dart';
 import 'heard_page1/location_form.dart';
 import 'heard_page1/personal_info.dart';
-// import 'heard_page2.dart';
-// import 'heard_page3.dart';
 
 class HeardPage1 extends StatefulWidget {
   const HeardPage1({
@@ -122,30 +117,6 @@ class _HeardPage1State extends State<HeardPage1> {
                             id: 2),
                       ],
                     ))),
-            //   Flexible(
-            //     child: SingleChildScrollView(
-            //       child: Column(
-            //         mainAxisSize: MainAxisSize.min,
-            //         children: [
-            // PersonalInfo(items: items),
-            //           const LocationForm(),
-            //           const DateAndTimeForm(),
-            //           Padding(
-            //               padding: EdgeInsets.symmetric(
-            //                   vertical: getProportionateScreenWidth(2))),
-            //           CustomRadioButton(
-            //               items: radioOptions,
-            //               title:
-            //                   "Are bobwhites released at the sightings location?",
-            //               id: 1),
-            //           CustomRadioButton(
-            //               items: radioOptions2,
-            //               title: "Did you physically see any birds?",
-            //               id: 2),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
           ],
         ),
       ),

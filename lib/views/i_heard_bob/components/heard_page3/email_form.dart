@@ -73,15 +73,8 @@ class _EmailFormState extends State<EmailForm> {
             enabled: context.watch<HeardPage3State>().isEnable,
             keyboardType: TextInputType.emailAddress,
             controller: emailController,
-            onTap: (() {
-              //  FocusScope.of(context).requestFocus(FocusNode());
-            }),
-            onSaved: (newValue) {
-              //  location = newValue ?? "";
-            },
             onChanged: (value) {
               changeEmail(value);
-              // emailController.text = value;
             },
             validator: (value) {
               return null;
@@ -113,7 +106,6 @@ class _EmailFormState extends State<EmailForm> {
               disabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  // color: Colors.white,
                 ),
               ),
               focusedBorder: const UnderlineInputBorder(

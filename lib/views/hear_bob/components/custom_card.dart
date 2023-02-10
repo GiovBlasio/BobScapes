@@ -19,7 +19,6 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        // color: Colors.red,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Card(
@@ -56,15 +55,7 @@ class CustomCard extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
-                        //TODO
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Image.asset(path,
-
-                              // fit: BoxFit.contain,
-                              // height: getProportionateScreenHeight(200),
-                              width: SizeConfig.screenWidth),
-                        ),
+                        child: Image.asset(path, width: SizeConfig.screenWidth),
                       )),
                 ),
                 const SizedBox(

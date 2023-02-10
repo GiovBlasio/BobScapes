@@ -29,6 +29,5 @@ class Audio {
   Map<String, dynamic> toJson() => {
         "time": time,
         "title": title,
-        //   "stato_compilazione": state,
       };
 }

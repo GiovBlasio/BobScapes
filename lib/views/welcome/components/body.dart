@@ -23,10 +23,8 @@ class _BodyState extends State<Body> {
           ? getProportionateScreenWidth(15)
           : getProportionateScreenWidth(15),
       decoration: BoxDecoration(
-        color: currentIndex == index ? kTextColor : kTextLightColor,
-       // borderRadius: BorderRadius.circular(15),
-        shape: BoxShape.circle
-      ),
+          color: currentIndex == index ? kTextColor : kTextLightColor,
+          shape: BoxShape.circle),
     );
   }
 
@@ -52,7 +50,7 @@ class _BodyState extends State<Body> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Spacer(),
+          const Spacer(),
           SvgPicture.asset(
             "assets/images/logo-bobscapes.svg",
             width: 45,
@@ -99,7 +97,7 @@ class _BodyState extends State<Body> {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Flexible(
                         flex: 3,
                         child: Text(
@@ -129,7 +127,7 @@ class _BodyState extends State<Body> {
                               color: kPrimaryColor),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Flexible(
                         flex: 15,
                         child: Text(
@@ -173,11 +171,9 @@ class _BodyState extends State<Body> {
                           double.infinity, getProportionateScreenHeight(75))),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
-                    // TODO POP AND PUSH
-                    onPressed: () =>
-                        Navigator.pushNamed(context, HomeScreen.routeName),
+                    onPressed: () => Navigator.popAndPushNamed(
+                        context, HomeScreen.routeName),
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Spacer(
                           flex: 3,
@@ -193,9 +189,11 @@ class _BodyState extends State<Body> {
                           flex: 2,
                         ),
                         Flexible(
-                          flex: 1,
-                          child: SvgPicture.asset("assets/icons/icon-arrow.svg", height: getProportionateScreenHeight(20),)
-                        ),
+                            flex: 1,
+                            child: SvgPicture.asset(
+                              "assets/icons/icon-arrow.svg",
+                              height: getProportionateScreenHeight(20),
+                            )),
                       ],
                     ),
                   ),

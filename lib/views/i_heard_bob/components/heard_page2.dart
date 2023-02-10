@@ -16,7 +16,6 @@ class HeardPage2 extends StatelessWidget {
           vertical: getProportionateScreenHeight(10)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,30 +32,6 @@ class HeardPage2 extends StatelessWidget {
           SizedBox(
             height: getProportionateScreenHeight(10),
           ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: getProportionateScreenWidth(15)),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Text(
-          //         "Register your sighting".toUpperCase(),
-          //         style: TextStyle(
-          //             fontWeight: FontWeight.w600,
-          //             fontSize: getProportionateScreenWidth(14)),
-          //       ),
-          //       IconButton(
-          //         splashRadius: 0.1,
-          //         icon: Icon(
-          //           Icons.close,
-          //           size: getProportionateScreenHeight(28),
-          //         ),
-          //         onPressed: () {
-          //           Navigator.pop(context);
-          //         },
-          //       )
-          //     ],
-          //   ),
-          // ),
           SizedBox(
             height: getProportionateScreenHeight(10),
           ),

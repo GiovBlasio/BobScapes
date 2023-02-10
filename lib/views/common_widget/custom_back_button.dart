@@ -1,5 +1,4 @@
 import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,8 +14,6 @@ class CustomBackButton extends StatelessWidget {
       onTap: () => Navigator.pop(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.baseline,
-        // textBaseline: TextBaseline.ideographic,
         children: [
           SvgPicture.asset(
             "assets/icons/icon-back.svg",

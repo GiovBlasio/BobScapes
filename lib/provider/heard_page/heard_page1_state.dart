@@ -19,7 +19,6 @@ class HeardPage1State with ChangeNotifier {
   String get latitude => _latitude;
   String get title => _title;
   String get name => _name;
-
   String get location => _location;
 
   void changeName(String value) {

@@ -1,4 +1,6 @@
-import 'package:bobscapes/services/remote_services.dart';
+import 'dart:async';
+
+import 'package:bobscapes/provider/heard_page/home_state.dart';
 import 'package:bobscapes/views/common_widget/bottom_buttons.dart';
 import 'package:bobscapes/views/common_widget/custom_title.dart';
 import 'package:bobscapes/constants.dart';
@@ -8,6 +10,7 @@ import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
 import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import 'custom_alert.dart';
 import 'custom_card.dart';
@@ -34,6 +37,8 @@ class _BodyState extends State<Body> {
   ];
 
   bool isLoaded = true;
+
+  late Timer timer;
   @override
   void initState() {
     super.initState();
@@ -49,6 +54,10 @@ class _BodyState extends State<Body> {
     // }
   }
 
+  void changeFirstAccess() {
+    context.read<HomeState>().changeFirstAccess();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -56,9 +65,7 @@ class _BodyState extends State<Body> {
         Opacity(
           opacity: 1,
           child: SvgPicture.asset("assets/images/sfondo3.svg",
-              fit: BoxFit.cover,
-              // height: SizeConfig.screenHeight,
-              width: double.infinity),
+              fit: BoxFit.cover, width: double.infinity),
         ),
         Visibility(
           visible: isLoaded,
@@ -110,136 +117,144 @@ class _BodyState extends State<Body> {
                     context, BobSightingsScreen.routeName),
               ),
               BottomButton(
-                color: kColor2,
-                title: "Hey, I heard Bob!",
-                iconPath: "assets/icons/gps.svg",
-                onPressed: () => Navigator.popAndPushNamed(
-                    context, IHeardBobScreen.routeName),
-              ),
-              // InkWell(
-              //   onTap: () => Navigator.popAndPushNamed(
-              //       context, BobSightingsScreen.routeName),
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(12),
-              //         boxShadow: const [
-              //           BoxShadow(
-              //             color: Colors.black12,
-              //             spreadRadius: 4,
-              //             blurRadius: 4,
-              //             offset: Offset(0, -4),
-              //           ),
-              //         ]),
-              //     child: Card(
-              //       shape: const RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.vertical(
-              //           top: Radius.circular(12),
-              //         ),
-              //       ),
-              //       elevation: 10,
-              //       margin: const EdgeInsets.all(0),
-              //       child: ClipRRect(
-              //         borderRadius: const BorderRadius.vertical(
-              //           top: Radius.circular(12),
-              //         ),
-              //         child: Container(
-              //           padding: EdgeInsets.symmetric(
-              //               vertical: getProportionateScreenHeight(10)),
-              //           width: SizeConfig.screenWidth / 2,
-              //           height: getProportionateScreenHeight(63),
-              //           color: kColor3,
-              //           child: Row(
-              //             children: [
-              //               const Spacer(
-              //                 flex: 2,
-              //               ),
-              //               Text(
-              //                 "Bob Sightings Map",
-              //                 textAlign: TextAlign.center,
-              //                 style: TextStyle(
-              //                     fontSize: getProportionateScreenWidth(14),
-              //                     fontWeight: FontWeight.w500,
-              //                     color: Colors.white),
-              //               ),
-              //               const Spacer(),
-              //               SvgPicture.asset(
-              //                 "assets/icons/eye.svg",
-              //                 height: getProportionateScreenHeight(25),
-              //                 color: Colors.white,
-              //               ),
-              //               const Spacer()
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // InkWell(
-              //   onTap: () {
-              //     Navigator.popAndPushNamed(context, IHeardBobScreen.routeName);
-              //   },
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //         color: Colors.teal,
-              //         borderRadius: BorderRadius.circular(12),
-              //         boxShadow: const [
-              //           BoxShadow(
-              //             color: Colors.black12,
-              //             spreadRadius: 4,
-              //             blurRadius: 4,
-              //             offset: Offset(0, -4), // Shadow position
-              //           ),
-              //         ]),
-              //     child: Card(
-              //       shape: const RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.vertical(
-              //           top: Radius.circular(12),
-              //         ),
-              //       ),
-              //       elevation: 10,
-              //       margin: const EdgeInsets.all(0),
-              //       child: ClipRRect(
-              //         borderRadius: const BorderRadius.vertical(
-              //           top: Radius.circular(12),
-              //         ),
-              //         child: Container(
-              //           padding: EdgeInsets.symmetric(
-              //               vertical: getProportionateScreenHeight(10)),
-              //           width: SizeConfig.screenWidth / 2,
-              //           height: getProportionateScreenHeight(63),
-              //           color: kColor2,
-              //           child: Row(
-              //             children: [
-              //               const Spacer(
-              //                 flex: 2,
-              //               ),
-              //               Text(
-              //                 "Hey, I heard Bob!",
-              //                 textAlign: TextAlign.center,
-              //                 style: TextStyle(
-              //                     fontSize: getProportionateScreenWidth(14),
-              //                     fontWeight: FontWeight.w500,
-              //                     color: Colors.white),
-              //               ),
-              //               const Spacer(),
-              //               SvgPicture.asset(
-              //                 "assets/icons/gps.svg",
-              //                 height: getProportionateScreenHeight(25),
-              //                 color: Colors.white,
-              //               ),
-              //               const Spacer()
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // )
+                  color: kColor2,
+                  title: "Hey, I heard Bob!",
+                  iconPath: "assets/icons/gps.svg",
+                  onPressed: () {
+                    if (Provider.of<HomeState>(context, listen: false)
+                        .firstAccess) {
+                      changeFirstAccess();
+                      showDialog(
+                          barrierDismissible: false,
+                          barrierColor: Colors.transparent,
+                          context: context,
+                          builder: (context) => _showDisclaimer(context));
+
+                      timer = Timer(const Duration(seconds: 25), () {
+                        Navigator.pop(context);
+                        Navigator.popAndPushNamed(
+                            context, IHeardBobScreen.routeName);
+                      });
+                    } else {
+                      Navigator.popAndPushNamed(
+                          context, IHeardBobScreen.routeName);
+                    }
+                  }),
             ],
           ),
         ),
       ],
     );
+  }
+
+  Stack _showDisclaimer(BuildContext context) {
+    return Stack(children: [
+      Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          child: Stack(alignment: Alignment.bottomCenter, children: [
+            Positioned(
+              bottom: 400,
+              left: 25,
+              child: Image.asset(
+                "assets/images/quail-reflected.png",
+                height: 200,
+              ),
+            ),
+            Positioned(
+              height: 525 - 72,
+              left: 25,
+              right: 25,
+              child: Card(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                ),
+                elevation: 10,
+                margin: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(0)),
+                child: Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: getProportionateScreenHeight(15)),
+                    decoration: const BoxDecoration(
+                        color: kColor3,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: getProportionateScreenWidth(30),
+                                right: getProportionateScreenWidth(10)),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                const Text(
+                                  "Disclaimer",
+                                  style: TextStyle(
+                                      color: kTextColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                                IconButton(
+                                  splashRadius: 0.1,
+                                  icon: const Icon(
+                                    Icons.close,
+                                    size: 30,
+                                    color: kTextColor,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                    Navigator.popAndPushNamed(
+                                        context, IHeardBobScreen.routeName);
+                                    setState(() {
+                                      timer.cancel();
+                                    });
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: getProportionateScreenWidth(30),
+                                  top: 30,
+                                  bottom: 5,
+                                  right: getProportionateScreenWidth(40)),
+                              child: Text(
+                                "The exact location of your sightings will not be shared with the public.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize:
+                                        getProportionateScreenWidth(14.5)),
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: getProportionateScreenWidth(30),
+                                  top: 20,
+                                  bottom: 5,
+                                  right: getProportionateScreenWidth(40)),
+                              child: const Text(
+                                "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14.5),
+                              )),
+                        ],
+                      ),
+                    )),
+              ),
+            ),
+          ])),
+    ]);
   }
 }

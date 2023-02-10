@@ -26,8 +26,6 @@ class Disclaimer extends StatelessWidget {
           child: Container(
               padding: EdgeInsets.symmetric(
                   vertical: getProportionateScreenHeight(15)),
-              //width: SizeConfig.screenWidth / 2,
-              // height: 75,
               decoration: const BoxDecoration(
                   color: kColor3,
                   borderRadius:
@@ -92,19 +90,7 @@ class Disclaimer extends StatelessWidget {
                               color: kPrimaryColor,
                               fontWeight: FontWeight.w400,
                               fontSize: getProportionateScreenWidth(14.5)),
-                        )), // Padding(
-                    //     padding: EdgeInsets.only(
-                    //         left: getProportionateScreenWidth(30),
-                    //         top: getProportionateScreenHeight(20),
-                    //         bottom: getProportionateScreenHeight(30),
-                    //         right: getProportionateScreenWidth(40)),
-                    //     child: Text(
-                    //       "Information will be used to inform management recommendations with conservation partners such as Quail Forever, USDA's NRCS and Univeristy of Georgia Martin Game Lab.",
-                    //       style: TextStyle(
-                    //           color: kPrimaryColor,
-                    //           fontWeight: FontWeight.w400,
-                    //           fontSize: getProportionateScreenWidth(14.5)),
-                    //     )),
+                        )),
                   ],
                 ),
               )),

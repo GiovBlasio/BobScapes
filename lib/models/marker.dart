@@ -12,7 +12,6 @@ class Marker {
     required this.longitude,
     required this.state,
     required this.sightings,
-    //  required this.state,
   });
 
   final double latitude;
@@ -20,14 +19,11 @@ class Marker {
   final String state;
   final int sightings;
 
-  //final String state;
-
   factory Marker.fromJson(Map<String, dynamic> json) => Marker(
-        state: json["time"],
-        longitude: json["title"],
-        latitude: json["title"],
-        sightings: json["title"],
-        // state: json["stato_compilazione"],
+        state: json["state"],
+        longitude: json["longitude"],
+        latitude: json["latitude"],
+        sightings: json["sightings"],
       );
 
   Map<String, dynamic> toJson() => {

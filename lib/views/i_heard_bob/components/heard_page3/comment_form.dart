@@ -42,7 +42,6 @@ class _CommentFormState extends State<CommentForm> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              // left: getProportionateScreenWidth(15),
               bottom: getProportionateScreenHeight(8),
               top: getProportionateScreenHeight(20)),
           child: Text(
@@ -61,12 +60,9 @@ class _CommentFormState extends State<CommentForm> {
             maxLines: null,
             keyboardType: TextInputType.multiline,
             controller: commentController,
-            onSaved: (newValue) {
-              //  location = newValue ?? "";
-            },
+            onSaved: (newValue) {},
             onChanged: (value) {
-              //changeComment(value);
-              // commentController.text = value;
+              changeComment(value);
             },
             validator: (value) {
               return null;
@@ -78,12 +74,10 @@ class _CommentFormState extends State<CommentForm> {
                   BoxConstraints(maxHeight: getProportionateScreenHeight(100)),
               labelStyle: TextStyle(
                   color: kPrimaryColor,
-                  // fontFamily: "Heebo",
                   fontSize: getProportionateScreenWidth(16),
                   fontWeight: FontWeight.w500),
               hintStyle: TextStyle(
                 overflow: TextOverflow.visible,
-                // color: Colors.black.withAlpha(177),
                 fontSize: getProportionateScreenWidth(13),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,

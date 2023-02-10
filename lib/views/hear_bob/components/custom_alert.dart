@@ -51,8 +51,8 @@ class _CustomAlertState extends State<CustomAlert> {
 
   @override
   void dispose() {
-    super.dispose();
     audioPlayer.stop();
+    super.dispose();
   }
 
   @override
@@ -65,13 +65,6 @@ class _CustomAlertState extends State<CustomAlert> {
       child: Container(
           height: getProportionateScreenHeight(240),
           decoration: BoxDecoration(
-            // boxShadow: const [
-            //   BoxShadow(
-            //     color: Colors.black38,
-            //     spreadRadius: 3,
-            //     blurRadius: 8,
-            //   ),
-            // ],
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Card(
@@ -87,14 +80,12 @@ class _CustomAlertState extends State<CustomAlert> {
                   child: Container(
                     color: kColor3,
                     width: double.infinity,
-                    //height: 350,
                     padding: EdgeInsets.symmetric(
                         vertical: getProportionateScreenHeight(0)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        // const Spacer(),
                         IconButton(
                           icon: SvgPicture.asset(
                             "assets/icons/icon-close.svg",
@@ -186,6 +177,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                 setState(() {
                                   position = Duration.zero;
                                   audioPlayer.stop();
+
                                   isPlaying = false;
                                 });
                               },

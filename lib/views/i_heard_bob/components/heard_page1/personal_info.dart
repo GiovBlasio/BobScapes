@@ -105,14 +105,11 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                               BorderSide(color: kTextColor, width: 0.3)),
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(0)),
-
-                    // alignment: AlignmentDirectional.bottomEnd,
                     style: TextStyle(
                       color: kTextColor,
                       fontSize: getProportionateScreenWidth(13),
                       fontWeight: FontWeight.w500,
                     ),
-                    // underline: Container(),
                     isExpanded: true,
                     value: dropdownvalue,
                     icon: const Icon(
@@ -198,35 +195,11 @@ class _NameFormState extends State<NameForm> {
         enableInteractiveSelection: false,
         controller: controller,
         keyboardType: TextInputType.name,
-        onSaved: (newValue) {
-          //email = newValue ?? "";
-        },
+        onSaved: (newValue) {},
         onChanged: (value) {
           changeName(value);
-
-          // if (value.isNotEmpty) {
-          //   setState(() {
-          //     errors.remove(kEmailNullError);
-          //   });
-          // }
-          // if (emailValidatorRegExp.hasMatch(value)) {
-          //   setState(() {
-          //     errors.remove(kInvalidEmailError);
-          //   });
-          // }
         },
         validator: (value) {
-          // if (value!.isEmpty) {
-          //   setState(() {
-          //     errors.add(kEmailNullError);
-          //   });
-          //   return "";
-          // } else if (!emailValidatorRegExp.hasMatch(value)) {
-          //   setState(() {
-          //     errors.add(kInvalidEmailError);
-          //   });
-          //   return "";
-          // }
           return null;
         },
         decoration: InputDecoration(

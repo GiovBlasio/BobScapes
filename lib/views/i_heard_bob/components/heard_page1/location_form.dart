@@ -1,14 +1,12 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/bob_sightings/components/maps.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 // ignore: depend_on_referenced_packages
-import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
@@ -133,7 +131,6 @@ class _LocationFormState extends State<LocationForm> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white.withAlpha(200),
-                        // TODO
                         contentPadding: EdgeInsets.all(
                           getProportionateScreenWidth(12),
                         ),

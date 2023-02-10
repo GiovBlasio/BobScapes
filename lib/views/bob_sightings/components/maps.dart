@@ -9,8 +9,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:bobscapes/models/marker.dart' as model;
 
-import '../../common_widget/disclaimer.dart';
-
 class Mappa extends StatefulWidget {
   const Mappa({
     Key? key,
@@ -85,7 +83,10 @@ class _MappaState extends State<Mappa> {
                       useSafeArea: false,
                       barrierColor: Colors.white70,
                       context: context,
-                      builder: (context) => const Disclaimer()),
+                      builder: (context) => Padding(
+                            padding: EdgeInsets.zero,
+                            child: _showDisclaimer(context),
+                          )),
                   icon: const Icon(
                     Icons.info_outline,
                     color: Colors.white,
@@ -95,16 +96,13 @@ class _MappaState extends State<Mappa> {
                 height: getProportionateScreenHeight(41),
                 child: FittedBox(
                   child: FloatingActionButton(
-                    //   backgroundColor: _liveUpdate ? Colors.white : kColor2,
                     backgroundColor: Colors.white,
                     onPressed: () {
                       _getLocation().then((value) => currentLatLng =
                           LatLng(value.latitude, value.longitude));
-                      // liveLocation();
                     },
                     child: SvgPicture.asset(
                       "assets/icons/icon-geolocalization.svg",
-                      //  color: _liveUpdate ? kColor2 : Colors.white,
                       color: kColor1,
                       height: getProportionateScreenHeight(30),
                       width: getProportionateScreenWidth(30),
@@ -221,6 +219,113 @@ class _MappaState extends State<Mappa> {
           return BottomSheetCards(
               state: state, item: index, sightings: sightings);
         });
+  }
+
+  _showDisclaimer(BuildContext context) {
+    return Stack(children: [
+      Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          child: Stack(alignment: Alignment.bottomCenter, children: [
+            Positioned(
+              bottom: 400,
+              left: 25,
+              child: Image.asset(
+                "assets/images/quail-reflected.png",
+                height: 200,
+              ),
+            ),
+            Positioned(
+              height: 453,
+              left: 25,
+              right: 25,
+              child: Card(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                ),
+                elevation: 10,
+                margin: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(0)),
+                child: Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: getProportionateScreenHeight(15)),
+                    decoration: const BoxDecoration(
+                        color: kColor3,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16))),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(10)),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: getProportionateScreenWidth(30),
+                                right: getProportionateScreenWidth(10)),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                const Text(
+                                  "Disclaimer",
+                                  style: TextStyle(
+                                      color: kTextColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                                IconButton(
+                                  splashRadius: 0.1,
+                                  icon: const Icon(
+                                    Icons.close,
+                                    size: 30,
+                                    color: kTextColor,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: getProportionateScreenWidth(30),
+                                  top: 30,
+                                  bottom: 5,
+                                  right: getProportionateScreenWidth(40)),
+                              child: Text(
+                                "The exact location of your sightings will not be shared with the public.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize:
+                                        getProportionateScreenWidth(14.5)),
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: getProportionateScreenWidth(30),
+                                  top: 20,
+                                  bottom: 5,
+                                  right: getProportionateScreenWidth(40)),
+                              child: const Text(
+                                "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14.5),
+                              )),
+                        ],
+                      ),
+                    )),
+              ),
+            ),
+          ]))
+    ]);
   }
 }
 

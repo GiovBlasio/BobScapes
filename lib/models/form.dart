@@ -31,17 +31,17 @@ class Form {
   final String time;
   final String title;
   final String name;
-  final String latitude;
-  final String longitude;
+  final double latitude;
+  final double longitude;
   final String date;
   final String physicallySee;
   final String releasedLocation;
   final String whatSee;
-  final String manyBirds;
-  final String manyMale;
-  final String manyFemale;
-  final String manyYoung;
-  final String manyBroods;
+  final int manyBirds;
+  final int manyMale;
+  final int manyFemale;
+  final int manyYoung;
+  final int manyBroods;
   final String moreInformation;
   final String learnMore;
   String email;
@@ -50,7 +50,8 @@ class Form {
   factory Form.fromJson(Map<String, dynamic> json) => Form(
         time: json["time"],
         title: json["title"],
-        name: json[""], latitude: json[""],
+        name: json[""],
+        latitude: json[""],
         longitude: json[""],
         date: json[""],
         physicallySee: json[""],
@@ -65,11 +66,26 @@ class Form {
         learnMore: json[""],
         email: json[""],
         comment: json[""],
-        // state: json["stato_compilazione"],
       );
 
   Map<String, dynamic> toJson() => {
         "time": time,
         "title": title,
+        "name": name,
+        "latitude": latitude,
+        "longitude": longitude,
+        "date": date,
+        "physicallySee": physicallySee,
+        "releasedLocation": releasedLocation,
+        "whatSee": whatSee,
+        "manyBirds": manyBirds,
+        "manyMale": manyMale,
+        "manyFemale": manyFemale,
+        "manyYoung": manyYoung,
+        "manyBroods": manyBroods,
+        "moreInformation": moreInformation,
+        "learnMore": learnMore,
+        "email": email,
+        "comment": comment,
       };
 }

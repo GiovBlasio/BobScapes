@@ -22,7 +22,7 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void incrementBroodsCounter() {
-    if (broodsCounter < _youngCounter) {
+    if (broodsCounter < _totalCounter) {
       _broodsCounter++;
     }
     notifyListeners();

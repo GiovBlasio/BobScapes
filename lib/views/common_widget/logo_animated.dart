@@ -30,12 +30,6 @@ class _AnimatedLogoState extends AnimatedWidgetBaseState<AnimatedLogo> {
       width: _logoWidth!.evaluate(animation),
       height: _logoHeight!.evaluate(animation),
     );
-    // return Logo(
-    //   iconColor: widget.iconColor,
-    //   textColor: widget.textColor,
-    //   iconSize: _iconSize!.evaluate(animation),
-    //   textSize: _textSize!.evaluate(animation),
-    // );
   }
 
   @override

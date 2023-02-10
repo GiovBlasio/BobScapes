@@ -1,6 +1,7 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/common_widget/custom_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,24 +55,33 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                         )
                       : Column(
                           children: [
-                            Transform.scale(
-                              scale: getProportionateScreenHeight(1.5),
-                              child: Radio(
-                                  fillColor:
-                                      const MaterialStatePropertyAll(kColor1),
-                                  overlayColor: const MaterialStatePropertyAll(
-                                      Colors.transparent),
-                                  activeColor: kColor1,
-                                  value: item,
-                                  groupValue: group,
-                                  onChanged: (value) {
-                                    changeValue(widget.id, value!);
+                            // Transform.scale(
+                            //   scale: getProportionateScreenHeight(1.5),
+                            //   child: Radio(
+                            //       fillColor:
+                            //           const MaterialStatePropertyAll(kColor1),
+                            //       overlayColor: const MaterialStatePropertyAll(
+                            //           Colors.transparent),
+                            //       activeColor: kColor1,
+                            //       value: item,
+                            //       groupValue: group,
+                            //       onChanged: (value) {
+                            //         changeValue(widget.id, value!);
 
-                                    setState(() {
-                                      group = value;
-                                    });
-                                  }),
-                            ),
+                            //         setState(() {
+                            //           group = value;
+                            //         });
+                            //       }),
+                            // ),
+                            CustomRadio(
+                                value: item,
+                                groupValue: group,
+                                onChanged: (value) {
+                                  changeValue(widget.id, value!);
+                                  setState(() {
+                                    group = value;
+                                  });
+                                }),
                             Text(
                               item,
                               softWrap: true,
@@ -79,9 +89,8 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(13),
                                   fontWeight: FontWeight.w600,
-                                  color: group == item
-                                      ? kTextColor
-                                      : kTextColor),
+                                  color:
+                                      group == item ? kTextColor : kTextColor),
                             ),
                           ],
                         ),
