@@ -303,7 +303,7 @@ class _BodyState extends State<Body> {
                                   String whatSee =
                                       context.read<HeardPage2State>().whatSee;
                                   int manyBirds =
-                                      context.read<HeardPage2State>().total;
+                                      context.read<HeardPage2State>().totalCounter;
                                   int manyMale = context
                                       .read<HeardPage2State>()
                                       .maleCounter;
@@ -331,9 +331,9 @@ class _BodyState extends State<Body> {
                                   String locality = placemarks
                                       .reversed.last.administrativeArea!;
 
-                                  name.replaceAll("'","'\\''");
+                                  // name.replaceAll("'", "'\\''");
 
-                                  print(name);
+                                  // print(name);
 
                                   Map<String, dynamic> params = {
                                     "name": name,
@@ -364,7 +364,8 @@ class _BodyState extends State<Body> {
                                     if (_keyEmail.currentState != null &&
                                         _keyEmail.currentState!.validate() &&
                                         name != '' &&
-                                        latitude != 1000) {
+                                        latitude != 1000 &&
+                                        manyBirds == manyFemale + manyMale) {
                                       bool isSended = await RemoteService()
                                           .sendData(params);
                                       if (isSended) {
@@ -413,7 +414,7 @@ class _BodyState extends State<Body> {
                                                                   18)),
                                                     ),
                                                     content: Text(
-                                                      "a problem occurred while sending the data, please try again later.",
+                                                      "A problem occurred while sending the data, please try again later.",
                                                       style: TextStyle(
                                                           color: kTextColor,
                                                           fontSize:
@@ -432,44 +433,47 @@ class _BodyState extends State<Body> {
                                       setState(() {
                                         isLoaded = !isLoaded;
                                       });
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            Widget continueButton = TextButton(
-                                              child: const Text(
-                                                "OK",
-                                                style: TextStyle(
-                                                    color: kTextColor),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            );
-                                            AlertDialog alert = AlertDialog(
-                                              backgroundColor: kColor3,
-                                              title: Text(
-                                                "BobScapes",
-                                                style: TextStyle(
-                                                    color: kTextColor,
-                                                    fontSize:
-                                                        getProportionateScreenWidth(
-                                                            18)),
-                                              ),
-                                              content: Text(
-                                                "You entered your name or email incorrectly, please try again.",
-                                                style: TextStyle(
-                                                    color: kTextColor,
-                                                    fontSize:
-                                                        getProportionateScreenWidth(
-                                                            14)),
-                                              ),
-                                              actions: [
-                                                continueButton,
-                                              ],
-                                            );
+                                      await Future.delayed(
+                                          Duration.zero,
+                                          () => showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                Widget continueButton =
+                                                    TextButton(
+                                                  child: const Text(
+                                                    "OK",
+                                                    style: TextStyle(
+                                                        color: kTextColor),
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                );
+                                                AlertDialog alert = AlertDialog(
+                                                  backgroundColor: kColor3,
+                                                  title: Text(
+                                                    "BobScapes",
+                                                    style: TextStyle(
+                                                        color: kTextColor,
+                                                        fontSize:
+                                                            getProportionateScreenWidth(
+                                                                18)),
+                                                  ),
+                                                  content: Text(
+                                                    "You entered your name, number of birds or email incorrectly, please try again.",
+                                                    style: TextStyle(
+                                                        color: kTextColor,
+                                                        fontSize:
+                                                            getProportionateScreenWidth(
+                                                                14)),
+                                                  ),
+                                                  actions: [
+                                                    continueButton,
+                                                  ],
+                                                );
 
-                                            return alert;
-                                          });
+                                                return alert;
+                                              }));
                                     }
                                   }
                                 }),
@@ -523,8 +527,6 @@ class _BodyState extends State<Body> {
               controller: context.watch<HeardPage3State>().isEnable
                   ? emailController
                   : TextEditingController(text: ''),
-
-              //onSaved: (newValue) {},
               onChanged: (value) {
                 changeEmail(value);
               },

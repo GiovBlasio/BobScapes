@@ -52,6 +52,7 @@ class _CustomAlertState extends State<CustomAlert> {
   @override
   void dispose() {
     audioPlayer.stop();
+    audioPlayer.dispose();
     super.dispose();
   }
 
@@ -173,10 +174,11 @@ class _CustomAlertState extends State<CustomAlert> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             InkWell(
-                              onTap: () {
+                              onTap: () async {
+                                await audioPlayer.seek(Duration.zero);
+                                audioPlayer.stop();
                                 setState(() {
                                   position = Duration.zero;
-                                  audioPlayer.stop();
 
                                   isPlaying = false;
                                 });
