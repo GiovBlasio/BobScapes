@@ -302,8 +302,9 @@ class _BodyState extends State<Body> {
                                       .releasedIntoLocation;
                                   String whatSee =
                                       context.read<HeardPage2State>().whatSee;
-                                  int manyBirds =
-                                      context.read<HeardPage2State>().totalCounter;
+                                  int manyBirds = context
+                                      .read<HeardPage2State>()
+                                      .totalCounter;
                                   int manyMale = context
                                       .read<HeardPage2State>()
                                       .maleCounter;
@@ -334,6 +335,10 @@ class _BodyState extends State<Body> {
                                   // name.replaceAll("'", "'\\''");
 
                                   // print(name);
+
+                                  // locality =
+                                  //     locality.substring(0, 1).toUpperCase() +
+                                  //         locality.substring(1);
 
                                   Map<String, dynamic> params = {
                                     "name": name,
@@ -384,6 +389,9 @@ class _BodyState extends State<Body> {
                                               IHeardBobThanksScreen.routeName);
                                         });
                                       } else {
+                                        setState(() {
+                                          isLoaded = !isLoaded;
+                                        });
                                         await Future.delayed(
                                             Duration.zero,
                                             () => showDialog(
@@ -866,7 +874,7 @@ class _BodyState extends State<Body> {
                   padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(15)),
                   child: const heard2.CustomDropDownMenu(
-                      items: ['Family (Covey)', '1', '2', '3']),
+                      items: ['Family (Covey)', 'Male', 'Female']),
                 ),
                 SizedBox(
                   height: getProportionateScreenHeight(10),
@@ -1016,7 +1024,7 @@ class _BodyState extends State<Body> {
     DateTime t = DateFormat.jm().parse(time);
     DateTime dt = DateTime.utc(d.year, d.month, d.day, t.hour, t.minute);
 
-    String dts = dt.toString().replaceFirst(' ', 'T');
+    String dts = dt.toString().substring(0, 19);
 
     return dts;
   }

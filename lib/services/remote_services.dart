@@ -12,6 +12,7 @@ class RemoteService {
   final headers = {
     HttpHeaders.contentTypeHeader: 'application/json',
     // HttpHeaders.authorizationHeader: bearerAuth,
+    "x-api-key": "C0ZOsvnQxv3VeAp1YGXoWaEDywtPurYU6suLwNWs",
   };
 
   // Future<List<Audio>> getAudio(
@@ -57,36 +58,39 @@ class RemoteService {
   Future<List<Marker>> getMarker([
     Map? params,
     String url =
-        'https://odoo14-cefpas.unitivastaging.it/api/v1/richiesta-forms',
+        'https://5kxsouk1xj.execute-api.us-east-1.amazonaws.com/default/bobwhite-app-map-sighting',
   ]) async {
+    // //TODO da togliere
+    // int index = 0;
+    // Map<String, Marker> map = state.map((key, value) {
+    //   index++;
+    //   return MapEntry<String, Marker>(
+    //       key,
+    //       Marker(
+    //           latitude: value.latitude,
+    //           longitude: value.longitude,
+    //           state: key,
+    //           sightings: index));
+    // });
 
-    //TODO da togliere 
-    int index = 0;
-    Map<String, Marker> map = state.map((key, value) {
-      index++;
-      return MapEntry<String, Marker>(
-          key,
-          Marker(
-              latitude: value.latitude,
-              longitude: value.longitude,
-              state: key,
-              sightings: index));
-    });
-
-    return await Future.delayed(
-        const Duration(seconds: 1), () => map.values.toList());
+    // return await Future.delayed(
+    //     const Duration(seconds: 1), () => map.values.toList());
 
     Uri uri = Uri.parse(url);
 
-    http.Response response =
-        await client.post(uri, headers: headers, body: json.encode(params));
+    http.Response response = await client.get(
+      uri,
+      headers: headers,
+    );
 
     if (response.statusCode == 200) {
       var json = response.body;
 
       var map = jsonDecode(json);
 
-      return markerFromJson(jsonEncode(map));
+      print(map['marker']);
+
+      return markerFromJson(jsonEncode(map['marker']));
 
       // return markerFromJson(jsonEncode(map['result']['user_forms']));
     } else {
@@ -99,26 +103,28 @@ class RemoteService {
     String url =
         'https://5kxsouk1xj.execute-api.us-east-1.amazonaws.com/default/bobwhite-app-add-sighting',
   ]) async {
-     return await Future.delayed(const Duration(seconds: 2), () => true);
+    // return await Future.delayed(const Duration(seconds: 2), () => true);
 
-   // Uri uri = Uri.parse(url);
+    Uri uri = Uri.parse(url);
 
-   // http.Response response =
-     //   await client.post(uri, headers: headers, body: json.encode(params));
+    http.Response response =
+        await client.post(uri, headers: headers, body: json.encode(params));
 
-    // if (response.statusCode == 200) {
-    //   var json = response.body;
+    print(response.body);
 
-    //   print(response.body);
+    if (response.statusCode == 200) {
+      var json = response.body;
 
-    //   var map = jsonDecode(json);
-    //   if (map['result'] == "ok") {
-    //     return true;
-    //   } else {
-    //     return false;
-    //    // throw Exception(map['result']['message']);
-    //   }
-    // }
-    // return false;
+      print(response.body);
+
+      var map = jsonDecode(json);
+      if (map['result'] == "ok") {
+        return true;
+      } else {
+        return false;
+        // throw Exception(map['result']['message']);
+      }
+    }
+    return false;
   }
 }
