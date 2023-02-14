@@ -78,65 +78,103 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
             ),
             child: Container(
               height: getProportionateScreenHeight(50),
+           //   width: double.infinity,
               padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(0)),
-              color: Colors.white,
-              child: DropdownButtonHideUnderline(
-                child: DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: kTextColor, width: 0.3)),
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: getProportionateScreenHeight(12),
-                          horizontal: getProportionateScreenWidth(12)),
-                      border: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: kTextColor, width: 0.3)),
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(0)),
+                  horizontal: getProportionateScreenWidth(5)),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(0)),
+
+                color: Colors.white,
+                // focusedBorder: const OutlineInputBorder(
+                //      borderSide:
+                //          BorderSide(color: kTextColor, width: 0.3)),
+                //  contentPadding: EdgeInsets.symmetric(
+                //      vertical: getProportionateScreenHeight(12),
+                //      horizontal: getProportionateScreenWidth(12)),
+                border: Border.all(color: kTextColor, width: 0.3),
+              ),
+              //  style: TextStyle(
+              //    color: kTextColor,
+              //    fontSize: getProportionateScreenWidth(13),
+              //    fontWeight: FontWeight.w500,
+              //  ),
+              // child: DropdownButtonHideUnderline(
+              //   child: DropdownButtonFormField(
+              //       decoration: InputDecoration(
+              //         focusedBorder: const OutlineInputBorder(
+              //             borderSide:
+              //                 BorderSide(color: kTextColor, width: 0.3)),
+              //         contentPadding: EdgeInsets.symmetric(
+              //             vertical: getProportionateScreenHeight(12),
+              //             horizontal: getProportionateScreenWidth(12)),
+              //         border: const OutlineInputBorder(
+              //             borderSide:
+              //                 BorderSide(color: kTextColor, width: 0.3)),
+              //       ),
+              //       borderRadius: const BorderRadius.all(Radius.circular(0)),
+              //       style: TextStyle(
+              //         color: kTextColor,
+              //         fontSize: getProportionateScreenWidth(13),
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //       isExpanded: true,
+              //       value: dropdownvalue,
+              //       icon: Icon(
+              //         Icons.keyboard_arrow_down,
+              //         color: kTextColor,
+              //         size: getProportionateScreenWidth(28),
+              //       ),
+              //       //iconSize: getProportionateScreenHeight(24),
+              //       items: widget.items.map((String item) {
+              //         return DropdownMenuItem(
+              //           value: item,
+              //           child: Padding(
+              //             padding: const EdgeInsets.only(left: 5),
+              //             child: Row(
+              //               children: [
+              //                 SvgPicture.asset("assets/icons/icon-bird.svg"),
+              //                 SizedBox(
+              //                   width: getProportionateScreenWidth(5),
+              //                 ),
+              //                 Text(
+              //                   item,
+              //                   style: TextStyle(
+              //                       fontSize: getProportionateScreenWidth(14),
+              //                       fontWeight: FontWeight.w500,
+              //                       color: kTextColor),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         );
+              //       }).toList(),
+              //       onChanged: (String? newValue) {
+              //         changeValue(newValue!);
+              //         setState(() {
+              //           dropdownvalue = newValue;
+              //         });
+              //       }),
+              // ),
+              child: Row(
+                children: [
+                  SvgPicture.asset("assets/icons/icon-bird.svg"),
+                  SizedBox(
+                    width: getProportionateScreenWidth(5),
+                  ),
+                  Text(
+                    widget.items[0],
                     style: TextStyle(
                       color: kTextColor,
                       fontSize: getProportionateScreenWidth(13),
                       fontWeight: FontWeight.w500,
                     ),
-                    isExpanded: true,
-                    value: dropdownvalue,
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: kTextColor,
-                      size: getProportionateScreenWidth(28),
-                    ),
-                    //iconSize: getProportionateScreenHeight(24),
-                    items: widget.items.map((String item) {
-                      return DropdownMenuItem(
-                        value: item,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset("assets/icons/icon-bird.svg"),
-                              SizedBox(
-                                width: getProportionateScreenWidth(5),
-                              ),
-                              Text(
-                                item,
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(14),
-                                    fontWeight: FontWeight.w500,
-                                    color: kTextColor),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      changeValue(newValue!);
-                      setState(() {
-                        dropdownvalue = newValue;
-                      });
-                    }),
+                    // style: TextStyle(
+
+                    //     fontSize: getProportionateScreenWidth(14),
+                    //     fontWeight: FontWeight.w500,
+                    //     color: kTextColor),
+                  ),
+                ],
               ),
             ),
           ),

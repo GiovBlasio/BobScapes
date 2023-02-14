@@ -34,7 +34,6 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
@@ -115,12 +114,16 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     contentPadding: EdgeInsets.all(
                       getProportionateScreenWidth(12),
                     ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        gapPadding: 20,
+                        borderSide: BorderSide(
+                            color: kTextColor.withOpacity(0.22), width: .5)),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0),
-                      gapPadding: 20,
-                      borderSide:
-                          const BorderSide(color: kTextColor, width: 0.3),
-                    ),
+                        borderRadius: BorderRadius.circular(5),
+                        gapPadding: 20,
+                        borderSide: BorderSide(
+                            color: kTextColor.withOpacity(0.22), width: .5)),
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: kTextColor, width: 0.3),
@@ -213,12 +216,16 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     contentPadding: EdgeInsets.all(
                       getProportionateScreenWidth(12),
                     ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        gapPadding: 20,
+                        borderSide: BorderSide(
+                            color: kTextColor.withOpacity(0.22), width: .5)),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0),
-                      gapPadding: 20,
-                      borderSide:
-                          const BorderSide(color: kTextColor, width: 0.3),
-                    ),
+                        borderRadius: BorderRadius.circular(5),
+                        gapPadding: 20,
+                        borderSide: BorderSide(
+                            color: kTextColor.withOpacity(0.22), width: .5)),
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: kTextColor, width: 0.3),
@@ -281,27 +288,27 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     MaterialStateColor.resolveWith((states) => Colors.white),
                 hourMinuteTextColor: MaterialStateColor.resolveWith((states) =>
                     states.contains(MaterialState.selected)
-                        ? Colors.pink
-                        : Colors.black),
+                        ? kTextLightColor
+                        : kTextColor),
               ),
               textTheme: const TextTheme(
                 labelSmall: TextStyle(
-                  color: kPrimaryColor,
+                  color: kTextColor,
                 ),
                 bodySmall: TextStyle(
-                  color: kPrimaryColor,
+                  color: kTextColor,
                 ),
               ),
               textButtonTheme: TextButtonThemeData(
                   style: ButtonStyle(
                 foregroundColor:
-                    MaterialStateColor.resolveWith((states) => kPrimaryColor),
+                    MaterialStateColor.resolveWith((states) => kTextColor),
                 overlayColor: MaterialStateColor.resolveWith(
                     (states) => Colors.transparent),
               )),
               colorScheme: const ColorScheme.light(
-                surface: kPrimaryColor,
-                primary: kPrimaryColor,
+                surface: kTextColor,
+                primary: kTextColor,
               ),
             ),
             child: Localizations.override(
@@ -339,23 +346,27 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
         data: Theme.of(context).copyWith(
           inputDecorationTheme: const InputDecorationTheme(
               filled: true,
-              fillColor: kPrimaryColor,
-              labelStyle: TextStyle(color: kColor3)),
+              fillColor: kTextColor,
+              labelStyle: TextStyle(color: kTextColor)),
           textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: kPrimaryColor,
+                bodyColor: kTextColor,
               ),
           textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.black,
+            cursorColor: kTextColor,
             selectionColor: Colors.transparent,
           ),
           colorScheme: const ColorScheme.light(
-            primary: kColor2,
-            onPrimary: kPrimaryColor,
+            onSecondary: kTextColor,
+            secondary: kTextColor,
+            surface: kTextColor,
+            onSurface: kTextColor,
+            primary: kColor1,
+            onPrimary: kTextColor,
           ),
           dialogBackgroundColor: Colors.white,
           textButtonTheme: const TextButtonThemeData(
               style: ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(Colors.black),
+                  foregroundColor: MaterialStatePropertyAll(kTextColor),
                   overlayColor: MaterialStatePropertyAll(Colors.transparent))),
         ),
         child: GestureDetector(

@@ -157,10 +157,11 @@ class BodyState extends State<Body> {
               left: 0,
               right: 0,
               top: 0,
-              child: Stack(alignment: Alignment.bottomCenter, children: [
+              child: Stack(alignment: Alignment.bottomLeft, children: [
                 Positioned(
                   bottom: 400,
-                  left: 25,
+                  left:-100,
+                  right: 0,
                   child: Image.asset(
                     "assets/images/quail-reflected.png",
                     height: 200,
@@ -168,8 +169,8 @@ class BodyState extends State<Body> {
                 ),
                 Positioned(
                   height: 453,
-                  left: 25,
-                  right: 25,
+                  left: getProportionateScreenWidth(20),
+                  right: getProportionateScreenWidth(20),
                   child: Card(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -272,7 +273,8 @@ class BodyState extends State<Body> {
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Positioned(
               bottom: 400,
-              left: 25,
+              left:-100,
+              right: 20,
               child: Image.asset(
                 "assets/images/quail-reflected.png",
                 height: 200,
@@ -280,8 +282,8 @@ class BodyState extends State<Body> {
             ),
             Positioned(
               height: 525 - 72,
-              left: 25,
-              right: 25,
+             left: getProportionateScreenWidth(20),
+              right: getProportionateScreenWidth(20),
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(

@@ -134,15 +134,23 @@ class _LocationFormState extends State<LocationForm> {
                         contentPadding: EdgeInsets.all(
                           getProportionateScreenWidth(12),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
                             gapPadding: 20,
-                            borderSide: const BorderSide(
-                                color: kTextColor, width: 0.3)),
+                            borderSide: BorderSide(
+                                color: kTextColor.withOpacity(0.22),
+                                width: .5)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            gapPadding: 20,
+                            borderSide: BorderSide(
+                                color: kTextColor.withOpacity(0.22),
+                                width: .5)),
                         border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: kTextColor, width: 0.3),
-                            borderRadius: BorderRadius.circular(0),
+                            borderSide: BorderSide(
+                                color: kTextColor.withOpacity(0.22),
+                                width: 0.3),
+                            borderRadius: BorderRadius.circular(5),
                             gapPadding: 20),
                         prefixIcon: Padding(
                           padding: EdgeInsets.symmetric(

@@ -100,9 +100,9 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                       contentPadding: EdgeInsets.symmetric(
                           vertical: getProportionateScreenHeight(12),
                           horizontal: getProportionateScreenWidth(12)),
-                      border: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: kTextColor, width: 0.3)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: kTextColor.withOpacity(0.22), width: 0.3)),
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(0)),
                     style: TextStyle(
@@ -122,7 +122,10 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset("assets/icons/icon_customers.svg"),
+                            SvgPicture.asset(
+                              "assets/icons/icon_customers.svg",
+                              color: kTextColor,
+                            ),
                             SizedBox(
                               width: getProportionateScreenWidth(5),
                             ),

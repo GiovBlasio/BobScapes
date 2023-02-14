@@ -61,13 +61,13 @@ class BottomButton extends StatelessWidget {
                     style: TextStyle(
                         fontSize: getProportionateScreenWidth(14),
                         fontWeight: FontWeight.w500,
-                        color: kPrimaryColor),
+                        color: kTextColor),
                   ),
                   const Spacer(),
                   SvgPicture.asset(
                     iconPath,
                     height: getProportionateScreenHeight(25),
-                    color: kPrimaryColor,
+                    color: kTextColor,
                   ),
                   const Spacer()
                 ],

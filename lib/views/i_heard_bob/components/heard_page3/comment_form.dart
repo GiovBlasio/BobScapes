@@ -55,7 +55,7 @@ class _CommentFormState extends State<CommentForm> {
         Flexible(
           child: TextFormField(
             enableInteractiveSelection: false,
-            cursorColor: kPrimaryColor,
+            cursorColor: kTextColor,
             expands: true,
             maxLines: null,
             keyboardType: TextInputType.multiline,
@@ -96,16 +96,19 @@ class _CommentFormState extends State<CommentForm> {
                 gapPadding: 20,
               ),
               hintText: "Write here...",
-              prefixIcon: Padding(
+              prefixIcon: Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: getProportionateScreenWidth(5)),
-                child: SvgPicture.asset(
-                  "assets/icons/icon-message.svg",
+                child: Column(
+                  children: [
+                    SvgPicture.asset(
+                      "assets/icons/icon-message.svg",
+                    ),
+                  ],
                 ),
               ),
-              prefixIconConstraints: BoxConstraints(
-                  maxHeight: getProportionateScreenHeight(28),
-                  maxWidth: getProportionateScreenWidth(28)),
+              prefixIconConstraints:
+                  const BoxConstraints(maxHeight: 75, maxWidth: 28),
             ),
             textAlignVertical: TextAlignVertical.top,
           ),

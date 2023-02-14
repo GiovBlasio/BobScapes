@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         );
       },
       debugShowCheckedModeBanner: false,
-      title: 'Bob Scapes',
+      title: 'BobScapes',
       theme: theme(context),
       initialRoute: SplashScreen.routeName,
       routes: routes,
@@ -65,11 +65,11 @@ ThemeData theme(BuildContext context) {
       800: kPrimaryColor.withOpacity(0.90),
       900: kPrimaryColor
     }),
-    primaryColor: Colors.black,
+    primaryColor: kTextColor,
     scaffoldBackgroundColor: const Color(0xfff0f0f0),
     appBarTheme: appBarTheme(),
     textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.black,
+          bodyColor: kTextColor,
           fontFamily: 'Manrope',
         ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -84,7 +84,7 @@ AppBarTheme appBarTheme() {
     systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
         statusBarColor: Colors.transparent),
-    iconTheme: const IconThemeData(color: kPrimaryColor),
+    iconTheme: const IconThemeData(color: kTextColor),
     titleTextStyle: textTheme.titleLarge,
   );
 }

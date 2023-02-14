@@ -72,25 +72,25 @@ class _MappaState extends State<Mappa> {
           right: getProportionateScreenWidth(10),
           left: 0,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              IconButton(
-                  iconSize: getProportionateScreenHeight(25),
-                  alignment: Alignment.bottomCenter,
-                  padding: EdgeInsets.zero,
-                  onPressed: () => showDialog(
-                      useSafeArea: false,
-                      barrierColor: Colors.white70,
-                      context: context,
-                      builder: (context) => Padding(
-                            padding: EdgeInsets.zero,
-                            child: _showDisclaimer(context),
-                          )),
-                  icon: const Icon(
-                    Icons.info_outline,
-                    color: Colors.white,
-                  )),
+              // IconButton(
+              //     iconSize: getProportionateScreenHeight(25),
+              //     alignment: Alignment.bottomCenter,
+              //     padding: EdgeInsets.zero,
+              //     onPressed: () => showDialog(
+              //         useSafeArea: false,
+              //         barrierColor: Colors.white70,
+              //         context: context,
+              //         builder: (context) => Padding(
+              //               padding: EdgeInsets.zero,
+              //               child: _showDisclaimer(context),
+              //             )),
+              //     icon: const Icon(
+              //       Icons.info_outline,
+              //       color: Colors.white,
+              //     )),
               SizedBox(
                 width: getProportionateScreenWidth(41),
                 height: getProportionateScreenHeight(41),
