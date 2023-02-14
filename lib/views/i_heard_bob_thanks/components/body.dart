@@ -68,7 +68,7 @@ class Body extends StatelessWidget {
                       ),
                       const Spacer(),
                       IconButton(
-                          color: kPrimaryColor,
+                          color: kTextColor,
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.zero,
                           onPressed: () => showDialog(
@@ -103,7 +103,7 @@ class Body extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: getProportionateScreenWidth(20),
-                              color: kPrimaryColor),
+                              color: kTextColor),
                         ),
                       ),
                     ],

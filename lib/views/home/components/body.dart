@@ -160,11 +160,12 @@ class BodyState extends State<Body> {
               child: Stack(alignment: Alignment.bottomLeft, children: [
                 Positioned(
                   bottom: 400,
-                  left:-100,
+                  left: 0,
                   right: 0,
                   child: Image.asset(
                     "assets/images/quail-reflected.png",
                     height: 200,
+                    alignment: Alignment.centerLeft,
                   ),
                 ),
                 Positioned(
@@ -273,16 +274,17 @@ class BodyState extends State<Body> {
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Positioned(
               bottom: 400,
-              left:-100,
+              left: 0,
               right: 20,
               child: Image.asset(
                 "assets/images/quail-reflected.png",
                 height: 200,
+                alignment: Alignment.centerLeft,
               ),
             ),
             Positioned(
               height: 525 - 72,
-             left: getProportionateScreenWidth(20),
+              left: getProportionateScreenWidth(20),
               right: getProportionateScreenWidth(20),
               child: Card(
                 shape: const RoundedRectangleBorder(

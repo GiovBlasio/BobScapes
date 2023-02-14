@@ -868,13 +868,16 @@ class _BodyState extends State<Body> {
             top: getProportionateScreenHeight(25),
             bottom: getProportionateScreenHeight(10),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(15)),
-                  child: const heard2.CustomDropDownMenu(
-                      items: ['Family (Covey)', 'Male', 'Female','Both']),
+                      horizontal: 15),
+                  child: Container(
+                    height: 100,
+                    child: const heard2.CustomDropDownMenu(
+                        items: ['Family (Covey)', 'Male', 'Female','Both']),
+                  ),
                 ),
                 SizedBox(
                   height: getProportionateScreenHeight(10),

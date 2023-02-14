@@ -47,7 +47,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               children: [
                 Padding(
                   padding:
-                      EdgeInsets.only(bottom: getProportionateScreenHeight(8)),
+                      EdgeInsets.only(top: 20),
                   child: Text(
                     "What did you see?",
                     style: TextStyle(
@@ -56,11 +56,11 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                         color: kTextColor),
                   ),
                 ),
-                const Spacer(),
-                SvgPicture.asset(
-                  "assets/icons/mini-quail.svg",
-                  height: getProportionateScreenHeight(90),
-                )
+               // const Spacer(),
+                // SvgPicture.asset(
+                //   "assets/icons/mini-quail.svg",
+                //   height: getProportionateScreenHeight(90),
+                // )
               ],
             ),
             SizedBox(
@@ -69,16 +69,26 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
           ],
         ),
         Positioned(
-          top: getProportionateScreenHeight(55),
           right: 0,
           left: 0,
+          top: 0,
+            child: SvgPicture.asset(
+                    "assets/icons/mini-quail.svg",
+                    height: 90,
+                    alignment: Alignment.centerRight,
+                  )),
+        Positioned(
+          top: 55,
+          right: 0,
+          left: 0,
+          bottom: 0,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(
               Radius.circular(0),
             ),
             child: Container(
-              height: getProportionateScreenHeight(50),
-           //   width: double.infinity,
+              height: 50,
+              //   width: double.infinity,
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(5)),
               decoration: BoxDecoration(
