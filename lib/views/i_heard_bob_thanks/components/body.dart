@@ -124,17 +124,17 @@ class Body extends StatelessWidget {
           top: 0,
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Positioned(
-              bottom: 400,
+              bottom: getProportionateScreenHeight(400),
               left: 25,
               child: Image.asset(
                 "assets/images/quail-reflected.png",
-                height: 200,
+                height: getProportionateScreenHeight(200),
               ),
             ),
             Positioned(
-              height: 453,
-              left: 25,
-              right: 25,
+              height: getProportionateScreenHeight(453),
+              left: 20,
+              right: 20,
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
@@ -189,8 +189,8 @@ class Body extends StatelessWidget {
                           Padding(
                               padding: EdgeInsets.only(
                                   left: getProportionateScreenWidth(30),
-                                  top: 30,
-                                  bottom: 5,
+                                  top: getProportionateScreenHeight(25),
+                                  bottom: getProportionateScreenHeight(5),
                                   right: getProportionateScreenWidth(40)),
                               child: Text(
                                 "The exact location of your sightings will not be shared with the public.",
@@ -203,15 +203,15 @@ class Body extends StatelessWidget {
                           Padding(
                               padding: EdgeInsets.only(
                                   left: getProportionateScreenWidth(30),
-                                  top: 20,
-                                  bottom: 5,
+                                  top: getProportionateScreenHeight(20),
+                                  bottom: getProportionateScreenHeight(5),
                                   right: getProportionateScreenWidth(40)),
-                              child: const Text(
+                              child:  Text(
                                 "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                 style: TextStyle(
                                     color: kTextColor,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 14.5),
+                                    fontSize: getProportionateScreenWidth(14.5)),
                               )),
                         ],
                       ),

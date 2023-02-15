@@ -119,13 +119,32 @@ class _BodyState extends State<Body> {
                     children: [
                       Flexible(
                         flex: 3,
-                        child: Text(
-                          ">Spotting Bob",
-                          style: TextStyle(
-                              fontSize: getProportionateScreenWidth(26),
-                              fontWeight: FontWeight.w600,
-                              color: kPrimaryColor),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(26),
+                                color: kTextColor,
+                                fontWeight: FontWeight.w500),
+                            children: const [
+                              TextSpan(
+                                text: ">Spotting Bob\n",
+                              ),
+
+                              // TextSpan(
+                              //   text:
+                              //       "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhite that you\nhave heard or spotted in your\n landscape",
+
+                              // ),
+                            ],
+                          ),
                         ),
+                        // Text(
+                        //   ">Spotting Bob",
+                        //   style: TextStyle(
+                        //       fontSize: getProportionateScreenWidth(26),
+                        //       fontWeight: FontWeight.w500,
+                        //       color: kTextColor),
+                        // ),
                       ),
                       const Spacer(),
                       Flexible(
@@ -133,7 +152,7 @@ class _BodyState extends State<Body> {
                         child: Text(
                           "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhite that you\nhave heard or spotted in your\n landscape",
                           style: TextStyle(
-                              color: kPrimaryColor,
+                              color: kTextColor,
                               fontSize: getProportionateScreenWidth(16),
                               fontWeight: FontWeight.w500),
                         ),

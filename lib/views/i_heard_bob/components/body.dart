@@ -171,9 +171,7 @@ class _BodyState extends State<Body> {
           children: [
             Flexible(
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                    top: getProportionateScreenHeight(15),
-                    bottom: getProportionateScreenHeight(80)),
+                padding: EdgeInsets.only(top: 15, bottom: 80),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,7 +184,7 @@ class _BodyState extends State<Body> {
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: kTextColor,
-                              fontSize: getProportionateScreenWidth(18)),
+                              fontSize: 18),
                         ),
                       ],
                     ),
@@ -211,7 +209,9 @@ class _BodyState extends State<Body> {
                     const SizedBox(
                       height: 15,
                     ),
+                    Divider(),
                     _buildEmailForm(context),
+                    Divider(),
                     const CommentForm(),
                     Container(
                       color: Colors.transparent,
@@ -324,13 +324,15 @@ class _BodyState extends State<Body> {
                                       context.read<HeardPage3State>().learnMore;
                                   String comment =
                                       context.read<HeardPage3State>().comment;
+                                  String locality = '';
+                                  if (latitude != 1000) {
+                                    List<Placemark> placemarks =
+                                        await placemarkFromCoordinates(
+                                            latitude, longitude);
 
-                                  List<Placemark> placemarks =
-                                      await placemarkFromCoordinates(
-                                          latitude, longitude);
-
-                                  String locality = placemarks
-                                      .reversed.last.administrativeArea!;
+                                    locality = placemarks
+                                        .reversed.last.administrativeArea!;
+                                  }
 
                                   // name.replaceAll("'", "'\\''");
 
@@ -414,7 +416,7 @@ class _BodyState extends State<Body> {
                                                       AlertDialog(
                                                     backgroundColor: kColor3,
                                                     title: Text(
-                                                      "BobScapes",
+                                                      "Bobscapes",
                                                       style: TextStyle(
                                                           color: kTextColor,
                                                           fontSize:
@@ -460,7 +462,7 @@ class _BodyState extends State<Body> {
                                                 AlertDialog alert = AlertDialog(
                                                   backgroundColor: kColor3,
                                                   title: Text(
-                                                    "BobScapes",
+                                                    "Bobscapes",
                                                     style: TextStyle(
                                                         color: kTextColor,
                                                         fontSize:
@@ -499,126 +501,129 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Form _buildEmailForm(BuildContext context) {
-    return Form(
-      key: _keyEmail,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          RichText(
-            text: TextSpan(
-              style: TextStyle(
-                  fontSize: getProportionateScreenWidth(15),
-                  color: context.watch<HeardPage3State>().isEnable
-                      ? kTextColor
-                      : kTextColor.withOpacity(0.6),
-                  fontWeight: FontWeight.w400),
-              children: [
-                const TextSpan(text: 'Your email '),
-                if (context.watch<HeardPage3State>().isEnable)
-                  const TextSpan(
-                      text: '(required)',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w300, color: kTextColor)),
-              ],
-            ),
-          ),
-          Flexible(
-            child: TextFormField(
-              style: const TextStyle(
-                  color: kTextColor, fontWeight: FontWeight.w500),
-              enableInteractiveSelection: false,
-              cursorColor: kTextColor,
-              enabled: context.watch<HeardPage3State>().isEnable,
-              keyboardType: TextInputType.emailAddress,
-              controller: context.watch<HeardPage3State>().isEnable
-                  ? emailController
-                  : TextEditingController(text: ''),
-              onChanged: (value) {
-                changeEmail(value);
-              },
-              validator: (value) {
-                if (!_validateEmail(value!) &&
-                    Provider.of<HeardPage3State>(context, listen: false)
-                        .isEnable) {
-                  return 'Enter correct email';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                enabled: context.watch<HeardPage3State>().isEnable,
-                labelStyle: TextStyle(
+  Padding _buildEmailForm(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 18),
+      child: Form(
+        key: _keyEmail,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                    fontSize: getProportionateScreenWidth(15),
                     color: context.watch<HeardPage3State>().isEnable
                         ? kTextColor
-                        : null,
-                    fontSize: getProportionateScreenWidth(16),
-                    fontWeight: FontWeight.w500),
-                hintStyle: TextStyle(
-                    color: context.watch<HeardPage3State>().isEnable
-                        ? kTextColor.withOpacity(0.6)
-                        : null,
-                    fontSize: getProportionateScreenWidth(14),
-                    fontWeight: FontWeight.w300),
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                contentPadding: EdgeInsets.all(
-                  getProportionateScreenWidth(8),
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: kTextColor,
-                  ),
-                ),
-                disabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: kTextColor,
-                  ),
-                ),
-                border: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: kTextColor,
-                  ),
-                ),
-                errorBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1.5,
-                    color: Colors.red,
-                  ),
-                ),
-                focusedErrorBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1.5,
-                    color: Colors.red,
-                  ),
-                ),
-                prefixIcon: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(5)),
-                  child: SvgPicture.asset(
-                    "assets/icons/icon-mail.svg",
-                  ),
-                ),
-                prefixIconConstraints: BoxConstraints(
-                    maxHeight: getProportionateScreenHeight(28),
-                    maxWidth: getProportionateScreenWidth(28)),
-                hintText: "hello@aol.com",
+                        : kTextColor.withOpacity(0.6),
+                    fontWeight: FontWeight.w400),
+                children: [
+                  const TextSpan(text: 'Your email '),
+                  if (context.watch<HeardPage3State>().isEnable)
+                    const TextSpan(
+                        text: '(required)',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w300, color: kTextColor)),
+                ],
               ),
             ),
-          ),
-        ],
+            Flexible(
+              child: TextFormField(
+                style: const TextStyle(
+                    color: kTextColor, fontWeight: FontWeight.w500),
+                enableInteractiveSelection: false,
+                cursorColor: kTextColor,
+                enabled: context.watch<HeardPage3State>().isEnable,
+                keyboardType: TextInputType.emailAddress,
+                controller: context.watch<HeardPage3State>().isEnable
+                    ? emailController
+                    : TextEditingController(text: ''),
+                onChanged: (value) {
+                  changeEmail(value);
+                },
+                validator: (value) {
+                  if (!_validateEmail(value!) &&
+                      Provider.of<HeardPage3State>(context, listen: false)
+                          .isEnable) {
+                    return 'Enter correct email';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  enabled: context.watch<HeardPage3State>().isEnable,
+                  labelStyle: TextStyle(
+                      color: context.watch<HeardPage3State>().isEnable
+                          ? kTextColor
+                          : null,
+                      fontSize: getProportionateScreenWidth(16),
+                      fontWeight: FontWeight.w500),
+                  hintStyle: TextStyle(
+                      color: context.watch<HeardPage3State>().isEnable
+                          ? kTextColor.withOpacity(0.6)
+                          : null,
+                      fontSize: getProportionateScreenWidth(14),
+                      fontWeight: FontWeight.w300),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  contentPadding: EdgeInsets.all(
+                    getProportionateScreenWidth(8),
+                  ),
+                  enabledBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: kTextColor,
+                    ),
+                  ),
+                  disabledBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: kTextColor,
+                    ),
+                  ),
+                  border: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: kTextColor,
+                    ),
+                  ),
+                  errorBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Colors.red,
+                    ),
+                  ),
+                  focusedErrorBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Colors.red,
+                    ),
+                  ),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(5)),
+                    child: SvgPicture.asset(
+                      "assets/icons/icon-mail.svg",
+                    ),
+                  ),
+                  prefixIconConstraints: BoxConstraints(
+                      maxHeight: getProportionateScreenHeight(28),
+                      maxWidth: getProportionateScreenWidth(28)),
+                  hintText: "hello@aol.com",
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Scaffold _buildPage1() {
+  Widget _buildPage1() {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
@@ -627,207 +632,318 @@ class _BodyState extends State<Body> {
         children: [
           Flexible(
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(
-                  bottom: getProportionateScreenHeight(75),
-                  top: getProportionateScreenHeight(15)),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              padding: EdgeInsets.only(bottom: 65, top: 0),
+              child: Stack(
+                //  mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: getProportionateScreenWidth(8),
-                        left: getProportionateScreenWidth(15)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Register your sighting",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: kTextColor,
-                              fontSize: getProportionateScreenWidth(18)),
-                        ),
-                      ],
+                  Column(children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8, left: 15, top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Register your sighting",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: kTextColor,
+                                fontSize: 18),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(10),
-                  ),
-                  Container(
-                    color: kColor3,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Divider(
-                          height: 0,
-                          color: kColor1,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: getProportionateScreenHeight(20),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(15)),
-                          child: Form(
-                            key: _keyName,
-                            child: TextFormField(
-                              enableInteractiveSelection: false,
-                              controller: controller,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {
-                                changeName(value);
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty || value == '') {
-                                  return "Enter correct name";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                labelStyle: TextStyle(
-                                    color: kTextColor,
-                                    fontSize: getProportionateScreenWidth(15),
-                                    fontWeight: FontWeight.w500),
-                                hintStyle: TextStyle(
-                                  color: kTextColor.withAlpha(177),
-                                  fontSize: getProportionateScreenWidth(12),
-                                ),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: getProportionateScreenHeight(8)),
-                                enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: kTextColor,
+                    SizedBox(
+                      height: 20,
+                    ),
+                    //  const Divider(
+                    //         height: 0,
+                    //         color: kColor1,
+                    //         thickness: 1,
+                    //       ),
+                    Container(
+                      // color: Colors.red,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Form(
+                              key: _keyName,
+                              child: TextFormField(
+                                enableInteractiveSelection: false,
+                                controller: controller,
+                                keyboardType: TextInputType.name,
+                                onChanged: (value) {
+                                  changeName(value);
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty || value == '') {
+                                    return "Enter correct name";
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  labelStyle: TextStyle(
+                                      color: kTextColor,
+                                      fontSize: getProportionateScreenWidth(15),
+                                      fontWeight: FontWeight.w500),
+                                  hintStyle: TextStyle(
+                                    color: kTextColor.withAlpha(177),
+                                    fontSize: getProportionateScreenWidth(12),
                                   ),
-                                ),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: kTextColor,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical:
+                                          getProportionateScreenHeight(8)),
+                                  enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: kTextColor,
+                                    ),
                                   ),
-                                ),
-                                border: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: kTextColor,
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: kTextColor,
+                                    ),
                                   ),
-                                ),
-                                errorBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1.5,
-                                    color: Colors.red,
+                                  border: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: kTextColor,
+                                    ),
                                   ),
-                                ),
-                                focusedErrorBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1.5,
-                                    color: Colors.red,
+                                  errorBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: Colors.red,
+                                    ),
                                   ),
+                                  focusedErrorBorder:
+                                      const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  labelText: "Your name (required)",
+                                  hintText: "Shane Mahoney",
                                 ),
-                                labelText: "Your name (required)",
-                                hintText: "Shane Mahoney",
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: getProportionateScreenHeight(20),
-                        ),
-                        CustomDropDownMenu(items: itemsPage1),
-                        SizedBox(
-                          height: getProportionateScreenHeight(20),
-                        ),
-                        const Divider(
-                          height: 0,
-                          color: kColor1,
-                          thickness: 2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(20),
-                  ),
-                  const LocationForm(),
-                  SizedBox(
-                    height: getProportionateScreenHeight(10),
-                  ),
-                  const DateAndTimeForm(),
-                  SizedBox(
-                    height: getProportionateScreenHeight(20),
-                  ),
-                  const Divider(),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: getProportionateScreenWidth(15),
-                        left: getProportionateScreenWidth(15)),
-                    child: CustomRadioButton(
-                        items: radioOptionsPage1,
-                        title:
-                            "Are bobwhites released at the sightings location?",
-                        id: 1),
-                  ),
-                  const Divider(),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: getProportionateScreenWidth(8),
-                        left: getProportionateScreenWidth(15)),
-                    child: CustomRadioButton(
-                        items: radioOptions2Page1,
-                        title: "Did you physically see any birds?",
-                        id: 2),
-                  ),
-                  Container(
-                    color: Colors.transparent,
-                    padding: EdgeInsets.only(
-                      left: getProportionateScreenWidth(15),
-                      right: getProportionateScreenWidth(15),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          style: ButtonStyle(
-                            overlayColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            shadowColor: MaterialStateProperty.all(Colors.grey),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
+                          SizedBox(
+                            height: 20,
                           ),
-                          onPressed: () {
-                            if (!isLoaded) {
-                              setState(() {
-                                pageController.animateToPage(currentIndex + 1,
-                                    duration: const Duration(seconds: 1),
-                                    curve: Curves.linear);
-                              });
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                "Next",
-                                style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(14),
-                                    color: kTextColor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                width: getProportionateScreenHeight(5),
-                              ),
-                              SvgPicture.asset(
-                                "assets/icons/icon-next-form.svg",
-                                height: getProportionateScreenHeight(14),
-                              )
-                            ],
+                          CustomDropDownMenu(items: itemsPage1),
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  )
+                    //  const Divider(
+                    //         height: 0,
+                    //         color: kColor1,
+                    //         thickness: 1,
+                    //       ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    const LocationForm(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    const DateAndTimeForm(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    const Divider(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: getProportionateScreenWidth(15),
+                          left: getProportionateScreenWidth(15)),
+                      child: CustomRadioButton(
+                          items: radioOptionsPage1,
+                          title:
+                              "Are bobwhites released at the sightings location?",
+                          id: 1),
+                    ),
+                    const Divider(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: getProportionateScreenWidth(8),
+                          left: getProportionateScreenWidth(15)),
+                      child: CustomRadioButton(
+                          items: radioOptions2Page1,
+                          title: "Did you physically see any birds?",
+                          id: 2),
+                    ),
+                    Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(
+                          left: getProportionateScreenWidth(15),
+                          right: getProportionateScreenWidth(15),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                                shadowColor:
+                                    MaterialStateProperty.all(Colors.grey),
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                              ),
+                              onPressed: () {
+                                if (!isLoaded) {
+                                  setState(() {
+                                    pageController.animateToPage(
+                                        currentIndex + 1,
+                                        duration: const Duration(seconds: 1),
+                                        curve: Curves.linear);
+                                  });
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Next",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: kTextColor,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  SvgPicture.asset(
+                                    "assets/icons/icon-next-form.svg",
+                                    height: 14,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
+                  ]),
+                  Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: SvgPicture.asset(
+                        "assets/icons/mini-quail.svg",
+                        height: 100,
+                        alignment: Alignment.centerRight,
+                      )),
+                  Positioned(
+                    top: 68,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      color: kColor3,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Divider(
+                            height: 0,
+                            color: kColor1,
+                            thickness: 1,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getProportionateScreenWidth(15)),
+                            child: Form(
+                              // key: _keyName,
+                              child: TextFormField(
+                                enableInteractiveSelection: false,
+                                controller: controller,
+                                keyboardType: TextInputType.name,
+                                onChanged: (value) {
+                                  changeName(value);
+                                },
+                                validator: (value) {
+                                  if (value!.isEmpty || value == '') {
+                                    return "Enter correct name";
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  labelStyle: TextStyle(
+                                      color: kTextColor,
+                                      fontSize: getProportionateScreenWidth(15),
+                                      fontWeight: FontWeight.w500),
+                                  hintStyle: TextStyle(
+                                    color: kTextColor.withAlpha(177),
+                                    fontSize: getProportionateScreenWidth(12),
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical:
+                                          getProportionateScreenHeight(8)),
+                                  enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: kTextColor,
+                                    ),
+                                  ),
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: kTextColor,
+                                    ),
+                                  ),
+                                  border: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: kTextColor,
+                                    ),
+                                  ),
+                                  errorBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  focusedErrorBorder:
+                                      const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  labelText: "Your name (required)",
+                                  hintText: "Shane Mahoney",
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CustomDropDownMenu(items: itemsPage1),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          const Divider(
+                            height: 0,
+                            color: kColor1,
+                            thickness: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -837,183 +953,400 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Stack _buildPage2() {
-    return Stack(
-      children: [
-        Positioned(
-          top: getProportionateScreenHeight(15),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(15)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Register your sighting",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: kTextColor,
-                      fontSize: getProportionateScreenWidth(18)),
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: getProportionateScreenHeight(15),
-        ),
-        Positioned(
-            right: 0,
-            left: 0,
-            top: getProportionateScreenHeight(25),
-            bottom: getProportionateScreenHeight(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 15),
-                  child: Container(
-                    height: 100,
-                    child: const heard2.CustomDropDownMenu(
-                        items: ['Family (Covey)', 'Male', 'Female','Both']),
-                  ),
-                ),
-                SizedBox(
-                  height: getProportionateScreenHeight(10),
-                ),
-                const Divider(),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(15),
-                      vertical: getProportionateScreenHeight(15)),
-                  child: const NumericalQuestion(
-                    title: "How many birds?",
-                    id: 1,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(15),
-                      vertical: getProportionateScreenHeight(15)),
-                  child: const NumericalQuestion(
-                    title: "How many male?",
-                    id: 2,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(15),
-                      vertical: getProportionateScreenHeight(15)),
-                  child:
-                      const NumericalQuestion(title: "How many female?", id: 3),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(15),
-                      vertical: getProportionateScreenHeight(15)),
-                  child: const NumericalQuestion(
-                    title: "How many young birds?",
-                    id: 4,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(15),
-                      vertical: getProportionateScreenHeight(15)),
-                  child: const NumericalQuestion(
-                      title: "How many broods\nrappresented?", id: 5),
-                ),
-                const Spacer(),
-                Container(
-                  color: Colors.transparent,
+  Widget _buildPage2() {
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: Column(mainAxisSize: MainAxisSize.min, children: [
+          Flexible(
+              child: SingleChildScrollView(
                   padding: EdgeInsets.only(
-                      left: getProportionateScreenWidth(15),
-                      right: getProportionateScreenWidth(15),
-                      bottom: getProportionateScreenHeight(10)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        style: ButtonStyle(
-                          overlayColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                          shadowColor: MaterialStateProperty.all(Colors.grey),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                        ),
-                        onPressed: () {
-                          if (!isLoaded) {
-                            setState(() {
-                              pageController.animateToPage(currentIndex - 1,
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.linear);
-                            });
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/icon-back-form.svg",
-                              height: getProportionateScreenHeight(14),
+                      bottom: getProportionateScreenHeight(70), top: 0),
+                  child: Stack(children: [
+                    Container(
+                      height: SizeConfig.screenHeight -
+                          getProportionateScreenHeight(201),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: getProportionateScreenWidth(15),
+                                top: getProportionateScreenHeight(20)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Register your sighting",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: kTextColor,
+                                      fontSize: 18),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: getProportionateScreenHeight(5),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        getProportionateScreenWidth(15)),
+                                child: Container(
+                                  height: 65,
+                                  // child: const heard2.CustomDropDownMenu(items: [
+                                  //   'Family (Covey)',
+                                  //   'Male',
+                                  //   'Female',
+                                  //   'Both'
+                                  // ]),
+                                ),
+                              ),
+                              SizedBox(
+                                height: getProportionateScreenHeight(10),
+                              ),
+                              const Divider(),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getProportionateScreenWidth(15),
+                                    vertical: getProportionateScreenHeight(15)),
+                                child: const NumericalQuestion(
+                                  title: "How many birds?",
+                                  id: 1,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getProportionateScreenWidth(15),
+                                    vertical: getProportionateScreenHeight(15)),
+                                child: const NumericalQuestion(
+                                  title: "How many male?",
+                                  id: 2,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getProportionateScreenWidth(15),
+                                    vertical: getProportionateScreenHeight(15)),
+                                child: const NumericalQuestion(
+                                    title: "How many female?", id: 3),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getProportionateScreenWidth(15),
+                                    vertical: getProportionateScreenHeight(15)),
+                                child: const NumericalQuestion(
+                                  title: "How many young birds?",
+                                  id: 4,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getProportionateScreenWidth(15),
+                                    vertical: getProportionateScreenHeight(15)),
+                                child: const NumericalQuestion(
+                                    title: "How many broods\nrappresented?",
+                                    id: 5),
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: getProportionateScreenWidth(15),
+                                right: getProportionateScreenWidth(15)),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                    shadowColor:
+                                        MaterialStateProperty.all(Colors.grey),
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                  ),
+                                  onPressed: () {
+                                    if (!isLoaded) {
+                                      setState(() {
+                                        pageController.animateToPage(
+                                            currentIndex - 1,
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            curve: Curves.linear);
+                                      });
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/icon-back-form.svg",
+                                        height: 14,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Back",
+                                        style: TextStyle(
+                                            fontSize: 14, color: kTextColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Spacer(),
+                                TextButton(
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                    shadowColor:
+                                        MaterialStateProperty.all(Colors.grey),
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                  ),
+                                  onPressed: () {
+                                    if (!isLoaded) {
+                                      setState(() {
+                                        pageController.animateToPage(
+                                            currentIndex + 1,
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            curve: Curves.linear);
+                                      });
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Next",
+                                        style: TextStyle(
+                                            fontSize: 14, color: kTextColor),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      SvgPicture.asset(
+                                        "assets/icons/icon-next-form.svg",
+                                        height: 14,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "Back",
-                              style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(14),
-                                  color: kTextColor),
-                            ),
-                          ],
-                        ),
+                          ),
+
+                          // Positioned(
+                          //     right: 0,
+                          //     left: 0,
+                          //     top: 25,
+                          //     bottom: 10,
+                          //     child: Column(
+                          //       mainAxisSize: MainAxisSize.max,
+                          //       children: [
+                          //         Padding(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal:
+                          //                   getProportionateScreenWidth(15)),
+                          //           child: Container(
+                          //             height: 110,
+                          //             child: const heard2.CustomDropDownMenu(
+                          //                 items: [
+                          //                   'Family (Covey)',
+                          //                   'Male',
+                          //                   'Female',
+                          //                   'Both'
+                          //                 ]),
+                          //           ),
+                          //         ),
+                          //         SizedBox(
+                          //           height: getProportionateScreenHeight(10),
+                          //         ),
+                          //         const Divider(),
+                          //         Padding(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal: getProportionateScreenWidth(15),
+                          //               vertical: getProportionateScreenHeight(15)),
+                          //           child: const NumericalQuestion(
+                          //             title: "How many birds?",
+                          //             id: 1,
+                          //           ),
+                          //         ),
+                          //         Padding(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal: getProportionateScreenWidth(15),
+                          //               vertical: getProportionateScreenHeight(15)),
+                          //           child: const NumericalQuestion(
+                          //             title: "How many male?",
+                          //             id: 2,
+                          //           ),
+                          //         ),
+                          //         Padding(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal: getProportionateScreenWidth(15),
+                          //               vertical: getProportionateScreenHeight(15)),
+                          //           child: const NumericalQuestion(
+                          //               title: "How many female?", id: 3),
+                          //         ),
+                          //         Padding(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal: getProportionateScreenWidth(15),
+                          //               vertical: getProportionateScreenHeight(15)),
+                          //           child: const NumericalQuestion(
+                          //             title: "How many young birds?",
+                          //             id: 4,
+                          //           ),
+                          //         ),
+                          //         Padding(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal: getProportionateScreenWidth(15),
+                          //               vertical: getProportionateScreenHeight(15)),
+                          //           child: const NumericalQuestion(
+                          //               title: "How many broods\nrappresented?",
+                          //               id: 5),
+                          //         ),
+                          //         const Spacer(),
+                          //         Container(
+                          //           color: Colors.transparent,
+                          //           padding: EdgeInsets.only(
+                          //               left: getProportionateScreenWidth(15),
+                          //               right: getProportionateScreenWidth(15),
+                          //               bottom: getProportionateScreenHeight(10)),
+                          //           child: Row(
+                          //             mainAxisSize: MainAxisSize.min,
+                          //             mainAxisAlignment:
+                          //                 MainAxisAlignment.spaceBetween,
+                          //             children: [
+                          //               TextButton(
+                          //                 style: ButtonStyle(
+                          //                   overlayColor: MaterialStateProperty.all(
+                          //                       Colors.transparent),
+                          //                   shadowColor: MaterialStateProperty.all(
+                          //                       Colors.grey),
+                          //                   backgroundColor:
+                          //                       MaterialStateProperty.all(
+                          //                           Colors.transparent),
+                          //                 ),
+                          //                 onPressed: () {
+                          //                   if (!isLoaded) {
+                          //                     setState(() {
+                          //                       pageController.animateToPage(
+                          //                           currentIndex - 1,
+                          //                           duration:
+                          //                               const Duration(seconds: 1),
+                          //                           curve: Curves.linear);
+                          //                     });
+                          //                   }
+                          //                 },
+                          //                 child: Row(
+                          //                   children: [
+                          //                     SvgPicture.asset(
+                          //                       "assets/icons/icon-back-form.svg",
+                          //                       height:
+                          //                           getProportionateScreenHeight(
+                          //                               14),
+                          //                     ),
+                          //                     SizedBox(
+                          //                       width:
+                          //                           getProportionateScreenHeight(5),
+                          //                     ),
+                          //                     Text(
+                          //                       "Back",
+                          //                       style: TextStyle(
+                          //                           fontSize:
+                          //                               getProportionateScreenWidth(
+                          //                                   14),
+                          //                           color: kTextColor),
+                          //                     ),
+                          //                   ],
+                          //                 ),
+                          //               ),
+                          //               const Spacer(),
+                          //               TextButton(
+                          //                 style: ButtonStyle(
+                          //                   overlayColor: MaterialStateProperty.all(
+                          //                       Colors.transparent),
+                          //                   shadowColor: MaterialStateProperty.all(
+                          //                       Colors.grey),
+                          //                   backgroundColor:
+                          //                       MaterialStateProperty.all(
+                          //                           Colors.transparent),
+                          //                 ),
+                          //                 onPressed: () {
+                          //                   if (!isLoaded) {
+                          //                     setState(() {
+                          //                       pageController.animateToPage(
+                          //                           currentIndex + 1,
+                          //                           duration:
+                          //                               const Duration(seconds: 1),
+                          //                           curve: Curves.linear);
+                          //                     });
+                          //                   }
+                          //                 },
+                          //                 child: Row(
+                          //                   children: [
+                          //                     Text(
+                          //                       "Next",
+                          //                       style: TextStyle(
+                          //                           fontSize:
+                          //                               getProportionateScreenWidth(
+                          //                                   14),
+                          //                           color: kTextColor),
+                          //                     ),
+                          //                     SizedBox(
+                          //                       width:
+                          //                           getProportionateScreenHeight(5),
+                          //                     ),
+                          //                     SvgPicture.asset(
+                          //                       "assets/icons/icon-next-form.svg",
+                          //                       height:
+                          //                           getProportionateScreenHeight(
+                          //                               14),
+                          //                     )
+                          //                   ],
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //         const Spacer(),
+                          //       ],
+                          //     )),
+                        ],
                       ),
-                      const Spacer(),
-                      TextButton(
-                        style: ButtonStyle(
-                          overlayColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                          shadowColor: MaterialStateProperty.all(Colors.grey),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                        ),
-                        onPressed: () {
-                          if (!isLoaded) {
-                            setState(() {
-                              pageController.animateToPage(currentIndex + 1,
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.linear);
-                            });
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              "Next",
-                              style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(14),
-                                  color: kTextColor),
-                            ),
-                            SizedBox(
-                              width: getProportionateScreenHeight(5),
-                            ),
-                            SvgPicture.asset(
-                              "assets/icons/icon-next-form.svg",
-                              height: getProportionateScreenHeight(14),
-                            )
-                          ],
-                        ),
+                    ),
+                    Positioned(
+                        right: 0,
+                        left: 0,
+                        top: 15,
+                        child: SvgPicture.asset(
+                          "assets/icons/mini-quail.svg",
+                          height: 100,
+                          alignment: Alignment.centerRight,
+                        )),
+                    Positioned(
+                      right: 15,
+                      left: 15,
+                      top: 55,
+                      child: Container(
+                        height: 110,
+                        child: const heard2.CustomDropDownMenu(items: [
+                          'Family (Covey)',
+                          'Male',
+                          'Female',
+                          'Both'
+                        ]),
                       ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-              ],
-            )),
-      ],
-    );
+                    ),
+                  ])))
+        ]));
   }
 
   bool _validateEmail(String email) {

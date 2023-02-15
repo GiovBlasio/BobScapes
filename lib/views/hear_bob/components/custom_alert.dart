@@ -58,198 +58,208 @@ class _CustomAlertState extends State<CustomAlert> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Padding(
-      padding: EdgeInsets.symmetric(
-          vertical: getProportionateScreenHeight(0),
-          horizontal: getProportionateScreenWidth(15)),
-      child: Container(
-          height: getProportionateScreenHeight(240),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: Card(
-              margin: const EdgeInsets.all(0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              elevation: 10,
-              child: ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(16),
-                  ),
-                  child: Container(
-                    color: kColor3,
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                        vertical: getProportionateScreenHeight(0)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          icon: SvgPicture.asset(
-                            "assets/icons/icon-close.svg",
-                            height: getProportionateScreenHeight(20),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.title,
-                              style: TextStyle(
-                                  color: kTextColor,
-                                  fontSize: getProportionateScreenWidth(16),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        const Spacer(
-                          flex: 6,
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: getProportionateScreenWidth(8)),
-                              child: SliderTheme(
-                                data: SliderThemeData(
-                                    trackHeight: 2,
-                                    inactiveTrackColor:
-                                        kTextColor.withOpacity(0.8),
-                                    activeTrackColor: kColor1,
-                                    disabledThumbColor: kColor1,
-                                    thumbShape: SliderComponentShape.noThumb,
-                                    overlayShape: const RoundSliderOverlayShape(
-                                        overlayRadius: 12),
-                                    overlayColor: Colors.transparent),
-                                child: Slider(
-                                    min: 0,
-                                    value: position.inSeconds.toDouble(),
-                                    max: duration.inSeconds.toDouble(),
-                                    onChanged: (value) async {
-                                      final position =
-                                          Duration(seconds: value.toInt());
-                                      await audioPlayer.seek(position);
-                                    }),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: getProportionateScreenWidth(20)),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    formatTime(position),
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontSize:
-                                            getProportionateScreenWidth(12),
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Text(
-                                    formatTime(
-                                      duration - position,
-                                    ),
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontSize:
-                                            getProportionateScreenWidth(12),
-                                        fontWeight: FontWeight.w500),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        const Spacer(flex: 2),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                await audioPlayer.seek(Duration.zero);
-                                audioPlayer.stop();
-                                setState(() {
-                                  position = Duration.zero;
-
-                                  isPlaying = false;
-                                });
-                              },
-                              child: Card(
-                                shape: const CircleBorder(),
-                                elevation: 8,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          getProportionateScreenWidth(8),
-                                      vertical:
-                                          getProportionateScreenHeight(8)),
-                                  child: SvgPicture.asset(
-                                    "assets/icons/icon-repeate.svg",
-                                    height: getProportionateScreenHeight(20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                if (isPlaying) {
-                                  await audioPlayer.pause();
-                                } else {
-                                  await audioPlayer.resume();
-                                }
-                                setState(() {
-                                  isPlaying = !isPlaying;
-                                });
-                              },
-                              child: Card(
-                                shape: const CircleBorder(),
-                                elevation: 8,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          getProportionateScreenWidth(8),
-                                      vertical:
-                                          getProportionateScreenHeight(8)),
-                                  child: !isPlaying
-                                      ? const Icon(
-                                          Icons.play_arrow,
-                                          color: kTextColor,
-                                          size: 20,
-                                        )
-                                      : SvgPicture.asset(
-                                          "assets/icons/icon-stop.svg",
-                                          height:
-                                              getProportionateScreenHeight(20),
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(
-                          flex: 5,
-                        )
-                      ],
+    return Stack(alignment: Alignment.center, children: [
+      Positioned(
+        top: getProportionateScreenHeight(140),
+        left: 40,
+        right: 30,
+        child: Image.asset(
+          "assets/images/quail.png",
+          height: getProportionateScreenHeight(125),
+          alignment: Alignment.centerRight,
+        ),
+      ),
+      Positioned(
+        left: 15,
+        right: 15,
+        top: getProportionateScreenHeight(240),
+        child: Container(
+            height: 240,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(13.0),
+            ),
+            child: Card(
+                margin: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13.0),
+                ),
+                elevation: 10,
+                child: ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(13),
                     ),
-                  )))),
-    ));
+                    child: Container(
+                      color: kColor3,
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            icon: SvgPicture.asset(
+                              "assets/icons/icon-close.svg",
+                              height: 20,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.title,
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          const Spacer(
+                            flex: 6,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getProportionateScreenWidth(8)),
+                                child: SliderTheme(
+                                  data: SliderThemeData(
+                                      trackHeight: 2,
+                                      inactiveTrackColor:
+                                          kTextColor.withOpacity(0.8),
+                                      activeTrackColor: kColor1,
+                                      disabledThumbColor: kColor1,
+                                      thumbShape: SliderComponentShape.noThumb,
+                                      overlayShape:
+                                          const RoundSliderOverlayShape(
+                                              overlayRadius: 12),
+                                      overlayColor: Colors.transparent),
+                                  child: Slider(
+                                      min: 0,
+                                      value: position.inSeconds.toDouble(),
+                                      max: duration.inSeconds.toDouble(),
+                                      onChanged: (value) async {
+                                        final position =
+                                            Duration(seconds: value.toInt());
+                                        await audioPlayer.seek(position);
+                                      }),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        getProportionateScreenWidth(20)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      formatTime(position),
+                                      style: TextStyle(
+                                          color: kTextColor,
+                                          fontSize:
+                                              getProportionateScreenWidth(12),
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      formatTime(
+                                        duration - position,
+                                      ),
+                                      style: TextStyle(
+                                          color: kTextColor,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          const Spacer(flex: 2),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  await audioPlayer.seek(Duration.zero);
+                                  audioPlayer.stop();
+                                  setState(() {
+                                    position = Duration.zero;
+
+                                    isPlaying = false;
+                                  });
+                                },
+                                child: Card(
+                                  shape: const CircleBorder(),
+                                  elevation: 8,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            getProportionateScreenWidth(8),
+                                        vertical:
+                                            getProportionateScreenHeight(8)),
+                                    child: SvgPicture.asset(
+                                      "assets/icons/icon-repeate.svg",
+                                      height: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  if (isPlaying) {
+                                    await audioPlayer.pause();
+                                  } else {
+                                    await audioPlayer.resume();
+                                  }
+                                  setState(() {
+                                    isPlaying = !isPlaying;
+                                  });
+                                },
+                                child: Card(
+                                  shape: const CircleBorder(),
+                                  elevation: 8,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            getProportionateScreenWidth(8),
+                                        vertical:
+                                            getProportionateScreenHeight(8)),
+                                    child: !isPlaying
+                                        ? const Icon(
+                                            Icons.play_arrow,
+                                            color: kTextColor,
+                                            size: 20,
+                                          )
+                                        : SvgPicture.asset(
+                                            "assets/icons/icon-stop.svg",
+                                            height: 20,
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(
+                            flex: 5,
+                          )
+                        ],
+                      ),
+                    )))),
+      ),
+    ]);
   }
 
   String formatTime(Duration duration) {

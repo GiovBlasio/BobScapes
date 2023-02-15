@@ -42,8 +42,8 @@ class _CommentFormState extends State<CommentForm> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              bottom: getProportionateScreenHeight(8),
-              top: getProportionateScreenHeight(20)),
+              bottom: 8,
+              top: 20),
           child: Text(
             "Leave a comment",
             style: TextStyle(
@@ -71,34 +71,43 @@ class _CommentFormState extends State<CommentForm> {
               filled: true,
               fillColor: Colors.white.withAlpha(200),
               constraints:
-                  BoxConstraints(maxHeight: getProportionateScreenHeight(100)),
+                  BoxConstraints(maxHeight: 100),
               labelStyle: TextStyle(
-                  color: kPrimaryColor,
+                  color: kTextColor,
                   fontSize: getProportionateScreenWidth(16),
                   fontWeight: FontWeight.w500),
               hintStyle: TextStyle(
+                color: kTextColor.withOpacity(0.6),
                 overflow: TextOverflow.visible,
-                fontSize: getProportionateScreenWidth(13),
+                fontSize: 13,
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
               contentPadding: EdgeInsets.only(
-                  left: getProportionateScreenWidth(10),
-                  right: getProportionateScreenWidth(10),
-                  top: getProportionateScreenHeight(5)),
+                  left: 10,
+                  right: 10,
+                  top: 5),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(5),
                 gapPadding: 20,
-                borderSide: const BorderSide(color: kTextColor, width: 0.3),
+                borderSide:
+                    BorderSide(color: kTextColor.withOpacity(0.22), width: 0.3),
               ),
               border: OutlineInputBorder(
-                borderSide: const BorderSide(color: kTextColor, width: 0.3),
-                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(color: kTextColor.withOpacity(0.22), width: 0.3),
+                borderRadius: BorderRadius.circular(5),
                 gapPadding: 20,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                gapPadding: 20,
+                borderSide:
+                    BorderSide(color: kTextColor.withOpacity(0.22), width: 0.3),
               ),
               hintText: "Write here...",
               prefixIcon: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(5)),
+                    horizontal: 5,),
                 child: Column(
                   children: [
                     SvgPicture.asset(

@@ -65,14 +65,14 @@ class _LocationFormState extends State<LocationForm> {
           Padding(
             padding: EdgeInsets.only(
                 //left: getProportionateScreenWidth(15),
-                bottom: getProportionateScreenWidth(4),
-                top: getProportionateScreenHeight(10)),
+                bottom: 4,
+                top: 10),
             child: Row(
               children: [
                 Text(
                   "Latitude/Longitude",
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(12),
+                      fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: kTextColor),
                 ),
@@ -86,7 +86,7 @@ class _LocationFormState extends State<LocationForm> {
                     children: [
                       SvgPicture.asset(
                         "assets/icons/icon-edit.svg",
-                        height: getProportionateScreenHeight(12),
+                        height: 12,
                         color: kColor1,
                       ),
                     ],
@@ -100,7 +100,7 @@ class _LocationFormState extends State<LocationForm> {
                     child: Text(
                       "change",
                       style: TextStyle(
-                          fontSize: getProportionateScreenWidth(12),
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: kTextColor),
                     )),
@@ -117,7 +117,7 @@ class _LocationFormState extends State<LocationForm> {
                       style: TextStyle(
                           color: kTextColor,
                           fontWeight: FontWeight.w600,
-                          fontSize: getProportionateScreenWidth(14)),
+                          fontSize: 14),
                       cursorColor: kTextColor,
                       controller: controller,
                       readOnly: true,
@@ -132,7 +132,7 @@ class _LocationFormState extends State<LocationForm> {
                         filled: true,
                         fillColor: Colors.white.withAlpha(200),
                         contentPadding: EdgeInsets.all(
-                          getProportionateScreenWidth(12),
+                          12,
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -154,14 +154,14 @@ class _LocationFormState extends State<LocationForm> {
                             gapPadding: 20),
                         prefixIcon: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(5)),
+                              horizontal: 5),
                           child: SvgPicture.asset(
                             "assets/icons/icon-geolocalization.svg",
                           ),
                         ),
                         prefixIconConstraints: BoxConstraints(
-                            maxHeight: getProportionateScreenHeight(28),
-                            maxWidth: getProportionateScreenWidth(28)),
+                            maxHeight: 28,
+                            maxWidth: 28),
                         //suffixIconColor: Colors.white,
                         hintText: "",
                       ),

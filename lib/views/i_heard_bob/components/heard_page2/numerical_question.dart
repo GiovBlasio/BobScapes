@@ -27,43 +27,47 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
             constraints: BoxConstraints(
                 maxWidth: widget.id != 5
-                    ? getProportionateScreenWidth(200)
-                    : getProportionateScreenWidth(135)),
+                    ? 200
+                    : 135),
             child: Text(
               widget.title,
               style: TextStyle(
-                  fontSize: getProportionateScreenWidth(13),
+                  fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: kTextColor),
             )),
         if (widget.id == 5)
-          Tooltip(
-            padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(20),
-                horizontal: getProportionateScreenWidth(20)),
-            margin: EdgeInsets.only(
-                left: getProportionateScreenWidth(90),
-                right: getProportionateScreenWidth(50)),
-            decoration: const BoxDecoration(
-              color: kColor2,
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            showDuration: const Duration(seconds: 25),
-            triggerMode: TooltipTriggerMode.tap,
-            verticalOffset: getProportionateScreenHeight(-165),
-            textStyle: TextStyle(
-                color: kPrimaryColor,
-                fontSize: getProportionateScreenWidth(13),
-                fontWeight: FontWeight.w500),
-            message:
-                'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
-            child: SvgPicture.asset(
-              "assets/icons/icon-info.svg",
-              height: getProportionateScreenHeight(15),
+          Container(
+            padding: const EdgeInsets.only(top: 4, left: 5),
+            child: Tooltip(
+              padding: EdgeInsets.symmetric(
+                  vertical: getProportionateScreenHeight(20),
+                  horizontal: getProportionateScreenWidth(20)),
+              margin: EdgeInsets.only(
+                  left: getProportionateScreenWidth(90),
+                  right: getProportionateScreenWidth(50)),
+              decoration: const BoxDecoration(
+                color: kColor2,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              showDuration: const Duration(seconds: 25),
+              triggerMode: TooltipTriggerMode.tap,
+              verticalOffset: getProportionateScreenHeight(-165),
+              textStyle: TextStyle(
+                  color: kTextColor,
+                  fontSize: getProportionateScreenWidth(13),
+                  fontWeight: FontWeight.w500),
+              message:
+                  'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
+              child: SvgPicture.asset(
+                "assets/icons/icon-info.svg",
+                height: 16,
+              ),
             ),
           ),
         const Spacer(),

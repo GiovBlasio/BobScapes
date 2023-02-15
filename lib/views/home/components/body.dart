@@ -44,6 +44,7 @@ class BodyState extends State<Body> {
         ),
         if (showQuail && !isDisclaimer)
           Positioned(
+            //TODO
             bottom: 245,
             left: 40,
             right: 20,
@@ -159,19 +160,19 @@ class BodyState extends State<Body> {
               top: 0,
               child: Stack(alignment: Alignment.bottomLeft, children: [
                 Positioned(
-                  bottom: 400,
+                  bottom: getProportionateScreenHeight(400),
                   left: 0,
                   right: 0,
                   child: Image.asset(
                     "assets/images/quail-reflected.png",
-                    height: 200,
+                    height: getProportionateScreenHeight(200),
                     alignment: Alignment.centerLeft,
                   ),
                 ),
                 Positioned(
-                  height: 453,
-                  left: getProportionateScreenWidth(20),
-                  right: getProportionateScreenWidth(20),
+                  height: getProportionateScreenHeight(453),
+                  left: 20,
+                  right: 20,
                   child: Card(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -230,8 +231,8 @@ class BodyState extends State<Body> {
                               Padding(
                                   padding: EdgeInsets.only(
                                       left: getProportionateScreenWidth(30),
-                                      top: 30,
-                                      bottom: 5,
+                                      top: getProportionateScreenHeight(25),
+                                      bottom: getProportionateScreenHeight(5),
                                       right: getProportionateScreenWidth(40)),
                                   child: Text(
                                     "The exact location of your sightings will not be shared with the public.",
@@ -244,15 +245,15 @@ class BodyState extends State<Body> {
                               Padding(
                                   padding: EdgeInsets.only(
                                       left: getProportionateScreenWidth(30),
-                                      top: 20,
-                                      bottom: 5,
+                                      top: getProportionateScreenHeight(15),
+                                      bottom: getProportionateScreenHeight(5),
                                       right: getProportionateScreenWidth(40)),
-                                  child: const Text(
+                                  child:  Text(
                                     "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 14.5),
+                                        fontSize: getProportionateScreenWidth(14.5)),
                                   )),
                             ],
                           ),
@@ -273,7 +274,7 @@ class BodyState extends State<Body> {
           top: 0,
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Positioned(
-              bottom: 400,
+              bottom: getProportionateScreenHeight(400),
               left: 0,
               right: 20,
               child: Image.asset(
@@ -283,9 +284,9 @@ class BodyState extends State<Body> {
               ),
             ),
             Positioned(
-              height: 525 - 72,
-              left: getProportionateScreenWidth(20),
-              right: getProportionateScreenWidth(20),
+              height:getProportionateScreenHeight(453),
+              left: 20,
+              right: 20,
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
@@ -303,7 +304,7 @@ class BodyState extends State<Body> {
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(16))),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding:  EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
                       child: Column(
                         children: [
                           Padding(
@@ -351,8 +352,8 @@ class BodyState extends State<Body> {
                           Padding(
                               padding: EdgeInsets.only(
                                   left: getProportionateScreenWidth(30),
-                                  top: 30,
-                                  bottom: 5,
+                                  top: getProportionateScreenHeight(25),
+                                  bottom: getProportionateScreenHeight(5),
                                   right: getProportionateScreenWidth(40)),
                               child: Text(
                                 "The exact location of your sightings will not be shared with the public.",
@@ -365,15 +366,15 @@ class BodyState extends State<Body> {
                           Padding(
                               padding: EdgeInsets.only(
                                   left: getProportionateScreenWidth(30),
-                                  top: 20,
-                                  bottom: 5,
+                                  top: getProportionateScreenHeight(15),
+                                  bottom: getProportionateScreenHeight(5),
                                   right: getProportionateScreenWidth(40)),
-                              child: const Text(
+                              child:  Text(
                                 "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                 style: TextStyle(
                                     color: kTextColor,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 14.5),
+                                    fontSize: getProportionateScreenWidth(14.5)),
                               )),
                         ],
                       ),
@@ -415,25 +416,25 @@ class HomeButton extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SvgPicture.asset(
               iconPath,
-              height: getProportionateScreenHeight(35),
+              height: 35,
               color: color,
             ),
             Text(
               title,
               style: TextStyle(
-                  fontSize: getProportionateScreenWidth(18),
+                  fontSize: 18,
                   color: kTextColor,
                   fontWeight: FontWeight.w600),
             ),
             SvgPicture.asset(
               iconPath,
-              height: getProportionateScreenHeight(35),
+              height: 35,
               color: kTextColor,
             ),
           ],

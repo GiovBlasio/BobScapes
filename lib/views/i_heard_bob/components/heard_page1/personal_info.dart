@@ -94,9 +94,12 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               child: DropdownButtonHideUnderline(
                 child: DropdownButtonFormField(
                     decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: kTextColor, width: 0.3)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: kTextColor.withOpacity(0.22), width: 0.3)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: kTextColor.withOpacity(0.22), width: 0.3)),
                       contentPadding: EdgeInsets.symmetric(
                           vertical: getProportionateScreenHeight(12),
                           horizontal: getProportionateScreenWidth(12)),

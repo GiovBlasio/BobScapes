@@ -47,7 +47,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               children: [
                 Padding(
                   padding:
-                      EdgeInsets.only(top: 20),
+                      EdgeInsets.only(top: 0),
                   child: Text(
                     "What did you see?",
                     style: TextStyle(
@@ -64,30 +64,22 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               ],
             ),
             SizedBox(
-              height: getProportionateScreenHeight(25),
+              height: getProportionateScreenHeight(0),
             )
           ],
         ),
+        
         Positioned(
+          top: 25,
           right: 0,
           left: 0,
-          top: 0,
-            child: SvgPicture.asset(
-                    "assets/icons/mini-quail.svg",
-                    height: 90,
-                    alignment: Alignment.centerRight,
-                  )),
-        Positioned(
-          top: 55,
-          right: 0,
-          left: 0,
-          bottom: 0,
+         // bottom: 0,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(
               Radius.circular(0),
             ),
             child: Container(
-              height: 50,
+              height: 45,
               //   width: double.infinity,
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(5)),
