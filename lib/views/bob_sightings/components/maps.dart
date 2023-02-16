@@ -356,7 +356,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
     currentIndex = widget.item;
     pageController = PageController(
       initialPage: currentIndex,
-      viewportFraction: 0.47,
+      viewportFraction: 0.49,
     );
     super.initState();
   }
@@ -478,6 +478,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                                 1)
                                               const TextSpan(
                                                 text: '0',
+                                                style: TextStyle(color: kColor3)
                                               ),
                                           ],
                                         ),
