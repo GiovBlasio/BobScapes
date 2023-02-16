@@ -93,7 +93,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                 //  contentPadding: EdgeInsets.symmetric(
                 //      vertical: getProportionateScreenHeight(12),
                 //      horizontal: getProportionateScreenWidth(12)),
-                border: Border.all(color: kTextColor, width: 0.3),
+                border: Border.all(color: kColor3, width: 0.3),
               ),
               //  style: TextStyle(
               //    color: kTextColor,

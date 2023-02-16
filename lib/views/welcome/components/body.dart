@@ -57,7 +57,7 @@ class _BodyState extends State<Body> {
             height: 45,
           ),
           const Spacer(
-            flex: 4,
+            flex: 2,
           ),
           Flexible(
             flex: 5,
@@ -157,6 +157,7 @@ class _BodyState extends State<Body> {
                               fontWeight: FontWeight.w500),
                         ),
                       ),
+                      Spacer()
                     ],
                   ),
                 ),

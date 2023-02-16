@@ -71,6 +71,14 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                       ),
                     ),
                     InkWell(
+                        onTap: () => _showDatePicker(),
+                        overlayColor:
+                            const MaterialStatePropertyAll(Colors.transparent),
+                        splashColor: Colors.transparent,
+                        child: SizedBox(
+                          width: 3,
+                        )),
+                    InkWell(
                       onTap: () => _showDatePicker(),
                       overlayColor:
                           const MaterialStatePropertyAll(Colors.transparent),
@@ -171,6 +179,14 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                         color: kColor1,
                       ),
                     ),
+                    InkWell(
+                        onTap: () => _showTimePicker(),
+                        overlayColor:
+                            const MaterialStatePropertyAll(Colors.transparent),
+                        splashColor: Colors.transparent,
+                        child: SizedBox(
+                          width: 3,
+                        )),
                     InkWell(
                       onTap: () => _showTimePicker(),
                       overlayColor:

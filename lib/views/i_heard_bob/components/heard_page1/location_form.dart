@@ -86,12 +86,20 @@ class _LocationFormState extends State<LocationForm> {
                     children: [
                       SvgPicture.asset(
                         "assets/icons/icon-edit.svg",
-                        height: 12,
+                        height: getProportionateScreenHeight(12),
                         color: kColor1,
                       ),
                     ],
                   ),
                 ),
+                InkWell(
+                        onTap: () => _showMap(),
+                        overlayColor:
+                            const MaterialStatePropertyAll(Colors.transparent),
+                        splashColor: Colors.transparent,
+                        child: SizedBox(
+                          width: 3,
+                        )),
                 InkWell(
                     overlayColor:
                         const MaterialStatePropertyAll(Colors.transparent),
@@ -100,7 +108,7 @@ class _LocationFormState extends State<LocationForm> {
                     child: Text(
                       "change",
                       style: TextStyle(
-                          fontSize: 12,
+                          fontSize: getProportionateScreenWidth(12),
                           fontWeight: FontWeight.w700,
                           color: kTextColor),
                     )),

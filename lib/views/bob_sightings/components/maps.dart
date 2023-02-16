@@ -10,6 +10,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:bobscapes/models/marker.dart' as model;
 
+import 'custom_carousel.dart';
+
 class Mappa extends StatefulWidget {
   const Mappa({
     Key? key,
@@ -347,10 +349,15 @@ class BottomSheetCards extends StatefulWidget {
 }
 
 class _BottomSheetCardsState extends State<BottomSheetCards> {
+  late final PageController pageController;
   int currentIndex = 0;
   @override
   void initState() {
     currentIndex = widget.item;
+    pageController = PageController(
+      initialPage: currentIndex,
+      viewportFraction: 0.47,
+    );
     super.initState();
   }
 
@@ -373,91 +380,322 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
           height: getProportionateScreenHeight(4),
           width: getProportionateScreenWidth(100),
         ),
-        SizedBox(
-          height: 280,
-          child: InfiniteCarousel.builder(
-            itemCount: widget.state.length,
-            itemExtent: 180,
-            center: false,
-            anchor: 0.15,
-            velocityFactor: 0.2,
-            onIndexChanged: (index) {
-              setState(() {
-                currentIndex = index % widget.state.length;
-              });
-            },
-            //controller: controller,
-            axisDirection: Axis.horizontal,
-            loop: true,
-            itemBuilder: (context, index, realIndex) {
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: AnimatedContainer(
-                  
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.all(20),
 
-                  //  constraints: const BoxConstraints(
-                  //    //minWidth: 120,
-                  //    maxHeight: 150
-                  //  ),
-                  decoration: BoxDecoration(
-                      color: currentIndex == index ? kColor3 : Colors.white,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        widget.state[index],
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: kTextColor,
-                            fontSize: getProportionateScreenWidth(14)),
-                      ),
-                      const Spacer(),
-                      Text(
-                        "Bob has\nbeen heard",
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(12),
-                            color: kTextColor,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        mainAxisSize: MainAxisSize.min,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            "${widget.sightings[index]}",
-                            style: TextStyle(
-                                fontSize: getProportionateScreenWidth(40),
-                                color: kTextColor,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            width: getProportionateScreenWidth(45),
-                          ),
-                          Text(
-                            "times",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: kTextColor,
-                                fontSize: getProportionateScreenWidth(12)),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
+        LimitedBox(
+          maxHeight: 230,
+          child: PageView.builder(
+            controller: pageController,
+            onPageChanged: (index) {
+              currentIndex = index % widget.state.length;
+              setState(() {});
             },
+            itemBuilder: (_, index) {
+              return AnimatedBuilder(
+                  animation: pageController,
+                  builder: (ctx, child) {
+                    return child!;
+                  },
+                  child: UnconstrainedBox(
+                    child: Column(
+                      children: [
+                        AnimatedContainer(
+                          //  color: Colors.red,
+                          duration: Duration(milliseconds: 750),
+                          height: currentIndex == index % widget.state.length
+                              ? 0
+                              : 60,
+                        ),
+                        AnimatedContainer(
+                          //  color: Colors.red,
+                          duration: Duration(milliseconds: 750),
+                          height: currentIndex == index % widget.state.length
+                              ? 230
+                              : 170,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              margin: EdgeInsets.symmetric(horizontal: 20),
+
+                              //  constraints: const BoxConstraints(
+                              //    //minWidth: 120,
+                              //    maxHeight: 150
+                              //  ),
+                              decoration: BoxDecoration(
+                                  color: currentIndex ==
+                                          index % widget.state.length
+                                      ? kColor3
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    widget.state[index % widget.state.length],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        color: kTextColor,
+                                        fontSize:
+                                            getProportionateScreenWidth(14)),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    "Bob has\nbeen heard",
+                                    style: TextStyle(
+                                        fontSize:
+                                            getProportionateScreenWidth(12),
+                                        color: kTextColor,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    mainAxisSize: MainAxisSize.min,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                          style: TextStyle(
+                                              fontSize:
+                                                  getProportionateScreenWidth(
+                                                      40),
+                                              color: kTextColor,
+                                              fontWeight: FontWeight.w400),
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  "${widget.sightings[index % widget.state.length]}",
+                                            ),
+                                            if (widget.sightings[index %
+                                                        widget.state.length]
+                                                    .toString()
+                                                    .length ==
+                                                1)
+                                              const TextSpan(
+                                                text: '0',
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: getProportionateScreenWidth(45),
+                                      ),
+                                      Text(
+                                        "times",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: kTextColor,
+                                            fontSize:
+                                                getProportionateScreenWidth(
+                                                    12)),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ));
+            },
+            itemCount: widget.state.length,
           ),
+
+          // : AnimatedContainer(
+          //   duration: Duration(seconds: 1),
+          //   margin: const EdgeInsets.symmetric(horizontal: 20),
+          //   width: 140,
+          //   height: 0 == index ? 200 : 100,
+          //   color: Colors.red,
+          // ),
         ),
-        // CarouselSlider.builder(
+
+        // AnimatedContainer(
+        //   duration: Duration(seconds: 1),
+        //   height: currentIndex == 3 % widget.state.length ? 200:100,
+        //   child: PageView.builder(
+        //     controller: pageController,
+        //     onPageChanged: (index) {
+        //       currentIndex = index % widget.state.length;
+        //       setState(() {});
+        //     },
+        //     itemBuilder: (_, index) {
+        //       return AnimatedBuilder(
+        //           animation: pageController,
+        //           builder: (ctx, child) {
+        //             return child!;
+        //           },
+        //           child: AnimatedContainer(
+        //             duration: Duration(seconds: 1),
+        //             height: currentIndex == index
+        //                 ? 200
+        //                 : 140,
+        //             child: Card(
+        //               shape: RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.circular(20.0),
+        //               ),
+        //               child: AnimatedContainer(
+        //                 duration: const Duration(milliseconds: 200),
+        //                 padding: const EdgeInsets.all(20),
+
+        //                 //  constraints: const BoxConstraints(
+        //                 //    //minWidth: 120,
+        //                 //    maxHeight: 150
+        //                 //  ),
+        //                 decoration: BoxDecoration(
+        //                     color: currentIndex == index % widget.state.length
+        //                         ? kColor3
+        //                         : Colors.white,
+        //                     borderRadius: BorderRadius.circular(20)),
+        //                 child: Column(
+        //                   crossAxisAlignment: CrossAxisAlignment.start,
+        //                   mainAxisAlignment: MainAxisAlignment.end,
+        //                   mainAxisSize: MainAxisSize.min,
+        //                   children: [
+        //                     Text(
+        //                       widget.state[index % widget.state.length],
+        //                       style: TextStyle(
+        //                           fontWeight: FontWeight.w700,
+        //                           color: kTextColor,
+        //                           fontSize: getProportionateScreenWidth(14)),
+        //                     ),
+        //                     const Spacer(),
+        //                     Text(
+        //                       "Bob has\nbeen heard",
+        //                       style: TextStyle(
+        //                           fontSize: getProportionateScreenWidth(12),
+        //                           color: kTextColor,
+        //                           fontWeight: FontWeight.w400),
+        //                     ),
+        //                     Row(
+        //                       crossAxisAlignment: CrossAxisAlignment.baseline,
+        //                       mainAxisSize: MainAxisSize.min,
+        //                       textBaseline: TextBaseline.alphabetic,
+        //                       children: [
+        //                         Text(
+        //                           "${widget.sightings[index % widget.state.length]}",
+        //                           style: TextStyle(
+        //                               fontSize:
+        //                                   getProportionateScreenWidth(40),
+        //                               color: kTextColor,
+        //                               fontWeight: FontWeight.w400),
+        //                         ),
+        //                         SizedBox(
+        //                           width: getProportionateScreenWidth(45),
+        //                         ),
+        //                         Text(
+        //                           "times",
+        //                           style: TextStyle(
+        //                               fontWeight: FontWeight.w500,
+        //                               color: kTextColor,
+        //                               fontSize:
+        //                                   getProportionateScreenWidth(12)),
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ],
+        //                 ),
+        //               ),
+        //             ),
+        //           ));
+        //     },
+        //     //  itemCount: widget.state.length,
+        //   ),
+        // ),
+
+        // SizedBox(
+        //   height: getProportionateScreenHeight(280),
+        //    child: Carousel()
+        //    // InfiniteCarousel.builder(
+        //   //   itemCount: widget.state.length,
+        //   //   itemExtent: 180,
+        //   //   center: false,
+        //   //   anchor: 0.15,
+        //   //   velocityFactor: 0.2,
+        //   //   onIndexChanged: (index) {
+        //   //     setState(() {
+        //   //       currentIndex = index % widget.state.length;
+        //   //     });
+        //   //   },
+        //   //   //controller: controller,
+        //   //   axisDirection: Axis.horizontal,
+        //   //   loop: true,
+        //   //   itemBuilder: (context, index, realIndex) {
+        //   //     return Card(
+        //   //       shape: RoundedRectangleBorder(
+        //   //         borderRadius: BorderRadius.circular(20.0),
+        //   //       ),
+        //   //       child: AnimatedContainer(
+
+        //   //         duration: const Duration(milliseconds: 200),
+        //   //         padding: const EdgeInsets.all(20),
+
+        //   //         //  constraints: const BoxConstraints(
+        //   //         //    //minWidth: 120,
+        //   //         //    maxHeight: 150
+        //   //         //  ),
+        //   //         decoration: BoxDecoration(
+        //   //             color: currentIndex == index ? kColor3 : Colors.white,
+        //   //             borderRadius: BorderRadius.circular(20)),
+        //   //         child: Column(
+        //   //           crossAxisAlignment: CrossAxisAlignment.start,
+        //   //           mainAxisAlignment: MainAxisAlignment.end,
+        //   //           mainAxisSize: MainAxisSize.min,
+        //   //           children: [
+        //   //             Text(
+        //   //               widget.state[index],
+        //   //               style: TextStyle(
+        //   //                   fontWeight: FontWeight.w700,
+        //   //                   color: kTextColor,
+        //   //                   fontSize: getProportionateScreenWidth(14)),
+        //   //             ),
+        //   //             const Spacer(),
+        //   //             Text(
+        //   //               "Bob has\nbeen heard",
+        //   //               style: TextStyle(
+        //   //                   fontSize: getProportionateScreenWidth(12),
+        //   //                   color: kTextColor,
+        //   //                   fontWeight: FontWeight.w400),
+        //   //             ),
+        //   //             Row(
+        //   //               crossAxisAlignment: CrossAxisAlignment.baseline,
+        //   //               mainAxisSize: MainAxisSize.min,
+        //   //               textBaseline: TextBaseline.alphabetic,
+        //   //               children: [
+        //   //                 Text(
+        //   //                   "${widget.sightings[index]}",
+        //   //                   style: TextStyle(
+        //   //                       fontSize: getProportionateScreenWidth(40),
+        //   //                       color: kTextColor,
+        //   //                       fontWeight: FontWeight.w400),
+        //   //                 ),
+        //   //                 SizedBox(
+        //   //                   width: getProportionateScreenWidth(45),
+        //   //                 ),
+        //   //                 Text(
+        //   //                   "times",
+        //   //                   style: TextStyle(
+        //   //                       fontWeight: FontWeight.w500,
+        //   //                       color: kTextColor,
+        //   //                       fontSize: getProportionateScreenWidth(12)),
+        //   //                 ),
+        //   //               ],
+        //   //             ),
+        //   //           ],
+        //   //         ),
+        //   //       ),
+        //   //     );
+        //   //   },
+        //   // ),
+        // ),
+        // // CarouselSlider.builder(
         //   itemCount: widget.state.length,
         //   options: CarouselOptions(
         //       initialPage: widget.item,
@@ -540,6 +778,20 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
           height: getProportionateScreenHeight(18),
         )
       ],
+    );
+  }
+
+  AnimatedContainer _buildCard({required int index}) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      //margin: const EdgeInsets.only(right: 8),
+      height: currentIndex == index ? 200 : 100,
+      width: currentIndex == index
+          ? getProportionateScreenWidth(130)
+          : getProportionateScreenWidth(130),
+      decoration: BoxDecoration(
+          color: currentIndex == index ? kColor3 : kColor3,
+          shape: BoxShape.rectangle),
     );
   }
 }

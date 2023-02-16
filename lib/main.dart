@@ -82,7 +82,7 @@ AppBarTheme appBarTheme() {
     color: const Color(0xfff5f5f5),
     elevation: 3,
     systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent),
     iconTheme: const IconThemeData(color: kTextColor),
     titleTextStyle: textTheme.titleLarge,

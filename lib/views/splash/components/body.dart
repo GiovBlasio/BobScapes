@@ -20,28 +20,48 @@ class _BodyState extends State<Body> {
   bool animate = false;
   bool opacity = false;
 
-  late double bottomLogo = getProportionateScreenHeight(405);
-  late double leftLogo = getProportionateScreenWidth(28);
-  late double bottomTextRow = getProportionateScreenHeight(-100);
-  late double bottomBackground = getProportionateScreenHeight(0);
+  late double bottomLogo;
+  late double leftLogo;
+  late double bottomTextRow;
+  late double bottomBackground;
   late double imageWidth = SizeConfig.screenWidth;
-  late double logoHeight = getProportionateScreenHeight(95);
-  late double logoWidth = getProportionateScreenWidth(45);
-  late double leftFirstPin = getProportionateScreenWidth(-50);
-  late double bottomMainPhrase = getProportionateScreenHeight(-200);
+  late double logoHeight;
+  late double logoWidth;
+  late double leftFirstPin;
+  late double bottomMainPhrase;
   late double rightSecondPin = getProportionateScreenWidth(-60);
 
   @override
   void initState() {
     super.initState();
+    bottomLogo = getProportionateScreenHeight(405);
+    leftLogo = 28;
+    bottomTextRow = getProportionateScreenHeight(-100);
+    bottomBackground = getProportionateScreenHeight(0);
+    imageWidth = SizeConfig.screenWidth;
+    logoHeight = 95;
+    logoWidth = 45;
+    leftFirstPin = getProportionateScreenWidth(-50);
+    bottomMainPhrase = -200;
+    rightSecondPin = getProportionateScreenWidth(-60);
     _initialization();
   }
 
   void _initialization() async {
-    await Future.delayed(const Duration(milliseconds: 2000), () {
+    await Future.delayed(const Duration(milliseconds: 000), () {
       SizeConfig().init(context);
+      // bottomLogo = getProportionateScreenHeight(405);
+      // leftLogo = getProportionateScreenWidth(28);
+      // bottomTextRow = getProportionateScreenHeight(-100);
+      // bottomBackground = getProportionateScreenHeight(0);
+      // imageWidth = SizeConfig.screenWidth;
+      // logoHeight = getProportionateScreenHeight(95);
+      // logoWidth = getProportionateScreenWidth(45);
+      // leftFirstPin = getProportionateScreenWidth(-50);
+      // bottomMainPhrase = -200;
+      // rightSecondPin = getProportionateScreenWidth(-60);
     });
-
+    await Future.delayed(const Duration(milliseconds: 200));
     setState(() {
       opacity = true;
       bottomLogo = getProportionateScreenHeight(380);

@@ -420,18 +420,15 @@ class HomeButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset(
-              iconPath,
-              height: 35,
-              color: color,
-            ),
+           Spacer(flex: 2,),
             Text(
               title,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 24,
                   color: kTextColor,
-                  fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w700),
             ),
+            Spacer(),
             SvgPicture.asset(
               iconPath,
               height: 35,

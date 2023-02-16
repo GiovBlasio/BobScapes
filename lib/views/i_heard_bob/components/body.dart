@@ -32,7 +32,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  PageController pageController = PageController();
+  PageController pageController = PageController(keepPage: true);
 
   int currentIndex = 0;
 
@@ -101,7 +101,7 @@ class _BodyState extends State<Body> {
         ),
         Positioned(
           bottom: getProportionateScreenHeight(0),
-          top: getProportionateScreenHeight(50),
+          top: getProportionateScreenHeight(55),
           left: 0,
           right: 0,
           child: PageView(
@@ -118,7 +118,7 @@ class _BodyState extends State<Body> {
               ]),
         ),
         Positioned(
-            height: getProportionateScreenHeight(50),
+            top: 0,
             width: SizeConfig.screenWidth,
             child: const CustomTitle(
               title: "I Heard a Bob!",

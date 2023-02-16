@@ -30,10 +30,9 @@ class CustomTitle extends StatelessWidget {
           bottom: Radius.circular(15),
         ),
         child: Container(
-          padding:
-              EdgeInsets.symmetric(vertical: getProportionateScreenHeight(10)),
+          padding: EdgeInsets.symmetric(vertical: 10),
           width: double.infinity,
-          height: getProportionateScreenHeight(45),
+          height: 47,
           color: color,
           child: Row(
             children: [
@@ -44,7 +43,7 @@ class CustomTitle extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: kTextColor,
-                    fontSize: getProportionateScreenWidth(16),
+                    fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
               const Spacer(
@@ -54,7 +53,7 @@ class CustomTitle extends StatelessWidget {
                 flex: 2,
                 child: SvgPicture.asset(
                   icon,
-                  height: getProportionateScreenHeight(30),
+                  height: 30,
                   color: kTextColor,
                 ),
               ),
