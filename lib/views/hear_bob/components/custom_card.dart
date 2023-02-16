@@ -94,14 +94,14 @@ class CustomCard extends StatelessWidget {
                             Text(
                               title,
                               style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(14),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: kTextColor),
                             ),
                             Text(
                               '$time s',
                               style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(10),
+                                  fontSize:10,
                                   color: kTextColor),
                             ),
                           ],

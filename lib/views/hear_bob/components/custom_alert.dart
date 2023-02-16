@@ -154,7 +154,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                           widget.title,
                                           style: TextStyle(
                                               color: kTextColor,
-                                              fontSize: 16,
+                                              fontSize: 22,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],
@@ -212,8 +212,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                                 style: TextStyle(
                                                     color: kTextColor,
                                                     fontSize:
-                                                        getProportionateScreenWidth(
-                                                            12),
+                                                        16,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
@@ -223,7 +222,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                                 ),
                                                 style: TextStyle(
                                                     color: kTextColor,
-                                                    fontSize: 12,
+                                                    fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               )

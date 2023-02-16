@@ -38,7 +38,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                    fontSize: getProportionateScreenWidth(14),
+                    fontSize:16,
                     color: kTextColor),
                 children: [
                   TextSpan(
@@ -48,6 +48,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                     const TextSpan(
                         text: ' (required)',
                         style: TextStyle(
+                          fontSize: 15,
                           fontWeight: FontWeight.w200,
                         )),
                 ],
@@ -84,7 +85,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                                 softWrap: true,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(13),
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: group == item
                                         ? kTextColor

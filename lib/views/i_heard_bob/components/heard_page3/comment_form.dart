@@ -47,7 +47,7 @@ class _CommentFormState extends State<CommentForm> {
           child: Text(
             "Leave a comment",
             style: TextStyle(
-                fontSize: getProportionateScreenWidth(13),
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: kTextColor),
           ),
@@ -74,12 +74,12 @@ class _CommentFormState extends State<CommentForm> {
                   BoxConstraints(maxHeight: 100),
               labelStyle: TextStyle(
                   color: kTextColor,
-                  fontSize: getProportionateScreenWidth(16),
+                  fontSize: 16,
                   fontWeight: FontWeight.w500),
               hintStyle: TextStyle(
                 color: kTextColor.withOpacity(0.6),
                 overflow: TextOverflow.visible,
-                fontSize: 13,
+                fontSize: 14,
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
               contentPadding: EdgeInsets.only(

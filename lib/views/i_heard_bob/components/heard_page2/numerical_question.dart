@@ -37,7 +37,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             child: Text(
               widget.title,
               style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: kTextColor),
             )),
@@ -57,16 +57,16 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               ),
               showDuration: const Duration(seconds: 25),
               triggerMode: TooltipTriggerMode.tap,
-              verticalOffset: getProportionateScreenHeight(-165),
+            //  verticalOffset: getProportionateScreenHeight(-165),
               textStyle: TextStyle(
                   color: kTextColor,
-                  fontSize: getProportionateScreenWidth(13),
+                  fontSize: 16,
                   fontWeight: FontWeight.w500),
               message:
                   'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
               child: SvgPicture.asset(
                 "assets/icons/icon-info.svg",
-                height: 16,
+                height: 18,
               ),
             ),
           ),

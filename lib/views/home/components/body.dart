@@ -44,7 +44,6 @@ class BodyState extends State<Body> {
         ),
         if (showQuail && !isDisclaimer)
           Positioned(
-            //TODO
             bottom: 245,
             left: 40,
             right: 20,
@@ -108,6 +107,7 @@ class BodyState extends State<Body> {
                                 .firstAccess) {
                               changeFirstAccess();
                               showDialog(
+                                  useSafeArea: false,
                                   barrierDismissible: false,
                                   barrierColor: Colors.transparent,
                                   context: context,
@@ -210,7 +210,7 @@ class BodyState extends State<Body> {
                                       style: TextStyle(
                                           color: kTextColor,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 20),
+                                          fontSize: 24),
                                     ),
                                     IconButton(
                                       splashRadius: 0.1,
@@ -239,8 +239,7 @@ class BodyState extends State<Body> {
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontWeight: FontWeight.w400,
-                                        fontSize:
-                                            getProportionateScreenWidth(14.5)),
+                                        fontSize: 18),
                                   )),
                               Padding(
                                   padding: EdgeInsets.only(
@@ -248,12 +247,12 @@ class BodyState extends State<Body> {
                                       top: getProportionateScreenHeight(15),
                                       bottom: getProportionateScreenHeight(5),
                                       right: getProportionateScreenWidth(40)),
-                                  child:  Text(
+                                  child: Text(
                                     "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: getProportionateScreenWidth(14.5)),
+                                        fontSize: 18),
                                   )),
                             ],
                           ),
@@ -284,7 +283,7 @@ class BodyState extends State<Body> {
               ),
             ),
             Positioned(
-              height:getProportionateScreenHeight(453),
+              height: getProportionateScreenHeight(453),
               left: 20,
               right: 20,
               child: Card(
@@ -304,7 +303,8 @@ class BodyState extends State<Body> {
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(16))),
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(10)),
                       child: Column(
                         children: [
                           Padding(
@@ -316,12 +316,13 @@ class BodyState extends State<Body> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               textBaseline: TextBaseline.alphabetic,
                               children: [
+                                //TODO FONTSIZE
                                 const Text(
                                   "Disclaimer",
                                   style: TextStyle(
                                       color: kTextColor,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 20),
+                                      fontSize: 24),
                                 ),
                                 IconButton(
                                   splashRadius: 0.1,
@@ -360,8 +361,7 @@ class BodyState extends State<Body> {
                                 style: TextStyle(
                                     color: kTextColor,
                                     fontWeight: FontWeight.w400,
-                                    fontSize:
-                                        getProportionateScreenWidth(14.5)),
+                                    fontSize: 18),
                               )),
                           Padding(
                               padding: EdgeInsets.only(
@@ -369,12 +369,12 @@ class BodyState extends State<Body> {
                                   top: getProportionateScreenHeight(15),
                                   bottom: getProportionateScreenHeight(5),
                                   right: getProportionateScreenWidth(40)),
-                              child:  Text(
+                              child: Text(
                                 "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                 style: TextStyle(
                                     color: kTextColor,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: getProportionateScreenWidth(14.5)),
+                                    fontSize: 18),
                               )),
                         ],
                       ),
@@ -415,20 +415,22 @@ class HomeButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           Spacer(flex: 2,),
+            //TODO SPACER
+            const Spacer(
+              flex: 8,
+            ),
             Text(
               title,
               style: TextStyle(
-                  fontSize: 24,
-                  color: kTextColor,
-                  fontWeight: FontWeight.w700),
+                  fontSize: 24, color: kTextColor, fontWeight: FontWeight.w700),
             ),
-            Spacer(),
+            const Spacer(
+              flex: 5,
+            ),
             SvgPicture.asset(
               iconPath,
               height: 35,

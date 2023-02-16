@@ -48,7 +48,7 @@ class BottomButton extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: getProportionateScreenHeight(10)),
               width: SizeConfig.screenWidth / 2,
-              height: getProportionateScreenHeight(63),
+              height: 63,
               color: color,
               child: Row(
                 children: [
@@ -59,14 +59,14 @@ class BottomButton extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
+                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: kTextColor),
                   ),
                   const Spacer(),
                   SvgPicture.asset(
                     iconPath,
-                    height: getProportionateScreenHeight(25),
+                    height: 25,
                     color: kTextColor,
                   ),
                   const Spacer()

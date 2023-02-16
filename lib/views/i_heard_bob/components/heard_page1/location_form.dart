@@ -72,7 +72,7 @@ class _LocationFormState extends State<LocationForm> {
                 Text(
                   "Latitude/Longitude",
                   style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: kTextColor),
                 ),
@@ -86,7 +86,7 @@ class _LocationFormState extends State<LocationForm> {
                     children: [
                       SvgPicture.asset(
                         "assets/icons/icon-edit.svg",
-                        height: getProportionateScreenHeight(12),
+                        height: 12,
                         color: kColor1,
                       ),
                     ],
@@ -108,7 +108,7 @@ class _LocationFormState extends State<LocationForm> {
                     child: Text(
                       "change",
                       style: TextStyle(
-                          fontSize: getProportionateScreenWidth(12),
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: kTextColor),
                     )),

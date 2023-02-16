@@ -53,7 +53,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     Text(
                       "Date",
                       style: TextStyle(
-                        fontSize: getProportionateScreenWidth(13),
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: kTextColor,
                       ),
@@ -66,7 +66,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                       splashColor: Colors.transparent,
                       child: SvgPicture.asset(
                         "assets/icons/icon-edit.svg",
-                        height: getProportionateScreenHeight(12),
+                        height: 12,
                         color: kColor1,
                       ),
                     ),
@@ -88,7 +88,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                           Text(
                             "change",
                             style: TextStyle(
-                              fontSize: getProportionateScreenWidth(12),
+                              fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: kTextColor,
                             ),
@@ -102,7 +102,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               Flexible(
                 child: TextFormField(
                   style: TextStyle(
-                    fontSize: getProportionateScreenWidth(13),
+                    fontSize: 14,
                     color: kTextColor,
                     fontWeight: FontWeight.w600,
                   ),
@@ -162,7 +162,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     Text(
                       "Time",
                       style: TextStyle(
-                        fontSize: getProportionateScreenWidth(13),
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: kTextColor,
                       ),
@@ -175,7 +175,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                       splashColor: Colors.transparent,
                       child: SvgPicture.asset(
                         "assets/icons/icon-edit.svg",
-                        height: getProportionateScreenHeight(12),
+                        height: 12,
                         color: kColor1,
                       ),
                     ),
@@ -197,7 +197,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                           Text(
                             "change",
                             style: TextStyle(
-                              fontSize: getProportionateScreenWidth(12),
+                              fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: kTextColor,
                             ),
@@ -211,7 +211,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               Flexible(
                 child: TextFormField(
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(13),
+                      fontSize: 14,
                       color: kTextColor,
                       fontWeight: FontWeight.w600),
                   cursorColor: Colors.white,

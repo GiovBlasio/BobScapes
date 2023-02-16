@@ -43,7 +43,7 @@ class CustomTitle extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: kTextColor,
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
               const Spacer(

@@ -79,7 +79,7 @@ class _BodyState extends State<Body> {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                                fontSize: getProportionateScreenWidth(26),
+                                fontSize: 26,
                                 color: kTextColor,
                                 fontWeight: FontWeight.w500),
                             children: const [
@@ -103,7 +103,7 @@ class _BodyState extends State<Body> {
                         child: Text(
                           "We appreciate your\n contribution to conservation!",
                           style: TextStyle(
-                              fontSize: getProportionateScreenWidth(16),
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               color: kTextColor),
                         ),
@@ -122,7 +122,7 @@ class _BodyState extends State<Body> {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                                fontSize: getProportionateScreenWidth(26),
+                                fontSize: 26,
                                 color: kTextColor,
                                 fontWeight: FontWeight.w500),
                             children: const [
@@ -153,7 +153,7 @@ class _BodyState extends State<Body> {
                           "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhite that you\nhave heard or spotted in your\n landscape",
                           style: TextStyle(
                               color: kTextColor,
-                              fontSize: getProportionateScreenWidth(16),
+                              fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
                       ),
@@ -188,7 +188,7 @@ class _BodyState extends State<Body> {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12))),
                       minimumSize: MaterialStateProperty.all(Size(
-                          double.infinity, getProportionateScreenHeight(75))),
+                          double.infinity, 75)),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     onPressed: () => Navigator.popAndPushNamed(
@@ -201,7 +201,7 @@ class _BodyState extends State<Body> {
                         Text(
                           "Enter",
                           style: TextStyle(
-                              fontSize: getProportionateScreenWidth(20),
+                              fontSize: 24,
                               fontWeight: FontWeight.w600,
                               color: kTextColor),
                         ),
@@ -212,7 +212,7 @@ class _BodyState extends State<Body> {
                             flex: 1,
                             child: SvgPicture.asset(
                               "assets/icons/icon-arrow.svg",
-                              height: getProportionateScreenHeight(20),
+                              height: 20,
                             )),
                       ],
                     ),

@@ -441,14 +441,14 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                         fontWeight: FontWeight.w700,
                                         color: kTextColor,
                                         fontSize:
-                                            getProportionateScreenWidth(14)),
+                                           16),
                                   ),
                                   const Spacer(),
                                   Text(
                                     "Bob has\nbeen heard",
                                     style: TextStyle(
                                         fontSize:
-                                            getProportionateScreenWidth(12),
+                                            14,
                                         color: kTextColor,
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -462,8 +462,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                         text: TextSpan(
                                           style: TextStyle(
                                               fontSize:
-                                                  getProportionateScreenWidth(
-                                                      40),
+                                                  40,
                                               color: kTextColor,
                                               fontWeight: FontWeight.w400),
                                           children: [
@@ -492,8 +491,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                             fontWeight: FontWeight.w500,
                                             color: kTextColor,
                                             fontSize:
-                                                getProportionateScreenWidth(
-                                                    12)),
+                                               14),
                                       ),
                                     ],
                                   ),

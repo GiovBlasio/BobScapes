@@ -50,7 +50,7 @@ class Body extends StatelessWidget {
                         child: Text("Thank you",
                             style: TextStyle(
                                 height: 1,
-                                fontSize: getProportionateScreenWidth(40),
+                                fontSize: 40,
                                 color: kTextColor,
                                 fontWeight: FontWeight.w600)),
                       ),
@@ -61,7 +61,7 @@ class Body extends StatelessWidget {
                           "for\nsubmitting \nyour \nsighting!",
                           style: TextStyle(
                             height: 1,
-                            fontSize: getProportionateScreenWidth(40),
+                            fontSize: 40,
                             color: kTextColor,
                           ),
                         ),
@@ -180,7 +180,7 @@ class Body extends StatelessWidget {
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 20),
+                                        fontSize: 24),
                                   ),
                                   IconButton(
                                     splashRadius: 0.1,
@@ -208,7 +208,7 @@ class Body extends StatelessWidget {
                                       color: kTextColor,
                                       fontWeight: FontWeight.w400,
                                       fontSize:
-                                          getProportionateScreenWidth(14.5)),
+                                          18),
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
@@ -222,7 +222,7 @@ class Body extends StatelessWidget {
                                       color: kTextColor,
                                       fontWeight: FontWeight.w400,
                                       fontSize:
-                                          getProportionateScreenWidth(14.5)),
+                                          18),
                                 )),
                           ],
                         ),

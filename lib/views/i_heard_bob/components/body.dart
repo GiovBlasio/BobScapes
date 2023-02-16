@@ -184,7 +184,7 @@ class _BodyState extends State<Body> {
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: kTextColor,
-                              fontSize: 18),
+                              fontSize: 24),
                         ),
                       ],
                     ),
@@ -243,7 +243,7 @@ class _BodyState extends State<Body> {
                               children: [
                                 SvgPicture.asset(
                                   "assets/icons/icon-back-form.svg",
-                                  height: getProportionateScreenHeight(14),
+                                  height: 14,
                                 ),
                                 SizedBox(
                                   width: getProportionateScreenHeight(5),
@@ -251,7 +251,7 @@ class _BodyState extends State<Body> {
                                 Text(
                                   "Back",
                                   style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(14),
+                                      fontSize: 14,
                                       color: kTextColor),
                                 ),
                               ],
@@ -513,7 +513,7 @@ class _BodyState extends State<Body> {
             RichText(
               text: TextSpan(
                 style: TextStyle(
-                    fontSize: getProportionateScreenWidth(15),
+                    fontSize: 16,
                     color: context.watch<HeardPage3State>().isEnable
                         ? kTextColor
                         : kTextColor.withOpacity(0.6),
@@ -524,6 +524,7 @@ class _BodyState extends State<Body> {
                     const TextSpan(
                         text: '(required)',
                         style: TextStyle(
+                          fontSize: 15,
                             fontWeight: FontWeight.w300, color: kTextColor)),
                 ],
               ),
@@ -556,13 +557,13 @@ class _BodyState extends State<Body> {
                       color: context.watch<HeardPage3State>().isEnable
                           ? kTextColor
                           : null,
-                      fontSize: getProportionateScreenWidth(16),
+                      fontSize: 16,
                       fontWeight: FontWeight.w500),
                   hintStyle: TextStyle(
                       color: context.watch<HeardPage3State>().isEnable
                           ? kTextColor.withOpacity(0.6)
                           : null,
-                      fontSize: getProportionateScreenWidth(14),
+                      fontSize:14,
                       fontWeight: FontWeight.w300),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   contentPadding: EdgeInsets.all(
@@ -611,8 +612,8 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   prefixIconConstraints: BoxConstraints(
-                      maxHeight: getProportionateScreenHeight(28),
-                      maxWidth: getProportionateScreenWidth(28)),
+                      maxHeight: 28,
+                      maxWidth: 28),
                   hintText: "hello@aol.com",
                 ),
               ),
@@ -647,7 +648,7 @@ class _BodyState extends State<Body> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: kTextColor,
-                                fontSize: 18),
+                                fontSize: 24),
                           ),
                         ],
                       ),
@@ -688,11 +689,11 @@ class _BodyState extends State<Body> {
                                 decoration: InputDecoration(
                                   labelStyle: TextStyle(
                                       color: kTextColor,
-                                      fontSize: getProportionateScreenWidth(15),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                   hintStyle: TextStyle(
                                     color: kTextColor.withAlpha(177),
-                                    fontSize: getProportionateScreenWidth(12),
+                                    fontSize: 14,
                                   ),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
@@ -880,11 +881,11 @@ class _BodyState extends State<Body> {
                                 decoration: InputDecoration(
                                   labelStyle: TextStyle(
                                       color: kTextColor,
-                                      fontSize: getProportionateScreenWidth(15),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                   hintStyle: TextStyle(
                                     color: kTextColor.withAlpha(177),
-                                    fontSize: getProportionateScreenWidth(12),
+                                    fontSize: 14,
                                   ),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
@@ -981,7 +982,7 @@ class _BodyState extends State<Body> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       color: kTextColor,
-                                      fontSize: 18),
+                                      fontSize: 24),
                                 ),
                               ],
                             ),
@@ -1386,7 +1387,7 @@ class DefaultButton extends StatelessWidget {
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         minimumSize: MaterialStateProperty.all(
-            Size(double.infinity, getProportionateScreenHeight(44))),
+            Size(double.infinity,44)),
         backgroundColor: MaterialStateProperty.all(kAppbarColor),
       ),
       onPressed: press,
@@ -1396,15 +1397,15 @@ class DefaultButton extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-                fontSize: getProportionateScreenWidth(13),
-                color: kPrimaryColor),
+                fontSize: 14,
+                color: kTextColor),
           ),
           SizedBox(
-            width: getProportionateScreenHeight(5),
+            width: 5,
           ),
           SvgPicture.asset(
             "assets/icons/icon-arrow.svg",
-            height: getProportionateScreenHeight(14),
+            height: 14,
           ),
         ],
       ),

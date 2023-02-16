@@ -155,7 +155,7 @@ class _BodyState extends State<Body> {
                 "Bobwhites",
                 style: TextStyle(
                     height: 1,
-                    fontSize: getProportionateScreenWidth(44),
+                    fontSize: 44,
                     color: kPrimaryColor,
                     fontWeight: FontWeight.w700),
               ),
@@ -163,7 +163,7 @@ class _BodyState extends State<Body> {
                 "on our",
                 style: TextStyle(
                   height: 1,
-                  fontSize: getProportionateScreenWidth(44),
+                  fontSize: 44,
                   color: kPrimaryColor,
                 ),
               ),
@@ -171,7 +171,7 @@ class _BodyState extends State<Body> {
                 "landscapes",
                 style: TextStyle(
                   height: 1,
-                  fontSize: getProportionateScreenWidth(44),
+                  fontSize: 44,
                   color: kPrimaryColor,
                 ),
               ),
