@@ -331,7 +331,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               context: context,
               child: MediaQuery(
                 data: MediaQuery.of(context)
-                    .copyWith(alwaysUse24HourFormat: false),
+                    .copyWith(alwaysUse24HourFormat: false, textScaleFactor: 1),
                 child: GestureDetector(
                     onTap: () => FocusScope.of(context).unfocus(),
                     child: child!),
@@ -385,8 +385,11 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                   foregroundColor: MaterialStatePropertyAll(kTextColor),
                   overlayColor: MaterialStatePropertyAll(Colors.transparent))),
         ),
-        child: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(), child: child!),
+        child: MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(), child: child!),
+        ),
       ),
       context: context,
       initialDate: DateTime.now(),

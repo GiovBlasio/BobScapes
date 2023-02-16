@@ -79,7 +79,7 @@ class _BodyState extends State<Body> {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                                fontSize: 26,
+                                fontSize: 28,
                                 color: kTextColor,
                                 fontWeight: FontWeight.w500),
                             children: const [
@@ -103,7 +103,7 @@ class _BodyState extends State<Body> {
                         child: Text(
                           "We appreciate your\n contribution to conservation!",
                           style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 20,
                               fontWeight: FontWeight.w500,
                               color: kTextColor),
                         ),
@@ -122,12 +122,12 @@ class _BodyState extends State<Body> {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                                fontSize: 26,
+                                fontSize: 28,
                                 color: kTextColor,
                                 fontWeight: FontWeight.w500),
                             children: const [
                               TextSpan(
-                                text: ">Spotting Bob\n",
+                                text: "> Spotting Bob\n",
                               ),
 
                               // TextSpan(
@@ -146,18 +146,18 @@ class _BodyState extends State<Body> {
                         //       color: kTextColor),
                         // ),
                       ),
-                      const Spacer(),
+                     
                       Flexible(
                         flex: 15,
                         child: Text(
                           "Using this app you can\ncontribute to Bobwhite\nconservation efforts by\nreporting Bobwhite that you\nhave heard or spotted in your\n landscape",
                           style: TextStyle(
                               color: kTextColor,
-                              fontSize: 16,
+                              fontSize: 20,
                               fontWeight: FontWeight.w500),
                         ),
                       ),
-                      Spacer()
+                     // Spacer()
                     ],
                   ),
                 ),

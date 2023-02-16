@@ -37,7 +37,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             child: Text(
               widget.title,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: kTextColor),
             )),
