@@ -131,6 +131,7 @@ class _BodyState extends State<Body> {
                         .firstAccess) {
                       changeFirstAccess();
                       showDialog(
+                        useSafeArea: false,
                           barrierDismissible: false,
                           barrierColor: Colors.transparent,
                           context: context,

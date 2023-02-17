@@ -58,6 +58,7 @@ class _BodyState extends State<Body> {
                         .firstAccess) {
                       changeFirstAccess();
                       showDialog(
+                          useSafeArea: false,
                           barrierDismissible: false,
                           barrierColor: Colors.transparent,
                           context: context,
@@ -86,10 +87,9 @@ class _BodyState extends State<Body> {
           extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            backgroundColor: kAppbarColor,
-            leading: Container(),
-            title: TitleBack()
-          ),
+              backgroundColor: kAppbarColor,
+              leading: Container(),
+              title: TitleBack()),
           body: Stack(children: [
             Positioned.fill(
               child: SvgPicture.asset(
@@ -153,7 +153,6 @@ class _BodyState extends State<Body> {
                                             color: kTextColor,
                                             fontFamily: 'Manrope',
                                             fontWeight: FontWeight.w600,
-                                            
                                             fontSize: 20.sp),
                                       ),
                                       IconButton(
