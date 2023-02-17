@@ -1,6 +1,8 @@
 import 'package:bobscapes/views/common_widget/custom_back_button.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
+import 'package:bobscapes/views/splash/splash.dart';
+import 'package:bobscapes/views/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -24,13 +26,30 @@ class IHeardBobScreen extends StatelessWidget {
             backgroundColor: kAppbarColor,
             leadingWidth: getProportionateScreenWidth(80),
             leading: const CustomBackButton(),
-            title: SvgPicture.asset(
-              "assets/images/logo-bobscapes.svg",
-              height: 34.23,
-            ),
+            title: TitleBack(),
           ),
           body: const Body(),
         ),
+      ),
+    );
+  }
+}
+
+class TitleBack extends StatelessWidget {
+  const TitleBack({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).popUntil(ModalRoute.withName('/home'));
+        Navigator.of(context).popAndPushNamed(SplashScreen.routeName);
+      },
+      child: SvgPicture.asset(
+        "assets/images/logo-bobscapes.svg",
+        height: 34.23,
       ),
     );
   }

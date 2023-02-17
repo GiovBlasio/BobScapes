@@ -161,10 +161,7 @@ class _BodyState extends State<Body> {
           appBar: AppBar(
             backgroundColor: kAppbarColor,
             leading: Container(),
-            title: SvgPicture.asset(
-              "assets/images/logo-bobscapes.svg",
-              height: 34.23,
-            ),
+            title: TitleBack()
           ),
           body: Stack(children: [
             Positioned.fill(

@@ -83,10 +83,7 @@ class _CustomAlertState extends State<CustomAlert> {
             backgroundColor: kAppbarColor,
             leadingWidth: getProportionateScreenWidth(80),
             leading: const CustomBackButton(),
-            title: SvgPicture.asset(
-              "assets/images/logo-bobscapes.svg",
-              height: 34.23,
-            ),
+            title: TitleBack()
           ),
           body: Stack(
               //alignment: Alignment.,
@@ -402,10 +399,7 @@ class _CustomAlertState extends State<CustomAlert> {
           appBar: AppBar(
             backgroundColor: kAppbarColor,
             leading: Container(),
-            title: SvgPicture.asset(
-              "assets/images/logo-bobscapes.svg",
-              height: 34.23,
-            ),
+            title: TitleBack()
           ),
           body: Stack(children: [
             Positioned.fill(

@@ -1,4 +1,5 @@
 import 'package:bobscapes/constants.dart';
+import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,10 +21,7 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kAppbarColor,
           leading: Container(),
-          title: SvgPicture.asset(
-            "assets/images/logo-bobscapes.svg",
-            height: 34.23,
-          ),
+          title: TitleBack()
         ),
         body: const Body(),
       ),
