@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class DateAndTimeForm extends StatefulWidget {
   const DateAndTimeForm({
@@ -19,7 +20,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
   DateTime? myDate = DateTime.now();
   TimeOfDay? myTime = TimeOfDay.now();
 
-  String date = DateFormat("MM/dd/''yy").format(DateTime.now());
+  String date = DateFormat("MM/dd/yy").format(DateTime.now());
 
   String time = DateFormat('hh:mm a').format(DateTime.now());
 
@@ -53,7 +54,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     Text(
                       "Date",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 11.sp,
+                        fontFamily: 'Manrope',
                         fontWeight: FontWeight.w500,
                         color: kTextColor,
                       ),
@@ -88,7 +90,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                           Text(
                             "change",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 10.sp,
+                              fontFamily: 'Manrope',
                               fontWeight: FontWeight.w700,
                               color: kTextColor,
                             ),
@@ -102,8 +105,9 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               Flexible(
                 child: TextFormField(
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 11.sp,
                     color: kTextColor,
+                    fontFamily: 'Manrope',
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
@@ -162,7 +166,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                     Text(
                       "Time",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 11.sp,
+                        fontFamily: 'Manrope',
                         fontWeight: FontWeight.w500,
                         color: kTextColor,
                       ),
@@ -197,7 +202,8 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
                           Text(
                             "change",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 10.sp,
+                              fontFamily: 'Manrope',
                               fontWeight: FontWeight.w700,
                               color: kTextColor,
                             ),
@@ -211,8 +217,9 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
               Flexible(
                 child: TextFormField(
                   style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 11.sp,
                       color: kTextColor,
+                      fontFamily: 'Manrope',
                       fontWeight: FontWeight.w600),
                   cursorColor: Colors.white,
                   onSaved: (newValue) {},
@@ -397,7 +404,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
       lastDate: DateTime.now().add(const Duration(days: 0)),
     );
     setState(() {
-      String time = DateFormat("MM/dd/''yy").format(myDate!);
+      String time = DateFormat("MM/dd/yy").format(myDate!);
       changeDate(time);
       dateController.text = time;
     });
@@ -444,7 +451,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                 "Date",
 //                 style: TextStyle(
 //                   fontSize: getProportionateScreenWidth(13),
-//                   fontWeight: FontWeight.w700,
+//                   fontFamily: 'Manrope', fontWeight: FontWeight.w700,
 //                   color: Colors.white,
 //                 ),
 //               ),
@@ -459,7 +466,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                 "Time",
 //                 style: TextStyle(
 //                   fontSize: getProportionateScreenWidth(13),
-//                   fontWeight: FontWeight.w700,
+//                   fontFamily: 'Manrope', fontWeight: FontWeight.w700,
 //                   color: Colors.white,
 //                 ),
 //               ),
@@ -474,7 +481,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                 style: TextStyle(
 //                     fontSize: getProportionateScreenWidth(13.5),
 //                     color: Colors.white,
-//                     fontWeight: FontWeight.w600),
+//                     fontFamily: 'Manrope', fontWeight: FontWeight.w600),
 //                 cursorColor: Colors.white,
 //                 onSaved: (newValue) {},
 //                 decoration: InputDecoration(
@@ -613,7 +620,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                     "Change",
 //                     style: TextStyle(
 //                       fontSize: getProportionateScreenWidth(12),
-//                       fontWeight: FontWeight.w700,
+//                       fontFamily: 'Manrope', fontWeight: FontWeight.w700,
 //                       color: Colors.white,
 //                     ),
 //                   )
@@ -628,7 +635,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                 style: TextStyle(
 //                   fontSize: getProportionateScreenWidth(12.5),
 //                   color: Colors.white,
-//                   fontWeight: FontWeight.w600,
+//                   fontFamily: 'Manrope', fontWeight: FontWeight.w600,
 //                 ),
 //                 decoration: InputDecoration(
 //                   filled: true,
@@ -818,7 +825,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                     "Change",
 //                     style: TextStyle(
 //                       fontSize: getProportionateScreenWidth(12),
-//                       fontWeight: FontWeight.w700,
+//                       fontFamily: 'Manrope', fontWeight: FontWeight.w700,
 //                       color: Colors.white,
 //                     ),
 //                   )
@@ -894,7 +901,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //             "Latitude/Longitude",
 //             style: TextStyle(
 //                 fontSize: getProportionateScreenWidth(13),
-//                 fontWeight: FontWeight.w700,
+//                 fontFamily: 'Manrope', fontWeight: FontWeight.w700,
 //                 color: Colors.white),
 //           ),
 //         ),
@@ -907,7 +914,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                   child: TextFormField(
 //                     style: TextStyle(
 //                         color: Colors.black,
-//                         fontWeight: FontWeight.w600,
+//                         fontFamily: 'Manrope', fontWeight: FontWeight.w600,
 //                         fontSize: getProportionateScreenWidth(14)),
 //                     cursorColor: Colors.black,
 //                     controller: controller,
@@ -976,7 +983,7 @@ class _DateAndTimeFormState extends State<DateAndTimeForm> {
 //                         "Change",
 //                         style: TextStyle(
 //                             fontSize: getProportionateScreenWidth(12),
-//                             fontWeight: FontWeight.w700,
+//                             fontFamily: 'Manrope', fontWeight: FontWeight.w700,
 //                             color: Colors.white),
 //                       )
 //                     ],

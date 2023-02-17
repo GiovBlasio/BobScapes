@@ -1,9 +1,11 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
+import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/custom_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomRadioButton extends StatefulWidget {
   const CustomRadioButton({
@@ -37,18 +39,17 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                 right: getProportionateScreenWidth(10)),
             child: RichText(
               text: TextSpan(
-                style: TextStyle(
-                    fontSize:16,
-                    color: kTextColor),
+                style: TextStyle(fontSize: 12.sp, color: kTextColor),
                 children: [
                   TextSpan(
                     text: widget.title,
                   ),
                   if (widget.id == 1)
-                    const TextSpan(
+                    TextSpan(
                         text: ' (required)',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 11.sp,
+                          fontFamily: 'Manrope',
                           fontWeight: FontWeight.w200,
                         )),
                 ],
@@ -76,6 +77,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                                   groupValue: group,
                                   onChanged: (value) {
                                     changeValue(widget.id, value!);
+
                                     setState(() {
                                       group = value;
                                     });
@@ -85,7 +87,8 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                                 softWrap: true,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 11.5.sp,
+                                    fontFamily: 'Manrope',
                                     fontWeight: FontWeight.w600,
                                     color: group == item
                                         ? kTextColor
@@ -120,6 +123,9 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
         break;
       case 2:
         context.read<HeardPage1State>().changePhysicallySee(value);
+        if (value == 'No') {
+          context.read<HeardPage2State>().resetAll();
+        }
         break;
     }
   }

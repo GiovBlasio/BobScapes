@@ -1,6 +1,7 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Disclaimer extends StatelessWidget {
   const Disclaimer({
@@ -48,15 +49,16 @@ class Disclaimer extends StatelessWidget {
                             "Disclaimer",
                             style: TextStyle(
                                 color: kPrimaryColor,
+                                fontFamily: 'Manrope',
                                 fontWeight: FontWeight.w600,
-                                fontSize: getProportionateScreenWidth(20.5)),
+                                fontSize: 24.sp),
                           ),
                           IconButton(
                             splashRadius: 0.1,
                             icon: Icon(
                               Icons.close,
                               size: getProportionateScreenHeight(30),
-                              color: kPrimaryColor,
+                              color: kTextColor,
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -75,8 +77,9 @@ class Disclaimer extends StatelessWidget {
                           "The exact location of your sightings will not be shared with the public.",
                           style: TextStyle(
                               color: kPrimaryColor,
+                              fontFamily: 'Manrope',
                               fontWeight: FontWeight.w400,
-                              fontSize: getProportionateScreenWidth(14.5)),
+                              fontSize: 15.sp),
                         )),
                     Padding(
                         padding: EdgeInsets.only(
@@ -88,8 +91,9 @@ class Disclaimer extends StatelessWidget {
                           "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                           style: TextStyle(
                               color: kPrimaryColor,
+                              fontFamily: 'Manrope',
                               fontWeight: FontWeight.w400,
-                              fontSize: getProportionateScreenWidth(14.5)),
+                              fontSize: 15.sp),
                         )),
                   ],
                 ),

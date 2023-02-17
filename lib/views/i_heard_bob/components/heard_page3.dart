@@ -1,6 +1,7 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import 'heard_page3/comment_form.dart';
 import 'heard_page3/email_form.dart';
@@ -39,9 +40,10 @@ class HeardPage3 extends StatelessWidget {
                           Text(
                             "Register your sighting",
                             style: TextStyle(
+                                fontFamily: 'Manrope',
                                 fontWeight: FontWeight.w600,
                                 color: kTextColor,
-                                fontSize: getProportionateScreenWidth(18)),
+                                fontSize: 18.sp),
                           ),
                         ],
                       ),

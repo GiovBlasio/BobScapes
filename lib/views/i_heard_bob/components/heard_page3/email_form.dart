@@ -4,6 +4,7 @@ import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class EmailForm extends StatefulWidget {
   const EmailForm({
@@ -48,10 +49,11 @@ class _EmailFormState extends State<EmailForm> {
         RichText(
           text: TextSpan(
             style: TextStyle(
-                fontSize: getProportionateScreenWidth(15),
+                fontSize: 15.sp,
                 color: context.watch<HeardPage3State>().isEnable
                     ? kTextColor
                     : kTextColor.withOpacity(0.6),
+                fontFamily: 'Manrope',
                 fontWeight: FontWeight.w400),
             children: [
               const TextSpan(text: 'Your email '),
@@ -59,15 +61,19 @@ class _EmailFormState extends State<EmailForm> {
                 const TextSpan(
                     text: '(required)',
                     style: TextStyle(
-                        fontWeight: FontWeight.w300, color: kTextColor)),
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w300,
+                        color: kTextColor)),
             ],
           ),
         ),
         Flexible(
           child: Form(
               child: TextFormField(
-            style:
-                const TextStyle(color: kTextColor, fontWeight: FontWeight.w500),
+            style: const TextStyle(
+                color: kTextColor,
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w500),
             enableInteractiveSelection: false,
             cursorColor: kPrimaryColor,
             enabled: context.watch<HeardPage3State>().isEnable,
@@ -85,13 +91,15 @@ class _EmailFormState extends State<EmailForm> {
                   color: context.watch<HeardPage3State>().isEnable
                       ? kTextColor
                       : null,
-                  fontSize: getProportionateScreenWidth(16),
+                  fontSize: 16.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500),
               hintStyle: TextStyle(
                   color: context.watch<HeardPage3State>().isEnable
                       ? kTextColor.withOpacity(0.6)
                       : null,
-                  fontSize: getProportionateScreenWidth(14),
+                  fontSize: 14.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w300),
               floatingLabelBehavior: FloatingLabelBehavior.always,
               contentPadding: EdgeInsets.all(

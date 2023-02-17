@@ -9,6 +9,7 @@ import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:bobscapes/models/marker.dart' as model;
+import 'package:sizer/sizer.dart';
 
 import 'custom_carousel.dart';
 
@@ -95,8 +96,8 @@ class _MappaState extends State<Mappa> {
               //       color: Colors.white,
               //     )),
               SizedBox(
-                width: getProportionateScreenWidth(41),
-                height: getProportionateScreenHeight(41),
+                width: 40,
+                height: 40,
                 child: FittedBox(
                   child: FloatingActionButton(
                     backgroundColor: Colors.white,
@@ -107,8 +108,8 @@ class _MappaState extends State<Mappa> {
                     child: SvgPicture.asset(
                       "assets/icons/icon-geolocalization.svg",
                       color: kColor1,
-                      height: getProportionateScreenHeight(30),
-                      width: getProportionateScreenWidth(30),
+                      height: 30,
+                      width: 30,
                     ),
                   ),
                 ),
@@ -130,36 +131,16 @@ class _MappaState extends State<Mappa> {
     for (model.Marker element in markers2) {
       Marker marker = Marker(
         anchorPos: AnchorPos.align(AnchorAlign.top),
-        height: element.sightings < 9
-            ? 40
-            : element.sightings < 25
-                ? 45
-                : 55,
-        width: element.sightings < 9
-            ? 40
-            : element.sightings < 13
-                ? 45
-                : 55,
+        height: 10.h,
+        width: 10.h,
         point: LatLng(element.latitude, element.longitude),
         builder: (context) => GestureDetector(
           onTap: () => _showBottomSheet(context, element.state),
           child: SvgPicture.asset(
             "assets/icons/icon-pointer.svg",
-            height: element.sightings < 9
-                ? 40
-                : element.sightings < 25
-                    ? 45
-                    : 55,
-            width: element.sightings < 9
-                ? 40
-                : element.sightings < 13
-                    ? 45
-                    : 55,
-            color: element.state.length < 9
-                ? kColor1
-                : element.state.length < 13
-                    ? kColor2
-                    : kColor3,
+            // height: 40,
+            // width: 40,
+            color: kColor1,
           ),
         ),
       );
@@ -274,12 +255,13 @@ class _MappaState extends State<Mappa> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               textBaseline: TextBaseline.alphabetic,
                               children: [
-                                const Text(
+                                Text(
                                   "Disclaimer",
                                   style: TextStyle(
                                       color: kTextColor,
+                                      fontFamily: 'Manrope',
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 20),
+                                      fontSize: 20.sp),
                                 ),
                                 IconButton(
                                   splashRadius: 0.1,
@@ -305,9 +287,9 @@ class _MappaState extends State<Mappa> {
                                 "The exact location of your sightings will not be shared with the public.",
                                 style: TextStyle(
                                     color: kTextColor,
+                                    fontFamily: 'Manrope',
                                     fontWeight: FontWeight.w400,
-                                    fontSize:
-                                        getProportionateScreenWidth(14.5)),
+                                    fontSize: 15.sp),
                               )),
                           Padding(
                               padding: EdgeInsets.only(
@@ -315,12 +297,13 @@ class _MappaState extends State<Mappa> {
                                   top: 20,
                                   bottom: 5,
                                   right: getProportionateScreenWidth(40)),
-                              child: const Text(
+                              child: Text(
                                 "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                 style: TextStyle(
                                     color: kTextColor,
+                                    fontFamily: 'Manrope',
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 14.5),
+                                    fontSize: 15.sp),
                               )),
                         ],
                       ),
@@ -438,18 +421,18 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                   Text(
                                     widget.state[index % widget.state.length],
                                     style: TextStyle(
+                                        fontFamily: 'Manrope',
                                         fontWeight: FontWeight.w700,
                                         color: kTextColor,
-                                        fontSize:
-                                           16),
+                                        fontSize: 16.sp),
                                   ),
                                   const Spacer(),
                                   Text(
                                     "Bob has\nbeen heard",
                                     style: TextStyle(
-                                        fontSize:
-                                            14,
+                                        fontSize: 12.sp,
                                         color: kTextColor,
+                                        fontFamily: 'Manrope',
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Row(
@@ -461,9 +444,9 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                       RichText(
                                         text: TextSpan(
                                           style: TextStyle(
-                                              fontSize:
-                                                  40,
+                                              fontSize: 34.sp,
                                               color: kTextColor,
+                                              fontFamily: 'Manrope',
                                               fontWeight: FontWeight.w400),
                                           children: [
                                             TextSpan(
@@ -476,9 +459,9 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                                     .length ==
                                                 1)
                                               const TextSpan(
-                                                text: '0',
-                                                style: TextStyle(color: kColor3)
-                                              ),
+                                                  text: '1',
+                                                  style: TextStyle(
+                                                      color: kColor3)),
                                           ],
                                         ),
                                       ),
@@ -488,10 +471,10 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                       Text(
                                         "times",
                                         style: TextStyle(
+                                            fontFamily: 'Manrope',
                                             fontWeight: FontWeight.w500,
                                             color: kTextColor,
-                                            fontSize:
-                                               14),
+                                            fontSize: 12.sp),
                                       ),
                                     ],
                                   ),
@@ -561,7 +544,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //                     Text(
         //                       widget.state[index % widget.state.length],
         //                       style: TextStyle(
-        //                           fontWeight: FontWeight.w700,
+        //                           fontFamily: 'Manrope', fontWeight: FontWeight.w700,
         //                           color: kTextColor,
         //                           fontSize: getProportionateScreenWidth(14)),
         //                     ),
@@ -571,7 +554,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //                       style: TextStyle(
         //                           fontSize: getProportionateScreenWidth(12),
         //                           color: kTextColor,
-        //                           fontWeight: FontWeight.w400),
+        //                           fontFamily: 'Manrope', fontWeight: FontWeight.w400),
         //                     ),
         //                     Row(
         //                       crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -584,7 +567,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //                               fontSize:
         //                                   getProportionateScreenWidth(40),
         //                               color: kTextColor,
-        //                               fontWeight: FontWeight.w400),
+        //                               fontFamily: 'Manrope', fontWeight: FontWeight.w400),
         //                         ),
         //                         SizedBox(
         //                           width: getProportionateScreenWidth(45),
@@ -592,7 +575,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //                         Text(
         //                           "times",
         //                           style: TextStyle(
-        //                               fontWeight: FontWeight.w500,
+        //                               fontFamily: 'Manrope', fontWeight: FontWeight.w500,
         //                               color: kTextColor,
         //                               fontSize:
         //                                   getProportionateScreenWidth(12)),
@@ -651,7 +634,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //   //             Text(
         //   //               widget.state[index],
         //   //               style: TextStyle(
-        //   //                   fontWeight: FontWeight.w700,
+        //   //                   fontFamily: 'Manrope', fontWeight: FontWeight.w700,
         //   //                   color: kTextColor,
         //   //                   fontSize: getProportionateScreenWidth(14)),
         //   //             ),
@@ -661,7 +644,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //   //               style: TextStyle(
         //   //                   fontSize: getProportionateScreenWidth(12),
         //   //                   color: kTextColor,
-        //   //                   fontWeight: FontWeight.w400),
+        //   //                   fontFamily: 'Manrope', fontWeight: FontWeight.w400),
         //   //             ),
         //   //             Row(
         //   //               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -673,7 +656,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //   //                   style: TextStyle(
         //   //                       fontSize: getProportionateScreenWidth(40),
         //   //                       color: kTextColor,
-        //   //                       fontWeight: FontWeight.w400),
+        //   //                       fontFamily: 'Manrope', fontWeight: FontWeight.w400),
         //   //                 ),
         //   //                 SizedBox(
         //   //                   width: getProportionateScreenWidth(45),
@@ -681,7 +664,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //   //                 Text(
         //   //                   "times",
         //   //                   style: TextStyle(
-        //   //                       fontWeight: FontWeight.w500,
+        //   //                       fontFamily: 'Manrope', fontWeight: FontWeight.w500,
         //   //                       color: kTextColor,
         //   //                       fontSize: getProportionateScreenWidth(12)),
         //   //                 ),
@@ -729,7 +712,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //             Text(
         //               widget.state[index],
         //               style: TextStyle(
-        //                   fontWeight: FontWeight.w700,
+        //                   fontFamily: 'Manrope', fontWeight: FontWeight.w700,
         //                   color: kTextColor,
         //                   fontSize: getProportionateScreenWidth(14)),
         //             ),
@@ -741,7 +724,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //               style: TextStyle(
         //                   fontSize: getProportionateScreenWidth(12),
         //                   color: kTextColor,
-        //                   fontWeight: FontWeight.w400),
+        //                   fontFamily: 'Manrope', fontWeight: FontWeight.w400),
         //             ),
         //             Row(
         //               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -753,7 +736,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //                   style: TextStyle(
         //                       fontSize: getProportionateScreenWidth(40),
         //                       color: kTextColor,
-        //                       fontWeight: FontWeight.w400),
+        //                       fontFamily: 'Manrope', fontWeight: FontWeight.w400),
         //                 ),
         //                 SizedBox(
         //                   width: getProportionateScreenWidth(45),
@@ -761,7 +744,7 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
         //                 Text(
         //                   "times",
         //                   style: TextStyle(
-        //                       fontWeight: FontWeight.w500,
+        //                       fontFamily: 'Manrope', fontWeight: FontWeight.w500,
         //                       color: kTextColor,
         //                       fontSize: getProportionateScreenWidth(12)),
         //                 ),

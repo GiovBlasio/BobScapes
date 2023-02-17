@@ -6,6 +6,7 @@ import 'package:bobscapes/views/common_widget/logo_animated.dart';
 import 'package:bobscapes/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../welcome/welcome.dart';
 
@@ -34,15 +35,15 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    bottomLogo = getProportionateScreenHeight(405);
-    leftLogo = 28;
-    bottomTextRow = getProportionateScreenHeight(-100);
-    bottomBackground = getProportionateScreenHeight(0);
-    imageWidth = SizeConfig.screenWidth;
-    logoHeight = 95;
-    logoWidth = 45;
+    bottomLogo = 60.h;
+    leftLogo = 10.w;
+    bottomTextRow = -100.h;
+    bottomBackground = 0;
+    imageWidth = 100.w;
+    logoHeight = 10.h;
+    logoWidth = 10.w;
     leftFirstPin = getProportionateScreenWidth(-50);
-    bottomMainPhrase = -200;
+    bottomMainPhrase = -100.h;
     rightSecondPin = getProportionateScreenWidth(-60);
     _initialization();
   }
@@ -64,27 +65,27 @@ class _BodyState extends State<Body> {
     await Future.delayed(const Duration(milliseconds: 200));
     setState(() {
       opacity = true;
-      bottomLogo = getProportionateScreenHeight(380);
-      bottomTextRow = getProportionateScreenHeight(30);
-      bottomBackground = getProportionateScreenHeight(100);
+      bottomLogo = 55.h;
+      bottomTextRow = 3.h;
+      bottomBackground = 100.h;
     });
 
-    await Future.delayed(const Duration(milliseconds: 5000));
+    await Future.delayed(const Duration(milliseconds: 3000));
 
     setState(() {
       animate = true;
-      bottomLogo = getProportionateScreenHeight(360);
-      leftLogo = getProportionateScreenWidth(22);
+      bottomLogo = 50.h;
+      leftLogo = 8.w;
       imageWidth = imageWidth + 100;
-      logoHeight = getProportionateScreenHeight(85);
-      logoWidth = getProportionateScreenWidth(40);
+      logoHeight = 12.h;
+      logoWidth = 12.w;
       leftFirstPin = getProportionateScreenWidth(-17);
-      bottomMainPhrase = getProportionateScreenHeight(180);
+      bottomMainPhrase = 53.h;
       rightSecondPin = getProportionateScreenWidth(10);
     });
 
     await Future.delayed(
-        const Duration(milliseconds: 5000),
+        const Duration(milliseconds: 3500),
         () => Navigator.of(context)
           ..pushReplacement(
             PageRouteBuilder(
@@ -146,34 +147,37 @@ class _BodyState extends State<Body> {
             )),
         AnimatedPositioned(
           duration: const Duration(seconds: 1),
-          left: getProportionateScreenHeight(25),
-          bottom: bottomMainPhrase,
+          left: 8.w,
+          top: bottomMainPhrase,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Bobwhites",
+                "Bobwhite",
                 style: TextStyle(
                     height: 1,
-                    fontSize: 44,
+                    fontSize: 41.sp,
                     color: kPrimaryColor,
+                    fontFamily: 'Manrope',
                     fontWeight: FontWeight.w700),
               ),
               Text(
                 "on our",
                 style: TextStyle(
-                  height: 1,
-                  fontSize: 44,
-                  color: kPrimaryColor,
-                ),
+                    height: 1,
+                    fontSize: 41.sp,
+                    color: kPrimaryColor,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w400),
               ),
               Text(
                 "landscapes",
                 style: TextStyle(
-                  height: 1,
-                  fontSize: 44,
-                  color: kPrimaryColor,
-                ),
+                    height: 1,
+                    fontSize: 41.sp,
+                    color: kPrimaryColor,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w400),
               ),
             ],
           ),

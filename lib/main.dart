@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'routes.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -26,28 +27,53 @@ void main() {
   ], child: const MyApp()));
 }
 
-const TextTheme textTheme = TextTheme(
+ TextTheme textTheme = TextTheme(
   titleLarge: TextStyle(
-      color: Color(0xff8b8b8b), fontSize: 18, fontFamily: 'FjallaOne'),
+      color: const Color(0xff8b8b8b), fontSize: 18.sp, fontFamily: 'FjallaOne'),
 );
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, child) {
-        return ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: child!,
-        );
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'Bobscapes',
-      theme: theme(context),
-      initialRoute: SplashScreen.routeName,
-      routes: routes,
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        
+        builder: (context, child) {
+          return ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: child!,
+          );
+        },
+        debugShowCheckedModeBanner: false,
+        title: 'Bobscapes',
+        theme: ThemeData(
+          fontFamily: 'Manrope',
+    primarySwatch: MaterialColor(0xFF2C2C2C, {
+      50: kPrimaryColor.withOpacity(0.10),
+      100: kPrimaryColor.withOpacity(0.20),
+      200: kPrimaryColor.withOpacity(0.30),
+      300: kPrimaryColor.withOpacity(0.40),
+      400: kPrimaryColor.withOpacity(0.50),
+      500: kPrimaryColor.withOpacity(0.60),
+      600: kPrimaryColor.withOpacity(0.70),
+      700: kPrimaryColor.withOpacity(0.80),
+      800: kPrimaryColor.withOpacity(0.90),
+      900: kPrimaryColor
+    }),
+    primaryColor: kTextColor,
+    scaffoldBackgroundColor: const Color(0xfff0f0f0),
+    appBarTheme: appBarTheme(),
+    textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: kTextColor,
+          fontFamily: 'Manrope',
+        ),
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+  ),
+        initialRoute: SplashScreen.routeName,
+        routes: routes,
+      );
+    });
   }
 }
 

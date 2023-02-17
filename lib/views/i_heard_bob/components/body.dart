@@ -14,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 import 'heard_page1/custom_forms.dart';
 import 'heard_page1/custom_radio_button.dart';
@@ -78,13 +79,13 @@ class _BodyState extends State<Body> {
   }
 
   void _initialization() {
-    isEnabled = Provider.of<HeardPage3State>(context, listen: false).isEnable;
+    //  isEnabled = Provider.of<HeardPage3State>(context, listen: false).isEnable;
 
     String name = Provider.of<HeardPage1State>(context, listen: false).name;
 
     String email = Provider.of<HeardPage3State>(context, listen: false).email;
 
-    if (email != '' && isEnabled) {
+    if (email != '') {
       emailController = TextEditingController(text: email);
     }
     if (name != '') controller = TextEditingController(text: name);
@@ -113,7 +114,9 @@ class _BodyState extends State<Body> {
               controller: pageController,
               children: [
                 _buildPage1(),
-                _buildPage2(),
+                if (Provider.of<HeardPage1State>(context).physicallySee ==
+                    'Yes')
+                  _buildPage2(),
                 _buildPage3(context),
               ]),
         ),
@@ -121,7 +124,7 @@ class _BodyState extends State<Body> {
             top: 0,
             width: SizeConfig.screenWidth,
             child: const CustomTitle(
-              title: "I Heard a Bob!",
+              title: "I Heard Bob!",
               color: kColor2,
               icon: "assets/icons/gps.svg",
             )),
@@ -133,15 +136,15 @@ class _BodyState extends State<Body> {
                   color: kColor3,
                   title: "Bob Sightings Map",
                   iconPath: "assets/icons/eye.svg",
-                  onPressed: () => Navigator.popAndPushNamed(
+                  onPressed: () => Navigator.pushNamed(
                       context, BobSightingsScreen.routeName),
                 ),
                 BottomButton(
                   color: kColor1,
                   title: "Hear Bob",
                   iconPath: "assets/icons/music.svg",
-                  onPressed: () => Navigator.popAndPushNamed(
-                      context, HearBobScreen.routeName),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, HearBobScreen.routeName),
                 ),
               ],
             )),
@@ -160,240 +163,356 @@ class _BodyState extends State<Body> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
-      body: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(15),
-            vertical: getProportionateScreenHeight(0)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.only(top: 15, bottom: 80),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Register your sighting",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: kTextColor,
-                              fontSize: 24),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const heard3.CustomRadioButton(
-                        items: {'Yes', 'No', '1', '2'},
-                        title: "Did you want more information about Bobwhite?",
-                        id: 1),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Divider(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const heard3.CustomRadioButton(
-                        items: {'Yes', 'No', 'I\'m alredy\nregistered', '1'},
-                        title: "Want to learn more about Bobwhite Cost Share?",
-                        id: 2),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Divider(),
-                    _buildEmailForm(context),
-                    Divider(),
-                    const CommentForm(),
-                    Container(
-                      color: Colors.transparent,
-                      padding: EdgeInsets.only(
-                          top: getProportionateScreenHeight(20)),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(15),
+              vertical: getProportionateScreenHeight(0)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(top: 15, bottom: 80),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextButton(
-                            style: ButtonStyle(
-                              overlayColor:
-                                  MaterialStateProperty.all(Colors.transparent),
-                              shadowColor:
-                                  MaterialStateProperty.all(Colors.grey),
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.transparent),
-                            ),
-                            onPressed: () {
-                              if (!isLoaded) {
-                                setState(() {
-                                  pageController.animateToPage(currentIndex - 1,
-                                      duration: const Duration(seconds: 1),
-                                      curve: Curves.linear);
-                                });
-                              }
-                            },
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/icon-back-form.svg",
-                                  height: 14,
-                                ),
-                                SizedBox(
-                                  width: getProportionateScreenHeight(5),
-                                ),
-                                Text(
-                                  "Back",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: kTextColor),
-                                ),
-                              ],
-                            ),
+                          Text(
+                            "Register your sighting",
+                            style: TextStyle(
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                color: kTextColor,
+                                fontSize: 20.sp),
                           ),
-                          const Spacer(),
-                          Container(
-                            color: Colors.transparent,
-                            width: (SizeConfig.screenWidth) / 2 -
-                                getProportionateScreenWidth(30),
-                            child: DefaultButton(
-                                text: "Send data",
-                                press: () async {
-                                  String name =
-                                      context.read<HeardPage1State>().name;
-                                  String email =
-                                      context.read<HeardPage3State>().email;
-                                  String time =
-                                      context.read<HeardPage1State>().time;
-                                  String title =
-                                      context.read<HeardPage1State>().title;
-                                  double latitude = context
-                                              .read<HeardPage1State>()
-                                              .latitude ==
-                                          ''
-                                      ? 1000
-                                      : double.parse(context
-                                          .read<HeardPage1State>()
-                                          .latitude);
-                                  double longitude = context
-                                              .read<HeardPage1State>()
-                                              .longitude ==
-                                          ''
-                                      ? 1000
-                                      : double.parse(context
-                                          .read<HeardPage1State>()
-                                          .longitude);
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const heard3.CustomRadioButton(
+                          items: {'Yes', 'No', '1', '2'},
+                          title:
+                              "Did you want more information about Bobwhite?",
+                          id: 1),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const heard3.CustomRadioButton(
+                          items: {'Yes', 'No', 'I\'m already\nenrolled', '1'},
+                          title:
+                              "Want to learn more about Bobwhite Cost Share?",
+                          id: 2),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Divider(),
+                      //_buildEmailForm(context),
+                      // Divider(),
+                      const CommentForm(),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.only(
+                            top: getProportionateScreenHeight(20)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                                shadowColor:
+                                    MaterialStateProperty.all(Colors.grey),
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                              ),
+                              onPressed: () {
+                                if (!isLoaded) {
+                                  setState(() {
+                                    pageController.animateToPage(
+                                        currentIndex - 1,
+                                        duration: const Duration(seconds: 1),
+                                        curve: Curves.linear);
+                                  });
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/icons/icon-back-form.svg",
+                                    height: 14,
+                                  ),
+                                  SizedBox(
+                                    width: getProportionateScreenHeight(5),
+                                  ),
+                                  Text(
+                                    "Back",
+                                    style: TextStyle(
+                                        fontSize: 12.sp, color: kTextColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Spacer(),
+                            Container(
+                              color: Colors.transparent,
+                              width: (SizeConfig.screenWidth) / 2 -
+                                  getProportionateScreenWidth(30),
+                              child: DefaultButton(
+                                  text: "Send data",
+                                  press: () async {
+                                    String name =
+                                        context.read<HeardPage1State>().name;
+                                    String email =
+                                        context.read<HeardPage3State>().email;
+                                    String time =
+                                        context.read<HeardPage1State>().time;
+                                    String title =
+                                        context.read<HeardPage1State>().title;
+                                    double latitude = context
+                                                .read<HeardPage1State>()
+                                                .latitude ==
+                                            ''
+                                        ? 1000
+                                        : double.parse(context
+                                            .read<HeardPage1State>()
+                                            .latitude);
+                                    double longitude = context
+                                                .read<HeardPage1State>()
+                                                .longitude ==
+                                            ''
+                                        ? 1000
+                                        : double.parse(context
+                                            .read<HeardPage1State>()
+                                            .longitude);
 
-                                  String date =
-                                      context.read<HeardPage1State>().date;
+                                    String date =
+                                        context.read<HeardPage1State>().date;
 
-                                  String datetime = _buildDate(date, time);
-                                  String physicallySee = context
-                                      .read<HeardPage1State>()
-                                      .physicallySee;
-                                  String releasedLocation = context
-                                      .read<HeardPage1State>()
-                                      .releasedIntoLocation;
-                                  String whatSee =
-                                      context.read<HeardPage2State>().whatSee;
-                                  int manyBirds = context
-                                      .read<HeardPage2State>()
-                                      .totalCounter;
-                                  int manyMale = context
-                                      .read<HeardPage2State>()
-                                      .maleCounter;
-                                  int manyFemale = context
-                                      .read<HeardPage2State>()
-                                      .femaleCounter;
-                                  int manyYoung = context
-                                      .read<HeardPage2State>()
-                                      .youngCounter;
-                                  int manyBroods = context
-                                      .read<HeardPage2State>()
-                                      .broodsCounter;
+                                    String datetime = _buildDate(date, time);
+                                    String physicallySee = context
+                                        .read<HeardPage1State>()
+                                        .physicallySee;
+                                    String releasedLocation = context
+                                        .read<HeardPage1State>()
+                                        .releasedIntoLocation;
+                                    String whatSee =
+                                        context.read<HeardPage2State>().whatSee;
+                                    int manyBirds = context
+                                        .read<HeardPage2State>()
+                                        .totalCounter;
+                                    int manyMale = context
+                                        .read<HeardPage2State>()
+                                        .maleCounter;
+                                    int manyFemale = context
+                                        .read<HeardPage2State>()
+                                        .femaleCounter;
+                                    int manyYoung = context
+                                        .read<HeardPage2State>()
+                                        .youngCounter;
+                                    int manyBroods = context
+                                        .read<HeardPage2State>()
+                                        .broodsCounter;
 
-                                  String moreInfo =
-                                      context.read<HeardPage3State>().moreInfo;
-                                  String learnMore =
-                                      context.read<HeardPage3State>().learnMore;
-                                  String comment =
-                                      context.read<HeardPage3State>().comment;
-                                  String locality = '';
-                                  if (latitude != 1000) {
-                                    List<Placemark> placemarks =
-                                        await placemarkFromCoordinates(
-                                            latitude, longitude);
+                                    String moreInfo = context
+                                        .read<HeardPage3State>()
+                                        .moreInfo;
+                                    String learnMore = context
+                                        .read<HeardPage3State>()
+                                        .learnMore;
+                                    String comment =
+                                        context.read<HeardPage3State>().comment;
+                                    String locality = '';
+                                    if (latitude != 1000) {
+                                      List<Placemark> placemarks =
+                                          await placemarkFromCoordinates(
+                                              latitude, longitude);
 
-                                    locality = placemarks
-                                        .reversed.last.administrativeArea!;
-                                  }
+                                      locality = placemarks
+                                          .reversed.last.administrativeArea!;
+                                    }
 
-                                  // name.replaceAll("'", "'\\''");
+                                    // name.replaceAll("'", "'\\''");
 
-                                  // print(name);
+                                    // print(name);
 
-                                  // locality =
-                                  //     locality.substring(0, 1).toUpperCase() +
-                                  //         locality.substring(1);
+                                    // locality =
+                                    //     locality.substring(0, 1).toUpperCase() +
+                                    //         locality.substring(1);
 
-                                  Map<String, dynamic> params = {
-                                    "name": name,
-                                    "email": email,
-                                    "title": title,
-                                    "latitude": latitude,
-                                    "longitude": longitude,
-                                    "datetime": datetime,
-                                    "physicallySee": physicallySee,
-                                    "releasedLocation": releasedLocation,
-                                    "whatSee": whatSee,
-                                    "mayBirds": manyBirds,
-                                    "manyMale": manyMale,
-                                    "manyFemale": manyFemale,
-                                    "manyYoung": manyYoung,
-                                    "manyBroods": manyBroods,
-                                    "moreInformation": moreInfo,
-                                    "learnMore": learnMore,
-                                    "comment": comment,
-                                    "state": locality
-                                  };
+                                    Map<String, dynamic> params = {
+                                      "name": name,
+                                      "email": email,
+                                      "title": title,
+                                      "latitude": latitude,
+                                      "longitude": longitude,
+                                      "datetime": datetime,
+                                      "physicallySee": physicallySee,
+                                      "releasedLocation": releasedLocation,
+                                      "whatSee": whatSee,
+                                      "mayBirds": manyBirds,
+                                      "manyMale": manyMale,
+                                      "manyFemale": manyFemale,
+                                      "manyYoung": manyYoung,
+                                      "manyBroods": manyBroods,
+                                      "moreInformation": moreInfo,
+                                      "learnMore": learnMore,
+                                      "comment": comment,
+                                      "state": locality
+                                    };
 
-                                  if (!isLoaded) {
-                                    setState(() {
-                                      isLoaded = !isLoaded;
-                                    });
+                                    if (!isLoaded) {
+                                      setState(() {
+                                        isLoaded = !isLoaded;
+                                      });
 
-                                    if (_keyEmail.currentState != null &&
-                                        _keyEmail.currentState!.validate() &&
-                                        name != '' &&
-                                        latitude != 1000 &&
-                                        manyBirds == manyFemale + manyMale) {
-                                      bool isSended = await RemoteService()
-                                          .sendData(params);
-                                      if (isSended) {
-                                        setState(() {
-                                          context
-                                              .read<HeardPage3State>()
-                                              .resetAll();
-                                          context
-                                              .read<HeardPage1State>()
-                                              .resetAll();
-                                          context
-                                              .read<HeardPage2State>()
-                                              .resetAll();
+                                      if (
+                                          //_keyEmail.currentState != null &&
+                                          //     _keyEmail.currentState!.validate() &&
+                                          //     _keyName.currentState != null &&
+                                          //     _keyName.currentState!.validate() &&
+                                          name != '' &&
+                                              _validateEmail(email) &&
+                                              latitude != 1000 &&
+                                              manyBirds ==
+                                                  manyFemale + manyMale) {
+                                        bool isSended = await RemoteService()
+                                            .sendData(params);
+                                        if (isSended) {
+                                          setState(() {
+                                            context
+                                                .read<HeardPage3State>()
+                                                .resetAll();
+                                            context
+                                                .read<HeardPage1State>()
+                                                .resetAll();
+                                            context
+                                                .read<HeardPage2State>()
+                                                .resetAll();
 
-                                          Navigator.popAndPushNamed(context,
-                                              IHeardBobThanksScreen.routeName);
-                                        });
+                                            Navigator.popAndPushNamed(
+                                                context,
+                                                IHeardBobThanksScreen
+                                                    .routeName);
+                                          });
+                                        } else {
+                                          setState(() {
+                                            isLoaded = !isLoaded;
+                                          });
+                                          String message =
+                                              "A problem occurred while sending the data, please try again later.";
+
+                                          await Future.delayed(
+                                              Duration.zero,
+                                              () => showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    Widget continueButton =
+                                                        TextButton(
+                                                      child: const Text(
+                                                        "OK",
+                                                        style: TextStyle(
+                                                            color: kTextColor),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                    );
+                                                    AlertDialog alert =
+                                                        AlertDialog(
+                                                      backgroundColor: kColor3,
+                                                      title: Text(
+                                                        "Bobscapes",
+                                                        style: TextStyle(
+                                                            color: kTextColor,
+                                                            fontSize: 18.sp),
+                                                      ),
+                                                      content: Text(
+                                                        message,
+                                                        style: TextStyle(
+                                                            color: kTextColor,
+                                                            fontSize: 14.sp),
+                                                      ),
+                                                      actions: [
+                                                        continueButton,
+                                                      ],
+                                                    );
+
+                                                    return alert;
+                                                  }));
+                                        }
                                       } else {
                                         setState(() {
                                           isLoaded = !isLoaded;
                                         });
+                                        print(_keyEmail.currentState != null
+                                            // _keyEmail.currentState!
+                                            //     .validate()
+                                            //name != '' &&
+                                            //latitude != 1000
+                                            );
+
+                                        print(
+                                            manyBirds == manyFemale + manyMale);
+
+                                        String message1 = "You entered";
+                                        String error = '';
+                                        if (name == '' &&
+                                            _validateEmail(email) &&
+                                            manyBirds ==
+                                                manyFemale + manyMale) {
+                                          error = 'name';
+                                        } else if (name != '' &&
+                                            !_validateEmail(email) &&
+                                            manyBirds ==
+                                                manyFemale + manyMale) {
+                                          error = 'email';
+                                        } else if (name != '' &&
+                                            _validateEmail(email) &&
+                                            manyBirds !=
+                                                manyFemale + manyMale) {
+                                          error = 'number of birds';
+                                        } else if (name == '' &&
+                                            !_validateEmail(email) &&
+                                            manyBirds ==
+                                                manyFemale + manyMale) {
+                                          error = 'name and email';
+                                        } else if (name == '' &&
+                                            _validateEmail(email) &&
+                                            manyBirds !=
+                                                manyFemale + manyMale) {
+                                          error = 'name and number of birds';
+                                        } else if (name != '' &&
+                                            !_validateEmail(email) &&
+                                            manyBirds !=
+                                                manyFemale + manyMale) {
+                                          error = 'email and number of birds';
+                                        } else {
+                                          error =
+                                              'name, email and number of birds';
+                                        }
+
+                                        //  error = '($error)';
+
+                                        String message =
+                                            "$message1 $error incorrectly, please try again.";
+
                                         await Future.delayed(
                                             Duration.zero,
                                             () => showDialog(
@@ -419,17 +538,13 @@ class _BodyState extends State<Body> {
                                                       "Bobscapes",
                                                       style: TextStyle(
                                                           color: kTextColor,
-                                                          fontSize:
-                                                              getProportionateScreenWidth(
-                                                                  18)),
+                                                          fontSize: 18.sp),
                                                     ),
                                                     content: Text(
-                                                      "A problem occurred while sending the data, please try again later.",
+                                                      message,
                                                       style: TextStyle(
                                                           color: kTextColor,
-                                                          fontSize:
-                                                              getProportionateScreenWidth(
-                                                                  14)),
+                                                          fontSize: 14.sp),
                                                     ),
                                                     actions: [
                                                       continueButton,
@@ -439,73 +554,31 @@ class _BodyState extends State<Body> {
                                                   return alert;
                                                 }));
                                       }
-                                    } else {
-                                      setState(() {
-                                        isLoaded = !isLoaded;
-                                      });
-                                      await Future.delayed(
-                                          Duration.zero,
-                                          () => showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                Widget continueButton =
-                                                    TextButton(
-                                                  child: const Text(
-                                                    "OK",
-                                                    style: TextStyle(
-                                                        color: kTextColor),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                );
-                                                AlertDialog alert = AlertDialog(
-                                                  backgroundColor: kColor3,
-                                                  title: Text(
-                                                    "Bobscapes",
-                                                    style: TextStyle(
-                                                        color: kTextColor,
-                                                        fontSize:
-                                                            getProportionateScreenWidth(
-                                                                18)),
-                                                  ),
-                                                  content: Text(
-                                                    "You entered your name, number of birds or email incorrectly, please try again.",
-                                                    style: TextStyle(
-                                                        color: kTextColor,
-                                                        fontSize:
-                                                            getProportionateScreenWidth(
-                                                                14)),
-                                                  ),
-                                                  actions: [
-                                                    continueButton,
-                                                  ],
-                                                );
-
-                                                return alert;
-                                              }));
                                     }
-                                  }
-                                }),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                                  }),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Padding _buildEmailForm(BuildContext context) {
+  Padding _buildEmailForm(BuildContext context, Key key) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 18),
+      padding: EdgeInsets.only(
+          bottom: 15,
+          left: getProportionateScreenWidth(15),
+          right: getProportionateScreenWidth(15)),
       child: Form(
-        key: _keyEmail,
+        key: key,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -513,57 +586,63 @@ class _BodyState extends State<Body> {
             RichText(
               text: TextSpan(
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 10.5.sp,
                     color: context.watch<HeardPage3State>().isEnable
                         ? kTextColor
-                        : kTextColor.withOpacity(0.6),
+                        : kTextColor,
+                    fontFamily: 'Manrope',
                     fontWeight: FontWeight.w400),
                 children: [
                   const TextSpan(text: 'Your email '),
-                  if (context.watch<HeardPage3State>().isEnable)
-                    const TextSpan(
-                        text: '(required)',
-                        style: TextStyle(
-                          fontSize: 15,
-                            fontWeight: FontWeight.w300, color: kTextColor)),
+                  // if (context.watch<HeardPage3State>().isEnable)
+                  TextSpan(
+                      text: '(required)',
+                      style: TextStyle(
+                          fontSize: 9.5.sp,
+                          fontFamily: 'Manrope',
+                          fontWeight: FontWeight.w300,
+                          color: kTextColor)),
                 ],
               ),
             ),
             Flexible(
               child: TextFormField(
                 style: const TextStyle(
-                    color: kTextColor, fontWeight: FontWeight.w500),
+                    color: kTextColor,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w500),
                 enableInteractiveSelection: false,
                 cursorColor: kTextColor,
-                enabled: context.watch<HeardPage3State>().isEnable,
+                enabled: true,
                 keyboardType: TextInputType.emailAddress,
                 controller: context.watch<HeardPage3State>().isEnable
                     ? emailController
-                    : TextEditingController(text: ''),
+                    : emailController,
                 onChanged: (value) {
                   changeEmail(value);
+                  if (key == _keyEmail) _keyEmail.currentState!.validate();
                 },
                 validator: (value) {
-                  if (!_validateEmail(value!) &&
-                      Provider.of<HeardPage3State>(context, listen: false)
-                          .isEnable) {
+                  if (!_validateEmail(value!)) {
                     return 'Enter correct email';
                   }
                   return null;
                 },
                 decoration: InputDecoration(
-                  enabled: context.watch<HeardPage3State>().isEnable,
+                  enabled: true,
                   labelStyle: TextStyle(
                       color: context.watch<HeardPage3State>().isEnable
                           ? kTextColor
-                          : null,
-                      fontSize: 16,
+                          : kTextColor,
+                      fontSize: 16.sp,
+                      fontFamily: 'Manrope',
                       fontWeight: FontWeight.w500),
                   hintStyle: TextStyle(
                       color: context.watch<HeardPage3State>().isEnable
                           ? kTextColor.withOpacity(0.6)
-                          : null,
-                      fontSize:14,
+                          : kTextColor.withOpacity(0.6),
+                      fontSize: 14.sp,
+                      fontFamily: 'Manrope',
                       fontWeight: FontWeight.w300),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   contentPadding: EdgeInsets.all(
@@ -611,9 +690,8 @@ class _BodyState extends State<Body> {
                       "assets/icons/icon-mail.svg",
                     ),
                   ),
-                  prefixIconConstraints: BoxConstraints(
-                      maxHeight: 28,
-                      maxWidth: 28),
+                  prefixIconConstraints:
+                      BoxConstraints(maxHeight: 28, maxWidth: 28),
                   hintText: "hello@aol.com",
                 ),
               ),
@@ -646,9 +724,10 @@ class _BodyState extends State<Body> {
                           Text(
                             "Register your sighting",
                             style: TextStyle(
+                                fontFamily: 'Manrope',
                                 fontWeight: FontWeight.w700,
                                 color: kTextColor,
-                                fontSize: 24),
+                                fontSize: 20.sp),
                           ),
                         ],
                       ),
@@ -672,7 +751,7 @@ class _BodyState extends State<Body> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             child: Form(
-                              key: _keyName,
+                              //  key: _keyName,
                               child: TextFormField(
                                 enableInteractiveSelection: false,
                                 controller: controller,
@@ -689,11 +768,12 @@ class _BodyState extends State<Body> {
                                 decoration: InputDecoration(
                                   labelStyle: TextStyle(
                                       color: kTextColor,
-                                      fontSize: 16,
+                                      fontSize: 14.sp,
+                                      fontFamily: 'Manrope',
                                       fontWeight: FontWeight.w500),
                                   hintStyle: TextStyle(
                                     color: kTextColor.withAlpha(177),
-                                    fontSize: 14,
+                                    fontSize: 13.sp,
                                   ),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
@@ -740,6 +820,7 @@ class _BodyState extends State<Body> {
                           SizedBox(
                             height: 20,
                           ),
+                          _buildEmailForm(context, GlobalKey<State>()),
                           CustomDropDownMenu(items: itemsPage1),
                           SizedBox(
                             height: 20,
@@ -817,8 +898,9 @@ class _BodyState extends State<Body> {
                                   Text(
                                     "Next",
                                     style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 12.sp,
                                         color: kTextColor,
+                                        fontFamily: 'Manrope',
                                         fontWeight: FontWeight.w600),
                                   ),
                                   SizedBox(
@@ -864,13 +946,14 @@ class _BodyState extends State<Body> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: getProportionateScreenWidth(15)),
                             child: Form(
-                              // key: _keyName,
+                              key: _keyName,
                               child: TextFormField(
                                 enableInteractiveSelection: false,
                                 controller: controller,
                                 keyboardType: TextInputType.name,
                                 onChanged: (value) {
                                   changeName(value);
+                                  _keyName.currentState!.validate();
                                 },
                                 validator: (value) {
                                   if (value!.isEmpty || value == '') {
@@ -881,11 +964,12 @@ class _BodyState extends State<Body> {
                                 decoration: InputDecoration(
                                   labelStyle: TextStyle(
                                       color: kTextColor,
-                                      fontSize: 16,
+                                      fontSize: 14.sp,
+                                      fontFamily: 'Manrope',
                                       fontWeight: FontWeight.w500),
                                   hintStyle: TextStyle(
                                     color: kTextColor.withAlpha(177),
-                                    fontSize: 14,
+                                    fontSize: 12.sp,
                                   ),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
@@ -932,6 +1016,7 @@ class _BodyState extends State<Body> {
                           SizedBox(
                             height: 20,
                           ),
+                          _buildEmailForm(context, _keyEmail),
                           CustomDropDownMenu(items: itemsPage1),
                           SizedBox(
                             height: 20,
@@ -965,24 +1050,24 @@ class _BodyState extends State<Body> {
                       bottom: getProportionateScreenHeight(70), top: 0),
                   child: Stack(children: [
                     Container(
-                      height: SizeConfig.screenHeight -
-                          getProportionateScreenHeight(201),
+                      height: 75.h,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
                                 left: getProportionateScreenWidth(15),
-                                top: getProportionateScreenHeight(20)),
+                                top: getProportionateScreenHeight(0)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   "Register your sighting",
                                   style: TextStyle(
+                                      fontFamily: 'Manrope',
                                       fontWeight: FontWeight.w700,
                                       color: kTextColor,
-                                      fontSize: 24),
+                                      fontSize: 20.sp),
                                 ),
                               ],
                             ),
@@ -999,13 +1084,12 @@ class _BodyState extends State<Body> {
                                     horizontal:
                                         getProportionateScreenWidth(15)),
                                 child: Container(
-                                  height: 65,
-                                  // child: const heard2.CustomDropDownMenu(items: [
-                                  //   'Family (Covey)',
-                                  //   'Male',
-                                  //   'Female',
-                                  //   'Both'
-                                  // ]),
+                                  height: 8.h,
+                                  // child: const heard2.CustomDropDownMenu(
+                                  //     items: [
+                                  //       'Family (Covey)',
+                                  //       'Individual Bird'
+                                  //     ]),
                                 ),
                               ),
                               SizedBox(
@@ -1051,7 +1135,7 @@ class _BodyState extends State<Body> {
                                     horizontal: getProportionateScreenWidth(15),
                                     vertical: getProportionateScreenHeight(15)),
                                 child: const NumericalQuestion(
-                                    title: "How many broods\nrappresented?",
+                                    title: "How many broods\nrepresented?",
                                     id: 5),
                               ),
                             ],
@@ -1097,7 +1181,7 @@ class _BodyState extends State<Body> {
                                       Text(
                                         "Back",
                                         style: TextStyle(
-                                            fontSize: 14, color: kTextColor),
+                                            fontSize: 12.sp, color: kTextColor),
                                       ),
                                     ],
                                   ),
@@ -1128,7 +1212,7 @@ class _BodyState extends State<Body> {
                                       Text(
                                         "Next",
                                         style: TextStyle(
-                                            fontSize: 14, color: kTextColor),
+                                            fontSize: 12.sp, color: kTextColor),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -1333,17 +1417,13 @@ class _BodyState extends State<Body> {
                           alignment: Alignment.centerRight,
                         )),
                     Positioned(
-                      right: 15,
-                      left: 15,
+                      right: getProportionateScreenWidth(15),
+                      left: getProportionateScreenWidth(15),
                       top: 55,
                       child: Container(
-                        height: 110,
-                        child: const heard2.CustomDropDownMenu(items: [
-                          'Family (Covey)',
-                          'Male',
-                          'Female',
-                          'Both'
-                        ]),
+                        height: 20.h,
+                        child: const heard2.CustomDropDownMenu(
+                            items: ['Family (Covey)', 'Individual bird']),
                       ),
                     ),
                   ])))
@@ -1386,8 +1466,7 @@ class DefaultButton extends StatelessWidget {
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-        minimumSize: MaterialStateProperty.all(
-            Size(double.infinity,44)),
+        minimumSize: MaterialStateProperty.all(Size(double.infinity, 44)),
         backgroundColor: MaterialStateProperty.all(kAppbarColor),
       ),
       onPressed: press,
@@ -1396,9 +1475,7 @@ class DefaultButton extends StatelessWidget {
         children: [
           Text(
             text,
-            style: TextStyle(
-                fontSize: 14,
-                color: kTextColor),
+            style: TextStyle(fontSize: 12.sp, color: kTextColor),
           ),
           SizedBox(
             width: 5,

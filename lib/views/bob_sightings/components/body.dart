@@ -10,6 +10,7 @@ import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 import 'maps.dart';
 
@@ -46,7 +47,7 @@ class _BodyState extends State<Body> {
                   title: "Hear Bob",
                   iconPath: "assets/icons/music.svg",
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, HearBobScreen.routeName);
+                    Navigator.pushNamed(context, HearBobScreen.routeName);
                   }),
               BottomButton(
                   color: kColor2,
@@ -64,12 +65,10 @@ class _BodyState extends State<Body> {
 
                       timer = Timer(const Duration(seconds: 25), () {
                         Navigator.pop(context);
-                        Navigator.popAndPushNamed(
-                            context, IHeardBobScreen.routeName);
+                        Navigator.pushNamed(context, IHeardBobScreen.routeName);
                       });
                     } else {
-                      Navigator.popAndPushNamed(
-                          context, IHeardBobScreen.routeName);
+                      Navigator.pushNamed(context, IHeardBobScreen.routeName);
                     }
                   }),
             ],
@@ -151,12 +150,14 @@ class _BodyState extends State<Body> {
                                         MainAxisAlignment.spaceBetween,
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
-                                      const Text(
+                                      Text(
                                         "Disclaimer",
                                         style: TextStyle(
                                             color: kTextColor,
+                                            fontFamily: 'Manrope',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20),
+                                            
+                                            fontSize: 20.sp),
                                       ),
                                       IconButton(
                                         splashRadius: 0.1,
@@ -167,7 +168,7 @@ class _BodyState extends State<Body> {
                                         ),
                                         onPressed: () async {
                                           Navigator.pop(context);
-                                          Navigator.popAndPushNamed(context,
+                                          Navigator.pushNamed(context,
                                               IHeardBobScreen.routeName);
                                           setState(() {
                                             timer.cancel();
@@ -187,9 +188,9 @@ class _BodyState extends State<Body> {
                                       "The exact location of your sightings will not be shared with the public.",
                                       style: TextStyle(
                                           color: kTextColor,
+                                          fontFamily: 'Manrope',
                                           fontWeight: FontWeight.w400,
-                                          fontSize: getProportionateScreenWidth(
-                                              14.5)),
+                                          fontSize: 15.sp),
                                     )),
                                 Padding(
                                     padding: EdgeInsets.only(
@@ -201,10 +202,9 @@ class _BodyState extends State<Body> {
                                       "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                       style: TextStyle(
                                           color: kTextColor,
+                                          fontFamily: 'Manrope',
                                           fontWeight: FontWeight.w400,
-                                          fontSize:
-                                              getProportionateScreenHeight(
-                                                  14.5)),
+                                          fontSize: 15.sp),
                                     )),
                               ],
                             ),

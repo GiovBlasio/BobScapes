@@ -1,6 +1,7 @@
 import 'package:bobscapes/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
@@ -23,12 +24,13 @@ class CustomBackButton extends StatelessWidget {
           const SizedBox(
             width: 4,
           ),
-          const Text(
+          Text(
             "BACK",
             style: TextStyle(
                 //height: 16,
+                fontFamily: 'Manrope',
                 fontWeight: FontWeight.w700,
-                fontSize: 12,
+                fontSize: 10.sp,
                 color: kPrimaryColor),
           ),
         ],

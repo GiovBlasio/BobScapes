@@ -9,6 +9,7 @@ import 'package:geolocator/geolocator.dart';
 // ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class LocationForm extends StatefulWidget {
   const LocationForm({
@@ -72,7 +73,8 @@ class _LocationFormState extends State<LocationForm> {
                 Text(
                   "Latitude/Longitude",
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 11.sp,
+                      fontFamily: 'Manrope',
                       fontWeight: FontWeight.w500,
                       color: kTextColor),
                 ),
@@ -93,13 +95,13 @@ class _LocationFormState extends State<LocationForm> {
                   ),
                 ),
                 InkWell(
-                        onTap: () => _showMap(),
-                        overlayColor:
-                            const MaterialStatePropertyAll(Colors.transparent),
-                        splashColor: Colors.transparent,
-                        child: SizedBox(
-                          width: 3,
-                        )),
+                    onTap: () => _showMap(),
+                    overlayColor:
+                        const MaterialStatePropertyAll(Colors.transparent),
+                    splashColor: Colors.transparent,
+                    child: SizedBox(
+                      width: 3,
+                    )),
                 InkWell(
                     overlayColor:
                         const MaterialStatePropertyAll(Colors.transparent),
@@ -108,7 +110,8 @@ class _LocationFormState extends State<LocationForm> {
                     child: Text(
                       "change",
                       style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 10.sp,
+                          fontFamily: 'Manrope',
                           fontWeight: FontWeight.w700,
                           color: kTextColor),
                     )),
@@ -124,8 +127,9 @@ class _LocationFormState extends State<LocationForm> {
                     child: TextFormField(
                       style: TextStyle(
                           color: kTextColor,
+                          fontFamily: 'Manrope',
                           fontWeight: FontWeight.w600,
-                          fontSize: 14),
+                          fontSize: 11.sp),
                       cursorColor: kTextColor,
                       controller: controller,
                       readOnly: true,
@@ -161,15 +165,13 @@ class _LocationFormState extends State<LocationForm> {
                             borderRadius: BorderRadius.circular(5),
                             gapPadding: 20),
                         prefixIcon: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 5),
+                          padding: EdgeInsets.symmetric(horizontal: 5),
                           child: SvgPicture.asset(
                             "assets/icons/icon-geolocalization.svg",
                           ),
                         ),
-                        prefixIconConstraints: BoxConstraints(
-                            maxHeight: 28,
-                            maxWidth: 28),
+                        prefixIconConstraints:
+                            BoxConstraints(maxHeight: 28, maxWidth: 28),
                         //suffixIconColor: Colors.white,
                         hintText: "",
                       ),

@@ -4,6 +4,7 @@ import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class CommentForm extends StatefulWidget {
   const CommentForm({
@@ -41,13 +42,12 @@ class _CommentFormState extends State<CommentForm> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(
-              bottom: 8,
-              top: 20),
+          padding: EdgeInsets.only(bottom: 8, top: 20),
           child: Text(
             "Leave a comment",
             style: TextStyle(
-                fontSize: 16,
+                fontSize: 12.sp,
+                fontFamily: 'Manrope',
                 fontWeight: FontWeight.w500,
                 color: kTextColor),
           ),
@@ -70,22 +70,19 @@ class _CommentFormState extends State<CommentForm> {
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white.withAlpha(200),
-              constraints:
-                  BoxConstraints(maxHeight: 100),
+              constraints: BoxConstraints(maxHeight: 100),
               labelStyle: TextStyle(
                   color: kTextColor,
-                  fontSize: 16,
+                  fontSize: 12.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500),
               hintStyle: TextStyle(
                 color: kTextColor.withOpacity(0.6),
                 overflow: TextOverflow.visible,
-                fontSize: 14,
+                fontSize: 12.sp,
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              contentPadding: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                  top: 5),
+              contentPadding: EdgeInsets.only(left: 10, right: 10, top: 5),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
                 gapPadding: 20,
@@ -107,7 +104,8 @@ class _CommentFormState extends State<CommentForm> {
               hintText: "Write here...",
               prefixIcon: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: 5,),
+                  horizontal: 5,
+                ),
                 child: Column(
                   children: [
                     SvgPicture.asset(

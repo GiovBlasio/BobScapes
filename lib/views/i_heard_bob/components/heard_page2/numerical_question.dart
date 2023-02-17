@@ -4,6 +4,7 @@ import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class NumericalQuestion extends StatefulWidget {
   const NumericalQuestion({
@@ -30,14 +31,13 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-            constraints: BoxConstraints(
-                maxWidth: widget.id != 5
-                    ? 200
-                    : 135),
+            constraints:
+                BoxConstraints(maxWidth: widget.id != 5 ? 65.w : 200.w),
             child: Text(
               widget.title,
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 12.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500,
                   color: kTextColor),
             )),
@@ -45,22 +45,20 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
           Container(
             padding: const EdgeInsets.only(top: 4, left: 5),
             child: Tooltip(
-              padding: EdgeInsets.symmetric(
-                  vertical: getProportionateScreenHeight(20),
-                  horizontal: getProportionateScreenWidth(20)),
-              margin: EdgeInsets.only(
-                  left: getProportionateScreenWidth(90),
-                  right: getProportionateScreenWidth(50)),
+              padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 5.w),
+              margin: EdgeInsets.only(left: 18.w, right: 18.w),
               decoration: const BoxDecoration(
                 color: kColor2,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               showDuration: const Duration(seconds: 25),
               triggerMode: TooltipTriggerMode.tap,
-            //  verticalOffset: getProportionateScreenHeight(-165),
+              verticalOffset: -5.h,
+              preferBelow: false,
               textStyle: TextStyle(
                   color: kTextColor,
-                  fontSize: 16,
+                  fontSize: 12.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500),
               message:
                   'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
@@ -102,7 +100,8 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 },
                 style: TextStyle(
                   color: kTextColor,
-                  fontSize: getProportionateScreenWidth(14),
+                  fontSize: 14.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500,
                 ),
                 enableInteractiveSelection: false,

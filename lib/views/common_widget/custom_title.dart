@@ -2,6 +2,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomTitle extends StatelessWidget {
   const CustomTitle({
@@ -43,7 +44,8 @@ class CustomTitle extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: kTextColor,
-                    fontSize: 18,
+                    fontSize: 15.sp,
+                    fontFamily: 'Manrope',
                     fontWeight: FontWeight.bold),
               ),
               const Spacer(

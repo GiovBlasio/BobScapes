@@ -35,6 +35,7 @@ class Logo extends StatelessWidget {
               fontSize: getProportionateScreenHeight(textSize),
               fontFamily: "FjallaOne",
               color: textColor,
+             // fontFamily: 'Manrope',
               fontWeight: FontWeight.bold),
         ),
       ],

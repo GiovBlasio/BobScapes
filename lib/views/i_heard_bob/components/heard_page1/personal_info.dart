@@ -4,6 +4,7 @@ import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({
@@ -77,7 +78,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
             child: Text(
               "You are",
               style: TextStyle(
-                  fontSize: getProportionateScreenWidth(12),
+                  fontSize: 12.sp,
+                  fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500,
                   color: kTextColor),
             ),
@@ -110,7 +112,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                     borderRadius: const BorderRadius.all(Radius.circular(0)),
                     style: TextStyle(
                       color: kTextColor,
-                      fontSize: getProportionateScreenWidth(13),
+                      fontSize: 10.sp,
+                      fontFamily: 'Manrope',
                       fontWeight: FontWeight.w500,
                     ),
                     isExpanded: true,
@@ -211,11 +214,12 @@ class _NameFormState extends State<NameForm> {
         decoration: InputDecoration(
           labelStyle: TextStyle(
               color: kTextColor,
-              fontSize: getProportionateScreenWidth(15),
+              fontSize: 15.sp,
+              fontFamily: 'Manrope',
               fontWeight: FontWeight.w500),
           hintStyle: TextStyle(
             color: kTextColor.withAlpha(177),
-            fontSize: getProportionateScreenWidth(12),
+            fontSize: 12.sp,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding:

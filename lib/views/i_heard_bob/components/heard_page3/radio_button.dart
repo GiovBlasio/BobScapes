@@ -4,6 +4,7 @@ import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/custom_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomRadioButton extends StatefulWidget {
   const CustomRadioButton({
@@ -36,7 +37,8 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
           child: Text(
             widget.title,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 12.sp,
+              fontFamily: 'Manrope',
               fontWeight: FontWeight.w500,
               color: kTextColor,
             ),
@@ -87,7 +89,8 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
                               softWrap: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 11.5.sp,
+                                  fontFamily: 'Manrope',
                                   fontWeight: FontWeight.w600,
                                   color:
                                       group == item ? kTextColor : kTextColor),

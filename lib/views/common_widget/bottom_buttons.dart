@@ -2,6 +2,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sizer/sizer.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({
@@ -59,7 +60,8 @@ class BottomButton extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 13.sp,
+                        fontFamily: 'Manrope',
                         fontWeight: FontWeight.w500,
                         color: kTextColor),
                   ),

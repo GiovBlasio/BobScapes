@@ -2,6 +2,7 @@ import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
@@ -94,15 +95,15 @@ class CustomCard extends StatelessWidget {
                             Text(
                               title,
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 13.sp,
+                                  fontFamily: 'Manrope',
                                   fontWeight: FontWeight.w700,
                                   color: kTextColor),
                             ),
                             Text(
                               '$time s',
-                              style: TextStyle(
-                                  fontSize:10,
-                                  color: kTextColor),
+                              style:
+                                  TextStyle(fontSize: 8.sp, color: kTextColor),
                             ),
                           ],
                         ),

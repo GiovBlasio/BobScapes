@@ -7,6 +7,7 @@ import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../provider/heard_page/home_state.dart';
 import '../../bob_sightings/bob_sightings.dart';
@@ -89,9 +90,12 @@ class _CustomAlertState extends State<CustomAlert> {
           ),
           body: Stack(
               //alignment: Alignment.,
-             // fit: StackFit.loose,
+              // fit: StackFit.loose,
               children: [
-                SizedBox(height: SizeConfig.screenHeight, width: SizeConfig.screenWidth,),
+                SizedBox(
+                  height: SizeConfig.screenHeight,
+                  width: SizeConfig.screenWidth,
+                ),
                 Positioned.fill(
                   child: Opacity(
                     opacity: 1,
@@ -154,7 +158,8 @@ class _CustomAlertState extends State<CustomAlert> {
                                           widget.title,
                                           style: TextStyle(
                                               color: kTextColor,
-                                              fontSize: 22,
+                                              fontSize: 18.sp,
+                                              fontFamily: 'Manrope',
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],
@@ -211,8 +216,8 @@ class _CustomAlertState extends State<CustomAlert> {
                                                 formatTime(position),
                                                 style: TextStyle(
                                                     color: kTextColor,
-                                                    fontSize:
-                                                        16,
+                                                    fontSize: 11.sp,
+                                                    fontFamily: 'Manrope',
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
@@ -222,7 +227,8 @@ class _CustomAlertState extends State<CustomAlert> {
                                                 ),
                                                 style: TextStyle(
                                                     color: kTextColor,
-                                                    fontSize: 16,
+                                                    fontSize: 11.sp,
+                                                    fontFamily: 'Manrope',
                                                     fontWeight:
                                                         FontWeight.w500),
                                               )
@@ -317,11 +323,11 @@ class _CustomAlertState extends State<CustomAlert> {
                                 ),
                               )))),
                 ),
-                 const CustomTitle(
-          title: "Hear Bob",
-          color: kColor1,
-          icon: "assets/icons/music.svg",
-        ),
+                const CustomTitle(
+                  title: "Hear Bob",
+                  color: kColor1,
+                  icon: "assets/icons/music.svg",
+                ),
                 Positioned(
                   bottom: 0,
                   child: Row(
@@ -330,7 +336,7 @@ class _CustomAlertState extends State<CustomAlert> {
                         color: kColor3,
                         title: "Bob Sightings Map",
                         iconPath: "assets/icons/eye.svg",
-                        onPressed: () => Navigator.popAndPushNamed(
+                        onPressed: () => Navigator.pushNamed(
                             context, BobSightingsScreen.routeName),
                       ),
                       BottomButton(
@@ -350,11 +356,11 @@ class _CustomAlertState extends State<CustomAlert> {
 
                               timer = Timer(const Duration(seconds: 25), () {
                                 Navigator.pop(context);
-                                Navigator.popAndPushNamed(
+                                Navigator.pushNamed(
                                     context, IHeardBobScreen.routeName);
                               });
                             } else {
-                              Navigator.popAndPushNamed(
+                              Navigator.pushNamed(
                                   context, IHeardBobScreen.routeName);
                             }
                           }),
@@ -458,12 +464,13 @@ class _CustomAlertState extends State<CustomAlert> {
                                         MainAxisAlignment.spaceBetween,
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
-                                      const Text(
+                                      Text(
                                         "Disclaimer",
                                         style: TextStyle(
                                             color: kTextColor,
+                                            fontFamily: 'Manrope',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20),
+                                            fontSize: 20.sp),
                                       ),
                                       IconButton(
                                         splashRadius: 0.1,
@@ -474,7 +481,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                         ),
                                         onPressed: () async {
                                           Navigator.pop(context);
-                                          Navigator.popAndPushNamed(context,
+                                          Navigator.pushNamed(context,
                                               IHeardBobScreen.routeName);
                                           setState(() {
                                             timer.cancel();
@@ -494,9 +501,9 @@ class _CustomAlertState extends State<CustomAlert> {
                                       "The exact location of your sightings will not be shared with the public.",
                                       style: TextStyle(
                                           color: kTextColor,
+                                          fontFamily: 'Manrope',
                                           fontWeight: FontWeight.w400,
-                                          fontSize: getProportionateScreenWidth(
-                                              14.5)),
+                                          fontSize: 15.sp),
                                     )),
                                 Padding(
                                     padding: EdgeInsets.only(
@@ -508,10 +515,9 @@ class _CustomAlertState extends State<CustomAlert> {
                                       "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                       style: TextStyle(
                                           color: kTextColor,
+                                          fontFamily: 'Manrope',
                                           fontWeight: FontWeight.w400,
-                                          fontSize:
-                                              getProportionateScreenHeight(
-                                                  14.5)),
+                                          fontSize: 15.sp),
                                     )),
                               ],
                             ),
