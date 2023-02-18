@@ -1,4 +1,4 @@
-import 'package:bobscapes/views/welcome/components/body.dart';
+import 'package:bobscapes/views/2_welcome/components/body.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {

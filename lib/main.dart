@@ -2,7 +2,7 @@ import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/provider/heard_page/home_state.dart';
-import 'package:bobscapes/views/splash/splash.dart';
+import 'package:bobscapes/views/1_splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

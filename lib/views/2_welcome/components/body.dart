@@ -1,6 +1,6 @@
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/home/home.dart';
+import 'package:bobscapes/views/3_home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
@@ -57,8 +57,8 @@ class _BodyState extends State<Body> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 40.h,
+              Flexible(
+               // height: 40.h,
                 child: PageView(
                   onPageChanged: (value) {
                     setState(() {
@@ -146,29 +146,30 @@ class _BodyState extends State<Body> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  2,
-                  (index) => buildDot(index: index),
-                ),
-              ),
+              // SizedBox(height: 8.h,),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: List.generate(
+              //     2,
+              //     (index) => buildDot(index: index),
+              //   ),
+              // ),
             ],
           ),
         ),
-        // Positioned(
-        //   bottom: 28.h,
-        //   left: 10.w,
-        //   right: 10.w,
-        //   //top: 80.h,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: List.generate(
-        //       2,
-        //       (index) => buildDot(index: index),
-        //     ),
-        //   ),
-        // ),
+         Positioned(
+           bottom: 20.h,
+           left: 10.w,
+           right: 10.w,
+           //top: 80.h,
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: List.generate(
+               2,
+               (index) => buildDot(index: index),
+             ),
+           ),
+         ),
         if (currentIndex == 1)
           Positioned(
             right: 5.w,

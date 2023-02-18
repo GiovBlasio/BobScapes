@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
 import 'package:bobscapes/views/common_widget/logo_animated.dart';
-import 'package:bobscapes/views/home/home.dart';
+import 'package:bobscapes/views/3_home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../welcome/welcome.dart';
+import '../../2_welcome/welcome.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -152,19 +152,43 @@ class _BodyState extends State<Body> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Bobwhite",
-                style: TextStyle(
-                    height: 1,
-                    fontSize: 41.sp,
-                    color: kPrimaryColor,
-                    fontFamily: 'Manrope',
-                    fontWeight: FontWeight.w700),
-              ),
+              // RichText(
+              //   text: TextSpan(
+              //     style: TextStyle(
+              //         fontSize: 41.sp,
+              //         color: kPrimaryColor,
+              //         fontFamily: 'Manrope',
+              //         // fontFamily: 'Manrope',
+              //         fontWeight: FontWeight.w400),
+              //     children: const [
+              //       TextSpan(
+              //           text: 'Bobwhite\n',
+              //           style: TextStyle(
+              //               fontFamily: 'Manrope',
+              //               fontWeight: FontWeight.w700,
+              //               color: kPrimaryColor)),
+              //       TextSpan(
+              //         text: 'on our\n',
+              //       ),
+              //       TextSpan(
+              //         text: 'landscapes',
+              //       ),
+              //     ],
+              //   ),
+              // ),
+               Text(
+                 "Bobwhite",
+                 style: TextStyle(
+                     //height: 1,
+                     fontSize: 41.sp,
+                     color: kPrimaryColor,
+                     fontFamily: 'Manrope',
+                     fontWeight: FontWeight.w700),
+               ),
               Text(
                 "on our",
                 style: TextStyle(
-                    height: 1,
+                   // height: 1,
                     fontSize: 41.sp,
                     color: kPrimaryColor,
                     fontFamily: 'Manrope',
@@ -173,7 +197,7 @@ class _BodyState extends State<Body> {
               Text(
                 "landscapes",
                 style: TextStyle(
-                    height: 1,
+                  //  height: 1,
                     fontSize: 41.sp,
                     color: kPrimaryColor,
                     fontFamily: 'Manrope',

@@ -6,9 +6,9 @@ import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
 import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
-import 'package:bobscapes/views/hear_bob/hear_bob.dart';
-import 'package:bobscapes/views/i_heard_bob_thanks/i_heard_bob_thanks_screen.dart';
+import 'package:bobscapes/views/7_bob_sightings/bob_sightings.dart';
+import 'package:bobscapes/views/4_hear_bob/hear_bob.dart';
+import 'package:bobscapes/views/6_i_heard_bob_thanks/i_heard_bob_thanks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
@@ -343,8 +343,9 @@ class _BodyState extends State<Body> {
                                               latitude, longitude);
 
                                       locality = placemarks
-                                          .reversed.last.administrativeArea!;
+                                          .reversed.last.subAdministrativeArea!;
                                     }
+                                    print(locality);
 
                                     // name.replaceAll("'", "'\\''");
 
@@ -374,6 +375,7 @@ class _BodyState extends State<Body> {
                                       "comment": comment,
                                       "state": locality
                                     };
+                                    print(locality);
 
                                     if (!isLoaded) {
                                       setState(() {

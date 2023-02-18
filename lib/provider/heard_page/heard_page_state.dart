@@ -1,4 +1,4 @@
-import 'package:bobscapes/views/i_heard_bob/components/heard_page1.dart';
+import 'package:bobscapes/views/5_i_heard_bob/components/heard_page1.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../size_config.dart';

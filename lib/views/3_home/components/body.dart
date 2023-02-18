@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/provider/heard_page/home_state.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/bob_sightings/bob_sightings.dart';
-import 'package:bobscapes/views/hear_bob/hear_bob.dart';
-import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
+import 'package:bobscapes/views/7_bob_sightings/bob_sightings.dart';
+import 'package:bobscapes/views/4_hear_bob/hear_bob.dart';
+import 'package:bobscapes/views/5_i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';

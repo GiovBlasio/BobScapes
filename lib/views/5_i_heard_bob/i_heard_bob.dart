@@ -1,8 +1,8 @@
 import 'package:bobscapes/views/common_widget/custom_back_button.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/splash/splash.dart';
-import 'package:bobscapes/views/welcome/welcome.dart';
+import 'package:bobscapes/views/1_splash/splash.dart';
+import 'package:bobscapes/views/2_welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bobscapes/constants.dart';
 import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/i_heard_bob/i_heard_bob.dart';
+import 'package:bobscapes/views/5_i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../provider/heard_page/home_state.dart';
-import '../../bob_sightings/bob_sightings.dart';
+import '../../7_bob_sightings/bob_sightings.dart';
 import '../../common_widget/bottom_buttons.dart';
 import '../../common_widget/custom_back_button.dart';
 import '../../common_widget/custom_title.dart';
