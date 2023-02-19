@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/models/audio.dart';
-import 'package:bobscapes/models/marker.dart';
+import '../models/marker.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteService {
@@ -60,22 +58,6 @@ class RemoteService {
     String url =
         'https://5kxsouk1xj.execute-api.us-east-1.amazonaws.com/default/bobwhite-app-map-sighting',
   ]) async {
-    // //TODO da togliere
-    // int index = 0;
-    // Map<String, Marker> map = state.map((key, value) {
-    //   index++;
-    //   return MapEntry<String, Marker>(
-    //       key,
-    //       Marker(
-    //           latitude: value.latitude,
-    //           longitude: value.longitude,
-    //           state: key,
-    //           sightings: index));
-    // });
-
-    // return await Future.delayed(
-    //     const Duration(seconds: 1), () => map.values.toList());
-
     Uri uri = Uri.parse(url);
 
     http.Response response = await client.get(
@@ -91,8 +73,6 @@ class RemoteService {
       print(map['marker']);
 
       return markerFromJson(jsonEncode(map['marker']));
-
-      // return markerFromJson(jsonEncode(map['result']['user_forms']));
     } else {
       throw Exception(response.statusCode);
     }
@@ -114,8 +94,6 @@ class RemoteService {
 
     if (response.statusCode == 200) {
       var json = response.body;
-
-      print(response.body);
 
       var map = jsonDecode(json);
       if (map['result'] == "ok") {

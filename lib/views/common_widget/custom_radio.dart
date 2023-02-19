@@ -1,5 +1,7 @@
-import 'package:bobscapes/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../constants.dart';
 
 class CustomRadio extends StatefulWidget {
   const CustomRadio({
@@ -27,19 +29,24 @@ class _CustomRadioState extends State<CustomRadio> {
         }
       },
       child: Container(
-        height: 25,
-        width: 25,
+        height: 32.h,
+        width: 32.w,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-                width: widget.groupValue != widget.value ? 2 : 8,
-                color:
-                    widget.groupValue == widget.value ? kColor1 : kTextColor)),
-       
-        margin: const EdgeInsets.all(2),
-        child: Container(
-          decoration:
-              const BoxDecoration(color: kColor3, shape: BoxShape.circle),
+          color: widget.groupValue == widget.value ? kColor1 : kColor3,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: widget.groupValue == widget.value ? kColor1 : kTextColor,
+          ),
+        ),
+        child: Center(
+          child: Container(
+            height: 12.h,
+            width: 12.w,
+            decoration: const BoxDecoration(
+              color: kColor3,
+              shape: BoxShape.circle,
+            ),
+          ),
         ),
       ),
     );

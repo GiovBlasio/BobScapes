@@ -1,10 +1,10 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page1_state.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({
@@ -27,14 +27,15 @@ class _PersonalInfoState extends State<PersonalInfo> {
         ),
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(15),
-              vertical: getProportionateScreenHeight(15)),
+            horizontal: 15.w,
+            vertical: 15.h,
+          ),
           color: kColor2.withAlpha(45).withOpacity(0.5),
           child: Row(
             children: [
               const NameForm(),
               SizedBox(
-                width: getProportionateScreenWidth(25),
+                width: 25.w,
               ),
               CustomDropDownMenu(items: widget.items)
             ],
@@ -73,15 +74,17 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                left: getProportionateScreenWidth(15),
-                bottom: getProportionateScreenHeight(8)),
+              left: 15.w,
+              bottom: 8.h,
+            ),
             child: Text(
               "You are",
               style: TextStyle(
-                  fontSize: 12.sp,
-                  fontFamily: 'Manrope',
-                  fontWeight: FontWeight.w500,
-                  color: kTextColor),
+                color: kTextLightColor,
+                fontSize: 14.sp,
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
           ClipRRect(
@@ -89,32 +92,42 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               Radius.circular(0),
             ),
             child: Container(
-              height: getProportionateScreenHeight(50),
+              height: 50.h,
               padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(15)),
-              //color: Colors.red,
+                horizontal: 15.w,
+              ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButtonFormField(
+                    dropdownColor: kColor3,
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: kTextColor.withOpacity(0.22), width: 0.3)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: kTextColor.withOpacity(0.22), width: 0.3)),
                       contentPadding: EdgeInsets.symmetric(
-                          vertical: getProportionateScreenHeight(12),
-                          horizontal: getProportionateScreenWidth(12)),
+                        horizontal: 10.w,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: kTextColor.withOpacity(0.22),
+                          width: 0.3,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: kTextColor.withOpacity(0.22),
+                          width: 0.3,
+                        ),
+                      ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: kTextColor.withOpacity(0.22), width: 0.3)),
+                        borderSide: BorderSide(
+                          color: kTextColor.withOpacity(0.22),
+                          width: 0.3,
+                        ),
+                      ),
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(0)),
                     style: TextStyle(
                       color: kTextColor,
-                      fontSize: 10.sp,
+                      fontSize: 16.sp,
                       fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                     ),
                     isExpanded: true,
                     value: dropdownvalue,
@@ -133,11 +146,15 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                               color: kTextColor,
                             ),
                             SizedBox(
-                              width: getProportionateScreenWidth(5),
+                              width: 5.w,
                             ),
                             Text(
                               item,
-                              style: const TextStyle(color: kTextColor),
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ],
                         ),
@@ -198,8 +215,7 @@ class _NameFormState extends State<NameForm> {
   Widget build(BuildContext context) {
     return Form(
         child: Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: TextFormField(
         enableInteractiveSelection: false,
         controller: controller,
@@ -222,8 +238,7 @@ class _NameFormState extends State<NameForm> {
             fontSize: 12.sp,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          contentPadding:
-              EdgeInsets.symmetric(vertical: getProportionateScreenHeight(8)),
+          contentPadding: EdgeInsets.symmetric(vertical: 8.h),
           enabledBorder: const UnderlineInputBorder(
             borderSide: BorderSide(
               width: 1,

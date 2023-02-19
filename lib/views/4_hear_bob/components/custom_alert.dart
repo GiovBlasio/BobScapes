@@ -1,19 +1,19 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/5_i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
+import '../../../constants.dart';
 import '../../../provider/heard_page/home_state.dart';
-import '../../7_bob_sightings/bob_sightings.dart';
+import '../../5_i_heard_bob/i_heard_bob.dart';
+import '../../7_bob_sightings_map/bob_sightings.dart';
 import '../../common_widget/bottom_buttons.dart';
 import '../../common_widget/custom_back_button.dart';
 import '../../common_widget/custom_title.dart';
+import '../../common_widget/title_back.dart';
 
 class CustomAlert extends StatefulWidget {
   const CustomAlert({
@@ -80,291 +80,282 @@ class _CustomAlertState extends State<CustomAlert> {
         bottom: false,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: kAppbarColor,
-            leadingWidth: getProportionateScreenWidth(80),
-            leading: const CustomBackButton(),
-            title: TitleBack()
-          ),
-          body: Stack(
-              //alignment: Alignment.,
-              // fit: StackFit.loose,
-              children: [
-                SizedBox(
-                  height: SizeConfig.screenHeight,
-                  width: SizeConfig.screenWidth,
+              backgroundColor: kAppbarColor,
+              leadingWidth: 80.w,
+              leading: const CustomBackButton(),
+              title: const TitleBack()),
+          body: Stack(children: [
+            SizedBox(
+              height: ScreenUtil().screenHeight,
+              width: ScreenUtil().screenWidth,
+            ),
+            Positioned.fill(
+              child: Opacity(
+                opacity: 1,
+                child: SvgPicture.asset(
+                  "assets/images/sfondo3.svg",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
-                Positioned.fill(
-                  child: Opacity(
-                    opacity: 1,
-                    child: SvgPicture.asset("assets/images/sfondo3.svg",
-                        fit: BoxFit.cover, width: double.infinity),
+              ),
+            ),
+            Positioned(
+              top: 118.h,
+              right: 16.w,
+              child: Image.asset(
+                "assets/images/quail.png",
+                height: 0.15.sh,
+                alignment: Alignment.centerRight,
+              ),
+            ),
+            Positioned(
+              left: 16.w,
+              right: 16.w,
+              top: 216.h,
+              child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(13.0),
                   ),
-                ),
-                Positioned(
-                  top: getProportionateScreenHeight(140),
-                  left: 40,
-                  right: 30,
-                  child: Image.asset(
-                    "assets/images/quail.png",
-                    height: getProportionateScreenHeight(125),
-                    alignment: Alignment.centerRight,
-                  ),
-                ),
-                Positioned(
-                  left: 15,
-                  right: 15,
-                  top: getProportionateScreenHeight(240),
-                  child: Container(
-                      height: 240,
-                      decoration: BoxDecoration(
+                  child: Card(
+                      margin: const EdgeInsets.all(0),
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13.0),
                       ),
-                      child: Card(
-                          margin: const EdgeInsets.all(0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13.0),
+                      elevation: 10,
+                      child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(13),
                           ),
-                          elevation: 10,
-                          child: ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(13),
-                              ),
-                              child: Container(
-                                color: kColor3,
-                                width: double.infinity,
-                                padding: EdgeInsets.symmetric(vertical: 0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                          child: Container(
+                            color: kColor3,
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    right: 10.w,
+                                  ),
+                                  child: IconButton(
+                                    icon: SvgPicture.asset(
+                                      "assets/icons/icon-close.svg",
+                                      height: 24.h,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    IconButton(
-                                      icon: SvgPicture.asset(
-                                        "assets/icons/icon-close.svg",
-                                        height: 20,
+                                    Text(
+                                      widget.title,
+                                      style: TextStyle(
+                                          color: kTextColor,
+                                          fontSize: 24.sp,
+                                          fontFamily: 'Manrope',
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 47.5.h,
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
+                                      child: SliderTheme(
+                                        data: SliderThemeData(
+                                            trackHeight: 2,
+                                            inactiveTrackColor:
+                                                kTextColor.withOpacity(0.8),
+                                            activeTrackColor: kColor1,
+                                            disabledThumbColor: kColor1,
+                                            thumbShape:
+                                                SliderComponentShape.noThumb,
+                                            overlayShape:
+                                                const RoundSliderOverlayShape(
+                                                    overlayRadius: 12),
+                                            overlayColor: Colors.transparent),
+                                        child: Slider(
+                                            min: 0,
+                                            value:
+                                                position.inSeconds.toDouble(),
+                                            max: duration.inSeconds.toDouble(),
+                                            onChanged: (value) async {
+                                              final position = Duration(
+                                                  seconds: value.toInt());
+                                              await audioPlayer.seek(position);
+                                            }),
                                       ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          widget.title,
-                                          style: TextStyle(
-                                              color: kTextColor,
-                                              fontSize: 18.sp,
-                                              fontFamily: 'Manrope',
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    const Spacer(
-                                      flex: 6,
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal:
-                                                  getProportionateScreenWidth(
-                                                      8)),
-                                          child: SliderTheme(
-                                            data: SliderThemeData(
-                                                trackHeight: 2,
-                                                inactiveTrackColor:
-                                                    kTextColor.withOpacity(0.8),
-                                                activeTrackColor: kColor1,
-                                                disabledThumbColor: kColor1,
-                                                thumbShape: SliderComponentShape
-                                                    .noThumb,
-                                                overlayShape:
-                                                    const RoundSliderOverlayShape(
-                                                        overlayRadius: 12),
-                                                overlayColor:
-                                                    Colors.transparent),
-                                            child: Slider(
-                                                min: 0,
-                                                value: position.inSeconds
-                                                    .toDouble(),
-                                                max: duration.inSeconds
-                                                    .toDouble(),
-                                                onChanged: (value) async {
-                                                  final position = Duration(
-                                                      seconds: value.toInt());
-                                                  await audioPlayer
-                                                      .seek(position);
-                                                }),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20.w,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            formatTime(position),
+                                            style: TextStyle(
+                                                color: kTextColor,
+                                                fontSize: 14.sp,
+                                                fontFamily: 'Manrope',
+                                                fontStyle: FontStyle.italic,
+                                                fontWeight: FontWeight.w400),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal:
-                                                  getProportionateScreenWidth(
-                                                      20)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                formatTime(position),
-                                                style: TextStyle(
-                                                    color: kTextColor,
-                                                    fontSize: 11.sp,
-                                                    fontFamily: 'Manrope',
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              Text(
-                                                formatTime(
-                                                  duration - position,
-                                                ),
-                                                style: TextStyle(
-                                                    color: kTextColor,
-                                                    fontSize: 11.sp,
-                                                    fontFamily: 'Manrope',
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const Spacer(flex: 2),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        InkWell(
-                                          onTap: () async {
-                                            await audioPlayer
-                                                .seek(Duration.zero);
-                                            audioPlayer.stop();
-                                            setState(() {
-                                              position = Duration.zero;
-
-                                              isPlaying = false;
-                                            });
-                                          },
-                                          child: Card(
-                                            shape: const CircleBorder(),
-                                            elevation: 8,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal:
-                                                      getProportionateScreenWidth(
-                                                          8),
-                                                  vertical:
-                                                      getProportionateScreenHeight(
-                                                          8)),
-                                              child: SvgPicture.asset(
-                                                "assets/icons/icon-repeate.svg",
-                                                height: 20,
-                                              ),
+                                          Text(
+                                            formatTime(
+                                              duration - position,
                                             ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () async {
-                                            if (isPlaying) {
-                                              await audioPlayer.pause();
-                                            } else {
-                                              await audioPlayer.resume();
-                                            }
-                                            setState(() {
-                                              isPlaying = !isPlaying;
-                                            });
-                                          },
-                                          child: Card(
-                                            shape: const CircleBorder(),
-                                            elevation: 8,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal:
-                                                      getProportionateScreenWidth(
-                                                          8),
-                                                  vertical:
-                                                      getProportionateScreenHeight(
-                                                          8)),
-                                              child: !isPlaying
-                                                  ? const Icon(
-                                                      Icons.play_arrow,
-                                                      color: kTextColor,
-                                                      size: 20,
-                                                    )
-                                                  : SvgPicture.asset(
-                                                      "assets/icons/icon-stop.svg",
-                                                      height: 20,
-                                                    ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const Spacer(
-                                      flex: 5,
+                                            style: TextStyle(
+                                                color: kTextColor,
+                                                fontSize: 14.sp,
+                                                fontFamily: 'Manrope',
+                                                fontStyle: FontStyle.italic,
+                                                fontWeight: FontWeight.w500),
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
-                              )))),
-                ),
-                const CustomTitle(
-                  title: "Hear Bob",
-                  color: kColor1,
-                  icon: "assets/icons/music.svg",
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: Row(
-                    children: [
-                      BottomButton(
-                        color: kColor3,
-                        title: "Bob Sightings Map",
-                        iconPath: "assets/icons/eye.svg",
-                        onPressed: () => Navigator.pushNamed(
-                            context, BobSightingsScreen.routeName),
-                      ),
-                      BottomButton(
-                          color: kColor2,
-                          title: "Hey, I heard Bob!",
-                          iconPath: "assets/icons/gps.svg",
-                          onPressed: () {
-                            if (Provider.of<HomeState>(context, listen: false)
-                                .firstAccess) {
-                              changeFirstAccess();
-                              showDialog(
-                                  barrierDismissible: false,
-                                  barrierColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) =>
-                                      _showDisclaimer(context));
+                                SizedBox(
+                                  height: 27.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        await audioPlayer.seek(Duration.zero);
+                                        audioPlayer.stop();
+                                        setState(() {
+                                          position = Duration.zero;
 
-                              timer = Timer(const Duration(seconds: 25), () {
-                                Navigator.pop(context);
-                                Navigator.pushNamed(
-                                    context, IHeardBobScreen.routeName);
-                              });
-                            } else {
-                              Navigator.pushNamed(
-                                  context, IHeardBobScreen.routeName);
-                            }
-                          }),
-                    ],
+                                          isPlaying = false;
+                                        });
+                                      },
+                                      child: Card(
+                                        shape: const CircleBorder(),
+                                        elevation: 8,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 8.w,
+                                            vertical: 8.h,
+                                          ),
+                                          child: SvgPicture.asset(
+                                            "assets/icons/icon-repeate.svg",
+                                            height: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        if (isPlaying) {
+                                          await audioPlayer.pause();
+                                        } else {
+                                          await audioPlayer.resume();
+                                        }
+                                        setState(() {
+                                          isPlaying = !isPlaying;
+                                        });
+                                      },
+                                      child: Card(
+                                        shape: const CircleBorder(),
+                                        elevation: 8,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 8.w,
+                                            vertical: 8.h,
+                                          ),
+                                          child: !isPlaying
+                                              ? const Icon(
+                                                  Icons.play_arrow,
+                                                  color: kTextColor,
+                                                  size: 20,
+                                                )
+                                              : SvgPicture.asset(
+                                                  "assets/icons/icon-stop.svg",
+                                                  height: 20,
+                                                ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 32.h,
+                                )
+                              ],
+                            ),
+                          )))),
+            ),
+            const CustomTitle(
+              title: "Hear Bob",
+              color: kColor1,
+              icon: "assets/icons/music.svg",
+            ),
+            Positioned(
+              bottom: 0,
+              child: Row(
+                children: [
+                  BottomButton(
+                    color: kColor3,
+                    title: "Bob Sightings Map",
+                    iconPath: "assets/icons/eye.svg",
+                    onPressed: () => Navigator.pushNamed(
+                        context, BobSightingsScreen.routeName),
                   ),
-                ),
-              ]),
+                  BottomButton(
+                      color: kColor2,
+                      title: "Hey, I heard Bob!",
+                      iconPath: "assets/icons/gps.svg",
+                      onPressed: () {
+                        if (Provider.of<HomeState>(context, listen: false)
+                            .firstAccess) {
+                          changeFirstAccess();
+
+                          showDialog(
+                              barrierDismissible: false,
+                              barrierColor: Colors.transparent,
+                              context: context,
+                              builder: (context) => _showDisclaimer(context));
+
+                          timer = Timer(const Duration(seconds: 25), () {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                                context, IHeardBobScreen.routeName);
+                          });
+                        } else {
+                          Navigator.pushNamed(
+                              context, IHeardBobScreen.routeName);
+                        }
+                      }),
+                ],
+              ),
+            ),
+          ]),
         ));
   }
 
@@ -389,137 +380,128 @@ class _CustomAlertState extends State<CustomAlert> {
     audioPlayer.setUrl(url.path, isLocal: true);
   }
 
-  Widget _showDisclaimer(BuildContext context) {
-    return SafeArea(
-        top: false,
-        bottom: false,
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: kAppbarColor,
-            leading: Container(),
-            title: TitleBack()
-          ),
-          body: Stack(children: [
+  Stack _showDisclaimer(BuildContext context) {
+    return Stack(children: [
+      Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          child: Stack(alignment: Alignment.bottomCenter, children: [
             Positioned.fill(
               child: SvgPicture.asset(
                 "assets/images/sfondo-welcome2.svg",
                 fit: BoxFit.fill,
-                width: SizeConfig.screenWidth,
+                width: ScreenUtil().screenWidth,
               ),
             ),
             Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: 0,
-                child: Stack(alignment: Alignment.bottomCenter, children: [
-                  Positioned(
-                    bottom: getProportionateScreenHeight(400),
-                    left: 25,
-                    child: Image.asset(
-                      "assets/images/quail-reflected.png",
-                      height: getProportionateScreenHeight(200),
-                    ),
+              bottom: 400.h,
+              left: 0,
+              right: 0,
+              child: Image.asset(
+                "assets/images/quail-reflected.png",
+                height: 270.h,
+                alignment: Alignment.centerLeft,
+              ),
+            ),
+            Positioned(
+              height: 453.h,
+              left: 16.w,
+              right: 16.w,
+              child: Card(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(16),
                   ),
-                  Positioned(
-                    height: getProportionateScreenHeight(525 - 72),
-                    left: 25,
-                    right: 25,
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(16),
+                ),
+                elevation: 10,
+                margin: EdgeInsets.symmetric(horizontal: 0.h),
+                child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 15.h),
+                    decoration: BoxDecoration(
+                        color: kColor3,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16.r))),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 30.w, right: 10.w),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.baseline,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                textBaseline: TextBaseline.alphabetic,
+                                children: [
+                                  Text(
+                                    "Disclaimer",
+                                    style: TextStyle(
+                                        color: kTextColor,
+                                        fontFamily: 'Manrope',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24.sp),
+                                  ),
+                                  IconButton(
+                                    splashRadius: 0.1,
+                                    icon: const Icon(
+                                      Icons.close,
+                                      size: 30,
+                                      color: kTextColor,
+                                    ),
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(
+                                          context, IHeardBobScreen.routeName);
+                                      setState(() {
+                                        timer.cancel();
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 30.w,
+                                top: 25.h,
+                                bottom: 5.h,
+                                right: 40.w,
+                              ),
+                              child: Text(
+                                "The exact location of your sightings will not be shared with the public.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontFamily: 'Manrope',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.sp),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 30.w,
+                                top: 15.h,
+                                bottom: 5.h,
+                                right: 40.w,
+                              ),
+                              child: Text(
+                                "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontFamily: 'Manrope',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.sp),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      elevation: 10,
-                      margin: EdgeInsets.symmetric(
-                          horizontal: getProportionateScreenWidth(0)),
-                      child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: getProportionateScreenHeight(15)),
-                          decoration: const BoxDecoration(
-                              color: kColor3,
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(16))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: getProportionateScreenWidth(30),
-                                      right: getProportionateScreenWidth(10)),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.baseline,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    textBaseline: TextBaseline.alphabetic,
-                                    children: [
-                                      Text(
-                                        "Disclaimer",
-                                        style: TextStyle(
-                                            color: kTextColor,
-                                            fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 20.sp),
-                                      ),
-                                      IconButton(
-                                        splashRadius: 0.1,
-                                        icon: const Icon(
-                                          Icons.close,
-                                          size: 30,
-                                          color: kTextColor,
-                                        ),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          Navigator.pushNamed(context,
-                                              IHeardBobScreen.routeName);
-                                          setState(() {
-                                            timer.cancel();
-                                          });
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left: getProportionateScreenWidth(30),
-                                        top: getProportionateScreenHeight(20),
-                                        bottom: getProportionateScreenHeight(5),
-                                        right: getProportionateScreenWidth(40)),
-                                    child: Text(
-                                      "The exact location of your sightings will not be shared with the public.",
-                                      style: TextStyle(
-                                          color: kTextColor,
-                                          fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.sp),
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left: getProportionateScreenWidth(30),
-                                        top: getProportionateScreenHeight(20),
-                                        bottom: getProportionateScreenHeight(5),
-                                        right: getProportionateScreenWidth(40)),
-                                    child: Text(
-                                      "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
-                                      style: TextStyle(
-                                          color: kTextColor,
-                                          fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.sp),
-                                    )),
-                              ],
-                            ),
-                          )),
-                    ),
-                  ),
-                ])),
-          ]),
-        ));
+                    )),
+              ),
+            ),
+          ])),
+    ]);
   }
 }

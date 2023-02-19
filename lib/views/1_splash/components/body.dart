@@ -1,17 +1,15 @@
-import 'dart:async';
-
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/common_widget/logo_animated.dart';
-import 'package:bobscapes/views/3_home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../2_welcome/welcome.dart';
+import '../../../constants.dart';
+import '../../2_welcome/welcome_screen.dart';
+import '../../common_widget/logo_animated.dart';
 
 class Body extends StatefulWidget {
-  const Body({super.key});
+  const Body({
+    super.key,
+  });
 
   @override
   State<Body> createState() => _BodyState();
@@ -21,67 +19,56 @@ class _BodyState extends State<Body> {
   bool animate = false;
   bool opacity = false;
 
-  late double bottomLogo;
+  late double topLogo;
   late double leftLogo;
   late double bottomTextRow;
-  late double bottomBackground;
-  late double imageWidth = SizeConfig.screenWidth;
+  // late double bottomBackground;
+  // late double imageWidth;
   late double logoHeight;
   late double logoWidth;
-  late double leftFirstPin;
-  late double bottomMainPhrase;
-  late double rightSecondPin = getProportionateScreenWidth(-60);
+  //late double leftFirstPin;
+  //late double bottomMainPhrase;
+  late double bobwhiteTop;
+  late double onOurTop;
+  late double landscapesTop;
 
   @override
   void initState() {
     super.initState();
-    bottomLogo = 60.h;
-    leftLogo = 10.w;
+    topLogo = 275.h;
+    leftLogo = 40.67.w;
     bottomTextRow = -100.h;
-    bottomBackground = 0;
-    imageWidth = 100.w;
-    logoHeight = 10.h;
-    logoWidth = 10.w;
-    leftFirstPin = getProportionateScreenWidth(-50);
-    bottomMainPhrase = -100.h;
-    rightSecondPin = getProportionateScreenWidth(-60);
+    //  bottomBackground = 0;
+    //imageWidth = 100.w;
+    logoHeight = 100.25.h;
+    logoWidth = 296.w;
+    bobwhiteTop = -204.h;
+    onOurTop = -153.h;
+    landscapesTop = -102.h;
     _initialization();
   }
 
   void _initialization() async {
-    await Future.delayed(const Duration(milliseconds: 000), () {
-      SizeConfig().init(context);
-      // bottomLogo = getProportionateScreenHeight(405);
-      // leftLogo = getProportionateScreenWidth(28);
-      // bottomTextRow = getProportionateScreenHeight(-100);
-      // bottomBackground = getProportionateScreenHeight(0);
-      // imageWidth = SizeConfig.screenWidth;
-      // logoHeight = getProportionateScreenHeight(95);
-      // logoWidth = getProportionateScreenWidth(45);
-      // leftFirstPin = getProportionateScreenWidth(-50);
-      // bottomMainPhrase = -200;
-      // rightSecondPin = getProportionateScreenWidth(-60);
-    });
     await Future.delayed(const Duration(milliseconds: 200));
     setState(() {
       opacity = true;
-      bottomLogo = 55.h;
-      bottomTextRow = 3.h;
-      bottomBackground = 100.h;
+      topLogo = 290.59.h;
+      bottomTextRow = 31.h;
+      // bottomBackground = 100.h;
     });
 
     await Future.delayed(const Duration(milliseconds: 3000));
 
     setState(() {
       animate = true;
-      bottomLogo = 50.h;
-      leftLogo = 8.w;
-      imageWidth = imageWidth + 100;
-      logoHeight = 12.h;
-      logoWidth = 12.w;
-      leftFirstPin = getProportionateScreenWidth(-17);
-      bottomMainPhrase = 53.h;
-      rightSecondPin = getProportionateScreenWidth(10);
+      topLogo = 315.59.h;
+      leftLogo = 24.67.w;
+      //imageWidth = imageWidth + 100;
+      logoHeight = 85.25.h;
+      logoWidth = 276.w;
+      bobwhiteTop = 419.59.h;
+      onOurTop = 470.59.h;
+      landscapesTop = 521.59.h;
     });
 
     await Future.delayed(
@@ -121,7 +108,7 @@ class _BodyState extends State<Body> {
           child: SvgPicture.asset(
             "assets/images/sfondo1.svg",
             fit: BoxFit.fill,
-            width: SizeConfig.screenWidth,
+            width: ScreenUtil().screenWidth,
           ),
         ),
         AnimatedOpacity(
@@ -130,151 +117,101 @@ class _BodyState extends State<Body> {
           child: SvgPicture.asset(
             "assets/images/sfondo-welcome2.svg",
             fit: BoxFit.fill,
-            width: SizeConfig.screenWidth,
+            width: ScreenUtil().screenWidth,
           ),
         ),
-        AnimatedPositioned(
-            duration: const Duration(seconds: 1),
-            bottom: bottomLogo,
-            left: leftLogo,
-            child: AnimatedOpacity(
-              opacity: opacity ? 1 : 0,
-              duration: const Duration(seconds: 1),
-              child: AnimatedLogo(
-                  logoHeight: logoHeight,
-                  logoWidth: logoWidth,
-                  duration: const Duration(seconds: 1)),
-            )),
         AnimatedPositioned(
           duration: const Duration(seconds: 1),
-          left: 8.w,
-          top: bottomMainPhrase,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // RichText(
-              //   text: TextSpan(
-              //     style: TextStyle(
-              //         fontSize: 41.sp,
-              //         color: kPrimaryColor,
-              //         fontFamily: 'Manrope',
-              //         // fontFamily: 'Manrope',
-              //         fontWeight: FontWeight.w400),
-              //     children: const [
-              //       TextSpan(
-              //           text: 'Bobwhite\n',
-              //           style: TextStyle(
-              //               fontFamily: 'Manrope',
-              //               fontWeight: FontWeight.w700,
-              //               color: kPrimaryColor)),
-              //       TextSpan(
-              //         text: 'on our\n',
-              //       ),
-              //       TextSpan(
-              //         text: 'landscapes',
-              //       ),
-              //     ],
-              //   ),
-              // ),
-               Text(
-                 "Bobwhite",
-                 style: TextStyle(
-                     //height: 1,
-                     fontSize: 41.sp,
-                     color: kPrimaryColor,
-                     fontFamily: 'Manrope',
-                     fontWeight: FontWeight.w700),
-               ),
-              Text(
-                "on our",
-                style: TextStyle(
-                   // height: 1,
-                    fontSize: 41.sp,
-                    color: kPrimaryColor,
-                    fontFamily: 'Manrope',
-                    fontWeight: FontWeight.w400),
-              ),
-              Text(
-                "landscapes",
-                style: TextStyle(
-                  //  height: 1,
-                    fontSize: 41.sp,
-                    color: kPrimaryColor,
-                    fontFamily: 'Manrope',
-                    fontWeight: FontWeight.w400),
-              ),
-            ],
+          bottom: bottomTextRow,
+          left: 12.w,
+          right: 12.w,
+          child: AnimatedOpacity(
+            opacity: opacity ? 1 : 0,
+            duration: const Duration(seconds: 2),
+            child: Row(
+              children: [
+                const Spacer(),
+                SvgPicture.asset(
+                  "assets/images/wlfw.svg",
+                ),
+                const Spacer(
+                  flex: 2,
+                ),
+                SvgPicture.asset(
+                  "assets/images/quail-forever.svg",
+                ),
+                const Spacer(
+                  flex: 2,
+                ),
+                Image.asset(
+                  "assets/images/gamelabmartin.png",
+                  //height: 90,
+                  scale: 3,
+                ),
+                const Spacer()
+              ],
+            ),
           ),
         ),
         AnimatedPositioned(
             duration: const Duration(seconds: 1),
-            bottom: bottomTextRow,
-            left: getProportionateScreenHeight(0),
-            right: getProportionateScreenHeight(0),
-            child: AnimatedOpacity(
-              opacity: opacity ? 1 : 0,
-              duration: const Duration(seconds: 2),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  SvgPicture.asset(
-                    "assets/images/wlfw.svg",
-                  ),
-                  const Spacer(
-                    flex: 2,
-                  ),
-                  SvgPicture.asset(
-                    "assets/images/quail-forever.svg",
-                  ),
-                  const Spacer(
-                    flex: 2,
-                  ),
-                  Image.asset(
-                    "assets/images/gamelabmartin.png",
-                    //height: 90,
-                    scale: 3,
-                  ),
-                  const Spacer()
-                ],
-              ),
-            ))
+            left: leftLogo,
+            top: topLogo,
+            child: AnimatedLogo(
+              duration: const Duration(seconds: 1),
+              logoHeight: logoHeight,
+              logoWidth: logoWidth,
+            )
+            // SvgPicture.asset(
+            //   "assets/images/logo-bobscapes.svg",
+            //   height: logoHeight,
+            //   width: logoWidth,
+            //   alignment: Alignment.centerLeft,
+            // ),
+            ),
+        AnimatedPositioned(
+          duration: const Duration(seconds: 1),
+          left: 38.w,
+          top: bobwhiteTop,
+          child: Text(
+            "Bobwhite",
+            style: TextStyle(
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.w700,
+              color: kPrimaryColor,
+              fontSize: 51.sp,
+            ),
+          ),
+        ),
+        AnimatedPositioned(
+          duration: const Duration(seconds: 1),
+          left: 38.w,
+          top: onOurTop,
+          child: Text(
+            "on our",
+            style: TextStyle(
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.w400,
+              color: kPrimaryColor,
+              fontSize: 51.sp,
+            ),
+          ),
+        ),
+        AnimatedPositioned(
+          duration: const Duration(seconds: 1),
+          left: 38.w,
+          top: landscapesTop,
+          child: Text(
+            "landscapes",
+            style: TextStyle(
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.w400,
+              color: kPrimaryColor,
+              fontSize: 51.sp,
+            ),
+          ),
+        ),
       ],
-    );
-  }
-}
-
-class Transition extends StatelessWidget {
-  const Transition({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: FloatingActionButton(onPressed: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-              transitionDuration: const Duration(seconds: 2),
-              pageBuilder: (context, animation, secondaryAnimation) =>
-                  const HomeScreen(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(-1, 0);
-                const end = Offset.zero;
-                const curve = Curves.slowMiddle;
-
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: curve));
-                final offsetAnimation = animation.drive(tween);
-
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: child,
-                );
-              }),
-        );
-      }),
     );
   }
 }

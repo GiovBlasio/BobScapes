@@ -6,14 +6,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
-import '../../../models/audio.dart';
 import '../../../provider/heard_page/home_state.dart';
+import '../../4_hear_bob/heard_bob.dart';
 import '../../5_i_heard_bob/i_heard_bob.dart';
-import '../../7_bob_sightings_map/bob_sightings.dart';
 import '../../common_widget/bottom_buttons.dart';
 import '../../common_widget/custom_title.dart';
-import 'custom_alert.dart';
-import 'custom_card.dart';
+import 'maps.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -23,21 +21,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  List<Audio> audio = [
-    Audio(
-        time: "4",
-        title: "Male Bobwhite Spring Call",
-        path: "male-bobwhite-spring-call.mp3",
-        pathImage: "assets/images/bobwhite.jpg"),
-    Audio(
-        time: "6",
-        title: "Fall covey Call",
-        path: "fall-covey-call.mp3",
-        pathImage: "assets/images/covata.jpg")
-  ];
-
-  bool isLoaded = true;
-
   late Timer timer;
 
   void changeFirstAccess() {
@@ -48,62 +31,23 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Opacity(
-          opacity: 1,
-          child: SvgPicture.asset("assets/images/sfondo3.svg",
-              fit: BoxFit.fill, width: double.infinity),
-        ),
-        Visibility(
-          visible: isLoaded,
-          replacement: const Center(
-            child: CircularProgressIndicator(),
-          ),
-          child: ListView.separated(
-            padding: EdgeInsets.only(
-              top: 74.h,
-              left: 16.w,
-              right: 16.w,
-              bottom: 96.h,
-            ),
-            itemCount: audio.length,
-            itemBuilder: (context, index) => InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => CustomAlert(
-                      title: audio[index].title,
-                      path: audio[index].path,
-                    ),
-                  ),
-                );
-              },
-              child: CustomCard(
-                time: audio[index].time,
-                title: audio[index].title,
-                path: audio[index].pathImage,
-              ),
-            ),
-            separatorBuilder: (context, index) => SizedBox(
-              height: 40.h,
-            ),
-          ),
-        ),
+        const Mappa(),
         const CustomTitle(
-          title: "Hear Bob",
-          color: kColor1,
-          icon: "assets/icons/music.svg",
+          title: "Bob Sightings Map",
+          color: kColor3,
+          icon: "assets/icons/eye.svg",
         ),
         Positioned(
           bottom: 0,
           child: Row(
             children: [
               BottomButton(
-                color: kColor3,
-                title: "Bob Sightings Map",
-                iconPath: "assets/icons/eye.svg",
-                onPressed: () =>
-                    Navigator.pushNamed(context, BobSightingsScreen.routeName),
-              ),
+                  color: kColor1,
+                  title: "Hear Bob",
+                  iconPath: "assets/icons/music.svg",
+                  onPressed: () {
+                    Navigator.pushNamed(context, HearBobScreen.routeName);
+                  }),
               BottomButton(
                   color: kColor2,
                   title: "Hey, I heard Bob!",
@@ -112,7 +56,6 @@ class _BodyState extends State<Body> {
                     if (Provider.of<HomeState>(context, listen: false)
                         .firstAccess) {
                       changeFirstAccess();
-
                       showDialog(
                           useSafeArea: false,
                           barrierDismissible: false,

@@ -1,8 +1,8 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../constants.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({
@@ -24,7 +24,7 @@ class BottomButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
@@ -34,22 +34,21 @@ class BottomButton extends StatelessWidget {
               ),
             ]),
         child: Card(
-          shape: const RoundedRectangleBorder(
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              top: Radius.circular(12),
+              top: Radius.circular(12.r),
             ),
           ),
           elevation: 10,
           margin: const EdgeInsets.all(0),
           child: ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(12),
+            borderRadius:  BorderRadius.vertical(
+              top: Radius.circular(12.r),
             ),
             child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: getProportionateScreenHeight(10)),
-              width: SizeConfig.screenWidth / 2,
-              height: 63,
+              padding: EdgeInsets.symmetric(vertical: 10.h),
+              width: 0.5.sw,
+              height: 67.h,
               color: color,
               child: Row(
                 children: [
@@ -60,7 +59,7 @@ class BottomButton extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 13.sp,
+                        fontSize: 15.sp,
                         fontFamily: 'Manrope',
                         fontWeight: FontWeight.w500,
                         color: kTextColor),

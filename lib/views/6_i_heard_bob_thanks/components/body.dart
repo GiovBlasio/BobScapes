@@ -1,8 +1,8 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../constants.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -11,107 +11,134 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Opacity(
-          opacity: 1,
+        Positioned.fill(
           child: SvgPicture.asset(
             "assets/images/sfondo5.svg",
             fit: BoxFit.fill,
-            width: SizeConfig.screenWidth,
+            width: ScreenUtil().screenWidth,
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(10),
-              vertical: getProportionateScreenHeight(15)),
-          child: Column(
-            children: [
-              const Spacer(
-                flex: 2,
+        Positioned(
+          top: 233.25.h,
+          left: 45.w,
+          child: SvgPicture.asset(
+            "assets/images/logo-bobscapes.svg",
+            width: 275.43.w,
+            height: 85.h,
+          ),
+        ),
+        Positioned(
+          top: 321.25.h,
+          left: 56.w,
+          child: Text(
+            "Thank you",
+            style: TextStyle(
+              fontSize: 51.sp,
+              color: kTextColor,
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 372.25.h,
+          left: 56.w,
+          child: Text(
+            "for",
+            style: TextStyle(
+              fontSize: 51.sp,
+              color: kTextColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 423.25.h,
+          left: 56.w,
+          child: Text(
+            "submitting",
+            style: TextStyle(
+              fontSize: 51.sp,
+              color: kTextColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 474.25.h,
+          left: 56.w,
+          child: Text(
+            "your",
+            style: TextStyle(
+              fontSize: 51.sp,
+              color: kTextColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 525.25.h,
+          left: 56.w,
+          child: Text(
+            "sighting!",
+            style: TextStyle(
+              fontSize: 51.sp,
+              color: kTextColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 177.h,
+          left: 16.w,
+          child: IconButton(
+            color: kTextColor,
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.zero,
+            onPressed: () => showDialog(
+              useSafeArea: false,
+              context: context,
+              builder: (context) => Padding(
+                padding: EdgeInsets.zero,
+                child: _showDisclaimer(context),
               ),
-              Flexible(
-                  flex: 5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenWidth(20)),
-                        child: SvgPicture.asset(
-                          "assets/images/logo-bobscapes.svg",
-                          height: getProportionateScreenHeight(85),
-                          width: getProportionateScreenWidth(40),
-                        ),
-                      ),
-                      const Spacer(
-                        flex: 5,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenHeight(40)),
-                        child: Text("Thank you",
-                            style: TextStyle(
-                                height: 1,
-                                fontSize: 38.sp,
-                                color: kTextColor,
-                                fontFamily: 'Manrope',
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getProportionateScreenHeight(40)),
-                        child: Text(
-                          "for\nsubmitting \nyour \nsighting!",
-                          style: TextStyle(
-                            height: 1,
-                            fontSize: 38.sp,
-                            color: kTextColor,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      IconButton(
-                          color: kTextColor,
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.zero,
-                          onPressed: () => showDialog(
-                                useSafeArea: false,
-                                barrierColor: Colors.white70,
-                                context: context,
-                                builder: (context) => Padding(
-                                    padding: EdgeInsets.zero,
-                                    child: _showDisclaimer(context)),
-                              ),
-                          icon: const Icon(Icons.info_outline)),
-                      const Spacer(
-                        flex: 2,
-                      ),
-                      TextButton(
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(kColor3),
-                          shadowColor: MaterialStateProperty.all(Colors.grey),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8))),
-                          minimumSize: MaterialStateProperty.all(Size(
-                              double.infinity,
-                              getProportionateScreenHeight(65))),
-                          backgroundColor: MaterialStateProperty.all(kColor3),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(0)),
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                        child: Text(
-                          'Back to home',
-                          style: TextStyle(
-                              fontFamily: 'Manrope',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18.sp,
-                              color: kTextColor),
-                        ),
-                      ),
-                    ],
-                  ))
-            ],
+            ),
+            icon: SvgPicture.asset(
+              "assets/icons/icon-info.svg",
+              height: 25.h,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 27.h,
+          left: 16.w,
+          right: 16.w,
+          child: TextButton(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(kColor3),
+              shadowColor: MaterialStateProperty.all(Colors.grey),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              minimumSize: MaterialStateProperty.all(
+                Size(double.infinity, 84.h),
+              ),
+              backgroundColor: MaterialStateProperty.all(kColor3),
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.all(0),
+              ),
+            ),
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Back to home',
+              style: TextStyle(
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24.sp,
+                  color: kTextColor),
+            ),
           ),
         ),
       ],
@@ -124,30 +151,30 @@ class Body extends StatelessWidget {
       bottom: false,
       child: Stack(children: [
         Positioned.fill(
-          child: SvgPicture.asset(
-            "assets/images/sfondo-welcome2.svg",
-            fit: BoxFit.fill,
-            width: SizeConfig.screenWidth,
-          ),
-        ),
-        Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            top: 0,
-            child: Stack(alignment: Alignment.bottomCenter, children: [
-              Positioned(
-                bottom: getProportionateScreenHeight(400),
-                left: 25,
-                child: Image.asset(
-                  "assets/images/quail-reflected.png",
-                  height: getProportionateScreenHeight(200),
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              Positioned.fill(
+                child: SvgPicture.asset(
+                  "assets/images/sfondo-welcome2.svg",
+                  fit: BoxFit.fill,
+                  width: ScreenUtil().screenWidth,
                 ),
               ),
               Positioned(
-                height: getProportionateScreenHeight(525 - 72),
-                left: 25,
-                right: 25,
+                bottom: 400.h,
+                left: 0,
+                right: 0,
+                child: Image.asset(
+                  "assets/images/quail-reflected.png",
+                  height: 270.h,
+                  alignment: Alignment.centerLeft,
+                ),
+              ),
+              Positioned(
+                height: 453.h,
+                left: 16.w,
+                right: 16.w,
                 child: Card(
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
@@ -155,24 +182,21 @@ class Body extends StatelessWidget {
                     ),
                   ),
                   elevation: 10,
-                  margin: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(0)),
+                  margin: const EdgeInsets.symmetric(horizontal: 0),
                   child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: getProportionateScreenHeight(15)),
-                      decoration: const BoxDecoration(
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      decoration: BoxDecoration(
                           color: kColor3,
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(16))),
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(16.r))),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
-                                    left: getProportionateScreenWidth(30),
-                                    right: getProportionateScreenWidth(10)),
+                                padding:
+                                    EdgeInsets.only(left: 30.w, right: 10.w),
                                 child: Row(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.baseline,
@@ -185,8 +209,8 @@ class Body extends StatelessWidget {
                                       style: TextStyle(
                                           color: kTextColor,
                                           fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20.sp),
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 24.sp),
                                     ),
                                     IconButton(
                                       splashRadius: 0.1,
@@ -204,31 +228,33 @@ class Body extends StatelessWidget {
                               ),
                               Padding(
                                   padding: EdgeInsets.only(
-                                      left: getProportionateScreenWidth(30),
-                                      top: getProportionateScreenHeight(20),
-                                      bottom: getProportionateScreenHeight(5),
-                                      right: getProportionateScreenWidth(40)),
+                                    left: 30.w,
+                                    top: 25.h,
+                                    bottom: 5.h,
+                                    right: 40.w,
+                                  ),
                                   child: Text(
                                     "The exact location of your sightings will not be shared with the public.",
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15.sp),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18.sp),
                                   )),
                               Padding(
                                   padding: EdgeInsets.only(
-                                      left: getProportionateScreenWidth(30),
-                                      top: getProportionateScreenHeight(20),
-                                      bottom: getProportionateScreenHeight(5),
-                                      right: getProportionateScreenWidth(40)),
+                                    left: 30.w,
+                                    top: 15.h,
+                                    bottom: 5.h,
+                                    right: 40.w,
+                                  ),
                                   child: Text(
                                     "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15.sp),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18.sp),
                                   )),
                             ],
                           ),
@@ -236,7 +262,9 @@ class Body extends StatelessWidget {
                       )),
                 ),
               ),
-            ])),
+            ],
+          ),
+        )
       ]),
     );
   }

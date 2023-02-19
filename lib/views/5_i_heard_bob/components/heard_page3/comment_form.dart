@@ -1,10 +1,10 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page3_state.dart';
 
 class CommentForm extends StatefulWidget {
   const CommentForm({
@@ -37,90 +37,101 @@ class _CommentFormState extends State<CommentForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 8, top: 20),
-          child: Text(
-            "Leave a comment",
-            style: TextStyle(
-                fontSize: 12.sp,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 15.w,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              bottom: 8.h,
+            ),
+            child: Text(
+              "Leave a comment",
+              style: TextStyle(
+                fontSize: 14.sp,
                 fontFamily: 'Manrope',
-                fontWeight: FontWeight.w500,
-                color: kTextColor),
+                fontWeight: FontWeight.w700,
+                color: kTextLightColor,
+              ),
+            ),
           ),
-        ),
-        Flexible(
-          child: TextFormField(
-            enableInteractiveSelection: false,
-            cursorColor: kTextColor,
-            expands: true,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-            controller: commentController,
-            onSaved: (newValue) {},
-            onChanged: (value) {
-              changeComment(value);
-            },
-            validator: (value) {
-              return null;
-            },
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white.withAlpha(200),
-              constraints: BoxConstraints(maxHeight: 100),
-              labelStyle: TextStyle(
+          Flexible(
+            child: TextFormField(
+              style: TextStyle(
+                  color: kTextColor,
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16.sp),
+              enableInteractiveSelection: false,
+              cursorColor: kTextColor,
+              expands: true,
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              controller: commentController,
+              onChanged: (value) {
+                changeComment(value);
+              },
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white.withAlpha(200),
+                constraints: BoxConstraints(maxHeight: 100.h),
+                labelStyle: TextStyle(
+                    color: kTextColor,
+                    fontSize: 15.sp,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w500),
+                hintStyle: TextStyle(
                   color: kTextColor,
                   fontSize: 12.sp,
-                  fontFamily: 'Manrope',
-                  fontWeight: FontWeight.w500),
-              hintStyle: TextStyle(
-                color: kTextColor.withOpacity(0.6),
-                overflow: TextOverflow.visible,
-                fontSize: 12.sp,
-              ),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              contentPadding: EdgeInsets.only(left: 10, right: 10, top: 5),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                gapPadding: 20,
-                borderSide:
-                    BorderSide(color: kTextColor.withOpacity(0.22), width: 0.3),
-              ),
-              border: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: kTextColor.withOpacity(0.22), width: 0.3),
-                borderRadius: BorderRadius.circular(5),
-                gapPadding: 20,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                gapPadding: 20,
-                borderSide:
-                    BorderSide(color: kTextColor.withOpacity(0.22), width: 0.3),
-              ),
-              hintText: "Write here...",
-              prefixIcon: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 5,
                 ),
-                child: Column(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/icon-message.svg",
-                    ),
-                  ],
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                contentPadding: EdgeInsets.only(top: 10.h),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  gapPadding: 20,
+                  borderSide: BorderSide(
+                    color: kTextColor.withOpacity(0.22),
+                    width: .5,
+                  ),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  gapPadding: 4,
+                  borderSide: BorderSide(
+                    color: kTextColor.withOpacity(0.22),
+                    width: .5,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: kTextColor.withOpacity(0.22), width: 0.3),
+                    borderRadius: BorderRadius.circular(5),
+                    gapPadding: 20),
+                hintText: "Write here...",
+                prefixIcon: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 5.w,
+                  ),
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/icons/icon-message.svg",
+                      ),
+                    ],
+                  ),
+                ),
+                prefixIconConstraints:
+                    BoxConstraints(maxHeight: 75.h, maxWidth: 28.w),
               ),
-              prefixIconConstraints:
-                  const BoxConstraints(maxHeight: 75, maxWidth: 28),
+              textAlignVertical: TextAlignVertical.top,
             ),
-            textAlignVertical: TextAlignVertical.top,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

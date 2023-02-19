@@ -1,5 +1,6 @@
-import 'package:bobscapes/views/2_welcome/components/body.dart';
 import 'package:flutter/material.dart';
+
+import 'components/body.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

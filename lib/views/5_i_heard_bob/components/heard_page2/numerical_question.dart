@@ -1,10 +1,10 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page2_state.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page2_state.dart';
 
 class NumericalQuestion extends StatefulWidget {
   const NumericalQuestion({
@@ -28,25 +28,25 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
             constraints:
-                BoxConstraints(maxWidth: widget.id != 5 ? 65.w : 200.w),
+                BoxConstraints(maxWidth: widget.id != 5 ? 180.w : 160.w),
             child: Text(
               widget.title,
               style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 14.sp,
                   fontFamily: 'Manrope',
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w700,
                   color: kTextColor),
             )),
         if (widget.id == 5)
           Container(
-            padding: const EdgeInsets.only(top: 4, left: 5),
+            padding: EdgeInsets.only(left: 5.w),
             child: Tooltip(
-              padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 5.w),
-              margin: EdgeInsets.only(left: 18.w, right: 18.w),
+              padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+              margin: EdgeInsets.only(left: 50.w, right: 50.w),
               decoration: const BoxDecoration(
                 color: kColor2,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -61,10 +61,11 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500),
               message:
-                  'During the summer months, female will join up, resulting in mixed age groups of young.\n\nYour answer should reflect how many age groups you see.',
+                  'During the summer months, female will join up, resulting in mixed age groups of young.\nYour answer should reflect how many age groups you see.',
               child: SvgPicture.asset(
                 "assets/icons/icon-info.svg",
                 height: 18,
+                alignment: Alignment.topCenter,
               ),
             ),
           ),
@@ -77,8 +78,8 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   color: kColor3,
                   border: Border.all(color: kTextColor, width: 0.4),
                   borderRadius: const BorderRadius.all(Radius.circular(3.5))),
-              width: getProportionateScreenWidth(20),
-              height: getProportionateScreenHeight(20),
+              width: 25.h,
+              height: 25.h,
               child: IconButton(
                   splashRadius: 0.1,
                   padding: EdgeInsets.zero,
@@ -89,20 +90,21 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   },
                   icon: SvgPicture.asset(
                     "assets/icons/icon-minus.svg",
-                    width: getProportionateScreenWidth(13),
+                    width: 13.w,
                   )),
             ),
             SizedBox(
-              width: getProportionateScreenWidth(55),
+              width: 60.w,
               child: TextFormField(
                 contextMenuBuilder: (context, editableTextState) {
                   return Container();
                 },
                 style: TextStyle(
                   color: kTextColor,
-                  fontSize: 14.sp,
+                  fontSize: 16.sp,
                   fontFamily: 'Manrope',
-                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.w700,
                 ),
                 enableInteractiveSelection: false,
                 textAlign: TextAlign.center,
@@ -114,13 +116,15 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: kColor3,
-                  border: Border.all(color: kTextColor, width: 0.4),
-                  borderRadius: const BorderRadius.all(Radius.circular(3.5))),
-              width: getProportionateScreenWidth(20),
-              height: getProportionateScreenHeight(20),
+                color: kColor3,
+                border: Border.all(color: kTextColor, width: 0.4),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(3.5),
+                ),
+              ),
+              width: 25.h,
+              height: 25.h,
               child: IconButton(
-                  iconSize: getProportionateScreenHeight(15),
                   splashRadius: 0.1,
                   padding: EdgeInsets.zero,
                   onPressed: () {
@@ -128,7 +132,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   },
                   icon: SvgPicture.asset(
                     "assets/icons/icon-plus.svg",
-                    width: getProportionateScreenWidth(13),
+                    width: 13.w,
                   )),
             ),
           ],

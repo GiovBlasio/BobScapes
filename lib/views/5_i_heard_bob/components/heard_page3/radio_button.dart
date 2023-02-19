@@ -1,10 +1,10 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
-import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/common_widget/custom_radio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page3_state.dart';
+import '../../../common_widget/custom_radio.dart';
 
 class CustomRadioButton extends StatefulWidget {
   const CustomRadioButton({
@@ -31,74 +31,76 @@ class CustomRadioButtonState extends State<CustomRadioButton> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            top: getProportionateScreenHeight(8),
-            bottom: getProportionateScreenHeight(8),
+            top: 8.h,
+            bottom: 8.h,
           ),
           child: Text(
             widget.title,
             style: TextStyle(
-              fontSize: 12.sp,
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w500,
-              color: kTextColor,
+              fontSize: 14.sp,
+              color: kTextLightColor,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
+        SizedBox(
+          height: 15.h,
+        ),
         Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: widget.items
-                .map(
-                  (item) => (item == '1' || item == '2')
-                      ? SizedBox(
-                          height: getProportionateScreenHeight(45),
-                          width: getProportionateScreenWidth(65),
-                        )
-                      : Column(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: widget.items
+              .map(
+                (item) => (item == '1' || item == '2')
+                    ? SizedBox(
+                        height: 45.h,
+                        width: 65.w,
+                      )
+                    : InkWell(
+                        overlayColor:
+                            const MaterialStatePropertyAll(Colors.transparent),
+                        onTap: () {
+                          changeValue(widget.id, item);
+                          setState(
+                            () {
+                              group = item;
+                            },
+                          );
+                        },
+                        child: Column(
                           children: [
-                            // Transform.scale(
-                            //   scale: getProportionateScreenHeight(1.5),
-                            //   child: Radio(
-                            //       fillColor:
-                            //           const MaterialStatePropertyAll(kColor1),
-                            //       overlayColor: const MaterialStatePropertyAll(
-                            //           Colors.transparent),
-                            //       activeColor: kColor1,
-                            //       value: item,
-                            //       groupValue: group,
-                            //       onChanged: (value) {
-                            //         changeValue(widget.id, value!);
-
-                            //         setState(() {
-                            //           group = value;
-                            //         });
-                            //       }),
-                            // ),
                             CustomRadio(
-                                value: item,
-                                groupValue: group,
-                                onChanged: (value) {
-                                  changeValue(widget.id, value!);
-                                  setState(() {
-                                    group = value;
-                                  });
-                                }),
+                              value: item,
+                              groupValue: group,
+                              onChanged: (value) {
+                                changeValue(widget.id, value!);
+
+                                setState(() {
+                                  group = value;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              height: 4.h,
+                            ),
                             Text(
                               item,
                               softWrap: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 11.5.sp,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w600,
-                                  color:
-                                      group == item ? kTextColor : kTextColor),
+                                fontSize: 16.sp,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w700,
+                                color: kTextColor,
+                              ),
                             ),
                           ],
                         ),
-                )
-                .toList()),
+                      ),
+              )
+              .toList(),
+        ),
       ],
     );
   }

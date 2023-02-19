@@ -1,16 +1,14 @@
 import 'dart:async';
-
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/home_state.dart';
-import 'package:bobscapes/size_config.dart';
-import 'package:bobscapes/views/7_bob_sightings/bob_sightings.dart';
-import 'package:bobscapes/views/4_hear_bob/hear_bob.dart';
-import 'package:bobscapes/views/5_i_heard_bob/i_heard_bob.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../constants.dart';
+import '../../../provider/heard_page/home_state.dart';
+import '../../4_hear_bob/heard_bob.dart';
+import '../../5_i_heard_bob/i_heard_bob.dart';
+import '../../7_bob_sightings_map/bob_sightings.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -40,140 +38,140 @@ class BodyState extends State<Body> {
           child: SvgPicture.asset(
             "assets/images/sfondo2.svg",
             fit: BoxFit.fill,
-            width: SizeConfig.screenWidth,
+            width: ScreenUtil().screenWidth,
           ),
         ),
         if (showQuail && !isDisclaimer)
           Positioned(
-            bottom: 260,
-            left: 40,
-            right: 20,
+            bottom: 0.27.sh,
+            left: 0.w,
+            right: 0.w,
             child: Image.asset(
               "assets/images/quail.png",
-              height: 260,
+              height: 0.42.sh,
+              width: 0.73.sw,
             ),
           ),
         Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      splashRadius: 0.1,
-                      padding: const EdgeInsets.only(left: 15),
-                      onPressed: () {
-                        setState(() {
-                          isDisclaimer = !isDisclaimer;
-                        });
-                      },
-                      icon: SvgPicture.asset(
-                        "assets/icons/icon-info.svg",
-                        height: 23,
-                      ),
+          bottom: 27.h,
+          left: 16.w,
+          right: 16.w,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    splashRadius: 0.1,
+                    padding: const EdgeInsets.only(left: 0),
+                    onPressed: () {
+                      setState(() {
+                        isDisclaimer = !isDisclaimer;
+                      });
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/icons/icon-info.svg",
+                      height: 25.h,
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      HomeButton(
-                        title: 'Hear Bob',
-                        iconPath: "assets/icons/music.svg",
-                        color: kColor1,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Column(
+                  children: [
+                    HomeButton(
+                      title: 'Hear Bob',
+                      iconPath: "assets/icons/music.svg",
+                      color: kColor1,
+                      onPressed: () {
+                        Navigator.pushNamed(context, HearBobScreen.routeName);
+                      },
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    HomeButton(
+                        title: 'Hey, I heard Bob!',
+                        iconPath: "assets/icons/gps.svg",
+                        color: kColor2,
                         onPressed: () {
-                          Navigator.pushNamed(context, HearBobScreen.routeName);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      HomeButton(
-                          title: 'Hey, I heard Bob!',
-                          iconPath: "assets/icons/gps.svg",
-                          color: kColor2,
-                          onPressed: () {
-                            setState(() {
-                              showQuail = false;
-                            });
-                            if (Provider.of<HomeState>(context, listen: false)
-                                .firstAccess) {
-                              changeFirstAccess();
-                              showDialog(
-                                  useSafeArea: false,
-                                  barrierDismissible: false,
-                                  barrierColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) =>
-                                      _showDisclaimer(context));
+                          setState(() {
+                            showQuail = false;
+                          });
+                          if (Provider.of<HomeState>(context, listen: false)
+                              .firstAccess) {
+                            changeFirstAccess();
 
-                              timer = Timer(const Duration(seconds: 25), () {
-                                setState(() {
-                                  showQuail = true;
-                                });
-                                if (!discalimerClosed) {
-                                  Navigator.pop(context);
-                                  Navigator.pushNamed(
-                                      context, IHeardBobScreen.routeName);
-                                }
-                              });
-                            } else {
+                            showDialog(
+                              useSafeArea: false,
+                              barrierDismissible: false,
+                              barrierColor: Colors.transparent,
+                              context: context,
+                              builder: (context) => _showDisclaimer(context),
+                            );
+
+                            timer = Timer(const Duration(seconds: 25), () {
                               setState(() {
                                 showQuail = true;
                               });
+                              if (!discalimerClosed) {
+                                Navigator.pop(context);
 
-                              Navigator.pushNamed(
-                                  context, IHeardBobScreen.routeName);
-                            }
-                          }),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      HomeButton(
-                        title: 'Bob Sightings Map',
-                        iconPath: "assets/icons/eye.svg",
-                        color: kColor3,
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, BobSightingsScreen.routeName);
-                        },
-                      ),
-                    ],
-                  ),
+                                Navigator.pushNamed(
+                                    context, IHeardBobScreen.routeName);
+                              }
+                            });
+                          } else {
+                            setState(() {
+                              showQuail = true;
+                            });
+
+                            Navigator.pushNamed(
+                                context, IHeardBobScreen.routeName);
+                          }
+                        }),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    HomeButton(
+                      title: 'Bob Sightings Map',
+                      iconPath: "assets/icons/eye.svg",
+                      color: kColor3,
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          BobSightingsScreen.routeName,
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         if (isDisclaimer)
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              top: 0,
-              child: Stack(alignment: Alignment.bottomLeft, children: [
+          Positioned.fill(
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
                 Positioned(
-                  bottom: getProportionateScreenHeight(400),
+                  bottom: 400.h,
                   left: 0,
                   right: 0,
                   child: Image.asset(
                     "assets/images/quail-reflected.png",
-                    height: getProportionateScreenHeight(200),
+                    height: 270.h,
                     alignment: Alignment.centerLeft,
                   ),
                 ),
                 Positioned(
-                  height: getProportionateScreenHeight(453),
-                  left: 20,
-                  right: 20,
+                  height: 453.h,
+                  left: 16.w,
+                  right: 16.w,
                   child: Card(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -181,25 +179,21 @@ class BodyState extends State<Body> {
                       ),
                     ),
                     elevation: 10,
-                    margin: EdgeInsets.symmetric(
-                        horizontal: getProportionateScreenWidth(0)),
+                    margin: const EdgeInsets.symmetric(horizontal: 0),
                     child: Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: getProportionateScreenHeight(15)),
-                        decoration: const BoxDecoration(
+                        padding: EdgeInsets.symmetric(vertical: 15.h),
+                        decoration: BoxDecoration(
                             color: kColor3,
                             borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16))),
+                                top: Radius.circular(16.r))),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(10)),
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      left: getProportionateScreenWidth(30),
-                                      right: getProportionateScreenWidth(10)),
+                                  padding:
+                                      EdgeInsets.only(left: 30.w, right: 10.w),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.baseline,
@@ -212,8 +206,8 @@ class BodyState extends State<Body> {
                                         style: TextStyle(
                                             color: kTextColor,
                                             fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 20.sp),
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 24.sp),
                                       ),
                                       IconButton(
                                         splashRadius: 0.1,
@@ -232,32 +226,35 @@ class BodyState extends State<Body> {
                                   ),
                                 ),
                                 Padding(
-                                    padding: EdgeInsets.only(
-                                        left: getProportionateScreenWidth(30),
-                                        top: getProportionateScreenHeight(25),
-                                        bottom: getProportionateScreenHeight(5),
-                                        right: getProportionateScreenWidth(40)),
-                                    child: Text(
-                                      "The exact location of your sightings will not be shared with the public.",
-                                      style: TextStyle(
-                                          color: kTextColor,
-                                          fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.sp),
-                                    )),
+                                  padding: EdgeInsets.only(
+                                    left: 30.w,
+                                    top: 25.h,
+                                    bottom: 5.h,
+                                    right: 40.w,
+                                  ),
+                                  child: Text(
+                                    "The exact location of your sightings will not be shared with the public.",
+                                    style: TextStyle(
+                                        color: kTextColor,
+                                        fontFamily: 'Manrope',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18.sp),
+                                  ),
+                                ),
                                 Padding(
                                     padding: EdgeInsets.only(
-                                        left: getProportionateScreenWidth(30),
-                                        top: getProportionateScreenHeight(15),
-                                        bottom: getProportionateScreenHeight(5),
-                                        right: getProportionateScreenWidth(40)),
+                                      left: 30.w,
+                                      top: 15.h,
+                                      bottom: 5.h,
+                                      right: 40.w,
+                                    ),
                                     child: Text(
                                       "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                                       style: TextStyle(
                                           color: kTextColor,
                                           fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.sp),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18.sp),
                                     )),
                               ],
                             ),
@@ -265,7 +262,9 @@ class BodyState extends State<Body> {
                         )),
                   ),
                 ),
-              ]))
+              ],
+            ),
+          )
       ],
     );
   }
@@ -279,19 +278,19 @@ class BodyState extends State<Body> {
           top: 0,
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Positioned(
-              bottom: getProportionateScreenHeight(400),
+              bottom: 400.h,
               left: 0,
-              right: 20,
+              right: 0,
               child: Image.asset(
                 "assets/images/quail-reflected.png",
-                height: 200,
+                height: 270.h,
                 alignment: Alignment.centerLeft,
               ),
             ),
             Positioned(
-              height: getProportionateScreenHeight(453),
-              left: 20,
-              right: 20,
+              height: 453.h,
+              left: 16.w,
+              right: 16.w,
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
@@ -299,39 +298,33 @@ class BodyState extends State<Body> {
                   ),
                 ),
                 elevation: 10,
-                margin: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(0)),
+                margin: EdgeInsets.symmetric(horizontal: 0.h),
                 child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: getProportionateScreenHeight(15)),
-                    decoration: const BoxDecoration(
+                    padding: EdgeInsets.symmetric(vertical: 15.h),
+                    decoration: BoxDecoration(
                         color: kColor3,
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(16))),
+                            BorderRadius.vertical(top: Radius.circular(16.r))),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: getProportionateScreenWidth(10)),
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(
-                                  left: getProportionateScreenWidth(30),
-                                  right: getProportionateScreenWidth(10)),
+                              padding: EdgeInsets.only(left: 30.w, right: 10.w),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.baseline,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 textBaseline: TextBaseline.alphabetic,
                                 children: [
-                                  //TODO FONTSIZE
                                   Text(
                                     "Disclaimer",
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20.sp),
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24.sp),
                                   ),
                                   IconButton(
                                     splashRadius: 0.1,
@@ -360,33 +353,37 @@ class BodyState extends State<Body> {
                               ),
                             ),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: getProportionateScreenWidth(30),
-                                    top: getProportionateScreenHeight(25),
-                                    bottom: getProportionateScreenHeight(5),
-                                    right: getProportionateScreenWidth(40)),
-                                child: Text(
-                                  "The exact location of your sightings will not be shared with the public.",
-                                  style: TextStyle(
-                                      color: kTextColor,
-                                      fontFamily: 'Manrope',
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 15.sp),
-                                )),
+                              padding: EdgeInsets.only(
+                                left: 30.w,
+                                top: 25.h,
+                                bottom: 5.h,
+                                right: 40.w,
+                              ),
+                              child: Text(
+                                "The exact location of your sightings will not be shared with the public.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontFamily: 'Manrope',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.sp),
+                              ),
+                            ),
                             Padding(
-                                padding: EdgeInsets.only(
-                                    left: getProportionateScreenWidth(30),
-                                    top: getProportionateScreenHeight(15),
-                                    bottom: getProportionateScreenHeight(5),
-                                    right: getProportionateScreenWidth(40)),
-                                child: Text(
-                                  "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
-                                  style: TextStyle(
-                                      color: kTextColor,
-                                      fontFamily: 'Manrope',
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 15.sp),
-                                )),
+                              padding: EdgeInsets.only(
+                                left: 30.w,
+                                top: 15.h,
+                                bottom: 5.h,
+                                right: 40.w,
+                              ),
+                              child: Text(
+                                "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                style: TextStyle(
+                                    color: kTextColor,
+                                    fontFamily: 'Manrope',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.sp),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -420,25 +417,32 @@ class HomeButton extends StatelessWidget {
         overlayColor: MaterialStateProperty.all(color),
         shadowColor: MaterialStateProperty.all(Colors.grey),
         shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-        minimumSize: MaterialStateProperty.all(const Size(double.infinity, 80)),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+        ),
+        minimumSize: MaterialStateProperty.all(
+          Size(
+            double.infinity,
+            84.h,
+          ),
+        ),
         backgroundColor: MaterialStateProperty.all(color),
         padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
       ),
       onPressed: onPressed,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            //TODO SPACER
             const Spacer(
               flex: 8,
             ),
             Text(
               title,
               style: TextStyle(
-                  fontSize: 18.sp,
+                  fontSize: 24.sp,
                   color: kTextColor,
                   fontFamily: 'Manrope',
                   fontWeight: FontWeight.w700),
@@ -448,7 +452,7 @@ class HomeButton extends StatelessWidget {
             ),
             SvgPicture.asset(
               iconPath,
-              height: 35,
+              height: 35.h,
               color: kTextColor,
             ),
           ],

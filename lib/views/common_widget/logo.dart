@@ -1,4 +1,3 @@
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,19 +22,19 @@ class Logo extends StatelessWidget {
       children: [
         SvgPicture.asset(
           "assets/icons/eye.svg",
-          height: getProportionateScreenHeight(iconSize),
+          height: (iconSize),
           color: iconColor,
         ),
-        SizedBox(
-          width: getProportionateScreenWidth(8),
+        const SizedBox(
+          width: (8),
         ),
         Text(
           "Bobscapes".toUpperCase(),
           style: TextStyle(
-              fontSize: getProportionateScreenHeight(textSize),
+              fontSize: (textSize),
               fontFamily: "FjallaOne",
               color: textColor,
-             // fontFamily: 'Manrope',
+              // fontFamily: 'Manrope',
               fontWeight: FontWeight.bold),
         ),
       ],

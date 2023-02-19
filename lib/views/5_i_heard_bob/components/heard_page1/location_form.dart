@@ -1,15 +1,15 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page1_state.dart';
-import 'package:bobscapes/size_config.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 // ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page1_state.dart';
 
 class LocationForm extends StatefulWidget {
   const LocationForm({
@@ -59,24 +59,24 @@ class _LocationFormState extends State<LocationForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.only(
-                //left: getProportionateScreenWidth(15),
-                bottom: 4,
-                top: 10),
+              bottom: 8.h,
+            ),
             child: Row(
               children: [
                 Text(
                   "Latitude/Longitude",
                   style: TextStyle(
-                      fontSize: 11.sp,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w500,
-                      color: kTextColor),
+                    fontSize: 14.sp,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w700,
+                    color: kTextLightColor,
+                  ),
                 ),
                 const Spacer(),
                 InkWell(
@@ -84,103 +84,93 @@ class _LocationFormState extends State<LocationForm> {
                       const MaterialStatePropertyAll(Colors.transparent),
                   splashColor: Colors.transparent,
                   onTap: () => _showMap(),
-                  child: Column(
+                  child: Row(
                     children: [
-                      SvgPicture.asset(
-                        "assets/icons/icon-edit.svg",
-                        height: 12,
-                        color: kColor1,
+                      Column(
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/icon-edit.svg",
+                            height: 14,
+                            color: kColor1,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 3.w,
+                      ),
+                      Text(
+                        "change",
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w700,
+                            color: kTextColor),
                       ),
                     ],
                   ),
                 ),
-                InkWell(
-                    onTap: () => _showMap(),
-                    overlayColor:
-                        const MaterialStatePropertyAll(Colors.transparent),
-                    splashColor: Colors.transparent,
-                    child: SizedBox(
-                      width: 3,
-                    )),
-                InkWell(
-                    overlayColor:
-                        const MaterialStatePropertyAll(Colors.transparent),
-                    splashColor: Colors.transparent,
-                    onTap: () => _showMap(),
-                    child: Text(
-                      "change",
-                      style: TextStyle(
-                          fontSize: 10.sp,
-                          fontFamily: 'Manrope',
-                          fontWeight: FontWeight.w700,
-                          color: kTextColor),
-                    )),
               ],
             ),
           ),
-          Row(children: [
-            Expanded(
-              child: Form(
-                  child: Row(
-                children: [
-                  Flexible(
-                    child: TextFormField(
-                      style: TextStyle(
-                          color: kTextColor,
-                          fontFamily: 'Manrope',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 11.sp),
-                      cursorColor: kTextColor,
-                      controller: controller,
-                      readOnly: true,
-                      onSaved: (newValue) {
-                        //  location = newValue ?? "";
-                      },
-                      onChanged: (value) {},
-                      validator: (value) {
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white.withAlpha(200),
-                        contentPadding: EdgeInsets.all(
-                          12,
-                        ),
-                        enabledBorder: OutlineInputBorder(
+          Row(
+            children: [
+              Expanded(
+                child: Form(
+                    child: Row(
+                  children: [
+                    Flexible(
+                      child: TextFormField(
+                        style: TextStyle(
+                            color: kTextColor,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.sp),
+                        cursorColor: kTextColor,
+                        controller: controller,
+                        readOnly: true,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white.withAlpha(200),
+                          contentPadding: EdgeInsets.zero,
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                             gapPadding: 20,
                             borderSide: BorderSide(
-                                color: kTextColor.withOpacity(0.22),
-                                width: .5)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            gapPadding: 20,
-                            borderSide: BorderSide(
-                                color: kTextColor.withOpacity(0.22),
-                                width: .5)),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: kTextColor.withOpacity(0.22),
-                                width: 0.3),
-                            borderRadius: BorderRadius.circular(5),
-                            gapPadding: 20),
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          child: SvgPicture.asset(
-                            "assets/icons/icon-geolocalization.svg",
+                              color: kTextColor.withOpacity(0.22),
+                              width: .5,
+                            ),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            gapPadding: 4,
+                            borderSide: BorderSide(
+                              color: kTextColor.withOpacity(0.22),
+                              width: .5,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: kTextColor.withOpacity(0.22),
+                                  width: 0.3),
+                              borderRadius: BorderRadius.circular(5),
+                              gapPadding: 4),
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: SvgPicture.asset(
+                              "assets/icons/icon-geolocalization.svg",
+                            ),
+                          ),
+                          prefixIconConstraints:
+                              BoxConstraints(maxHeight: 28.w, maxWidth: 28.w),
+                          hintText: "",
                         ),
-                        prefixIconConstraints:
-                            BoxConstraints(maxHeight: 28, maxWidth: 28),
-                        //suffixIconColor: Colors.white,
-                        hintText: "",
                       ),
                     ),
-                  ),
-                ],
-              )),
-            ),
-          ]),
+                  ],
+                )),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -192,10 +182,10 @@ class _LocationFormState extends State<LocationForm> {
       builder: (context) => Stack(
         children: [
           Positioned(
-            bottom: getProportionateScreenHeight(75),
-            top: getProportionateScreenHeight(75),
-            left: getProportionateScreenWidth(30),
-            right: getProportionateScreenWidth(30),
+            bottom: 75.h,
+            top: 75.h,
+            left: 30.w,
+            right: 30.w,
             child: FlutterMap(
               options: MapOptions(
                   onTap: (tapPosition, point) {
@@ -231,13 +221,13 @@ class _LocationFormState extends State<LocationForm> {
                   userAgentPackageName: 'com.example.app',
                 ),
                 Positioned(
-                  bottom: getProportionateScreenHeight(10),
-                  left: getProportionateScreenWidth(10),
+                  bottom: 10.h,
+                  left: 10.w,
                   child: Row(
                     children: [
                       SizedBox(
-                        width: getProportionateScreenWidth(41),
-                        height: getProportionateScreenHeight(41),
+                        width: 41.w,
+                        height: 41.w,
                         child: FittedBox(
                           child: FloatingActionButton(
                             backgroundColor: Colors.white,
@@ -262,8 +252,8 @@ class _LocationFormState extends State<LocationForm> {
                             child: SvgPicture.asset(
                               "assets/icons/icon-geolocalization.svg",
                               color: kColor1,
-                              height: getProportionateScreenHeight(30),
-                              width: getProportionateScreenWidth(30),
+                              height: 30,
+                              width: 30,
                             ),
                           ),
                         ),

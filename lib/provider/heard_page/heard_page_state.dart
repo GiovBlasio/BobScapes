@@ -1,10 +1,9 @@
-import 'package:bobscapes/views/5_i_heard_bob/components/heard_page1.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../size_config.dart';
 
 class HeardPageState with ChangeNotifier {
-  Widget _page = const HeardPage1();
+  Widget _page = Container();
   double _top = getProportionateScreenHeight(60);
 
   Widget get page => _page;

@@ -1,8 +1,8 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../constants.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
@@ -35,18 +35,15 @@ class CustomCard extends StatelessWidget {
           child: Container(
             color: kColor3,
             width: double.infinity,
-            //height: 350,
-            padding: EdgeInsets.symmetric(
-                vertical: getProportionateScreenHeight(15),
-                horizontal: getProportionateScreenWidth(15)),
+          //  height: 358.h,
+            padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   //color: Colors.blue,
-                  padding:
-                      EdgeInsets.only(left: getProportionateScreenWidth(65)),
+                  padding: EdgeInsets.only(left: 65.w),
                   child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -56,11 +53,14 @@ class CustomCard extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
-                        child: Image.asset(path, width: SizeConfig.screenWidth),
+                        child: Image.asset(
+                          path,
+                          width: ScreenUtil().screenWidth,
+                        ),
                       )),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Flexible(
                   child: Row(
@@ -71,22 +71,21 @@ class CustomCard extends StatelessWidget {
                         shape: const CircleBorder(),
                         elevation: 8,
                         child: Container(
+                            height: 45.h,
                             decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
                             padding: EdgeInsets.symmetric(
-                                horizontal: getProportionateScreenWidth(8),
-                                vertical: getProportionateScreenHeight(8)),
+                                horizontal: 8.w, vertical: 8.h),
                             child: SvgPicture.asset(
                               "assets/icons/icon-sound.svg",
-                              height: getProportionateScreenHeight(18),
+                              height: 20.h,
                             )),
                       ),
                       Container(
                         //width: 245,
-                        margin: EdgeInsets.only(
-                            left: getProportionateScreenWidth(25)),
+                        margin: EdgeInsets.only(left: 25.w),
                         child: Column(
                           //mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,15 +94,17 @@ class CustomCard extends StatelessWidget {
                             Text(
                               title,
                               style: TextStyle(
-                                  fontSize: 13.sp,
+                                  fontSize: 18.sp,
                                   fontFamily: 'Manrope',
                                   fontWeight: FontWeight.w700,
                                   color: kTextColor),
                             ),
                             Text(
                               '$time s',
-                              style:
-                                  TextStyle(fontSize: 8.sp, color: kTextColor),
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: kTextColor,
+                              ),
                             ),
                           ],
                         ),

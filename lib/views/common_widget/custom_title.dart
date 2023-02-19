@@ -1,8 +1,8 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../constants.dart';
 
 class CustomTitle extends StatelessWidget {
   const CustomTitle({
@@ -24,16 +24,15 @@ class CustomTitle extends StatelessWidget {
         ),
       ),
       elevation: 10,
-      margin: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(15), vertical: 0),
+      margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 0),
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(15),
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.symmetric(vertical: 0.008.sh),
           width: double.infinity,
-          height: 47,
+          height: 47.h,
           color: color,
           child: Row(
             children: [
@@ -44,9 +43,9 @@ class CustomTitle extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: kTextColor,
-                    fontSize: 15.sp,
+                    fontSize: 20.sp,
                     fontFamily: 'Manrope',
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.w700),
               ),
               const Spacer(
                 flex: 5,

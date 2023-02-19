@@ -1,7 +1,7 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../constants.dart';
 
 class Disclaimer extends StatelessWidget {
   const Disclaimer({
@@ -22,24 +22,19 @@ class Disclaimer extends StatelessWidget {
             ),
           ),
           elevation: 10,
-          margin:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+          margin: const EdgeInsets.symmetric(horizontal: 15),
           child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: getProportionateScreenHeight(15)),
+              padding: const EdgeInsets.symmetric(vertical: (15)),
               decoration: const BoxDecoration(
                   color: kColor3,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(16))),
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(10)),
+                padding: const EdgeInsets.symmetric(horizontal: (10)),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(30),
-                          right: getProportionateScreenWidth(10)),
+                      padding: const EdgeInsets.only(left: (30), right: (10)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,9 +50,9 @@ class Disclaimer extends StatelessWidget {
                           ),
                           IconButton(
                             splashRadius: 0.1,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.close,
-                              size: getProportionateScreenHeight(30),
+                              size: (30),
                               color: kTextColor,
                             ),
                             onPressed: () {
@@ -68,11 +63,8 @@ class Disclaimer extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(
-                            left: getProportionateScreenWidth(30),
-                            top: getProportionateScreenHeight(30),
-                            bottom: getProportionateScreenHeight(5),
-                            right: getProportionateScreenWidth(40)),
+                        padding: const EdgeInsets.only(
+                            left: (30), top: (30), bottom: (5), right: (40)),
                         child: Text(
                           "The exact location of your sightings will not be shared with the public.",
                           style: TextStyle(
@@ -82,11 +74,8 @@ class Disclaimer extends StatelessWidget {
                               fontSize: 15.sp),
                         )),
                     Padding(
-                        padding: EdgeInsets.only(
-                            left: getProportionateScreenWidth(30),
-                            top: getProportionateScreenHeight(20),
-                            bottom: getProportionateScreenHeight(5),
-                            right: getProportionateScreenWidth(40)),
+                        padding: const EdgeInsets.only(
+                            left: (30), top: (20), bottom: (5), right: (40)),
                         child: Text(
                           "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
                           style: TextStyle(

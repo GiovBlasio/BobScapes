@@ -1,10 +1,10 @@
-import 'package:bobscapes/constants.dart';
-import 'package:bobscapes/provider/heard_page/heard_page3_state.dart';
-import 'package:bobscapes/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page3_state.dart';
 
 class EmailForm extends StatefulWidget {
   const EmailForm({
@@ -75,7 +75,7 @@ class _EmailFormState extends State<EmailForm> {
                 fontFamily: 'Manrope',
                 fontWeight: FontWeight.w500),
             enableInteractiveSelection: false,
-            cursorColor: kPrimaryColor,
+            cursorColor: kTextColor,
             enabled: context.watch<HeardPage3State>().isEnable,
             keyboardType: TextInputType.emailAddress,
             controller: emailController,
@@ -103,7 +103,7 @@ class _EmailFormState extends State<EmailForm> {
                   fontWeight: FontWeight.w300),
               floatingLabelBehavior: FloatingLabelBehavior.always,
               contentPadding: EdgeInsets.all(
-                getProportionateScreenWidth(8),
+                8.w,
               ),
               enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
@@ -142,14 +142,14 @@ class _EmailFormState extends State<EmailForm> {
               ),
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(5)),
+                    horizontal: 5.w),
                 child: SvgPicture.asset(
                   "assets/icons/icon-mail.svg",
                 ),
               ),
               prefixIconConstraints: BoxConstraints(
-                  maxHeight: getProportionateScreenHeight(28),
-                  maxWidth: getProportionateScreenWidth(28)),
+                  maxHeight: 28.w,
+                  maxWidth: 28.w),
               hintText: "hello@aol.com",
             ),
           )),

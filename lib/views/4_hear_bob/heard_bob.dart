@@ -6,28 +6,23 @@ import '../common_widget/custom_back_button.dart';
 import '../common_widget/title_back.dart';
 import 'components/body.dart';
 
-class IHeardBobScreen extends StatelessWidget {
-  const IHeardBobScreen({super.key});
+class HearBobScreen extends StatelessWidget {
+  const HearBobScreen({super.key});
 
-  static String routeName = "/i_heard_bob";
+  static String routeName = "/hear_bob";
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       bottom: false,
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
+      child: Scaffold(
+        appBar: AppBar(
             backgroundColor: kAppbarColor,
             leadingWidth: 80.w,
             leading: const CustomBackButton(),
-            title: const TitleBack(),
-          ),
-          body: const Body(),
-        ),
+            title:const  TitleBack()),
+        body: const Body(),
       ),
     );
   }

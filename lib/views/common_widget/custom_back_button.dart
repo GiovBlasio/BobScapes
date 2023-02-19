@@ -1,7 +1,8 @@
-import 'package:bobscapes/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sizer/sizer.dart';
+
+import '../../constants.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
@@ -18,11 +19,11 @@ class CustomBackButton extends StatelessWidget {
         children: [
           SvgPicture.asset(
             "assets/icons/icon-back.svg",
-            height: 13,
-            width: 16,
+            height: 13.h,
+            width: 16.w,
           ),
-          const SizedBox(
-            width: 4,
+          SizedBox(
+            width: 4.w,
           ),
           Text(
             "BACK",
@@ -30,7 +31,7 @@ class CustomBackButton extends StatelessWidget {
                 //height: 16,
                 fontFamily: 'Manrope',
                 fontWeight: FontWeight.w700,
-                fontSize: 10.sp,
+                fontSize: 12.sp,
                 color: kPrimaryColor),
           ),
         ],
