@@ -63,18 +63,20 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
           ),
           child: Container(
             height: 50.h,
-            padding: EdgeInsets.symmetric(
+            margin: EdgeInsets.symmetric(
               horizontal: 15.w,
             ),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(0)),
-              color: Colors.white,
+              color: Colors.transparent,
               border: Border.all(color: kColor3, width: 0.3),
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField(
                   dropdownColor: kColor3,
                   decoration: InputDecoration(
+                    fillColor: kColor3,
+                    filled: true,
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: 10.w,
                     ),

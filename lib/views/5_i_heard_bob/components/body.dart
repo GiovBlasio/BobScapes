@@ -95,12 +95,14 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Opacity(
-          opacity: 1,
-          child: SvgPicture.asset(
-            "assets/images/sfondo3.svg",
-            fit: BoxFit.cover,
-           // width: double.infinity,
+        Positioned.fill(
+          child: Opacity(
+            opacity: 1,
+            child: SvgPicture.asset(
+              "assets/images/sfondo3.svg",
+              fit: BoxFit.cover,
+             // width: double.infinity,
+            ),
           ),
         ),
         Positioned(
@@ -586,7 +588,7 @@ class _BodyState extends State<Body> {
                       // ),
                       Container(
                         color: Colors.transparent,
-                        height: 135.h,
+                        height: 100.h,
                       ),
                       SizedBox(
                         height: 20.h,
@@ -601,7 +603,7 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(
-                        height: 31.h,
+                        height: 45.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -613,7 +615,7 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(
-                        height: 31.h,
+                        height: 45.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -623,7 +625,7 @@ class _BodyState extends State<Body> {
                             title: "How many female?", id: 3),
                       ),
                       SizedBox(
-                        height: 31.h,
+                        height: 45.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -635,7 +637,7 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(
-                        height: 31.h,
+                        height: 45.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -936,9 +938,9 @@ class _BodyState extends State<Body> {
                           const heard2.CustomDropDownMenu(
                               items: ['Family (Covey)', 'Individual bird']),
                           SizedBox(
-                            height: 35.h,
+                            height: 0.h,
                           ),
-                          const Divider(),
+                          //const Divider(),
                         ],
                       ),
                     ),

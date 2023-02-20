@@ -103,7 +103,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                   color: kTextColor,
                   fontSize: 16.sp,
                   fontFamily: 'Manrope',
-                  fontStyle: FontStyle.italic,
+                  // fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.w700,
                 ),
                 enableInteractiveSelection: false,

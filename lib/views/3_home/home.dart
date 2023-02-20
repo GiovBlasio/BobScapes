@@ -18,13 +18,10 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(84.h),
-          child: AppBar(
-            backgroundColor: kAppbarColor,
-            leading: Container(),
-            title: const TitleBack(),
-          ),
+        appBar: AppBar(
+          backgroundColor: kAppbarColor,
+          leading: Container(),
+          title: const TitleBack(),
         ),
         body: const Body(),
       ),

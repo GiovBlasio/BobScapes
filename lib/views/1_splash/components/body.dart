@@ -102,22 +102,26 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AnimatedOpacity(
-          opacity: animate ? 0 : 1,
-          duration: const Duration(seconds: 1),
-          child: SvgPicture.asset(
-            "assets/images/sfondo1.svg",
-            fit: BoxFit.cover,
-           // width: ScreenUtil().screenWidth,
+        Positioned.fill(
+          child: AnimatedOpacity(
+            opacity: animate ? 0 : 1,
+            duration: const Duration(seconds: 1),
+            child: SvgPicture.asset(
+              "assets/images/sfondo1.svg",
+              fit: BoxFit.cover,
+              // width: ScreenUtil().screenWidth,
+            ),
           ),
         ),
-        AnimatedOpacity(
-          opacity: animate ? 1 : 0,
-          duration: const Duration(seconds: 1),
-          child: SvgPicture.asset(
-            "assets/images/sfondo-welcome2.svg",
-            fit: BoxFit.cover,
-          //  width: ScreenUtil().screenWidth,
+        Positioned.fill(
+          child: AnimatedOpacity(
+            opacity: animate ? 1 : 0,
+            duration: const Duration(seconds: 1),
+            child: SvgPicture.asset(
+              "assets/images/sfondo-welcome2.svg",
+              fit: BoxFit.cover,
+              //  width: ScreenUtil().screenWidth,
+            ),
           ),
         ),
         AnimatedPositioned(
@@ -171,46 +175,125 @@ class _BodyState extends State<Body> {
             ),
         AnimatedPositioned(
           duration: const Duration(seconds: 1),
-          left: 38.w,
           top: bobwhiteTop,
-          child: Text(
-            "Bobwhite",
-            style: TextStyle(
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w700,
-              color: kPrimaryColor,
-              fontSize: 51.sp,
-            ),
-          ),
-        ),
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
           left: 38.w,
-          top: onOurTop,
-          child: Text(
-            "on our",
-            style: TextStyle(
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w400,
-              color: kPrimaryColor,
-              fontSize: 51.sp,
-            ),
+          child: Column(
+            children: [
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    height: 1.1,
+                    fontSize: 51.sp,
+                    color: kPrimaryColor,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  children: [
+                    const TextSpan(text: 'Bobwhite\n'),
+                    TextSpan(
+                      text: "on our\nlandscapes",
+                      style: TextStyle(
+                        height: 1.1,
+                        fontSize: 51.sp,
+                        color: kPrimaryColor,
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    // TextSpan(
+                    //   text: "submitting",
+                    //   style: TextStyle(
+                    //     height: 1.1,
+                    //     fontSize: 51.sp,
+                    //     color: kTextColor,
+                    //     fontWeight: FontWeight.w400,
+                    //   ),
+                    // ),
+                    // TextSpan(
+                    //   text: "your",
+                    //   style: TextStyle(
+                    //     height: 1.1,
+                    //     fontSize: 51.sp,
+                    //     color: kTextColor,
+                    //     fontWeight: FontWeight.w400,
+                    //   ),
+                    // ),
+                    // TextSpan(
+                    //   text: "for",
+                    //   style: TextStyle(
+                    //     height: 1.1,
+                    //     fontSize: 51.sp,
+                    //     color: kTextColor,
+                    //     fontWeight: FontWeight.w400,
+                    //   ),
+                    // ),
+                    // TextSpan(
+                    //   text: "sighting",
+                    //   style: TextStyle(
+                    //     height: 1.1,
+                    //     fontSize: 51.sp,
+                    //     color: kTextColor,
+                    //     fontWeight: FontWeight.w400,
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+              // Text(
+              //   "Thank you\nfor\nsubmitting\nyour\nsighting!",
+              //   style: TextStyle(
+              //     height: 1.1,
+              //     fontSize: 51.sp,
+              //     color: kTextColor,
+              //     fontFamily: 'Manrope',
+              //     fontWeight: FontWeight.w700,
+              //   ),
+              // ),
+            ],
           ),
         ),
-        AnimatedPositioned(
-          duration: const Duration(seconds: 1),
-          left: 38.w,
-          top: landscapesTop,
-          child: Text(
-            "landscapes",
-            style: TextStyle(
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w400,
-              color: kPrimaryColor,
-              fontSize: 51.sp,
-            ),
-          ),
-        ),
+        // AnimatedPositioned(
+        //   duration: const Duration(seconds: 1),
+        //   left: 38.w,
+        //   top: bobwhiteTop,
+        //   child: Text(
+        //     "Bobwhite",
+        //     style: TextStyle(
+        //       fontFamily: 'Manrope',
+        //       fontWeight: FontWeight.w700,
+        //       color: kPrimaryColor,
+        //       fontSize: 51.sp,
+        //     ),
+        //   ),
+        // ),
+        // AnimatedPositioned(
+        //   duration: const Duration(seconds: 1),
+        //   left: 38.w,
+        //   top: onOurTop,
+        //   child: Text(
+        //     "on our",
+        //     style: TextStyle(
+        //       fontFamily: 'Manrope',
+        //       fontWeight: FontWeight.w400,
+        //       color: kPrimaryColor,
+        //       fontSize: 51.sp,
+        //     ),
+        //   ),
+        // ),
+        // AnimatedPositioned(
+        //   duration: const Duration(seconds: 1),
+        //   left: 38.w,
+        //   top: landscapesTop,
+        //   child: Text(
+        //     "landscapes",
+        //     style: TextStyle(
+        //       fontFamily: 'Manrope',
+        //       fontWeight: FontWeight.w400,
+        //       color: kPrimaryColor,
+        //       fontSize: 51.sp,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

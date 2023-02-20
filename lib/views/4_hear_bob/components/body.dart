@@ -50,12 +50,14 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Opacity(
-          opacity: 1,
-          child: SvgPicture.asset(
-            "assets/images/sfondo3.svg",
-            fit: BoxFit.cover,
-            //width: double.infinity,
+        Positioned.fill(
+          child: Opacity(
+            opacity: 1,
+            child: SvgPicture.asset(
+              "assets/images/sfondo3.svg",
+              fit: BoxFit.cover,
+              //width: double.infinity,
+            ),
           ),
         ),
         Visibility(

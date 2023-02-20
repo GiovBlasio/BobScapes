@@ -89,7 +89,7 @@ class _CommentFormState extends State<CommentForm> {
                   fontSize: 12.sp,
                 ),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                contentPadding: EdgeInsets.only(top: 10.h),
+                contentPadding: EdgeInsets.only(top: 5.h),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   gapPadding: 20,
@@ -110,22 +110,26 @@ class _CommentFormState extends State<CommentForm> {
                     borderSide: BorderSide(
                         color: kTextColor.withOpacity(0.22), width: 0.3),
                     borderRadius: BorderRadius.circular(5),
-                    gapPadding: 20),
+                    gapPadding: 4),
                 hintText: "Write here...",
                 prefixIcon: Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 5.w,
+                    vertical: 11.h
                   ),
                   child: Column(
                     children: [
+                      // SizedBox(
+                      //   height: 11.h,
+                      // ),
                       SvgPicture.asset(
                         "assets/icons/icon-message.svg",
                       ),
                     ],
                   ),
                 ),
-                prefixIconConstraints:
-                    BoxConstraints(maxHeight: 75.h, maxWidth: 28.w),
+                // prefixIconConstraints:
+                //     BoxConstraints(maxHeight: 75.h, maxWidth: 55.w),
               ),
               textAlignVertical: TextAlignVertical.top,
             ),
