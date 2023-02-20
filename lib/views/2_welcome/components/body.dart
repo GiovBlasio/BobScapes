@@ -23,8 +23,8 @@ class _BodyState extends State<Body> {
         Positioned.fill(
           child: SvgPicture.asset(
             "assets/images/sfondo2.svg",
-            fit: BoxFit.fill,
-            width: ScreenUtil().screenWidth,
+            fit: BoxFit.cover,
+           // width: ScreenUtil().screenWidth,
           ),
         ),
         Positioned(
@@ -121,6 +121,7 @@ class _BodyState extends State<Body> {
                               color: kTextColor,
                               fontFamily: 'Manrope',
                               fontWeight: FontWeight.w700,
+                              height: 1.1,
                             ),
                           ),
                           SizedBox(

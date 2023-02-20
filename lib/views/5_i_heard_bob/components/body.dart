@@ -97,8 +97,11 @@ class _BodyState extends State<Body> {
       children: [
         Opacity(
           opacity: 1,
-          child: SvgPicture.asset("assets/images/sfondo3.svg",
-              fit: BoxFit.fill, width: double.infinity),
+          child: SvgPicture.asset(
+            "assets/images/sfondo3.svg",
+            fit: BoxFit.cover,
+           // width: double.infinity,
+          ),
         ),
         Positioned(
           bottom: 65.h,
@@ -1118,7 +1121,7 @@ class _BodyState extends State<Body> {
                                     await placemarkFromCoordinates(
                                         latitude, longitude);
                                 locality = placemarks
-                                    .reversed.last.subAdministrativeArea!;
+                                    .reversed.last.administrativeArea!;
                               }
 
                               if (abbreviation
@@ -1127,6 +1130,7 @@ class _BodyState extends State<Body> {
                                     abbreviation[locality.toUpperCase()]!;
                               }
 
+                              print(locality);
                               Map<String, dynamic> params = {
                                 "name": name,
                                 "email": email,

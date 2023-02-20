@@ -380,128 +380,141 @@ class _CustomAlertState extends State<CustomAlert> {
     audioPlayer.setUrl(url.path, isLocal: true);
   }
 
-  Stack _showDisclaimer(BuildContext context) {
-    return Stack(children: [
-      Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-          child: Stack(alignment: Alignment.bottomCenter, children: [
-            Positioned.fill(
-              child: SvgPicture.asset(
-                "assets/images/sfondo-welcome2.svg",
-                fit: BoxFit.fill,
-                width: ScreenUtil().screenWidth,
-              ),
-            ),
-            Positioned(
-              bottom: 400.h,
+  Widget _showDisclaimer(BuildContext context) {
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: kAppbarColor,
+            leadingWidth: 80.w,
+            leading: const CustomBackButton(),
+            title: const TitleBack()),
+        body: Stack(children: [
+          Positioned(
+              bottom: 0,
               left: 0,
               right: 0,
-              child: Image.asset(
-                "assets/images/quail-reflected.png",
-                height: 270.h,
-                alignment: Alignment.centerLeft,
-              ),
-            ),
-            Positioned(
-              height: 453.h,
-              left: 16.w,
-              right: 16.w,
-              child: Card(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(16),
+              top: 0,
+              child: Stack(alignment: Alignment.bottomCenter, children: [
+                Positioned.fill(
+                  child: SvgPicture.asset(
+                    "assets/images/sfondo-welcome2.svg",
+                    fit: BoxFit.cover,
+                    //   width: ScreenUtil().screenWidth,
                   ),
                 ),
-                elevation: 10,
-                margin: EdgeInsets.symmetric(horizontal: 0.h),
-                child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15.h),
-                    decoration: BoxDecoration(
-                        color: kColor3,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(16.r))),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 30.w, right: 10.w),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.baseline,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                textBaseline: TextBaseline.alphabetic,
-                                children: [
-                                  Text(
-                                    "Disclaimer",
+                Positioned(
+                  bottom: 400.h,
+                  left: 0,
+                  right: 0,
+                  child: Image.asset(
+                    "assets/images/quail-reflected.png",
+                    height: 270.h,
+                    alignment: Alignment.centerLeft,
+                  ),
+                ),
+                Positioned(
+                  height: 453.h,
+                  left: 16.w,
+                  right: 16.w,
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    elevation: 10,
+                    margin: EdgeInsets.symmetric(horizontal: 0.h),
+                    child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 15.h),
+                        decoration: BoxDecoration(
+                            color: kColor3,
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16.r))),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 30.w, right: 10.w),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      Text(
+                                        "Disclaimer",
+                                        style: TextStyle(
+                                            color: kTextColor,
+                                            fontFamily: 'Manrope',
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 24.sp),
+                                      ),
+                                      IconButton(
+                                        splashRadius: 0.1,
+                                        icon: const Icon(
+                                          Icons.close,
+                                          size: 30,
+                                          color: kTextColor,
+                                        ),
+                                        onPressed: () async {
+                                          Navigator.pop(context);
+                                          Navigator.pushNamed(context,
+                                              IHeardBobScreen.routeName);
+                                          setState(() {
+                                            timer.cancel();
+                                          });
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 30.w,
+                                    top: 25.h,
+                                    bottom: 5.h,
+                                    right: 40.w,
+                                  ),
+                                  child: Text(
+                                    "The exact location of your sightings will not be shared with the public.",
                                     style: TextStyle(
                                         color: kTextColor,
                                         fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 24.sp),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18.sp),
                                   ),
-                                  IconButton(
-                                    splashRadius: 0.1,
-                                    icon: const Icon(
-                                      Icons.close,
-                                      size: 30,
-                                      color: kTextColor,
-                                    ),
-                                    onPressed: () async {
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(
-                                          context, IHeardBobScreen.routeName);
-                                      setState(() {
-                                        timer.cancel();
-                                      });
-                                    },
-                                  )
-                                ],
-                              ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 30.w,
+                                    top: 15.h,
+                                    bottom: 5.h,
+                                    right: 40.w,
+                                  ),
+                                  child: Text(
+                                    "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                    style: TextStyle(
+                                        color: kTextColor,
+                                        fontFamily: 'Manrope',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18.sp),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 30.w,
-                                top: 25.h,
-                                bottom: 5.h,
-                                right: 40.w,
-                              ),
-                              child: Text(
-                                "The exact location of your sightings will not be shared with the public.",
-                                style: TextStyle(
-                                    color: kTextColor,
-                                    fontFamily: 'Manrope',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18.sp),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 30.w,
-                                top: 15.h,
-                                bottom: 5.h,
-                                right: 40.w,
-                              ),
-                              child: Text(
-                                "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
-                                style: TextStyle(
-                                    color: kTextColor,
-                                    fontFamily: 'Manrope',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18.sp),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )),
-              ),
-            ),
-          ])),
-    ]);
+                          ),
+                        )),
+                  ),
+                ),
+              ])),
+        ]),
+      ),
+    );
   }
 }

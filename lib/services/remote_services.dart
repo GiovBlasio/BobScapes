@@ -90,7 +90,7 @@ class RemoteService {
     http.Response response =
         await client.post(uri, headers: headers, body: json.encode(params));
 
-    print(response.body);
+    print(params);
 
     if (response.statusCode == 200) {
       var json = response.body;

@@ -107,8 +107,8 @@ class _BodyState extends State<Body> {
           duration: const Duration(seconds: 1),
           child: SvgPicture.asset(
             "assets/images/sfondo1.svg",
-            fit: BoxFit.fill,
-            width: ScreenUtil().screenWidth,
+            fit: BoxFit.cover,
+           // width: ScreenUtil().screenWidth,
           ),
         ),
         AnimatedOpacity(
@@ -116,8 +116,8 @@ class _BodyState extends State<Body> {
           duration: const Duration(seconds: 1),
           child: SvgPicture.asset(
             "assets/images/sfondo-welcome2.svg",
-            fit: BoxFit.fill,
-            width: ScreenUtil().screenWidth,
+            fit: BoxFit.cover,
+          //  width: ScreenUtil().screenWidth,
           ),
         ),
         AnimatedPositioned(

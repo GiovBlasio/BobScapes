@@ -94,7 +94,7 @@ class CustomCard extends StatelessWidget {
                             Text(
                               title,
                               style: TextStyle(
-                                  fontSize: 18.sp,
+                                  fontSize: 17.5.sp,
                                   fontFamily: 'Manrope',
                                   fontWeight: FontWeight.w700,
                                   color: kTextColor),
