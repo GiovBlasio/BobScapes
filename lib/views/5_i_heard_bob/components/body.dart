@@ -101,7 +101,7 @@ class _BodyState extends State<Body> {
             child: SvgPicture.asset(
               "assets/images/sfondo3.svg",
               fit: BoxFit.cover,
-             // width: double.infinity,
+              // width: double.infinity,
             ),
           ),
         ),
@@ -1131,6 +1131,7 @@ class _BodyState extends State<Body> {
                                 locality =
                                     abbreviation[locality.toUpperCase()]!;
                               }
+                              locality = locality.replaceAll(' ', '_').toLowerCase();
 
                               print(locality);
                               Map<String, dynamic> params = {

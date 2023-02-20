@@ -119,6 +119,7 @@ class _MappaState extends State<Mappa> {
 
   _initialization() async {
     markers2 = await RemoteService().getMarker();
+    
     _buildMarkers();
     setState(() {});
   }

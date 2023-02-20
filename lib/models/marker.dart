@@ -19,12 +19,18 @@ class Marker {
   final String state;
   final int sightings;
 
-  factory Marker.fromJson(Map<String, dynamic> json) => Marker(
-        state: json["state"],
-        longitude: json["longitude"] ?? 0,
-        latitude: json["latitude"] ?? 0,
-        sightings: json["sightings"],
-      );
+  factory Marker.fromJson(Map<String, dynamic> json) {
+    String stato = json["state"] as String;
+    stato = stato.replaceAll('_', ' ');
+    stato =
+        stato.substring(0, 1).toUpperCase() + stato.substring(1).toLowerCase();
+    return Marker(
+      state: stato,
+      longitude: json["longitude"] ?? 0,
+      latitude: json["latitude"] ?? 0,
+      sightings: json["sightings"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "time": longitude,
