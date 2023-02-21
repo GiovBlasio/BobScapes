@@ -57,7 +57,7 @@ class _BodyState extends State<Body> {
       // bottomBackground = 100.h;
     });
 
-    await Future.delayed(const Duration(milliseconds: 3000));
+    await Future.delayed(const Duration(milliseconds: 1500));
 
     setState(() {
       animate = true;
@@ -72,7 +72,7 @@ class _BodyState extends State<Body> {
     });
 
     await Future.delayed(
-        const Duration(milliseconds: 3500),
+        const Duration(milliseconds: 1500),
         () => Navigator.of(context)
           ..pushReplacement(
             PageRouteBuilder(
@@ -83,14 +83,14 @@ class _BodyState extends State<Body> {
                   (context, animation, secondaryAnimation, child) {
                 const begin = Offset(-1, 0);
                 const end = Offset.zero;
-                const curve = Curves.slowMiddle;
+                const curve = Curves.ease;
 
                 var tween = Tween(begin: begin, end: end)
                     .chain(CurveTween(curve: curve));
-                final offsetAnimation = animation.drive(tween);
+             //   final offsetAnimation = animation.drive(tween);
 
-                return SlideTransition(
-                  position: offsetAnimation,
+                return FadeTransition(
+                  opacity: animation,
                   child: child,
                 );
               },

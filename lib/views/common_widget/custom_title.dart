@@ -32,7 +32,7 @@ class CustomTitle extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 0.008.sh),
           width: double.infinity,
-          height: 47.h,
+          height: 52.h,
           color: color,
           child: Row(
             children: [
@@ -43,7 +43,7 @@ class CustomTitle extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: kTextColor,
-                    fontSize: 20.sp,
+                    fontSize: 19.sp,
                     fontFamily: 'Manrope',
                     fontWeight: FontWeight.w700),
               ),

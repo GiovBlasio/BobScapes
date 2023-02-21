@@ -158,7 +158,7 @@ class _CustomAlertState extends State<CustomAlert> {
                                       widget.title,
                                       style: TextStyle(
                                           color: kTextColor,
-                                          fontSize: 24.sp,
+                                          fontSize: 22.sp,
                                           fontFamily: 'Manrope',
                                           fontWeight: FontWeight.w700),
                                     ),
@@ -321,17 +321,20 @@ class _CustomAlertState extends State<CustomAlert> {
               child: Row(
                 children: [
                   BottomButton(
-                    color: kColor3,
-                    title: "Bob Sightings Map",
-                    iconPath: "assets/icons/eye.svg",
-                    onPressed: () => Navigator.pushNamed(
-                        context, BobSightingsScreen.routeName),
-                  ),
+                      color: kColor3,
+                      title: "Bob Sightings Map",
+                      iconPath: "assets/icons/eye.svg",
+                      onPressed: () {
+                        audioPlayer.stop();
+                        Navigator.pushNamed(
+                            context, BobSightingsScreen.routeName);
+                      }),
                   BottomButton(
                       color: kColor2,
                       title: "Hey, I heard Bob!",
                       iconPath: "assets/icons/gps.svg",
                       onPressed: () {
+                        audioPlayer.stop();
                         if (Provider.of<HomeState>(context, listen: false)
                             .firstAccess) {
                           changeFirstAccess();
@@ -434,80 +437,86 @@ class _CustomAlertState extends State<CustomAlert> {
                                 top: Radius.circular(16.r))),
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 30.w, right: 10.w),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.baseline,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    textBaseline: TextBaseline.alphabetic,
-                                    children: [
-                                      Text(
-                                        "Disclaimer",
-                                        style: TextStyle(
-                                            color: kTextColor,
-                                            fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 24.sp),
-                                      ),
-                                      IconButton(
-                                        splashRadius: 0.1,
-                                        icon: const Icon(
-                                          Icons.close,
-                                          size: 30,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: 30.w, right: 10.w),
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Text(
+                                      "Disclaimer",
+                                      style: TextStyle(
                                           color: kTextColor,
+                                          fontFamily: 'Manrope',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 24.sp),
+                                    ),
+                                    IconButton(
+                                      splashRadius: 0.1,
+                                      icon: const Icon(
+                                        Icons.close,
+                                        size: 30,
+                                        color: kTextColor,
+                                      ),
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                        Navigator.pushNamed(
+                                            context, IHeardBobScreen.routeName);
+                                        setState(() {
+                                          timer.cancel();
+                                        });
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 30.w,
+                                          top: 25.h,
+                                          bottom: 5.h,
+                                          right: 40.w,
                                         ),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          Navigator.pushNamed(context,
-                                              IHeardBobScreen.routeName);
-                                          setState(() {
-                                            timer.cancel();
-                                          });
-                                        },
-                                      )
+                                        child: Text(
+                                          "The exact location of your sightings will not be shared with the public.",
+                                          style: TextStyle(
+                                              color: kTextColor,
+                                              fontFamily: 'Manrope',
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18.sp),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 30.w,
+                                          top: 15.h,
+                                          bottom: 5.h,
+                                          right: 40.w,
+                                        ),
+                                        child: Text(
+                                          "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                          style: TextStyle(
+                                              color: kTextColor,
+                                              fontFamily: 'Manrope',
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18.sp),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 30.w,
-                                    top: 25.h,
-                                    bottom: 5.h,
-                                    right: 40.w,
-                                  ),
-                                  child: Text(
-                                    "The exact location of your sightings will not be shared with the public.",
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18.sp),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 30.w,
-                                    top: 15.h,
-                                    bottom: 5.h,
-                                    right: 40.w,
-                                  ),
-                                  child: Text(
-                                    "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18.sp),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         )),
                   ),

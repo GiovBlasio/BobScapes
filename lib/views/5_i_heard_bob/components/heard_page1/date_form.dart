@@ -101,6 +101,7 @@ class _DateFormState extends State<DateForm> {
           ),
           Flexible(
             child: TextFormField(
+              onTap: () => _showDatePicker(),
               style: TextStyle(
                   color: kTextColor,
                   fontFamily: 'Manrope',
@@ -156,25 +157,28 @@ class _DateFormState extends State<DateForm> {
   _showDatePicker() async {
     myDate = await showDatePicker(
       keyboardType: TextInputType.datetime,
-      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      initialEntryMode: DatePickerEntryMode.inputOnly,
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           inputDecorationTheme: const InputDecorationTheme(
               filled: true,
-              fillColor: kTextColor,
+             // fillColor: kTextColor,
               labelStyle: TextStyle(color: kTextColor)),
           textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: kTextColor,
+           //  displayColor: kColor2,
+                 bodyColor: kTextColor,
               ),
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: kTextColor,
             selectionColor: Colors.transparent,
           ),
           colorScheme: const ColorScheme.light(
-            onSecondary: kTextColor,
-            secondary: kTextColor,
-            surface: kTextColor,
-            onSurface: kTextColor,
+            // onSecondary: kTextColor,
+            // secondary: kColor3,
+            //  onTertiary: kTextColor,
+            // tertiary: kColor3,
+            // surface: kTextColor,
+            // onSurface: kColor3,
             primary: kColor1,
             onPrimary: kTextColor,
           ),

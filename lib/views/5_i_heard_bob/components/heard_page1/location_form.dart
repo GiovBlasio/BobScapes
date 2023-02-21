@@ -23,6 +23,9 @@ class LocationForm extends StatefulWidget {
 class _LocationFormState extends State<LocationForm> {
   TextEditingController controller = TextEditingController();
 
+  late Marker current;
+  late LatLng currentLatLng = LatLng(45, -120);
+
   @override
   void initState() {
     _initialization();
@@ -38,12 +41,10 @@ class _LocationFormState extends State<LocationForm> {
   void _initialization() async {
     String location =
         Provider.of<HeardPage1State>(context, listen: false).location;
-
+    Position point = await _getLocation();
     if (location != '') {
       controller = TextEditingController(text: location);
     } else {
-      Position point = await _getLocation();
-
       String latitude = convertLatLng(point.latitude, true);
 
       String longitude = convertLatLng(point.longitude, false);
@@ -52,8 +53,20 @@ class _LocationFormState extends State<LocationForm> {
           point.longitude.toStringAsFixed(3));
 
       controller = TextEditingController(text: liveLocation);
-      setState(() {});
     }
+    currentLatLng = LatLng(point.latitude, point.longitude);
+    current = Marker(
+        height: 75,
+        width: 75,
+        point: currentLatLng,
+        builder: (BuildContext context) {
+          return SvgPicture.asset(
+            "assets/icons/icon-pin-here.svg",
+          );
+        });
+    // markers.add(current);
+
+    setState(() {});
   }
 
   @override
@@ -120,6 +133,7 @@ class _LocationFormState extends State<LocationForm> {
                   children: [
                     Flexible(
                       child: TextFormField(
+                        onTap: () => _showMap(),
                         style: TextStyle(
                             color: kTextColor,
                             fontFamily: 'Manrope',
@@ -177,96 +191,309 @@ class _LocationFormState extends State<LocationForm> {
   }
 
   _showMap() {
+    List<Marker> markers = [];
+    markers.add(current);
+    LatLng pin = currentLatLng;
     showDialog(
-      context: context,
-      builder: (context) => Stack(
-        children: [
-          Positioned(
-            bottom: 75.h,
-            top: 75.h,
-            left: 30.w,
-            right: 30.w,
-            child: FlutterMap(
-              options: MapOptions(
-                  onTap: (tapPosition, point) {
-                    setState(() {
-                      String latitude = convertLatLng(point.latitude, true);
-
-                      String longitude = convertLatLng(point.longitude, false);
-                      String location = '$latitude/$longitude';
-                      changeLocation(
-                          location,
-                          point.latitude.toStringAsFixed(3),
-                          point.longitude.toStringAsFixed(3));
-                      controller.text = location;
-                    });
-                    Navigator.of(context).pop();
-                  },
-                  maxBounds:
-                      LatLngBounds(LatLng(0, -180.0), LatLng(75, -40.781693)),
-                  minZoom: 3.5,
-                  maxZoom: 18,
-                  center: LatLng(45, -120),
-                  zoom: 5,
-                  interactiveFlags:
-                      InteractiveFlag.all & ~InteractiveFlag.rotate),
-              children: [
-                AttributionWidget.defaultWidget(
-                  source: 'OpenStreetMap contributors',
-                  onSourceTapped: null,
-                ),
-                TileLayer(
-                  backgroundColor: Colors.white,
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'com.example.app',
-                ),
-                Positioned(
-                  bottom: 10.h,
-                  left: 10.w,
-                  child: Row(
+        context: context,
+        builder: (context) {
+          return Stack(
+            children: [
+              Positioned(
+                bottom: 75.h,
+                top: 75.h,
+                left: 30.w,
+                right: 30.w,
+                child: Container(
+                  color: kColor3,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(
-                        width: 41.w,
-                        height: 41.w,
-                        child: FittedBox(
-                          child: FloatingActionButton(
-                            backgroundColor: Colors.white,
-                            onPressed: () {
-                              _getLocation().then((point) {
-                                setState(() {
-                                  String latitude =
-                                      convertLatLng(point.latitude, true);
-
-                                  String longitude =
-                                      convertLatLng(point.longitude, false);
-                                  String location = '$latitude/$longitude';
-                                  changeLocation(
-                                      location,
-                                      point.latitude.toString(),
-                                      point.longitude.toString());
-                                  controller.text = location;
-                                  Navigator.of(context).pop();
-                                });
-                              });
-                            },
-                            child: SvgPicture.asset(
-                              "assets/icons/icon-geolocalization.svg",
-                              color: kColor1,
-                              height: 30,
-                              width: 30,
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Register your sighting",
+                            style: TextStyle(
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w700,
+                                color: kTextColor,
+                                fontSize: 18.sp),
+                          ),
+                          const Spacer(),
+                          Flexible(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                                shadowColor:
+                                    MaterialStateProperty.all(Colors.grey),
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  // Text(
+                                  //   "Next",
+                                  //   style: TextStyle(
+                                  //     fontSize: 14.sp,
+                                  //     color: kTextColor,
+                                  //     fontWeight: FontWeight.w700,
+                                  //   ),
+                                  // ),
+                                  // SizedBox(
+                                  //   width: 5.w,
+                                  // ),
+                                  SvgPicture.asset(
+                                    "assets/icons/icon-close.svg",
+                                    height: 14,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
+
+                          // IconButton(
+                          //   splashRadius: 0.1,
+                          //   icon: const Icon(
+                          //     Icons.close,
+                          //     size: 30,
+                          //     color: kTextColor,
+                          //   ),
+                          //   onPressed: () {
+                          //     // if (!isLoaded) {
+                          //     //   setState(() {
+                          //     //     pageController.animateToPage(
+                          //     //         currentIndex + 1,
+                          //     //         duration: const Duration(seconds: 1),
+                          //     //         curve: Curves.linear);
+                          //     //   });
+                          //     // }
+                          //   },
+
+                          //  ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Flexible(
+                        child: FlutterMap(
+                          options: MapOptions(
+                              onTap: (tapPosition, point) {
+                                markers.removeWhere(
+                                    (marker) => (marker != current));
+                                Marker marker = Marker(
+                                    anchorPos: AnchorPos.align(AnchorAlign.top),
+                                    height: 75,
+                                    width: 75,
+                                    point: point,
+                                    builder: (BuildContext context) {
+                                      return SvgPicture.asset(
+                                        "assets/icons/icon-pointer.svg",
+                                      );
+                                    });
+                                markers.add(marker);
+                                pin = point;
+                                // setState(() {
+                                //   String latitude =
+                                //       convertLatLng(point.latitude, true);
+
+                                //   String longitude =
+                                //       convertLatLng(point.longitude, false);
+                                //   String location = '$latitude/$longitude';
+                                //   changeLocation(
+                                //       location,
+                                //       point.latitude.toStringAsFixed(3),
+                                //       point.longitude.toStringAsFixed(3));
+                                //   controller.text = location;
+                                // });
+
+                                //Navigator.of(context).pop();
+                              },
+                              maxBounds: LatLngBounds(
+                                  LatLng(0, -180.0), LatLng(75, -40.781693)),
+                              minZoom: 10,
+                              maxZoom: 18,
+                              center: currentLatLng,
+                              zoom: 15,
+                              interactiveFlags: InteractiveFlag.all &
+                                  ~InteractiveFlag.rotate),
+                          children: [
+                            AttributionWidget.defaultWidget(
+                              source: 'OpenStreetMap contributors',
+                              onSourceTapped: null,
+                            ),
+                            TileLayer(
+                              backgroundColor: Colors.white,
+                              urlTemplate:
+                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                              userAgentPackageName: 'com.example.app',
+                            ),
+                            MarkerLayer(
+                              markers: markers,
+                            ),
+                            Positioned(
+                              bottom: 10.h,
+                              left: 10.w,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 41.w,
+                                    height: 41.w,
+                                    child: FittedBox(
+                                      child: FloatingActionButton(
+                                        backgroundColor: Colors.white,
+                                        onPressed: () async {
+                                          Position point = await _getLocation();
+
+                                          currentLatLng = LatLng(
+                                              point.latitude, point.longitude);
+                                          current = Marker(
+                                              height: 75,
+                                              width: 75,
+                                              point: LatLng(point.latitude,
+                                                  point.longitude),
+                                              builder: (BuildContext context) {
+                                                return SvgPicture.asset(
+                                                  "assets/icons/icon-pin-here.svg",
+                                                );
+                                              });
+                                          markers.add(current);
+                                          setState(() {});
+                                          // setState(() {
+                                          //   String latitude = convertLatLng(
+                                          //       point.latitude, true);
+
+                                          //   String longitude = convertLatLng(
+                                          //       point.longitude, false);
+                                          //   String location =
+                                          //       '$latitude/$longitude';
+                                          //   changeLocation(
+                                          //       location,
+                                          //       point.latitude.toString(),
+                                          //       point.longitude.toString());
+                                          //   controller.text = location;
+                                          //   // Navigator.of(context).pop();
+                                          // });
+                                        },
+                                        child: SvgPicture.asset(
+                                          "assets/icons/icon-geolocalization.svg",
+                                          color: kColor1,
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              shadowColor:
+                                  MaterialStateProperty.all(Colors.grey),
+                              backgroundColor:
+                                  MaterialStateProperty.all(kAppbarColor),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                // SvgPicture.asset(
+                                //   "assets/icons/icon-back-form.svg",
+                                //   height: 14,
+                                // ),
+                                // SizedBox(
+                                //   width: 5.w,
+                                // ),
+                                Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              shadowColor:
+                                  MaterialStateProperty.all(Colors.grey),
+                              backgroundColor:
+                                  MaterialStateProperty.all(kAppbarColor),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                String latitude =
+                                    convertLatLng(pin.latitude, true);
+
+                                String longitude =
+                                    convertLatLng(pin.longitude, false);
+                                String location = '$latitude/$longitude';
+                                changeLocation(
+                                    location,
+                                    pin.latitude.toStringAsFixed(3),
+                                    pin.longitude.toStringAsFixed(3));
+                                controller.text = location;
+                              });
+
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                // SvgPicture.asset(
+                                //   "assets/icons/icon-back-form.svg",
+                                //   height: 14,
+                                // ),
+                                // SizedBox(
+                                //   width: 5.w,
+                                // ),
+                                Text(
+                                  "Confirm",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: kTextColor,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+              ),
+            ],
+          );
+        });
   }
 
   Future<Position> _getLocation() async {

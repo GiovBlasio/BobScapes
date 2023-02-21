@@ -4,16 +4,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../constants.dart';
 
-class CustomBackButton extends StatelessWidget {
+class CustomBackButton extends StatefulWidget {
   const CustomBackButton({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<CustomBackButton> createState() => _CustomBackButtonState();
+}
+
+class _CustomBackButtonState extends State<CustomBackButton> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       overlayColor: MaterialStateProperty.all(Colors.transparent),
-      onTap: () => Navigator.pop(context),
+      onTap: () async {
+        await Future.delayed(
+            const Duration(milliseconds: 500), () => Navigator.pop(context));
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

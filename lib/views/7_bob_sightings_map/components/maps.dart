@@ -119,7 +119,7 @@ class _MappaState extends State<Mappa> {
 
   _initialization() async {
     markers2 = await RemoteService().getMarker();
-    
+
     _buildMarkers();
     setState(() {});
   }
@@ -143,6 +143,7 @@ class _MappaState extends State<Mappa> {
       state.add(element.state);
       sightings.add(element.sightings);
       markers.add(marker);
+      _getLocation();
     }
 
     markers.sort((a, b) => b.point.latitude.compareTo(a.point.latitude));
@@ -168,7 +169,7 @@ class _MappaState extends State<Mappa> {
       return Future.error("Location permission are permanently denied");
     }
 
-    position = (await Geolocator.getCurrentPosition());
+    position = await Geolocator.getCurrentPosition();
 
     currentLatLng = LatLng(position.latitude, position.longitude);
     if (current != null && markers.contains(current)) markers.remove(current);

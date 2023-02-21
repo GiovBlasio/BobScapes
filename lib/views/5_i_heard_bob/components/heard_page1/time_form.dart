@@ -85,6 +85,7 @@ class TimeFormState extends State<TimeForm> {
           ),
           Flexible(
             child: TextFormField(
+              onTap: () => _showTimePicker(),
               style: TextStyle(
                   color: kTextColor,
                   fontFamily: 'Manrope',

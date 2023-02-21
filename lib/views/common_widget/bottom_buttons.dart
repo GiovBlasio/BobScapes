@@ -57,11 +57,11 @@ class BottomButton extends StatelessWidget {
                   ),
                   Text(
                     title,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontSize: 15.sp,
+                        fontSize: 13.5.sp,
                         fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         color: kTextColor),
                   ),
                   const Spacer(),

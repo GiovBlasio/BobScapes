@@ -197,80 +197,86 @@ class _BodyState extends State<Body> {
                                 top: Radius.circular(16.r))),
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 30.w, right: 10.w),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.baseline,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    textBaseline: TextBaseline.alphabetic,
-                                    children: [
-                                      Text(
-                                        "Disclaimer",
-                                        style: TextStyle(
-                                            color: kTextColor,
-                                            fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 24.sp),
-                                      ),
-                                      IconButton(
-                                        splashRadius: 0.1,
-                                        icon: const Icon(
-                                          Icons.close,
-                                          size: 30,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: 30.w, right: 10.w),
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Text(
+                                      "Disclaimer",
+                                      style: TextStyle(
                                           color: kTextColor,
+                                          fontFamily: 'Manrope',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 24.sp),
+                                    ),
+                                    IconButton(
+                                      splashRadius: 0.1,
+                                      icon: const Icon(
+                                        Icons.close,
+                                        size: 30,
+                                        color: kTextColor,
+                                      ),
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                        Navigator.pushNamed(
+                                            context, IHeardBobScreen.routeName);
+                                        setState(() {
+                                          timer.cancel();
+                                        });
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 30.w,
+                                          top: 25.h,
+                                          bottom: 5.h,
+                                          right: 40.w,
                                         ),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          Navigator.pushNamed(context,
-                                              IHeardBobScreen.routeName);
-                                          setState(() {
-                                            timer.cancel();
-                                          });
-                                        },
-                                      )
+                                        child: Text(
+                                          "The exact location of your sightings will not be shared with the public.",
+                                          style: TextStyle(
+                                              color: kTextColor,
+                                              fontFamily: 'Manrope',
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18.sp),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 30.w,
+                                          top: 15.h,
+                                          bottom: 5.h,
+                                          right: 40.w,
+                                        ),
+                                        child: Text(
+                                          "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                          style: TextStyle(
+                                              color: kTextColor,
+                                              fontFamily: 'Manrope',
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18.sp),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 30.w,
-                                    top: 25.h,
-                                    bottom: 5.h,
-                                    right: 40.w,
-                                  ),
-                                  child: Text(
-                                    "The exact location of your sightings will not be shared with the public.",
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18.sp),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 30.w,
-                                    top: 15.h,
-                                    bottom: 5.h,
-                                    right: 40.w,
-                                  ),
-                                  child: Text(
-                                    "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18.sp),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         )),
                   ),

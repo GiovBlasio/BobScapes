@@ -60,7 +60,11 @@ class _BodyState extends State<Body> {
 
   final _keyEmail = GlobalKey<FormState>();
 
+  final _keyEmailFake = GlobalKey<FormState>();
+
   final _keyName = GlobalKey<FormState>();
+
+  final _keyNameFake = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -93,79 +97,88 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Opacity(
-            opacity: 1,
-            child: SvgPicture.asset(
-              "assets/images/sfondo3.svg",
-              fit: BoxFit.cover,
-              // width: double.infinity,
+    return GestureDetector(
+      // onTap: () {
+      //   FocusScope.of(context).unfocus();
+      //   setState(() {
+      //     hintText2 = "Your Name";
+      //   });
+      // },
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Opacity(
+              opacity: 1,
+              child: SvgPicture.asset(
+                "assets/images/sfondo3.svg",
+                fit: BoxFit.cover,
+                // width: double.infinity,
+              ),
             ),
           ),
-        ),
-        Positioned(
-          bottom: 65.h,
-          top: 55.h,
-          left: 0,
-          right: 0,
-          child: PageView(
-              onPageChanged: (value) {
-                setState(() {
-                  currentIndex = value;
-                });
-              },
-              controller: pageController,
+          Positioned(
+            bottom: 65.h,
+            top: 55.h,
+            left: 0,
+            right: 0,
+            child: PageView(
+                onPageChanged: (value) {
+                  setState(() {
+                    currentIndex = value;
+                  });
+                },
+                controller: pageController,
+                children: [
+                  _buildPage1(),
+                  if (Provider.of<HeardPage1State>(context).physicallySee ==
+                      'Yes')
+                    _buildPage2(),
+                  _buildPage3(context),
+                ]),
+          ),
+          Positioned(
+            top: 0,
+            width: ScreenUtil().screenWidth,
+            child: const CustomTitle(
+              title: "I Heard Bob!",
+              color: kColor2,
+              icon: "assets/icons/gps.svg",
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Row(
               children: [
-                _buildPage1(),
-                if (Provider.of<HeardPage1State>(context).physicallySee ==
-                    'Yes')
-                  _buildPage2(),
-                _buildPage3(context),
-              ]),
-        ),
-        Positioned(
-          top: 0,
-          width: ScreenUtil().screenWidth,
-          child: const CustomTitle(
-            title: "I Heard Bob!",
-            color: kColor2,
-            icon: "assets/icons/gps.svg",
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          child: Row(
-            children: [
-              BottomButton(
-                color: kColor3,
-                title: "Bob Sightings Map",
-                iconPath: "assets/icons/eye.svg",
-                onPressed: () =>
-                    Navigator.pushNamed(context, BobSightingsScreen.routeName),
-              ),
-              BottomButton(
-                color: kColor1,
-                title: "Hear Bob",
-                iconPath: "assets/icons/music.svg",
-                onPressed: () =>
-                    Navigator.pushNamed(context, HearBobScreen.routeName),
-              ),
-            ],
-          ),
-        ),
-        if (isLoaded)
-          const Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(kColor2),
-              backgroundColor: kColor1,
+                BottomButton(
+                  color: kColor3,
+                  title: "Bob Sightings Map",
+                  iconPath: "assets/icons/eye.svg",
+                  onPressed: () => Navigator.pushNamed(
+                      context, BobSightingsScreen.routeName),
+                ),
+                BottomButton(
+                  color: kColor1,
+                  title: "Hear Bob",
+                  iconPath: "assets/icons/music.svg",
+                  onPressed: () =>
+                      Navigator.pushNamed(context, HearBobScreen.routeName),
+                ),
+              ],
             ),
-          )
-      ],
+          ),
+          if (isLoaded)
+            const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(kColor2),
+                backgroundColor: kColor1,
+              ),
+            )
+        ],
+      ),
     );
   }
 
+  String hintText1 = "Your Email";
   Padding _buildEmailForm(Key key) {
     return Padding(
       padding: EdgeInsets.only(
@@ -198,9 +211,31 @@ class _BodyState extends State<Body> {
                 enabled: true,
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
+                onTapOutside: (event) {
+                  if (Provider.of<HeardPage3State>(context, listen: false)
+                          .email ==
+                      '') {
+                    setState(() {
+                      hintText1 = 'Your Email';
+                    });
+                  }
+                },
+                onTap: () {
+                  setState(() {
+                    hintText1 = '';
+                  });
+                },
                 onChanged: (value) {
                   changeEmail(value);
-                  if (key == _keyEmail) _keyEmail.currentState!.validate();
+                  if (key == _keyEmail) {
+                    _keyEmail.currentState!.validate();
+                    _keyEmailFake.currentState!.validate();
+                  }
+                  if (value.isEmpty || value == '') {
+                    setState(() {
+                      hintText1 = 'Your Email';
+                    });
+                  }
                 },
                 validator: (value) {
                   if (!_validateEmail(value!)) {
@@ -215,7 +250,7 @@ class _BodyState extends State<Body> {
                       fontFamily: 'Manrope',
                       fontWeight: FontWeight.w700),
                   hintStyle: TextStyle(
-                    color: kTextColor,
+                    color: kTextColor.withOpacity(0.4),
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -261,7 +296,7 @@ class _BodyState extends State<Body> {
                   ),
                   prefixIconConstraints:
                       BoxConstraints(maxHeight: 28.w, maxWidth: 28.w),
-                  hintText: "hello@aol.com",
+                  hintText: hintText1,
                 ),
               ),
             ),
@@ -271,6 +306,7 @@ class _BodyState extends State<Body> {
     );
   }
 
+  String hintText2 = "Your Name";
   Padding _buildNameForm(Key key) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -291,12 +327,34 @@ class _BodyState extends State<Body> {
             ),
             Flexible(
               child: TextFormField(
+                onTapOutside: (event) {
+                  if (Provider.of<HeardPage1State>(context, listen: false)
+                          .name ==
+                      '') {
+                    setState(() {
+                      hintText2 = 'Your Name';
+                    });
+                  }
+                },
                 enableInteractiveSelection: false,
                 controller: controller,
                 keyboardType: TextInputType.name,
+                onTap: () {
+                  setState(() {
+                    hintText2 = '';
+                  });
+                },
                 onChanged: (value) {
                   changeName(value);
-                  if (key == _keyName) _keyName.currentState!.validate();
+                  if (key == _keyName) {
+                    _keyName.currentState!.validate();
+                    _keyNameFake.currentState!.validate();
+                  }
+                  if (value.isEmpty || value == '') {
+                    setState(() {
+                      hintText2 = 'Your Name';
+                    });
+                  }
                 },
                 validator: (value) {
                   if (value!.isEmpty || value == '') {
@@ -306,7 +364,7 @@ class _BodyState extends State<Body> {
                 },
                 decoration: InputDecoration(
                   hintStyle: TextStyle(
-                    color: kTextColor,
+                    color: kTextColor.withOpacity(0.4),
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -342,7 +400,7 @@ class _BodyState extends State<Body> {
                       color: Colors.red,
                     ),
                   ),
-                  hintText: "Shane Mahoney",
+                  hintText: hintText2,
                 ),
               ),
             ),
@@ -353,6 +411,13 @@ class _BodyState extends State<Body> {
   }
 
   Widget _buildPage1() {
+    if (_keyEmail.currentState != null) {
+      _keyEmail.currentState!.validate();
+      _keyName.currentState!.validate();
+      _keyEmailFake.currentState!.validate();
+      _keyNameFake.currentState!.validate();
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
@@ -389,11 +454,11 @@ class _BodyState extends State<Body> {
                           SizedBox(
                             height: 20.h,
                           ),
-                          _buildNameForm(GlobalKey()),
+                          _buildNameForm(_keyNameFake),
                           SizedBox(
                             height: 28.h,
                           ),
-                          _buildEmailForm(GlobalKey<State>()),
+                          _buildEmailForm(_keyEmailFake),
                           SizedBox(
                             height: 28.h,
                           ),
@@ -424,7 +489,7 @@ class _BodyState extends State<Body> {
                         child: CustomRadioButton(
                             items: radioOptionsPage1,
                             title:
-                                "Are bobwhites released at the sightings location?",
+                                "Are Bobwhite released at the sightings location?",
                             id: 1),
                       ),
                       const Divider(),
@@ -586,13 +651,13 @@ class _BodyState extends State<Body> {
                       //     ),
                       //   ],
                       // ),
-                      Container(
-                        color: Colors.transparent,
-                        height: 100.h,
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      // Container(
+                      //   color: Colors.transparent,
+                      //   height: 100.h,
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 15.w,
@@ -603,7 +668,11 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(
-                        height: 45.h,
+                        height: 15.h,
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        height: 15.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -615,7 +684,11 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(
-                        height: 45.h,
+                        height: 15.h,
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        height: 15.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -625,7 +698,11 @@ class _BodyState extends State<Body> {
                             title: "How many female?", id: 3),
                       ),
                       SizedBox(
-                        height: 45.h,
+                        height: 15.h,
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        height: 15.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -637,14 +714,18 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(
-                        height: 45.h,
+                        height: 15.h,
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        height: 15.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 15.w,
                         ),
                         child: const NumericalQuestion(
-                            title: "How many broods\nrepresented?", id: 5),
+                            title: "How many broods represented?", id: 5),
                       ),
                       Container(
                         color: Colors.transparent,
@@ -916,35 +997,35 @@ class _BodyState extends State<Body> {
                   //     )),
                   //   ],
                   // ),
-                  Positioned(
-                    right: 10.w,
-                    left: 0,
-                    top: 40.h,
-                    child: SvgPicture.asset(
-                      "assets/icons/mini-quail.svg",
-                      height: 110.h,
-                      alignment: Alignment.centerRight,
-                    ),
-                  ),
-                  Positioned(
-                    right: 0.w,
-                    left: 0.w,
-                    top: 80.h,
-                    child: Container(
-                      color: Colors.transparent,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const heard2.CustomDropDownMenu(
-                              items: ['Family (Covey)', 'Individual bird']),
-                          SizedBox(
-                            height: 0.h,
-                          ),
-                          //const Divider(),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   right: 10.w,
+                  //   left: 0,
+                  //   top: 40.h,
+                  //   child: SvgPicture.asset(
+                  //     "assets/icons/mini-quail.svg",
+                  //     height: 110.h,
+                  //     alignment: Alignment.centerRight,
+                  //   ),
+                  // ),
+                  // Positioned(
+                  //   right: 0.w,
+                  //   left: 0.w,
+                  //   top: 80.h,
+                  //   child: Container(
+                  //     color: Colors.transparent,
+                  //     child: Column(
+                  //       mainAxisSize: MainAxisSize.min,
+                  //       children: [
+                  //         const heard2.CustomDropDownMenu(
+                  //             items: ['Family (Covey)', 'Individual bird']),
+                  //         SizedBox(
+                  //           height: 0.h,
+                  //         ),
+                  //         //const Divider(),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -1131,7 +1212,8 @@ class _BodyState extends State<Body> {
                                 locality =
                                     abbreviation[locality.toUpperCase()]!;
                               }
-                              locality = locality.replaceAll(' ', '_').toLowerCase();
+                              locality =
+                                  locality.replaceAll(' ', '_').toLowerCase();
 
                               print(locality);
                               Map<String, dynamic> params = {
@@ -1162,7 +1244,8 @@ class _BodyState extends State<Body> {
                                 if (name != '' &&
                                     _validateEmail(email) &&
                                     latitude != 1000 &&
-                                    manyBirds == manyFemale + manyMale) {
+                                    manyBirds ==
+                                        manyFemale + manyMale + manyYoung) {
                                   bool isSended =
                                       await RemoteService().sendData(params);
                                   if (isSended) {

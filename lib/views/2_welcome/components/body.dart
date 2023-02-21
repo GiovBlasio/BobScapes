@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
           ),
         ),
         Positioned(
-          top: 303.h,
+          top: 295.h,
           bottom: 0.h,
           left: 0.w,
           right: 0.w,
@@ -46,7 +46,7 @@ class _BodyState extends State<Body> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 0.40.sh,
+                height: 0.42.sh,
                 child: PageView(
                   onPageChanged: (value) {
                     setState(
@@ -98,7 +98,7 @@ class _BodyState extends State<Body> {
                             style: TextStyle(
                               fontSize: 20.sp,
                               fontFamily: 'Manrope',
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w400,
                               color: kTextColor,
                             ),
                           ),
@@ -133,7 +133,7 @@ class _BodyState extends State<Body> {
                               color: kTextColor,
                               fontSize: 20.sp,
                               fontFamily: 'Manrope',
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ],
