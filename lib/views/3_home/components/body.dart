@@ -339,8 +339,8 @@ class BodyState extends State<Body> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 30.w, right: 10.w),
+                                  padding:
+                                      EdgeInsets.only(left: 30.w, right: 10.w),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.baseline,

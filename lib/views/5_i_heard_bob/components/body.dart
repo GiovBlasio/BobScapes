@@ -485,7 +485,12 @@ class _BodyState extends State<Body> {
                       ),
                       const Divider(),
                       Padding(
-                        padding: EdgeInsets.only(right: 15.w, left: 15.w),
+                        padding: EdgeInsets.only(
+                          right: 15.w,
+                          left: 15.w,
+                          top: 24.h,
+                          bottom: 24.h,
+                        ),
                         child: CustomRadioButton(
                             items: radioOptionsPage1,
                             title:
@@ -494,7 +499,12 @@ class _BodyState extends State<Body> {
                       ),
                       const Divider(),
                       Padding(
-                        padding: EdgeInsets.only(right: 15.w, left: 15.w),
+                        padding: EdgeInsets.only(
+                          right: 15.w,
+                          left: 15.w,
+                          top: 24.h,
+                          bottom: 24.h,
+                        ),
                         child: CustomRadioButton(
                             items: radioOptions2Page1,
                             title: "Did you physically see any birds?",
@@ -1206,7 +1216,8 @@ class _BodyState extends State<Body> {
                               if (latitude != 1000) {
                                 List<Placemark> placemarks =
                                     await placemarkFromCoordinates(
-                                        latitude, longitude, localeIdentifier: 'en_US');
+                                        latitude, longitude,
+                                        localeIdentifier: 'en_US');
                                 locality = placemarks
                                     .reversed.last.administrativeArea!;
                               }
@@ -1275,6 +1286,7 @@ class _BodyState extends State<Body> {
                                     await Future.delayed(
                                         Duration.zero,
                                         () => showDialog(
+                                            useSafeArea: false,
                                             context: context,
                                             builder: (BuildContext context) {
                                               Widget continueButton =
@@ -1345,10 +1357,11 @@ class _BodyState extends State<Body> {
                                   }
 
                                   String message =
-                                      "$message1 $error incorrectly, please try again.";
+                                      "$message1 $error incorrectly.Please try again. Note: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
                                   await Future.delayed(
                                     Duration.zero,
                                     () => showDialog(
+                                      useSafeArea: false,
                                       context: context,
                                       builder: (BuildContext context) {
                                         Widget continueButton = TextButton(

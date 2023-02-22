@@ -157,7 +157,7 @@ class _DateFormState extends State<DateForm> {
   _showDatePicker() async {
     myDate = await showDatePicker(
       keyboardType: TextInputType.datetime,
-      initialEntryMode: DatePickerEntryMode.inputOnly,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           inputDecorationTheme: const InputDecorationTheme(

@@ -148,6 +148,8 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                       padding: EdgeInsets.zero,
                       onPressed: () {
                         incrementCounter(widget.id);
+                        // // isChecked = initialCheck(widget.id);
+                        // setState(() {});
                       },
                       icon: SvgPicture.asset(
                         "assets/icons/icon-plus.svg",
@@ -159,12 +161,52 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CustomCheckBox(
-                  isChecked: isChecked,
-                  onPressed: () {
-                    changeCheck(widget.id);
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      // _isSelected = !_isSelected;
+                      changeCheck(widget.id);
+                    });
                   },
-                )
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kColor3,
+                          border: Border.all(color: kTextColor, width: 0.4),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(3.5),
+                          ),
+                        ),
+                        width: 35.h,
+                        height: 35.h,
+                        child: initialCheck(widget.id)
+                            ? const Icon(
+                                Icons.check,
+                                color: kTextColor,
+                              )
+                            : Container(),
+                      ),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      Text(
+                        "unsure",
+                        style: TextStyle(
+                            color: kTextColor,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'Manrope',
+                            fontSize: 14.sp),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                    ],
+                  ),
+                ),
+                // CustomCheckBox(
+                //     isChecked: isChecked,
+                //     onPressed: () => changeCheck(widget.id))
               ],
             ),
           ],
@@ -214,66 +256,90 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
     switch (id) {
       case 1:
         context.read<HeardPage2State>().incrementTotalCounter();
+        context.read<HeardPage2State>().changeFirstAccessTotalCounter();
         controller.text =
             (Provider.of<HeardPage2State>(context, listen: false).totalCounter)
                 .toString();
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).totalCheck);
+
         break;
       case 2:
         context.read<HeardPage2State>().incrementMaleCounter();
+        context.read<HeardPage2State>().changeFirstAccessMaleCounter();
         controller.text =
             (Provider.of<HeardPage2State>(context, listen: false).maleCounter)
                 .toString();
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).maleCheck);
         break;
       case 3:
         context.read<HeardPage2State>().incrementFemaleCounter();
+        context.read<HeardPage2State>().changeFirstAccessFemaleCounter();
+
         controller.text =
             (Provider.of<HeardPage2State>(context, listen: false).femaleCounter)
                 .toString();
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).femaleCheck);
         break;
       case 4:
         context.read<HeardPage2State>().incrementYoungCounter();
+        context.read<HeardPage2State>().changeFirstAccessYoungCounter();
+
         controller.text =
             (Provider.of<HeardPage2State>(context, listen: false).youngCounter)
                 .toString();
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).youngCheck);
+
         break;
       case 5:
         context.read<HeardPage2State>().incrementBroodsCounter();
+        context.read<HeardPage2State>().changeFirstAccessBroodsCounter();
         controller.text =
             (Provider.of<HeardPage2State>(context, listen: false).broodsCounter)
                 .toString();
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).broodsCheck);
         break;
       default:
     }
+    setState(() {
+      
+    });
   }
 
   void changeCheck(int id) {
     switch (id) {
       case 1:
         context.read<HeardPage2State>().changeTotalCheck();
-        // controller.text =
-        //     (Provider.of<HeardPage2State>(context, listen: false).totalCounter)
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).totalCheck);
         //         .toString();
         break;
       case 2:
         context.read<HeardPage2State>().changeMaleCheck();
-        // controller.text =
-        //     (Provider.of<HeardPage2State>(context, listen: false).maleCounter)
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).maleCheck);
         //         .toString();
         break;
       case 3:
         context.read<HeardPage2State>().changeFemaleCheck();
-        // controller.text =
-        //     (Provider.of<HeardPage2State>(context, listen: false).femaleCounter)
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).femaleCheck);
         //         .toString();
         break;
       case 4:
         context.read<HeardPage2State>().changeYoungCheck();
-        // controller.text =
-        //     (Provider.of<HeardPage2State>(context, listen: false).youngCounter)
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).youngCheck);
         //         .toString();
         break;
       case 5:
         context.read<HeardPage2State>().changeBroodsCheck();
+        isChecked =
+            (Provider.of<HeardPage2State>(context, listen: false).broodsCheck);
 
         break;
       default:
@@ -283,27 +349,64 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   String initialValue(int id) {
     switch (id) {
       case 1:
-        return (Provider.of<HeardPage2State>(context, listen: false)
-                .totalCounter)
-            .toString();
+        {
+          if ((!Provider.of<HeardPage2State>(context, listen: false)
+              .firstAccessTotalCounter)) {
+            return (Provider.of<HeardPage2State>(context, listen: false)
+                    .totalCounter)
+                .toString();
+          } else {
+            return '';
+          }
+        }
       case 2:
-        return (Provider.of<HeardPage2State>(context, listen: false)
-                .maleCounter)
-            .toString();
+        {
+          if ((!Provider.of<HeardPage2State>(context, listen: false)
+              .firstAccessMaleCounter)) {
+            return (Provider.of<HeardPage2State>(context, listen: false)
+                    .maleCounter)
+                .toString();
+          } else {
+            return '';
+          }
+        }
+
       case 3:
-        return (Provider.of<HeardPage2State>(context, listen: false)
-                .femaleCounter)
-            .toString();
+        {
+          if ((!Provider.of<HeardPage2State>(context, listen: false)
+              .firstAccessFemaleCounter)) {
+            return (Provider.of<HeardPage2State>(context, listen: false)
+                    .femaleCounter)
+                .toString();
+          } else {
+            return '';
+          }
+        }
+
       case 4:
-        return (Provider.of<HeardPage2State>(context, listen: false)
-                .youngCounter)
-            .toString();
+        {
+          if ((!Provider.of<HeardPage2State>(context, listen: false)
+              .firstAccessYoungCounter)) {
+            return (Provider.of<HeardPage2State>(context, listen: false)
+                    .youngCounter)
+                .toString();
+          } else {
+            return '';
+          }
+        }
       case 5:
-        return (Provider.of<HeardPage2State>(context, listen: false)
-                .broodsCounter)
-            .toString();
+        {
+          if ((!Provider.of<HeardPage2State>(context, listen: false)
+              .firstAccessBroodsCounter)) {
+            return (Provider.of<HeardPage2State>(context, listen: false)
+                    .broodsCounter)
+                .toString();
+          } else {
+            return '';
+          }
+        }
       default:
-        return '0';
+        return ' ';
     }
   }
 

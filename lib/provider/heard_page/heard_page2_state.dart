@@ -13,6 +13,12 @@ class HeardPage2State with ChangeNotifier {
   bool _totalCheck = true;
   bool _broodsCheck = true;
 
+  bool _firstAccessTotalCounter = true;
+  bool _firstAccessMaleCounter = true;
+  bool _firstAccessFemaleCounter = true;
+  bool _firstAccessYoungCounter = true;
+  bool _firstAccessBroodsCounter = true;
+
   int get total => _maleCounter + _femaleCounter;
   int get maleCounter => _maleCounter;
   int get femaleCounter => _femaleCounter;
@@ -25,11 +31,46 @@ class HeardPage2State with ChangeNotifier {
   bool get youngCheck => _youngCheck;
   bool get totalCheck => _totalCheck;
   bool get broodsCheck => _broodsCheck;
+  bool get firstAccessTotalCounter => _firstAccessTotalCounter;
+  bool get firstAccessMaleCounter => _firstAccessMaleCounter;
+  bool get firstAccessFemaleCounter => _firstAccessFemaleCounter;
+  bool get firstAccessYoungCounter => _firstAccessYoungCounter;
+  bool get firstAccessBroodsCounter => _firstAccessBroodsCounter;
   bool get check =>
       _youngCheck || _maleCheck || _broodsCheck || _totalCheck || _femaleCheck;
 
   void changeWhatSee(String value) {
     _whatSee = value;
+    notifyListeners();
+  }
+
+  void changeFirstAccessTotalCounter() {
+   if (_firstAccessTotalCounter) _totalCheck = false;
+    _firstAccessTotalCounter = false;
+    notifyListeners();
+  }
+
+  void changeFirstAccessMaleCounter() {
+    if (_firstAccessMaleCounter) _maleCheck = false;
+    _firstAccessMaleCounter = false;
+    notifyListeners();
+  }
+
+  void changeFirstAccessFemaleCounter() {
+    if (_firstAccessFemaleCounter) _femaleCheck = false;
+    _firstAccessFemaleCounter = false;
+    notifyListeners();
+  }
+
+  void changeFirstAccessYoungCounter() {
+    if (_firstAccessYoungCounter) _youngCheck = false;
+    _firstAccessYoungCounter = false;
+    notifyListeners();
+  }
+
+  void changeFirstAccessBroodsCounter() {
+    if (_firstAccessBroodsCounter) _broodsCheck = false;
+    _firstAccessBroodsCounter = false;
     notifyListeners();
   }
 
@@ -75,7 +116,7 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void decrementTotalCounter() {
-    if (total < _totalCounter || check) {
+    if (total < _totalCounter) {
       _totalCounter--;
     }
     notifyListeners();

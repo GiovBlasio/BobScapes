@@ -118,10 +118,11 @@ class _BottomSheetCardsState extends State<BottomSheetCards> {
                                         Positioned(
                                           top: 17.h,
                                           left: 20.w,
-                                          right: 0,
+                                          right: 20.w,
                                           bottom: 0,
                                           child: Container(
                                             width: 153.w,
+                                           // padding: EdgeInsets.symmetric(),
                                             child: Text(
                                               widget.state[
                                                   index % widget.state.length],

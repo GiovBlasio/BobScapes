@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../constants.dart';
 
-//TODO
+//TODO aggiungere Provider in modo che sia dinamico
 class CustomCheckBox extends StatefulWidget {
   const CustomCheckBox({
     Key? key,
@@ -34,8 +34,8 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
       onTap: () {
         setState(() {
           _isSelected = !_isSelected;
+          widget.onPressed();
         });
-        widget.onPressed();
       },
       child: Row(
         children: [

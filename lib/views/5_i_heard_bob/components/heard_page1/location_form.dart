@@ -22,9 +22,12 @@ class LocationForm extends StatefulWidget {
 
 class _LocationFormState extends State<LocationForm> {
   TextEditingController controller = TextEditingController();
+  List<Marker> markers = [];
 
   late Marker current;
   late LatLng currentLatLng = LatLng(45, -120);
+
+  bool getPosition = false;
 
   @override
   void initState() {
@@ -41,10 +44,35 @@ class _LocationFormState extends State<LocationForm> {
   void _initialization() async {
     String location =
         Provider.of<HeardPage1State>(context, listen: false).location;
-    Position point = await _getLocation();
+
     if (location != '') {
       controller = TextEditingController(text: location);
+      String latitude =
+          Provider.of<HeardPage1State>(context, listen: false).latitude;
+      String longitude =
+          Provider.of<HeardPage1State>(context, listen: false).longitude;
+      currentLatLng = LatLng(
+        double.parse(latitude),
+        double.parse(longitude),
+      );
+
+      current = Marker(
+          height: 75,
+          width: 75,
+          point: currentLatLng,
+          builder: (BuildContext context) {
+            return SvgPicture.asset(
+              "assets/icons/icon-pointer.svg",
+            );
+          });
     } else {
+      dynamic point = LatLng(45, -120);
+      dynamic result = await _getLocation();
+      if (result != null) {
+        point = result;
+        getPosition = true;
+      }
+
       String latitude = convertLatLng(point.latitude, true);
 
       String longitude = convertLatLng(point.longitude, false);
@@ -53,17 +81,29 @@ class _LocationFormState extends State<LocationForm> {
           point.longitude.toStringAsFixed(3));
 
       controller = TextEditingController(text: liveLocation);
+      currentLatLng = LatLng(point.latitude, point.longitude);
+      current = Marker(
+          height: 75,
+          width: 75,
+          point: currentLatLng,
+          builder: (BuildContext context) {
+            return SvgPicture.asset(
+              result != null
+                  ? "assets/icons/icon-pin-here.svg"
+                  : "assets/icons/icon-pointer.svg",
+            );
+          });
     }
-    currentLatLng = LatLng(point.latitude, point.longitude);
-    current = Marker(
-        height: 75,
-        width: 75,
-        point: currentLatLng,
-        builder: (BuildContext context) {
-          return SvgPicture.asset(
-            "assets/icons/icon-pin-here.svg",
-          );
-        });
+
+    // current = Marker(
+    //     height: 75,
+    //     width: 75,
+    //     point: currentLatLng,
+    //     builder: (BuildContext context) {
+    //       return SvgPicture.asset(
+    //         "assets/icons/icon-pin-here.svg",
+    //       );
+    //     });
     // markers.add(current);
 
     setState(() {});
@@ -191,10 +231,10 @@ class _LocationFormState extends State<LocationForm> {
   }
 
   _showMap() {
-    List<Marker> markers = [];
-    markers.add(current);
+    // markers.add(current);
     LatLng pin = currentLatLng;
     showDialog(
+        useSafeArea: false,
         context: context,
         builder: (context) {
           return Stack(
@@ -205,9 +245,14 @@ class _LocationFormState extends State<LocationForm> {
                 left: 30.w,
                 right: 30.w,
                 child: Container(
-                  color: kColor3,
                   padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                      EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+                  decoration: BoxDecoration(
+                    color: kColor3,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12.r),
+                    ),
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -218,10 +263,11 @@ class _LocationFormState extends State<LocationForm> {
                           Text(
                             "Register your sighting",
                             style: TextStyle(
-                                fontFamily: 'Manrope',
-                                fontWeight: FontWeight.w700,
-                                color: kTextColor,
-                                fontSize: 18.sp),
+                              fontFamily: 'Manrope',
+                              fontWeight: FontWeight.w700,
+                              color: kTextColor,
+                              fontSize: 18.sp,
+                            ),
                           ),
                           const Spacer(),
                           Flexible(
@@ -259,26 +305,6 @@ class _LocationFormState extends State<LocationForm> {
                               ),
                             ),
                           ),
-
-                          // IconButton(
-                          //   splashRadius: 0.1,
-                          //   icon: const Icon(
-                          //     Icons.close,
-                          //     size: 30,
-                          //     color: kTextColor,
-                          //   ),
-                          //   onPressed: () {
-                          //     // if (!isLoaded) {
-                          //     //   setState(() {
-                          //     //     pageController.animateToPage(
-                          //     //         currentIndex + 1,
-                          //     //         duration: const Duration(seconds: 1),
-                          //     //         curve: Curves.linear);
-                          //     //   });
-                          //     // }
-                          //   },
-
-                          //  ),
                         ],
                       ),
                       SizedBox(
@@ -288,8 +314,13 @@ class _LocationFormState extends State<LocationForm> {
                         child: FlutterMap(
                           options: MapOptions(
                               onTap: (tapPosition, point) {
-                                markers.removeWhere(
-                                    (marker) => (marker != current));
+                                markers.removeWhere((marker) {
+                                  if (getPosition) {
+                                    return marker != current;
+                                  } else {
+                                    return true;
+                                  }
+                                });
                                 Marker marker = Marker(
                                     anchorPos: AnchorPos.align(AnchorAlign.top),
                                     height: 75,
@@ -302,6 +333,7 @@ class _LocationFormState extends State<LocationForm> {
                                     });
                                 markers.add(marker);
                                 pin = point;
+                                currentLatLng = pin;
                                 // setState(() {
                                 //   String latitude =
                                 //       convertLatLng(point.latitude, true);
@@ -352,15 +384,37 @@ class _LocationFormState extends State<LocationForm> {
                                       child: FloatingActionButton(
                                         backgroundColor: Colors.white,
                                         onPressed: () async {
-                                          Position point = await _getLocation();
+                                          dynamic point = await _getLocation();
+                                          if (point == null) {
+                                            print('Print');
+                                            LocationPermission permission =
+                                                await Geolocator
+                                                    .checkPermission();
 
+                                            if (permission ==
+                                                    LocationPermission.denied ||
+                                                permission ==
+                                                    LocationPermission
+                                                        .deniedForever) {
+                                              print('Print2');
+                                              await Geolocator
+                                                  .requestPermission();
+                                              permission = await Geolocator
+                                                  .checkPermission();
+                                              if (permission ==
+                                                  LocationPermission.denied) {
+                                                // await Geolocator
+                                                // .requestPermission();
+                                              }
+                                            }
+                                            print("Print3");
+                                          }
                                           currentLatLng = LatLng(
                                               point.latitude, point.longitude);
                                           current = Marker(
                                               height: 75,
                                               width: 75,
-                                              point: LatLng(point.latitude,
-                                                  point.longitude),
+                                              point: currentLatLng,
                                               builder: (BuildContext context) {
                                                 return SvgPicture.asset(
                                                   "assets/icons/icon-pin-here.svg",
@@ -496,7 +550,7 @@ class _LocationFormState extends State<LocationForm> {
         });
   }
 
-  Future<Position> _getLocation() async {
+  Future<dynamic> _getLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
@@ -509,19 +563,19 @@ class _LocationFormState extends State<LocationForm> {
       await Geolocator.requestPermission();
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error("Location permission are denied");
+        // return Future.error("Location permission are denied");
       }
+    } else if (permission == LocationPermission.deniedForever) {
+      // return Future.error("Location permission are permanently denied");
+    } else {
+      Position position = (await Geolocator.getCurrentPosition());
+
+      //currentLatLng = LatLng(position.latitude, position.longitude);
+      //if (current != null && markers.contains(current)) markers.remove(current);
+
+      return position;
     }
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error("Location permission are permanently denied");
-    }
-
-    Position position = (await Geolocator.getCurrentPosition());
-
-    //currentLatLng = LatLng(position.latitude, position.longitude);
-    //if (current != null && markers.contains(current)) markers.remove(current);
-
-    return position;
+    return null;
   }
 
   String convertLatLng(double decimal, bool isLat) {

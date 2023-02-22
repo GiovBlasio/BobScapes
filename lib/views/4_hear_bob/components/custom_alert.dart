@@ -151,18 +151,18 @@ class _CustomAlertState extends State<CustomAlert> {
                                     },
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      widget.title,
-                                      style: TextStyle(
-                                          color: kTextColor,
-                                          fontSize: 22.sp,
-                                          fontFamily: 'Manrope',
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                  ],
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20.w),
+                                  child: Text(
+                                    widget.title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kTextColor,
+                                        fontSize: 22.sp,
+                                        fontFamily: 'Manrope',
+                                        fontWeight: FontWeight.w700),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 47.5.h,
@@ -340,6 +340,7 @@ class _CustomAlertState extends State<CustomAlert> {
                           changeFirstAccess();
 
                           showDialog(
+                              useSafeArea: false,
                               barrierDismissible: false,
                               barrierColor: Colors.transparent,
                               context: context,

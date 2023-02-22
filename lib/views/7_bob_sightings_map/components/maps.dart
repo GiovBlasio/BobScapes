@@ -79,7 +79,7 @@ class _MappaState extends State<Mappa> {
               //     iconSize: getProportionateScreenHeight(25),
               //     alignment: Alignment.bottomCenter,
               //     padding: EdgeInsets.zero,
-              //     onPressed: () => showDialog(
+              //     onPressed: () => showDialog( useSafeArea: false,
               //         useSafeArea: false,
               //         barrierColor: Colors.white70,
               //         context: context,
