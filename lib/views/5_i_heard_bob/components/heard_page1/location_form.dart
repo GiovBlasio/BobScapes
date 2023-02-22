@@ -320,7 +320,7 @@ class _LocationFormState extends State<LocationForm> {
                               },
                               maxBounds: LatLngBounds(
                                   LatLng(0, -180.0), LatLng(75, -40.781693)),
-                              minZoom: 10,
+                              minZoom: 3,
                               maxZoom: 18,
                               center: currentLatLng,
                               zoom: 15,

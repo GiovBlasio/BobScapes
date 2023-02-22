@@ -1198,14 +1198,20 @@ class _BodyState extends State<Body> {
                                   context.read<HeardPage3State>().learnMore;
                               String comment =
                                   context.read<HeardPage3State>().comment;
+
+                              bool checkNeeded =
+                                  context.read<HeardPage2State>().check;
+
                               String locality = '';
                               if (latitude != 1000) {
                                 List<Placemark> placemarks =
                                     await placemarkFromCoordinates(
-                                        latitude, longitude);
+                                        latitude, longitude, localeIdentifier: 'en_US');
                                 locality = placemarks
                                     .reversed.last.administrativeArea!;
                               }
+
+                              print(locality);
 
                               if (abbreviation
                                   .containsKey(locality.toUpperCase())) {
@@ -1215,7 +1221,6 @@ class _BodyState extends State<Body> {
                               locality =
                                   locality.replaceAll(' ', '_').toLowerCase();
 
-                              print(locality);
                               Map<String, dynamic> params = {
                                 "name": name,
                                 "email": email,
@@ -1236,7 +1241,6 @@ class _BodyState extends State<Body> {
                                 "comment": comment,
                                 "state": locality
                               };
-
                               if (!isLoaded) {
                                 setState(() {
                                   isLoaded = !isLoaded;
@@ -1244,8 +1248,8 @@ class _BodyState extends State<Body> {
                                 if (name != '' &&
                                     _validateEmail(email) &&
                                     latitude != 1000 &&
-                                    manyBirds ==
-                                        manyFemale + manyMale + manyYoung) {
+                                    (manyBirds == manyFemale + manyMale ||
+                                        checkNeeded)) {
                                   bool isSended =
                                       await RemoteService().sendData(params);
                                   if (isSended) {

@@ -25,7 +25,13 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
   late TextEditingController controller =
       TextEditingController(text: initialValue(widget.id));
 
-  bool checkValue = false;
+  late bool isChecked;
+
+  @override
+  void initState() {
+    isChecked = initialCheck(widget.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,40 +160,11 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomCheckBox(
-                  isChecked: false,
-                  //  // groupValue: groupValue,
-                  //   value: checkValue,
-                  //   onChanged: (value) => setState(() {
-                  //     checkValue = value!;
-                  //   }),
+                  isChecked: isChecked,
+                  onPressed: () {
+                    changeCheck(widget.id);
+                  },
                 )
-                // Checkbox(
-                //   value: checkValue,
-                //   onChanged: (value) => setState(() {
-                //     checkValue = value!;
-                //   }),
-                // ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //       color: kColor3,
-                //       border: Border.all(color: kTextColor, width: 0.4),
-                //       borderRadius:
-                //           const BorderRadius.all(Radius.circular(3.5))),
-                //   width: 35.h,
-                //   height: 35.h,
-                //   child: IconButton(
-                //       splashRadius: 0.1,
-                //       padding: EdgeInsets.zero,
-                //       onPressed: () {
-                //         setState(() {
-                //           decrementCounter(widget.id);
-                //         });
-                //       },
-                //       icon: SvgPicture.asset(
-                //         "assets/icons/icon-minus.svg",
-                //         width: 13.w,
-                //       )),
-                // ),
               ],
             ),
           ],
@@ -269,6 +246,40 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
     }
   }
 
+  void changeCheck(int id) {
+    switch (id) {
+      case 1:
+        context.read<HeardPage2State>().changeTotalCheck();
+        // controller.text =
+        //     (Provider.of<HeardPage2State>(context, listen: false).totalCounter)
+        //         .toString();
+        break;
+      case 2:
+        context.read<HeardPage2State>().changeMaleCheck();
+        // controller.text =
+        //     (Provider.of<HeardPage2State>(context, listen: false).maleCounter)
+        //         .toString();
+        break;
+      case 3:
+        context.read<HeardPage2State>().changeFemaleCheck();
+        // controller.text =
+        //     (Provider.of<HeardPage2State>(context, listen: false).femaleCounter)
+        //         .toString();
+        break;
+      case 4:
+        context.read<HeardPage2State>().changeYoungCheck();
+        // controller.text =
+        //     (Provider.of<HeardPage2State>(context, listen: false).youngCounter)
+        //         .toString();
+        break;
+      case 5:
+        context.read<HeardPage2State>().changeBroodsCheck();
+
+        break;
+      default:
+    }
+  }
+
   String initialValue(int id) {
     switch (id) {
       case 1:
@@ -293,6 +304,23 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
             .toString();
       default:
         return '0';
+    }
+  }
+
+  bool initialCheck(int id) {
+    switch (id) {
+      case 1:
+        return Provider.of<HeardPage2State>(context, listen: false).totalCheck;
+      case 2:
+        return Provider.of<HeardPage2State>(context, listen: false).maleCheck;
+      case 3:
+        return Provider.of<HeardPage2State>(context, listen: false).femaleCheck;
+      case 4:
+        return Provider.of<HeardPage2State>(context, listen: false).youngCheck;
+      case 5:
+        return Provider.of<HeardPage2State>(context, listen: false).broodsCheck;
+      default:
+        return false;
     }
   }
 }
