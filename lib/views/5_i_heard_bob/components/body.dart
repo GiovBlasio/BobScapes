@@ -1466,11 +1466,12 @@ class _BodyState extends State<Body> {
         : double.parse(context.read<HeardPage1State>().longitude);
 
     String date = context.read<HeardPage1State>().date;
-    String datetime = _buildDate(date, time);
+
     String physicallySee = context.read<HeardPage1State>().physicallySee;
     String releasedLocation =
         context.read<HeardPage1State>().releasedIntoLocation;
     String timeZone = context.read<HeardPage1State>().timeZone;
+    String datetime = _buildDate(date, time, timeZone);
 
     int manyBirds = context.read<HeardPage2State>().totalCounter;
     int manyMale = context.read<HeardPage2State>().maleCounter;
@@ -1634,13 +1635,41 @@ class _BodyState extends State<Body> {
     return emailValidatorRegExp.hasMatch(email);
   }
 
-  String _buildDate(String date, String time) {
+  String _buildDate(String date, String time, String timeZone) {
     // date = date.replaceAll('\'', '20');
     date = '${date.substring(0, 6)}20${date.substring(6)}';
 
     DateTime d = DateFormat.yMd().parse(date);
     DateTime t = DateFormat.jm().parse(time);
-    DateTime dt = DateTime.utc(d.year, d.month, d.day, t.hour, t.minute);
+
+    int hours = 5;
+    switch (timeZone) {
+      case 'Central (UTC -6H)':
+        hours = 6;
+        break;
+      case 'Mountain (UTC -7H)':
+        hours = 7;
+        break;
+      case 'Pacific (UTC -8H)':
+        hours = 8;
+        break;
+      case 'Alaska (UTC -9H)':
+        hours = 9;
+        break;
+      case 'Hawaii-Aleutian (UTC -10H)':
+        hours = 10;
+        break;
+    }
+
+    t = t.add(Duration(hours: hours));
+
+    DateTime dt = DateTime(
+      d.year,
+      d.month,
+      d.day,
+      t.hour,
+      t.minute,
+    );
 
     String dts = dt.toString().substring(0, 19);
 
