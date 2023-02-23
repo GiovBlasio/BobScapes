@@ -128,7 +128,9 @@ class TimeFormState extends State<TimeForm> {
                     ),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: kTextColor.withOpacity(0.22), width: 0.3),
+                          color: kTextColor.withOpacity(0.22),
+                          width: 0.5,
+                        ),
                         borderRadius: BorderRadius.circular(5),
                         gapPadding: 4),
                     prefixIcon: Padding(
@@ -150,7 +152,9 @@ class TimeFormState extends State<TimeForm> {
                 flex: 2,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w),
-                  child: _CustomDropDownMenu(items: items),
+                  child: _CustomDropDownMenu(
+                    items: items,
+                  ),
                 ),
               ),
             ],
@@ -251,7 +255,7 @@ class TimeFormState extends State<TimeForm> {
                 Card(
                   child: Container(
                     height: 400.h,
-                    width: 370.w,
+                    width: 0.90.sw,
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     decoration: BoxDecoration(
                         color: kColor3,
@@ -291,7 +295,9 @@ class TimeFormState extends State<TimeForm> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          child: _CustomDropDownMenu(items: items),
+                          child: _CustomDropDownMenu(
+                            items: items,
+                          ),
                         ),
                         SizedBox(
                           height: 10.h,
@@ -344,8 +350,7 @@ class TimeFormState extends State<TimeForm> {
                                     changeTime(time);
 
                                     timeController.text = time;
-
-                                    print(time);
+                                    //    _externalFormKey.currentState!.print(time);
                                   });
 
                                   Navigator.pop(context);
@@ -724,90 +729,81 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       margin: EdgeInsets.zero,
-      child: Container(
-        height: 52.h,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(5)),
-          color: Colors.transparent,
-          border: Border.all(
-            color: kTextColor.withOpacity(0.22),
-            width: 0.5,
-          ),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButtonFormField(
-              dropdownColor: kColor3,
-              decoration: InputDecoration(
-                fillColor: kColor3.withAlpha(200),
-                filled: true,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: kTextColor.withOpacity(0.22),
-                    width: 0.3,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: kTextColor.withOpacity(0.22),
-                    width: 0.3,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: kTextColor.withOpacity(0.22),
-                    width: 0.3,
-                  ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButtonFormField(
+            // key: widget.formKey,
+            onSaved: (newValue) => changeValue(newValue!),
+            dropdownColor: kColor3,
+            decoration: InputDecoration(
+              fillColor: kColor3.withAlpha(200),
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kTextColor.withOpacity(0.22),
+                  width: 0.5,
                 ),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              style: TextStyle(
-                color: kTextColor,
-                fontSize: 16.sp,
-                fontFamily: 'Manrope',
-                fontWeight: FontWeight.w700,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kTextColor.withOpacity(0.22),
+                  width: 0.5,
+                ),
               ),
-              isExpanded: true,
-              value: dropdownvalue,
-              icon: const Icon(
-                Icons.keyboard_arrow_down,
-                color: kTextColor,
-                size: 28,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kTextColor.withOpacity(0.22),
+                  width: 0.5,
+                ),
               ),
-              items: widget.items.map((String item) {
-                return DropdownMenuItem(
-                  value: item,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // SvgPicture.asset("assets/icons/icon-bird.svg"),
-                      // SizedBox(
-                      //   width: 5.w,
-                      // ),
-                      Text(
-                        item,
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            fontFamily: 'Manrope',
-                            fontWeight: FontWeight.w700,
-                            color: kTextColor),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                changeValue(
-                    newValue!); //Serve, una volta modificato fuori al picker questo viene visto anche dentro al picker
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            style: TextStyle(
+              color: kTextColor,
+              fontSize: 16.sp,
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.w700,
+            ),
+            isExpanded: true,
+            value: dropdownvalue,
+            icon: const Icon(
+              Icons.keyboard_arrow_down,
+              color: kTextColor,
+              size: 28,
+            ),
+            items: widget.items.map((String item) {
+              return DropdownMenuItem(
+                value: item,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // SvgPicture.asset("assets/icons/icon-bird.svg"),
+                    // SizedBox(
+                    //   width: 5.w,
+                    // ),
+                    Text(
+                      item,
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontFamily: 'Manrope',
+                          fontWeight: FontWeight.w700,
+                          color: kTextColor),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              changeValue(
+                  newValue!); //Serve, una volta modificato fuori al picker questo viene visto anche dentro al picker
 
-                setState(() {
-                  tmpValue = newValue;
-                  dropdownvalue = newValue;
-                });
-              }),
-        ),
+              setState(() {
+                tmpValue = newValue;
+                dropdownvalue = newValue;
+              });
+            }),
       ),
     );
   }
