@@ -116,8 +116,8 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void decrementTotalCounter() {
-    if (total < _totalCounter) {
-      _totalCounter--;
+    if (total < _totalCounter || check) {
+      _totalCounter > 0 ? _totalCounter-- : _totalCounter;
     }
     notifyListeners();
   }

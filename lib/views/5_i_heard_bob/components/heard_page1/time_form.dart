@@ -21,7 +21,14 @@ class TimeFormState extends State<TimeForm> {
   String time = DateFormat('hh:mm a').format(DateTime.now());
   TextEditingController timeController = TextEditingController();
 
-  var items = ['Santa Fe (GMT -7H)', '1', '2', '3', '4'];
+  var items = [
+    'Eastern (UTC -5H)',
+    'Central (UTC -6H)',
+    'Mountain (UTC -7H)',
+    'Pacific (UTC -8H)',
+    'Alaska (UTC -9H)',
+    'Hawaii-Aleutian (UTC -10H)'
+  ];
 
   @override
   void initState() {
@@ -244,7 +251,7 @@ class TimeFormState extends State<TimeForm> {
                 Card(
                   child: Container(
                     height: 400.h,
-                    width: 343.h,
+                    width: 370.w,
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     decoration: BoxDecoration(
                         color: kColor3,
@@ -290,7 +297,7 @@ class TimeFormState extends State<TimeForm> {
                           height: 10.h,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: const _TimePicker(),
                         ),
                         SizedBox(
@@ -404,7 +411,7 @@ class __TimePickerState extends State<_TimePicker> {
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   // // hours wheel
                   SizedBox(
@@ -524,9 +531,10 @@ class __TimePickerState extends State<_TimePicker> {
             ],
           ),
         ),
-        SizedBox(
-          width: 5.w,
-        ),
+        // SizedBox(
+        //   width: 5.w,
+        // ),
+        Spacer(),
         Container(
           decoration: BoxDecoration(
             border: Border.all(
@@ -712,6 +720,9 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
     return Card(
       color: Colors.transparent,
       elevation: 0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
       margin: EdgeInsets.zero,
       child: Container(
         height: 52.h,
@@ -751,7 +762,7 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
                   ),
                 ),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(0)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               style: TextStyle(
                 color: kTextColor,
                 fontSize: 16.sp,
@@ -778,7 +789,7 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
                       Text(
                         item,
                         style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontFamily: 'Manrope',
                             fontWeight: FontWeight.w700,
                             color: kTextColor),

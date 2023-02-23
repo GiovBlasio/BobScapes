@@ -99,7 +99,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                       ),
                     ),
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
                   style: TextStyle(
                     color: kTextColor,
                     fontSize: 16.sp,

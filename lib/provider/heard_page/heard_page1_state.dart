@@ -10,7 +10,7 @@ class HeardPage1State with ChangeNotifier {
   String _time = '';
   String _releasedIntoLocation = 'Yes';
   String _physicallySee = 'Yes';
-  String _timeZone = 'Santa Fe (GMT -7H)';
+  String _timeZone = 'Eastern (UTC -5H)';
 
   String get timeZone => _timeZone;
   String get releasedIntoLocation => _releasedIntoLocation;
@@ -83,6 +83,6 @@ class HeardPage1State with ChangeNotifier {
     _time = '';
     _releasedIntoLocation = 'Yes';
     _physicallySee = 'Yes';
-    _timeZone = 'Santa Fe (GMT -7H)';
+    _timeZone = 'Eastern (UTC -5H)';
   }
 }
