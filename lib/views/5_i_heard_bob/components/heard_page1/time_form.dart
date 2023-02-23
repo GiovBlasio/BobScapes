@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../constants.dart';
 import '../../../../provider/heard_page/heard_page1_state.dart';
-import '../../../../provider/heard_page/heard_page2_state.dart';
 
 class TimeForm extends StatefulWidget {
   const TimeForm({
@@ -22,9 +21,7 @@ class TimeFormState extends State<TimeForm> {
   String time = DateFormat('hh:mm a').format(DateTime.now());
   TextEditingController timeController = TextEditingController();
 
-  var dropdownvalue = 'Family (covey)';
-
-  var items = ['Family (covey)', 'Individual'];
+  var items = ['Santa Fe (GMT -7H)', '1', '2', '3', '4'];
 
   @override
   void initState() {
@@ -92,7 +89,6 @@ class TimeFormState extends State<TimeForm> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(
-
                 child: TextFormField(
                   onTap: () => _showTimePicker(),
                   style: TextStyle(
@@ -140,7 +136,9 @@ class TimeFormState extends State<TimeForm> {
                   ),
                 ),
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Flexible(
                 flex: 2,
                 child: Padding(
@@ -168,6 +166,10 @@ class TimeFormState extends State<TimeForm> {
 
   void changeTime(String time) {
     context.read<HeardPage1State>().changeTime(time);
+  }
+
+  void changeValue(String value) {
+    context.read<HeardPage1State>().changeTimeZone(value);
   }
 
   _showTimePicker() {
@@ -230,6 +232,7 @@ class TimeFormState extends State<TimeForm> {
 
     int hour = 0;
     int minute = 0;
+    String value = 'Santa Fe (GMT -7H)';
     showDialog(
         useSafeArea: false,
         context: context,
@@ -298,22 +301,56 @@ class TimeFormState extends State<TimeForm> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "CANCEL",
-                                style: TextStyle(
-                                  color: kTextColor,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Manrope',
+                              InkWell(
+                                onTap: () => Navigator.of(context).pop(),
+                                child: Text(
+                                  "CANCEL",
+                                  style: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Manrope',
+                                  ),
                                 ),
                               ),
-                              Text(
-                                "OK",
-                                style: TextStyle(
-                                  color: kTextColor,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Manrope',
+                              InkWell(
+                                onTap: () {
+                                  hour = tmpHour;
+                                  minute = tmpMinute;
+                                  value = tmpValue;
+                                  if (!_isSelectedAM) hour += 12;
+                                  if (hour == 24) hour = 12;
+                                  if (hour == 12 && _isSelectedAM) hour = 0;
+                                  myTime =
+                                      TimeOfDay(hour: hour, minute: minute);
+                                  setState(() {
+                                    DateTime date = DateTime(
+                                        DateTime.now().year,
+                                        DateTime.now().month,
+                                        DateTime.now().day,
+                                        myTime!.hour,
+                                        myTime!.minute);
+
+                                    String time =
+                                        DateFormat('hh:mm a').format(date);
+
+                                    changeTime(time);
+
+                                    timeController.text = time;
+
+                                    print(time);
+                                  });
+
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "OK",
+                                  style: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Manrope',
+                                  ),
                                 ),
                               ),
                             ],
@@ -327,27 +364,21 @@ class TimeFormState extends State<TimeForm> {
             ),
           );
         });
-
-    myTime = TimeOfDay(hour: hour, minute: minute);
-    setState(() {
-      DateTime date = DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, myTime!.hour, myTime!.minute);
-
-      String time = DateFormat('hh:mm a').format(date);
-
-      changeTime(time);
-
-      timeController.text = time;
-    });
   }
 }
 
 class _TimePicker extends StatefulWidget {
-  const _TimePicker({super.key});
+  const _TimePicker({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<_TimePicker> createState() => __TimePickerState();
 }
+
+int tmpHour = 1;
+int tmpMinute = 0;
+bool _isSelectedAM = true;
 
 class __TimePickerState extends State<_TimePicker> {
   late FixedExtentScrollController _controller;
@@ -356,6 +387,8 @@ class __TimePickerState extends State<_TimePicker> {
   void initState() {
     super.initState();
     _controller = FixedExtentScrollController();
+    tmpHour = 1;
+    tmpMinute = 0;
   }
 
   @override
@@ -374,25 +407,28 @@ class __TimePickerState extends State<_TimePicker> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // // hours wheel
-                  Container(
+                  SizedBox(
                     width: 110.w,
                     height: 95.h,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 95.h,
                           child: ListWheelScrollView.useDelegate(
+                            onSelectedItemChanged: (index) {
+                              tmpHour = index + 1;
+                            },
                             controller: _controller,
                             itemExtent: 100,
                             perspective: 0.001,
                             diameterRatio: 1,
                             physics: const FixedExtentScrollPhysics(),
                             childDelegate: ListWheelChildBuilderDelegate(
-                              childCount: 13,
+                              childCount: 12,
                               builder: (context, index) {
                                 return MyHours(
-                                  hours: index,
+                                  hours: index + 1,
                                 );
                               },
                             ),
@@ -416,6 +452,9 @@ class __TimePickerState extends State<_TimePicker> {
                     width: 120.w,
                     height: 95.h,
                     child: ListWheelScrollView.useDelegate(
+                      onSelectedItemChanged: (index) {
+                        tmpMinute = index;
+                      },
                       itemExtent: 100,
                       perspective: 0.001,
                       diameterRatio: 1,
@@ -490,8 +529,13 @@ class __TimePickerState extends State<_TimePicker> {
         ),
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: kTextLightColor),
-              borderRadius: BorderRadius.all(Radius.circular(4.r))),
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.4),
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(4.r),
+            ),
+          ),
           height: 90.h,
           width: 48.w,
           child: Column(
@@ -499,9 +543,15 @@ class __TimePickerState extends State<_TimePicker> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
+                onTap: () {
+                  _isSelectedAM = true;
+                  setState(() {});
+                },
                 child: Container(
-                  color: Colors.grey.withOpacity(0.1),
-                  height: 44.h,
+                  color: _isSelectedAM
+                      ? Colors.grey.withOpacity(0.1)
+                      : Colors.transparent,
+                  height: 43.88.h,
                   width: 48.w,
                   child: Center(
                     child: Text(
@@ -515,11 +565,22 @@ class __TimePickerState extends State<_TimePicker> {
                   ),
                 ),
               ),
+              Divider(
+                color: Colors.grey.withOpacity(0.4),
+                height: 0,
+                thickness: 1,
+              ),
               InkWell(
+                onTap: () {
+                  _isSelectedAM = false;
+                  setState(() {});
+                },
                 child: Container(
-                  height: 44.h,
+                  height: 43.88.h,
                   width: 48.w,
-                  color: Colors.transparent,
+                  color: !_isSelectedAM
+                      ? Colors.grey.withOpacity(0.1)
+                      : Colors.transparent,
                   child: Center(
                       child: Text(
                     'PM',
@@ -541,9 +602,7 @@ class __TimePickerState extends State<_TimePicker> {
 
 // class AmPm extends StatelessWidget {
 //   final bool isItAm;
-
 //   const AmPm({super.key, required this.isItAm});
-
 //   @override
 //   Widget build(BuildContext context) {
 //     return Padding(
@@ -567,7 +626,10 @@ class __TimePickerState extends State<_TimePicker> {
 class MyHours extends StatelessWidget {
   final int hours;
 
-  const MyHours({super.key, required this.hours});
+  const MyHours({
+    required this.hours,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -590,7 +652,10 @@ class MyHours extends StatelessWidget {
 class MyMinutes extends StatelessWidget {
   final int mins;
 
-  const MyMinutes({super.key, required this.mins});
+  const MyMinutes({
+    required this.mins,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -610,6 +675,8 @@ class MyMinutes extends StatelessWidget {
   }
 }
 
+String tmpValue = 'Santa Fe (GMT -7H)';
+
 class _CustomDropDownMenu extends StatefulWidget {
   const _CustomDropDownMenu({
     Key? key,
@@ -623,40 +690,44 @@ class _CustomDropDownMenu extends StatefulWidget {
 }
 
 class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
-  late String dropdownvalue = 'Family (covey)';
+  late String dropdownvalue;
 
   @override
   void initState() {
-    //_initialization();
+    _initialization();
     super.initState();
   }
 
   void changeValue(String value) {
-    context.read<HeardPage2State>().changeWhatSee(value);
+    context.read<HeardPage1State>().changeTimeZone(value);
   }
 
   void _initialization() {
     dropdownvalue =
-        Provider.of<HeardPage2State>(context, listen: false).whatSee;
+        Provider.of<HeardPage1State>(context, listen: false).timeZone;
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.transparent,
       elevation: 0,
       margin: EdgeInsets.zero,
       child: Container(
         height: 52.h,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(0)),
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
           color: Colors.transparent,
-          border: Border.all(color: kColor3, width: 0.3),
+          border: Border.all(
+            color: kTextColor.withOpacity(0.22),
+            width: 0.5,
+          ),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButtonFormField(
               dropdownColor: kColor3,
               decoration: InputDecoration(
-                fillColor: kColor3,
+                fillColor: kColor3.withAlpha(200),
                 filled: true,
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 10.w,
@@ -700,10 +771,10 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SvgPicture.asset("assets/icons/icon-bird.svg"),
-                      SizedBox(
-                        width: 5.w,
-                      ),
+                      // SvgPicture.asset("assets/icons/icon-bird.svg"),
+                      // SizedBox(
+                      //   width: 5.w,
+                      // ),
                       Text(
                         item,
                         style: TextStyle(
@@ -717,9 +788,12 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
                 );
               }).toList(),
               onChanged: (String? newValue) {
-                // changeValue(newValue!);
+                changeValue(
+                    newValue!); //Serve, una volta modificato fuori al picker questo viene visto anche dentro al picker
+
                 setState(() {
-                  dropdownvalue = newValue!;
+                  tmpValue = newValue;
+                  dropdownvalue = newValue;
                 });
               }),
         ),

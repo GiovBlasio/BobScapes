@@ -151,18 +151,23 @@ class _CustomAlertState extends State<CustomAlert> {
                                     },
                                   ),
                                 ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 20.w),
-                                  child: Text(
-                                    widget.title,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: kTextColor,
-                                        fontSize: 22.sp,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20.w),
+                                      child: Text(
+                                        widget.title,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: kTextColor,
+                                            fontSize: 22.sp,
+                                            fontFamily: 'Manrope',
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 47.5.h,

@@ -45,7 +45,7 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void changeFirstAccessTotalCounter() {
-   if (_firstAccessTotalCounter) _totalCheck = false;
+    if (_firstAccessTotalCounter) _totalCheck = false;
     _firstAccessTotalCounter = false;
     notifyListeners();
   }

@@ -55,11 +55,11 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 padding: EdgeInsets.only(left: 5.w),
                 child: Tooltip(
                   padding:
-                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+                      EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
                   margin: EdgeInsets.only(left: 50.w, right: 50.w),
                   decoration: const BoxDecoration(
                     color: kColor2,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                   showDuration: const Duration(seconds: 25),
                   triggerMode: TooltipTriggerMode.tap,
@@ -74,7 +74,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                       'During the summer months, female will join up, resulting in mixed age groups of young.\nYour answer should reflect how many age groups you see.',
                   child: SvgPicture.asset(
                     "assets/icons/icon-info.svg",
-                    height: 18,
+                    height: 18.h,
                     alignment: Alignment.topCenter,
                   ),
                 ),
@@ -158,56 +158,60 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                 ),
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      // _isSelected = !_isSelected;
-                      changeCheck(widget.id);
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: kColor3,
-                          border: Border.all(color: kTextColor, width: 0.4),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(3.5),
+            Padding(
+              padding: EdgeInsets.only(right: 15.w),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // _isSelected = !_isSelected;
+                        changeCheck(widget.id);
+                        firstAccess(widget.id);
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: kColor3,
+                            border: Border.all(color: kTextColor, width: 0.4),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(3.5),
+                            ),
                           ),
+                          width: 35.h,
+                          height: 35.h,
+                          child: initialCheck(widget.id)
+                              ? const Icon(
+                                  Icons.check,
+                                  color: kTextLightColor,
+                                )
+                              : Container(),
                         ),
-                        width: 35.h,
-                        height: 35.h,
-                        child: initialCheck(widget.id)
-                            ? const Icon(
-                                Icons.check,
-                                color: kTextColor,
-                              )
-                            : Container(),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      Text(
-                        "unsure",
-                        style: TextStyle(
-                            color: kTextColor,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Manrope',
-                            fontSize: 14.sp),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                    ],
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        Text(
+                          "unsure",
+                          style: TextStyle(
+                              color: kTextColor,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Manrope',
+                              fontSize: 14.sp),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                // CustomCheckBox(
-                //     isChecked: isChecked,
-                //     onPressed: () => changeCheck(widget.id))
-              ],
+                  // CustomCheckBox(
+                  //     isChecked: isChecked,
+                  //     onPressed: () => changeCheck(widget.id))
+                ],
+              ),
             ),
           ],
         )
@@ -305,9 +309,63 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
         break;
       default:
     }
-    setState(() {
-      
-    });
+    setState(() {});
+  }
+
+  void firstAccess(int id) {
+    switch (id) {
+      case 1:
+        if (!Provider.of<HeardPage2State>(context, listen: false).totalCheck) {
+          context.read<HeardPage2State>().changeFirstAccessTotalCounter();
+          controller.text =
+              (Provider.of<HeardPage2State>(context, listen: false)
+                      .totalCounter)
+                  .toString();
+        }
+
+        break;
+      case 2:
+        if (!Provider.of<HeardPage2State>(context, listen: false).maleCheck) {
+          context.read<HeardPage2State>().changeFirstAccessMaleCounter();
+          controller.text =
+              (Provider.of<HeardPage2State>(context, listen: false).maleCounter)
+                  .toString();
+        }
+
+        break;
+      case 3:
+        if (!Provider.of<HeardPage2State>(context, listen: false).femaleCheck) {
+          context.read<HeardPage2State>().changeFirstAccessFemaleCounter();
+          controller.text =
+              (Provider.of<HeardPage2State>(context, listen: false)
+                      .femaleCounter)
+                  .toString();
+        }
+
+        break;
+      case 4:
+        if (!Provider.of<HeardPage2State>(context, listen: false).youngCheck) {
+          context.read<HeardPage2State>().changeFirstAccessYoungCounter();
+          controller.text =
+              (Provider.of<HeardPage2State>(context, listen: false)
+                      .youngCounter)
+                  .toString();
+        }
+
+        break;
+      case 5:
+        if (!Provider.of<HeardPage2State>(context, listen: false).broodsCheck) {
+          context.read<HeardPage2State>().changeFirstAccessBroodsCounter();
+          controller.text =
+              (Provider.of<HeardPage2State>(context, listen: false)
+                      .broodsCounter)
+                  .toString();
+        }
+
+        break;
+      default:
+    }
+    setState(() {});
   }
 
   void changeCheck(int id) {

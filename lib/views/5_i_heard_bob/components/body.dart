@@ -56,6 +56,8 @@ class _BodyState extends State<Body> {
 
   TextEditingController emailController = TextEditingController();
 
+  TextEditingController controller = TextEditingController();
+
   late bool isEnabled = true;
 
   final _keyEmail = GlobalKey<FormState>();
@@ -66,13 +68,41 @@ class _BodyState extends State<Body> {
 
   final _keyNameFake = GlobalKey<FormState>();
 
+  // String hintEmail = "Your Email";
+
+  // String hintName = "Your Name";
+
+  String hintName = "Mikel Estel";
+
+  String hintEmail = "hello@aol.com";
+
+  late Map<String, dynamic> params;
+  // = {
+  // "name": name,
+  // "email": email,
+  // "title": title,
+  // "latitude": latitude,
+  // "longitude": longitude,
+  // "datetime": datetime,
+  // "physicallySee": physicallySee,
+  // "releasedLocation": releasedLocation,
+  // "whatSee": whatSee,
+  // "mayBirds": manyBirds,
+  // "manyMale": manyMale,
+  // "manyFemale": manyFemale,
+  // "manyYoung": manyYoung,
+  // "manyBroods": manyBroods,
+  // "moreInformation": moreInfo,
+  // "learnMore": learnMore,
+  // "comment": comment,
+  // "state": locality
+  //};
+
   @override
   void initState() {
     _initialization();
     super.initState();
   }
-
-  TextEditingController controller = TextEditingController();
 
   void changeName(String name) {
     context.read<HeardPage1State>().changeName(name);
@@ -97,88 +127,79 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onTap: () {
-      //   FocusScope.of(context).unfocus();
-      //   setState(() {
-      //     hintText2 = "Your Name";
-      //   });
-      // },
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Opacity(
-              opacity: 1,
-              child: SvgPicture.asset(
-                "assets/images/sfondo3.svg",
-                fit: BoxFit.cover,
-                // width: double.infinity,
-              ),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Opacity(
+            opacity: 1,
+            child: SvgPicture.asset(
+              "assets/images/sfondo3.svg",
+              fit: BoxFit.cover,
+              // width: double.infinity,
             ),
           ),
-          Positioned(
-            bottom: 65.h,
-            top: 55.h,
-            left: 0,
-            right: 0,
-            child: PageView(
-                onPageChanged: (value) {
-                  setState(() {
-                    currentIndex = value;
-                  });
-                },
-                controller: pageController,
-                children: [
-                  _buildPage1(),
-                  if (Provider.of<HeardPage1State>(context).physicallySee ==
-                      'Yes')
-                    _buildPage2(),
-                  _buildPage3(context),
-                ]),
-          ),
-          Positioned(
-            top: 0,
-            width: ScreenUtil().screenWidth,
-            child: const CustomTitle(
-              title: "I Heard Bob!",
-              color: kColor2,
-              icon: "assets/icons/gps.svg",
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Row(
+        ),
+        Positioned(
+          bottom: 65.h,
+          top: 55.h,
+          left: 0,
+          right: 0,
+          child: PageView(
+              onPageChanged: (value) {
+                setState(() {
+                  currentIndex = value;
+                });
+              },
+              controller: pageController,
               children: [
-                BottomButton(
-                  color: kColor3,
-                  title: "Bob Sightings Map",
-                  iconPath: "assets/icons/eye.svg",
-                  onPressed: () => Navigator.pushNamed(
-                      context, BobSightingsScreen.routeName),
-                ),
-                BottomButton(
-                  color: kColor1,
-                  title: "Hear Bob",
-                  iconPath: "assets/icons/music.svg",
-                  onPressed: () =>
-                      Navigator.pushNamed(context, HearBobScreen.routeName),
-                ),
-              ],
-            ),
+                _buildPage1(),
+                if (Provider.of<HeardPage1State>(context).physicallySee ==
+                    'Yes')
+                  _buildPage2(),
+                _buildPage3(context),
+              ]),
+        ),
+        Positioned(
+          top: 0,
+          width: ScreenUtil().screenWidth,
+          child: const CustomTitle(
+            title: "I Heard Bob!",
+            color: kColor2,
+            icon: "assets/icons/gps.svg",
           ),
-          if (isLoaded)
-            const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(kColor2),
-                backgroundColor: kColor1,
+        ),
+        Positioned(
+          bottom: 0,
+          child: Row(
+            children: [
+              BottomButton(
+                color: kColor3,
+                title: "Bob Sightings Map",
+                iconPath: "assets/icons/eye.svg",
+                onPressed: () =>
+                    Navigator.pushNamed(context, BobSightingsScreen.routeName),
               ),
-            )
-        ],
-      ),
+              BottomButton(
+                color: kColor1,
+                title: "Hear Bob",
+                iconPath: "assets/icons/music.svg",
+                onPressed: () =>
+                    Navigator.pushNamed(context, HearBobScreen.routeName),
+              ),
+            ],
+          ),
+        ),
+        if (isLoaded)
+          const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(kColor2),
+              backgroundColor: kColor1,
+            ),
+          )
+      ],
     );
   }
 
-  String hintText1 = "Your Email";
   Padding _buildEmailForm(Key key) {
     return Padding(
       padding: EdgeInsets.only(
@@ -216,13 +237,14 @@ class _BodyState extends State<Body> {
                           .email ==
                       '') {
                     setState(() {
-                      hintText1 = 'Your Email';
+                      //  hintEmail = 'Your Email';
+                      hintEmail = "hello@aol.com";
                     });
                   }
                 },
                 onTap: () {
                   setState(() {
-                    hintText1 = '';
+                    hintEmail = '';
                   });
                 },
                 onChanged: (value) {
@@ -233,7 +255,7 @@ class _BodyState extends State<Body> {
                   }
                   if (value.isEmpty || value == '') {
                     setState(() {
-                      hintText1 = 'Your Email';
+                      hintEmail = "hello@aol.com";
                     });
                   }
                 },
@@ -296,7 +318,7 @@ class _BodyState extends State<Body> {
                   ),
                   prefixIconConstraints:
                       BoxConstraints(maxHeight: 28.w, maxWidth: 28.w),
-                  hintText: hintText1,
+                  hintText: hintEmail,
                 ),
               ),
             ),
@@ -306,7 +328,6 @@ class _BodyState extends State<Body> {
     );
   }
 
-  String hintText2 = "Your Name";
   Padding _buildNameForm(Key key) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -332,7 +353,7 @@ class _BodyState extends State<Body> {
                           .name ==
                       '') {
                     setState(() {
-                      hintText2 = 'Your Name';
+                      hintName = "Mikel Estel";
                     });
                   }
                 },
@@ -341,7 +362,7 @@ class _BodyState extends State<Body> {
                 keyboardType: TextInputType.name,
                 onTap: () {
                   setState(() {
-                    hintText2 = '';
+                    hintName = '';
                   });
                 },
                 onChanged: (value) {
@@ -352,7 +373,7 @@ class _BodyState extends State<Body> {
                   }
                   if (value.isEmpty || value == '') {
                     setState(() {
-                      hintText2 = 'Your Name';
+                      hintName = "Mikel Estel";
                     });
                   }
                 },
@@ -400,7 +421,7 @@ class _BodyState extends State<Body> {
                       color: Colors.red,
                     ),
                   ),
-                  hintText: hintText2,
+                  hintText: hintName,
                 ),
               ),
             ),
@@ -673,7 +694,7 @@ class _BodyState extends State<Body> {
                           horizontal: 15.w,
                         ),
                         child: const NumericalQuestion(
-                          title: "How many birds?",
+                          title: "How many adult birds?",
                           id: 1,
                         ),
                       ),
@@ -689,7 +710,7 @@ class _BodyState extends State<Body> {
                           horizontal: 15.w,
                         ),
                         child: const NumericalQuestion(
-                          title: "How many male?",
+                          title: "How many adult male?",
                           id: 2,
                         ),
                       ),
@@ -705,40 +726,63 @@ class _BodyState extends State<Body> {
                           horizontal: 15.w,
                         ),
                         child: const NumericalQuestion(
-                            title: "How many female?", id: 3),
+                            title: "How many adult female?", id: 3),
                       ),
                       SizedBox(
-                        height: 15.h,
+                        height: 30.h,
                       ),
-                      const Divider(),
-                      SizedBox(
-                        height: 15.h,
+                      const Divider(
+                        thickness: 2,
+                        height: 0,
+                        color: kColor1,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
+                      // SizedBox(
+                      //   height: 15.h,
+                      // ),
+
+                      Container(
+                        //padding: EdgeInsets.only(top: 20.h, bottom: 30.h),
+                        color: kColor3.withAlpha(200),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              child: const NumericalQuestion(
+                                  title: "How many broods?", id: 5),
+                            ),
+                            SizedBox(
+                              height: 17.5.h,
+                            ),
+                            SizedBox(
+                              height: 17.5.h,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              child: const NumericalQuestion(
+                                title: "How many young birds total?",
+                                id: 4, //Prima era la domanda in posizione 4 quindi resta con questo ID
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30.h,
+                            ),
+                          ],
                         ),
-                        child: const NumericalQuestion(
-                          title: "How many young birds?",
-                          id: 4,
-                        ),
                       ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      const Divider(),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        child: const NumericalQuestion(
-                            title: "How many broods represented?", id: 5),
+                      const Divider(
+                        thickness: 2,
+                        height: 0,
+                        color: kColor1,
                       ),
                       Container(
-                        color: Colors.transparent,
+                        color: Colors.transparent.withAlpha(0),
                         padding: EdgeInsets.only(
                             left: 15.w, right: 15.w, top: 45.h, bottom: 35.h),
                         child: Row(
@@ -1159,245 +1203,202 @@ class _BodyState extends State<Body> {
                           width: (ScreenUtil().screenWidth) / 2 - 30.w,
                           child: DefaultButton(
                             text: "Send data",
-                            press: () async {
-                              String name =
-                                  context.read<HeardPage1State>().name;
-                              String email =
-                                  context.read<HeardPage3State>().email;
-                              String time =
-                                  context.read<HeardPage1State>().time;
-                              String title =
-                                  context.read<HeardPage1State>().title;
-                              double latitude = context
-                                          .read<HeardPage1State>()
-                                          .latitude ==
-                                      ''
-                                  ? 1000
-                                  : double.parse(
-                                      context.read<HeardPage1State>().latitude);
-                              double longitude =
-                                  context.read<HeardPage1State>().longitude ==
-                                          ''
-                                      ? 1000
-                                      : double.parse(context
-                                          .read<HeardPage1State>()
-                                          .longitude);
-                              String date =
-                                  context.read<HeardPage1State>().date;
-                              String datetime = _buildDate(date, time);
-                              String physicallySee =
-                                  context.read<HeardPage1State>().physicallySee;
-                              String releasedLocation = context
-                                  .read<HeardPage1State>()
-                                  .releasedIntoLocation;
-                              String whatSee =
-                                  context.read<HeardPage2State>().whatSee;
-                              int manyBirds =
-                                  context.read<HeardPage2State>().totalCounter;
-                              int manyMale =
-                                  context.read<HeardPage2State>().maleCounter;
-                              int manyFemale =
-                                  context.read<HeardPage2State>().femaleCounter;
-                              int manyYoung =
-                                  context.read<HeardPage2State>().youngCounter;
-                              int manyBroods =
-                                  context.read<HeardPage2State>().broodsCounter;
-                              String moreInfo =
-                                  context.read<HeardPage3State>().moreInfo;
-                              String learnMore =
-                                  context.read<HeardPage3State>().learnMore;
-                              String comment =
-                                  context.read<HeardPage3State>().comment;
+                            press: () => _sendData(),
+                            // press: () async {
+                            //   // String name =
+                            //   //     context.read<HeardPage1State>().name;
+                            //   // String email =
+                            //   //     context.read<HeardPage3State>().email;
+                            //   // String time =
+                            //   //     context.read<HeardPage1State>().time;
+                            //   // String title =
+                            //   //     context.read<HeardPage1State>().title;
+                            //   // double latitude = context
+                            //   //             .read<HeardPage1State>()
+                            //   //             .latitude ==
+                            //   //         ''
+                            //   //     ? 1000
+                            //   //     : double.parse(
+                            //   //         context.read<HeardPage1State>().latitude);
+                            //   // double longitude =
+                            //   //     context.read<HeardPage1State>().longitude ==
+                            //   //             ''
+                            //   //         ? 1000
+                            //   //         : double.parse(context
+                            //   //             .read<HeardPage1State>()
+                            //   //             .longitude);
+                            //   // String date =
+                            //   //     context.read<HeardPage1State>().date;
+                            //   // String datetime = _buildDate(date, time);
+                            //   // String physicallySee =
+                            //   //     context.read<HeardPage1State>().physicallySee;
+                            //   // String releasedLocation = context
+                            //   //     .read<HeardPage1State>()
+                            //   //     .releasedIntoLocation;
+                            //   // String whatSee =
+                            //   //     context.read<HeardPage2State>().whatSee;
+                            //   // int manyBirds =
+                            //   //     context.read<HeardPage2State>().totalCounter;
+                            //   // int manyMale =
+                            //   //     context.read<HeardPage2State>().maleCounter;
+                            //   // int manyFemale =
+                            //   //     context.read<HeardPage2State>().femaleCounter;
+                            //   // int manyYoung =
+                            //   //     context.read<HeardPage2State>().youngCounter;
+                            //   // int manyBroods =
+                            //   //     context.read<HeardPage2State>().broodsCounter;
+                            //   // String moreInfo =
+                            //   //     context.read<HeardPage3State>().moreInfo;
+                            //   // String learnMore =
+                            //   //     context.read<HeardPage3State>().learnMore;
+                            //   // String comment =
+                            //   //     context.read<HeardPage3State>().comment;
 
-                              bool checkNeeded =
-                                  context.read<HeardPage2State>().check;
+                            //   // bool checkNeeded =
+                            //   //     context.read<HeardPage2State>().check;
 
-                              String locality = '';
-                              if (latitude != 1000) {
-                                List<Placemark> placemarks =
-                                    await placemarkFromCoordinates(
-                                        latitude, longitude,
-                                        localeIdentifier: 'en_US');
-                                locality = placemarks
-                                    .reversed.last.administrativeArea!;
-                              }
+                            //   // String locality = '';
+                            //   // if (latitude != 1000) {
+                            //   //   List<Placemark> placemarks =
+                            //   //       await placemarkFromCoordinates(
+                            //   //           latitude, longitude,
+                            //   //           localeIdentifier: 'en_US');
+                            //   //   locality = placemarks
+                            //   //       .reversed.last.administrativeArea!;
+                            //   // }
 
-                              print(locality);
+                            //   // print(locality);
 
-                              if (abbreviation
-                                  .containsKey(locality.toUpperCase())) {
-                                locality =
-                                    abbreviation[locality.toUpperCase()]!;
-                              }
-                              locality =
-                                  locality.replaceAll(' ', '_').toLowerCase();
+                            //   // if (abbreviation
+                            //   //     .containsKey(locality.toUpperCase())) {
+                            //   //   locality =
+                            //   //       abbreviation[locality.toUpperCase()]!;
+                            //   // }
+                            //   // locality =
+                            //   //     locality.replaceAll(' ', '_').toLowerCase();
 
-                              Map<String, dynamic> params = {
-                                "name": name,
-                                "email": email,
-                                "title": title,
-                                "latitude": latitude,
-                                "longitude": longitude,
-                                "datetime": datetime,
-                                "physicallySee": physicallySee,
-                                "releasedLocation": releasedLocation,
-                                "whatSee": whatSee,
-                                "mayBirds": manyBirds,
-                                "manyMale": manyMale,
-                                "manyFemale": manyFemale,
-                                "manyYoung": manyYoung,
-                                "manyBroods": manyBroods,
-                                "moreInformation": moreInfo,
-                                "learnMore": learnMore,
-                                "comment": comment,
-                                "state": locality
-                              };
-                              if (!isLoaded) {
-                                setState(() {
-                                  isLoaded = !isLoaded;
-                                });
-                                if (name != '' &&
-                                    _validateEmail(email) &&
-                                    latitude != 1000 &&
-                                    (manyBirds == manyFemale + manyMale ||
-                                        checkNeeded)) {
-                                  bool isSended =
-                                      await RemoteService().sendData(params);
-                                  if (isSended) {
-                                    setState(() {
-                                      context
-                                          .read<HeardPage3State>()
-                                          .resetAll();
-                                      context
-                                          .read<HeardPage1State>()
-                                          .resetAll();
-                                      context
-                                          .read<HeardPage2State>()
-                                          .resetAll();
-                                      Navigator.popAndPushNamed(context,
-                                          IHeardBobThanksScreen.routeName);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      isLoaded = !isLoaded;
-                                    });
-                                    String message =
-                                        "A problem occurred while sending the data, please try again later.";
-                                    await Future.delayed(
-                                        Duration.zero,
-                                        () => showDialog(
-                                            useSafeArea: false,
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              Widget continueButton =
-                                                  TextButton(
-                                                child: const Text(
-                                                  "OK",
-                                                  style: TextStyle(
-                                                      color: kTextColor),
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              );
-                                              AlertDialog alert = AlertDialog(
-                                                backgroundColor: kColor3,
-                                                title: Text(
-                                                  "Bobscapes",
-                                                  style: TextStyle(
-                                                      color: kTextColor,
-                                                      fontSize: 18.sp),
-                                                ),
-                                                content: Text(
-                                                  message,
-                                                  style: TextStyle(
-                                                      color: kTextColor,
-                                                      fontSize: 14.sp),
-                                                ),
-                                                actions: [
-                                                  continueButton,
-                                                ],
-                                              );
-                                              return alert;
-                                            }));
-                                  }
-                                } else {
-                                  setState(() {
-                                    isLoaded = !isLoaded;
-                                  });
+                            //   bool checkNeeded =
+                            //       context.read<HeardPage2State>().check;
 
-                                  String message1 = "You entered";
-                                  String error = '';
-                                  if (name == '' &&
-                                      _validateEmail(email) &&
-                                      manyBirds == manyFemale + manyMale) {
-                                    error = 'name';
-                                  } else if (name != '' &&
-                                      !_validateEmail(email) &&
-                                      manyBirds == manyFemale + manyMale) {
-                                    error = 'email';
-                                  } else if (name != '' &&
-                                      _validateEmail(email) &&
-                                      manyBirds != manyFemale + manyMale) {
-                                    error = 'number of birds';
-                                  } else if (name == '' &&
-                                      !_validateEmail(email) &&
-                                      manyBirds == manyFemale + manyMale) {
-                                    error = 'name and email';
-                                  } else if (name == '' &&
-                                      _validateEmail(email) &&
-                                      manyBirds != manyFemale + manyMale) {
-                                    error = 'name and number of birds';
-                                  } else if (name != '' &&
-                                      !_validateEmail(email) &&
-                                      manyBirds != manyFemale + manyMale) {
-                                    error = 'email and number of birds';
-                                  } else {
-                                    error = 'name, email and number of birds';
-                                  }
+                            //   await _sendData();
 
-                                  String message =
-                                      "$message1 $error incorrectly.Please try again. Note: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
-                                  await Future.delayed(
-                                    Duration.zero,
-                                    () => showDialog(
-                                      useSafeArea: false,
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        Widget continueButton = TextButton(
-                                          child: const Text(
-                                            "OK",
-                                            style: TextStyle(color: kTextColor),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        );
-                                        AlertDialog alert = AlertDialog(
-                                          backgroundColor: kColor3,
-                                          title: Text(
-                                            "Bobscapes",
-                                            style: TextStyle(
-                                                color: kTextColor,
-                                                fontSize: 18.sp),
-                                          ),
-                                          content: Text(
-                                            message,
-                                            style: TextStyle(
-                                                color: kTextColor,
-                                                fontSize: 14.sp),
-                                          ),
-                                          actions: [
-                                            continueButton,
-                                          ],
-                                        );
-                                        return alert;
-                                      },
-                                    ),
-                                  );
-                                }
-                              }
-                            },
+                            //   if (!isLoaded) {
+                            //     setState(() {
+                            //       isLoaded = !isLoaded;
+                            //     });
+                            //     if (name != '' &&
+                            //         _validateEmail(email) &&
+                            //         latitude != 1000 &&
+                            //         (manyBirds == manyFemale + manyMale ||
+                            //             checkNeeded)) {
+                            //       bool isSended =
+                            //           await RemoteService().sendData(params);
+                            //       if (isSended) {
+                            //         await Future.delayed(Duration.zero, () {
+                            //           context
+                            //               .read<HeardPage3State>()
+                            //               .resetAll();
+                            //           context
+                            //               .read<HeardPage1State>()
+                            //               .resetAll();
+                            //           context
+                            //               .read<HeardPage2State>()
+                            //               .resetAll();
+                            //           Navigator.popAndPushNamed(context,
+                            //               IHeardBobThanksScreen.routeName);
+                            //         });
+                            //       } else {
+                            //         setState(() {
+                            //           isLoaded = !isLoaded;
+                            //         });
+                            //         String message =
+                            //             "A problem occurred while sending the data, please try again later.";
+                            //         await Future.delayed(
+                            //             Duration.zero,
+                            //             () => showDialog(
+                            //                 useSafeArea: false,
+                            //                 context: context,
+                            //                 builder: (BuildContext context) {
+                            //                   Widget continueButton =
+                            //                       TextButton(
+                            //                     child: const Text(
+                            //                       "OK",
+                            //                       style: TextStyle(
+                            //                           color: kTextColor),
+                            //                     ),
+                            //                     onPressed: () {
+                            //                       Navigator.of(context).pop();
+                            //                     },
+                            //                   );
+                            //                   AlertDialog alert = AlertDialog(
+                            //                     backgroundColor: kColor3,
+                            //                     title: Text(
+                            //                       "Bobscapes",
+                            //                       style: TextStyle(
+                            //                           color: kTextColor,
+                            //                           fontSize: 18.sp),
+                            //                     ),
+                            //                     content: Text(
+                            //                       message,
+                            //                       style: TextStyle(
+                            //                           color: kTextColor,
+                            //                           fontSize: 14.sp),
+                            //                     ),
+                            //                     actions: [
+                            //                       continueButton,
+                            //                     ],
+                            //                   );
+                            //                   return alert;
+                            //                 }));
+                            //       }
+                            //     } else {
+                            //       setState(() {
+                            //         isLoaded = !isLoaded;
+                            //       });
+
+                            //       String message = _buildErrorMessage(name,
+                            //           email, manyBirds, manyFemale, manyMale);
+
+                            //       await Future.delayed(
+                            //         Duration.zero,
+                            //         () => showDialog(
+                            //           useSafeArea: false,
+                            //           context: context,
+                            //           builder: (BuildContext context) {
+                            //             Widget continueButton = TextButton(
+                            //               child: const Text(
+                            //                 "OK",
+                            //                 style: TextStyle(color: kTextColor),
+                            //               ),
+                            //               onPressed: () {
+                            //                 Navigator.of(context).pop();
+                            //               },
+                            //             );
+                            //             AlertDialog alert = AlertDialog(
+                            //               backgroundColor: kColor3,
+                            //               title: Text(
+                            //                 "Bobscapes",
+                            //                 style: TextStyle(
+                            //                     color: kTextColor,
+                            //                     fontSize: 18.sp),
+                            //               ),
+                            //               content: Text(
+                            //                 message,
+                            //                 style: TextStyle(
+                            //                     color: kTextColor,
+                            //                     fontSize: 14.sp),
+                            //               ),
+                            //               actions: [
+                            //                 continueButton,
+                            //               ],
+                            //             );
+                            //             return alert;
+                            //           },
+                            //         ),
+                            //       );
+                            //     }
+                            //   }
+                            // },
                           ),
                         ),
                       ],
@@ -1412,12 +1413,230 @@ class _BodyState extends State<Body> {
     );
   }
 
+  String _buildErrorMessage(
+      String name, String email, int manyBirds, int manyFemale, int manyMale) {
+    String message = "You entered";
+    String error = '';
+    if (name == '' &&
+        _validateEmail(email) &&
+        manyBirds == manyFemale + manyMale) {
+      error = 'name';
+    } else if (name != '' &&
+        !_validateEmail(email) &&
+        manyBirds == manyFemale + manyMale) {
+      error = 'email';
+    } else if (name != '' &&
+        _validateEmail(email) &&
+        manyBirds != manyFemale + manyMale) {
+      error = 'number of birds';
+    } else if (name == '' &&
+        !_validateEmail(email) &&
+        manyBirds == manyFemale + manyMale) {
+      error = 'name and email';
+    } else if (name == '' &&
+        _validateEmail(email) &&
+        manyBirds != manyFemale + manyMale) {
+      error = 'name and number of birds';
+    } else if (name != '' &&
+        !_validateEmail(email) &&
+        manyBirds != manyFemale + manyMale) {
+      error = 'email and number of birds';
+    } else {
+      error = 'name, email and number of birds';
+    }
+
+    message =
+        "$message $error incorrectly.Please try again. Note: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
+
+    return message;
+  }
+
+  dynamic _sendData() async {
+    String name = context.read<HeardPage1State>().name;
+    String email = context.read<HeardPage3State>().email;
+    String time = context.read<HeardPage1State>().time;
+    String title = context.read<HeardPage1State>().title;
+
+    double latitude = context.read<HeardPage1State>().latitude == ''
+        ? 1000
+        : double.parse(context.read<HeardPage1State>().latitude);
+
+    double longitude = context.read<HeardPage1State>().longitude == ''
+        ? 1000
+        : double.parse(context.read<HeardPage1State>().longitude);
+
+    String date = context.read<HeardPage1State>().date;
+    String datetime = _buildDate(date, time);
+    String physicallySee = context.read<HeardPage1State>().physicallySee;
+    String releasedLocation =
+        context.read<HeardPage1State>().releasedIntoLocation;
+    String timeZone = context.read<HeardPage1State>().timeZone;
+
+    int manyBirds = context.read<HeardPage2State>().totalCounter;
+    int manyMale = context.read<HeardPage2State>().maleCounter;
+    int manyFemale = context.read<HeardPage2State>().femaleCounter;
+    int manyYoung = context.read<HeardPage2State>().youngCounter;
+    int manyBroods = context.read<HeardPage2State>().broodsCounter;
+    bool birdsCheck = context.read<HeardPage2State>().totalCheck;
+    bool maleCheck = context.read<HeardPage2State>().maleCheck;
+    bool femaleCheck = context.read<HeardPage2State>().femaleCheck;
+    bool youngCheck = context.read<HeardPage2State>().youngCheck;
+    bool broodsCheck = context.read<HeardPage2State>().broodsCheck;
+
+    String moreInfo = context.read<HeardPage3State>().moreInfo;
+    String learnMore = context.read<HeardPage3State>().learnMore;
+    String comment = context.read<HeardPage3State>().comment;
+
+    bool checkNeeded = context.read<HeardPage2State>().check;
+
+    String locality = '';
+    if (latitude != 1000) {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          latitude, longitude,
+          localeIdentifier: 'en_US');
+      locality = placemarks.reversed.last.administrativeArea!;
+    }
+
+    print(locality);
+
+    if (abbreviation.containsKey(locality.toUpperCase())) {
+      locality = abbreviation[locality.toUpperCase()]!;
+    }
+    locality = locality.replaceAll(' ', '_').toLowerCase();
+
+    params = {
+      "name": name,
+      "email": email,
+      "title": title,
+      "latitude": latitude,
+      "longitude": longitude,
+      "datetime": datetime,
+      "timeZone": timeZone,
+      "physicallySee": physicallySee,
+      "releasedLocation": releasedLocation,
+      //  "whatSee": whatSee,
+      "manyBirds": manyBirds,
+      "manyMale": manyMale,
+      "manyFemale": manyFemale,
+      "manyYoung": manyYoung,
+      "manyBroods": manyBroods,
+      "birdsCheck": birdsCheck,
+      "maleCheck": maleCheck,
+      "femaleCheck": femaleCheck,
+      "youngCheck": youngCheck,
+      "broodsCheck": broodsCheck,
+      "moreInformation": moreInfo,
+      "learnMore": learnMore,
+      "comment": comment,
+      "state": locality
+    };
+
+    if (!isLoaded) {
+      setState(() {
+        isLoaded = !isLoaded;
+      });
+      if (name != '' &&
+          _validateEmail(email) &&
+          latitude != 1000 &&
+          (manyBirds == manyFemale + manyMale || checkNeeded)) {
+        bool isSended = await RemoteService().sendData(params);
+        if (isSended) {
+          await Future.delayed(Duration.zero, () {
+            context.read<HeardPage3State>().resetAll();
+            context.read<HeardPage1State>().resetAll();
+            context.read<HeardPage2State>().resetAll();
+            Navigator.popAndPushNamed(context, IHeardBobThanksScreen.routeName);
+          });
+        } else {
+          setState(() {
+            isLoaded = !isLoaded;
+          });
+          String message =
+              "A problem occurred while sending the data, please try again later.";
+          await Future.delayed(
+              Duration.zero,
+              () => showDialog(
+                  useSafeArea: false,
+                  context: context,
+                  builder: (BuildContext context) {
+                    Widget continueButton = TextButton(
+                      child: const Text(
+                        "OK",
+                        style: TextStyle(color: kTextColor),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                    AlertDialog alert = AlertDialog(
+                      backgroundColor: kColor3,
+                      title: Text(
+                        "Bobscapes",
+                        style: TextStyle(color: kTextColor, fontSize: 18.sp),
+                      ),
+                      content: Text(
+                        message,
+                        style: TextStyle(color: kTextColor, fontSize: 14.sp),
+                      ),
+                      actions: [
+                        continueButton,
+                      ],
+                    );
+                    return alert;
+                  }));
+        }
+      } else {
+        setState(() {
+          isLoaded = !isLoaded;
+        });
+
+        String message =
+            _buildErrorMessage(name, email, manyBirds, manyFemale, manyMale);
+
+        await Future.delayed(
+          Duration.zero,
+          () => showDialog(
+            useSafeArea: false,
+            context: context,
+            builder: (BuildContext context) {
+              Widget continueButton = TextButton(
+                child: const Text(
+                  "OK",
+                  style: TextStyle(color: kTextColor),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              );
+              AlertDialog alert = AlertDialog(
+                backgroundColor: kColor3,
+                title: Text(
+                  "Bobscapes",
+                  style: TextStyle(color: kTextColor, fontSize: 18.sp),
+                ),
+                content: Text(
+                  message,
+                  style: TextStyle(color: kTextColor, fontSize: 14.sp),
+                ),
+                actions: [
+                  continueButton,
+                ],
+              );
+              return alert;
+            },
+          ),
+        );
+      }
+    }
+  }
+
   bool _validateEmail(String email) {
     return emailValidatorRegExp.hasMatch(email);
   }
 
   String _buildDate(String date, String time) {
-    date = date.replaceAll('\'', '20');
+    // date = date.replaceAll('\'', '20');
+    date = '${date.substring(0, 6)}20${date.substring(6)}';
 
     DateTime d = DateFormat.yMd().parse(date);
     DateTime t = DateFormat.jm().parse(time);

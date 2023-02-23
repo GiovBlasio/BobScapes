@@ -10,7 +10,9 @@ class HeardPage1State with ChangeNotifier {
   String _time = '';
   String _releasedIntoLocation = 'Yes';
   String _physicallySee = 'Yes';
+  String _timeZone = 'Santa Fe (GMT -7H)';
 
+  String get timeZone => _timeZone;
   String get releasedIntoLocation => _releasedIntoLocation;
   String get physicallySee => _physicallySee;
   String get time => _time;
@@ -20,6 +22,11 @@ class HeardPage1State with ChangeNotifier {
   String get title => _title;
   String get name => _name;
   String get location => _location;
+
+  void changeTimeZone(String value) {
+    _timeZone = value;
+    notifyListeners();
+  }
 
   void changeName(String value) {
     _name = value;
@@ -76,5 +83,6 @@ class HeardPage1State with ChangeNotifier {
     _time = '';
     _releasedIntoLocation = 'Yes';
     _physicallySee = 'Yes';
+    _timeZone = 'Santa Fe (GMT -7H)';
   }
 }
