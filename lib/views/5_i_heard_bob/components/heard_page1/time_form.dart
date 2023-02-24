@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../../../../constants.dart';
 import '../../../../provider/heard_page/heard_page1_state.dart';
 
+late String dropdownvalue;
+
 class TimeForm extends StatefulWidget {
   const TimeForm({
     Key? key,
@@ -350,7 +352,6 @@ class TimeFormState extends State<TimeForm> {
                                     changeTime(time);
 
                                     timeController.text = time;
-                                    //    _externalFormKey.currentState!.print(time);
                                   });
 
                                   Navigator.pop(context);
@@ -703,8 +704,6 @@ class _CustomDropDownMenu extends StatefulWidget {
 }
 
 class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
-  late String dropdownvalue;
-
   @override
   void initState() {
     _initialization();
