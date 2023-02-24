@@ -1446,7 +1446,7 @@ class _BodyState extends State<Body> {
     }
 
     message =
-        "$message $error incorrectly. Please try again. Note: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
+        "$message $error incorrectly. Please try again.\nNote: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
 
     return message;
   }
