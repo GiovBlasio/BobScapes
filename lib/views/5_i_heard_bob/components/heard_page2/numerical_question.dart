@@ -105,6 +105,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                       onPressed: () {
                         setState(() {
                           decrementCounter(widget.id);
+                          isChecked == true ? changeCheck(widget.id) : null;
                         });
                       },
                       icon: SvgPicture.asset(
@@ -148,6 +149,10 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                       padding: EdgeInsets.zero,
                       onPressed: () {
                         incrementCounter(widget.id);
+                        isChecked == true ? changeCheck(widget.id) : null;
+                        setState(() {
+                          
+                        });
                         // // isChecked = initialCheck(widget.id);
                         // setState(() {});
                       },
@@ -169,6 +174,8 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                         // _isSelected = !_isSelected;
                         changeCheck(widget.id);
                         firstAccess(widget.id);
+                        isChecked = initialCheck(widget.id);
+                        controller.text = initialValue(widget.id);
                       });
                     },
                     child: Row(
@@ -194,7 +201,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                           width: 15.w,
                         ),
                         Text(
-                          "unsure",
+                          "UNSURE",
                           style: TextStyle(
                               color: kTextColor,
                               fontWeight: FontWeight.w700,
@@ -409,7 +416,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
       case 1:
         {
           if ((!Provider.of<HeardPage2State>(context, listen: false)
-              .firstAccessTotalCounter)) {
+              .totalCheck)) {
             return (Provider.of<HeardPage2State>(context, listen: false)
                     .totalCounter)
                 .toString();
@@ -420,7 +427,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
       case 2:
         {
           if ((!Provider.of<HeardPage2State>(context, listen: false)
-              .firstAccessMaleCounter)) {
+              .maleCheck)) {
             return (Provider.of<HeardPage2State>(context, listen: false)
                     .maleCounter)
                 .toString();
@@ -432,7 +439,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
       case 3:
         {
           if ((!Provider.of<HeardPage2State>(context, listen: false)
-              .firstAccessFemaleCounter)) {
+              .femaleCheck)) {
             return (Provider.of<HeardPage2State>(context, listen: false)
                     .femaleCounter)
                 .toString();
@@ -444,7 +451,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
       case 4:
         {
           if ((!Provider.of<HeardPage2State>(context, listen: false)
-              .firstAccessYoungCounter)) {
+              .youngCheck)) {
             return (Provider.of<HeardPage2State>(context, listen: false)
                     .youngCounter)
                 .toString();
@@ -455,7 +462,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
       case 5:
         {
           if ((!Provider.of<HeardPage2State>(context, listen: false)
-              .firstAccessBroodsCounter)) {
+              .broodsCheck)) {
             return (Provider.of<HeardPage2State>(context, listen: false)
                     .broodsCounter)
                 .toString();

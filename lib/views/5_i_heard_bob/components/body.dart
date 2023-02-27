@@ -1419,34 +1419,34 @@ class _BodyState extends State<Body> {
     String error = '';
     if (name == '' &&
         _validateEmail(email) &&
-        manyBirds == manyFemale + manyMale) {
+        manyBirds >= manyFemale + manyMale) {
       error = 'name';
     } else if (name != '' &&
         !_validateEmail(email) &&
-        manyBirds == manyFemale + manyMale) {
+        manyBirds >= manyFemale + manyMale) {
       error = 'email';
     } else if (name != '' &&
         _validateEmail(email) &&
-        manyBirds != manyFemale + manyMale) {
+        manyBirds < manyFemale + manyMale) {
       error = 'number of birds';
     } else if (name == '' &&
         !_validateEmail(email) &&
-        manyBirds == manyFemale + manyMale) {
+        manyBirds >= manyFemale + manyMale) {
       error = 'name and email';
     } else if (name == '' &&
         _validateEmail(email) &&
-        manyBirds != manyFemale + manyMale) {
+        manyBirds < manyFemale + manyMale) {
       error = 'name and number of birds';
     } else if (name != '' &&
         !_validateEmail(email) &&
-        manyBirds != manyFemale + manyMale) {
+        manyBirds < manyFemale + manyMale) {
       error = 'email and number of birds';
     } else {
       error = 'name, email and number of birds';
     }
 
-    message =
-        "$message $error incorrectly. Please try again.\nNote: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
+    message = "$message $error incorrectly. Please try again.";
+    // \nNote: Young birds and broods are not included in the total bird count and are considered a separate entity please try again.";
 
     return message;
   }
@@ -1539,7 +1539,7 @@ class _BodyState extends State<Body> {
       if (name != '' &&
           _validateEmail(email) &&
           latitude != 1000 &&
-          (manyBirds == manyFemale + manyMale || checkNeeded)) {
+          (manyBirds >= manyFemale + manyMale)) {
         bool isSended = await RemoteService().sendData(params);
         if (isSended) {
           await Future.delayed(Duration.zero, () {
@@ -1644,21 +1644,21 @@ class _BodyState extends State<Body> {
 
     int hours = 5;
     switch (timeZone) {
-      case 'Central (UTC -6H)':
+      case 'Central (CST)':
         hours = 6;
         break;
-      case 'Mountain (UTC -7H)':
+      case 'Mountain (MST)':
         hours = 7;
         break;
-      case 'Pacific (UTC -8H)':
+      case 'Pacific (PST)':
         hours = 8;
         break;
-      case 'Alaska (UTC -9H)':
-        hours = 9;
-        break;
-      case 'Hawaii-Aleutian (UTC -10H)':
-        hours = 10;
-        break;
+      // case 'Alaska (UTC -9H)':
+      //   hours = 9;
+      //   break;
+      // case 'Hawaii-Aleutian (UTC -10H)':
+      //   hours = 10;
+      //   break;
     }
 
     t = t.add(Duration(hours: hours));

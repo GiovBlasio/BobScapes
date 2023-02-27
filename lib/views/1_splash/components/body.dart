@@ -57,7 +57,7 @@ class _BodyState extends State<Body> {
       // bottomBackground = 100.h;
     });
 
-    await Future.delayed(const Duration(milliseconds: 1500));
+    await Future.delayed(const Duration(milliseconds: 2000));
 
     setState(() {
       animate = true;
@@ -72,7 +72,7 @@ class _BodyState extends State<Body> {
     });
 
     await Future.delayed(
-        const Duration(milliseconds: 1500),
+        const Duration(milliseconds: 2000),
         () => Navigator.of(context)
           ..pushReplacement(
             PageRouteBuilder(

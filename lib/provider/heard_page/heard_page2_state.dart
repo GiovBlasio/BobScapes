@@ -36,8 +36,7 @@ class HeardPage2State with ChangeNotifier {
   bool get firstAccessFemaleCounter => _firstAccessFemaleCounter;
   bool get firstAccessYoungCounter => _firstAccessYoungCounter;
   bool get firstAccessBroodsCounter => _firstAccessBroodsCounter;
-  bool get check =>
-      _youngCheck || _maleCheck || _broodsCheck || _totalCheck || _femaleCheck;
+  bool get check => _maleCheck || _totalCheck || _femaleCheck;
 
   void changeWhatSee(String value) {
     _whatSee = value;
@@ -123,15 +122,28 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void incrementMaleCounter() {
-    if (total < _totalCounter || check) {
+    if (total < _totalCounter) {
       _maleCounter++;
     }
+    if (_maleCounter == _totalCounter) {
+      for (int i = _femaleCounter; i > 0; i--) {
+        decrementFemaleCounter();
+      }
+      changeFemaleCheck();
+    }
+
     notifyListeners();
   }
 
   void incrementFemaleCounter() {
-    if (total < _totalCounter || check) {
+    if (total < _totalCounter) {
       _femaleCounter++;
+    }
+    if (_femaleCounter == _totalCounter) {
+      for (int i = _maleCounter; i > 0; i--) {
+        decrementMaleCounter();
+      }
+      changeMaleCheck();
     }
     notifyListeners();
   }
@@ -169,6 +181,11 @@ class HeardPage2State with ChangeNotifier {
     _youngCheck = true;
     _totalCheck = true;
     _broodsCheck = true;
+    _firstAccessTotalCounter = true;
+    _firstAccessMaleCounter = true;
+    _firstAccessFemaleCounter = true;
+    _firstAccessYoungCounter = true;
+    _firstAccessBroodsCounter = true;
     notifyListeners();
   }
 }

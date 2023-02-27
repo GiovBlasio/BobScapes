@@ -77,17 +77,24 @@ class _BodyState extends State<Body> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => CustomAlert(
-                      title: audio[index].title,
-                      path: audio[index].path,
+                    builder: (context) => MediaQuery(
+                      data:
+                          MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                      child: CustomAlert(
+                        title: audio[index].title,
+                        path: audio[index].path,
+                      ),
                     ),
                   ),
                 );
               },
-              child: CustomCard(
-                time: audio[index].time,
-                title: audio[index].title,
-                path: audio[index].pathImage,
+              child: MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: CustomCard(
+                  time: audio[index].time,
+                  title: audio[index].title,
+                  path: audio[index].pathImage,
+                ),
               ),
             ),
             separatorBuilder: (context, index) => SizedBox(

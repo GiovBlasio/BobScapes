@@ -24,12 +24,12 @@ class TimeFormState extends State<TimeForm> {
   TextEditingController timeController = TextEditingController();
 
   var items = [
-    'Eastern (UTC -5H)',
-    'Central (UTC -6H)',
-    'Mountain (UTC -7H)',
-    'Pacific (UTC -8H)',
-    'Alaska (UTC -9H)',
-    'Hawaii-Aleutian (UTC -10H)'
+    'Eastern (EST)',
+    'Central (CST)',
+    'Mountain (MST)',
+    'Pacific (PST)',
+    // 'Alaska (UTC -9H)',
+    // 'Hawaii-Aleutian (UTC -10H)'
   ];
 
   @override
@@ -269,7 +269,7 @@ class TimeFormState extends State<TimeForm> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: Text(
-                            "Enter Time",
+                            "Scroll to Change Time",
                             style: TextStyle(
                                 fontFamily: 'Manrope',
                                 fontWeight: FontWeight.w700,
