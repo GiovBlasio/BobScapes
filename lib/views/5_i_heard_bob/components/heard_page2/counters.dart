@@ -386,6 +386,21 @@ class _CountersState extends State<Counters> {
 
                                   controllerSecond.text =
                                       valueSecond.toString();
+                                  if (valueSecond == valueFirst &&
+                                      isCheckedThird) {
+                                    for (int i = valueThird; i > 0; i--) {
+                                      context
+                                          .read<HeardPage2State>()
+                                          .decrementFemaleCounter();
+                                    }
+                                    valueThird = 0;
+                                    controllerThird.text =
+                                        valueThird.toString();
+                                    isCheckedThird = !isCheckedThird;
+                                    context
+                                        .read<HeardPage2State>()
+                                        .changeFemaleCheck();
+                                  }
                                   if (isCheckedSecond) {
                                     isCheckedSecond = !isCheckedSecond;
                                     context
@@ -606,6 +621,21 @@ class _CountersState extends State<Counters> {
 
                                     controllerThird.text =
                                         valueThird.toString();
+                                    if (valueThird == valueFirst &&
+                                        isCheckedSecond) {
+                                      for (int i = valueSecond; i > 0; i--) {
+                                        context
+                                            .read<HeardPage2State>()
+                                            .decrementMaleCounter();
+                                      }
+                                      valueSecond = 0;
+                                      controllerSecond.text =
+                                          valueSecond.toString();
+                                      isCheckedSecond = !isCheckedSecond;
+                                      context
+                                          .read<HeardPage2State>()
+                                          .changeMaleCheck();
+                                    }
                                     if (isCheckedThird) {
                                       isCheckedThird = !isCheckedThird;
                                       context
