@@ -1375,33 +1375,39 @@ class _BodyState extends State<Body> {
     );
   }
 
-  String _buildErrorMessage(
-      String name, String email, int manyBirds, int manyFemale, int manyMale) {
+  String _buildErrorMessage(String name, String email, int manyBirds,
+      int manyFemale, int manyMale, bool almostOneUnsure) {
     String message = "You entered";
     String error = '';
     if (name == '' &&
         _validateEmail(email) &&
-        manyBirds >= manyFemale + manyMale) {
+        ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
       error = 'name';
     } else if (name != '' &&
         !_validateEmail(email) &&
-        manyBirds >= manyFemale + manyMale) {
+        ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
       error = 'email';
     } else if (name != '' &&
         _validateEmail(email) &&
-        manyBirds < manyFemale + manyMale) {
+        !((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
       error = 'number of birds';
     } else if (name == '' &&
         !_validateEmail(email) &&
-        manyBirds >= manyFemale + manyMale) {
+        ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
       error = 'name and email';
     } else if (name == '' &&
         _validateEmail(email) &&
-        manyBirds < manyFemale + manyMale) {
+        !((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
       error = 'name and number of birds';
     } else if (name != '' &&
         !_validateEmail(email) &&
-        manyBirds < manyFemale + manyMale) {
+        !((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
       error = 'email and number of birds';
     } else {
       error = 'name, email and number of birds';
@@ -1450,7 +1456,7 @@ class _BodyState extends State<Body> {
     String learnMore = context.read<HeardPage3State>().learnMore;
     String comment = context.read<HeardPage3State>().comment;
 
-    bool checkNeeded = context.read<HeardPage2State>().check;
+    bool almostOneUnsure = context.read<HeardPage2State>().almostOneUnsure;
 
     String locality = '';
     if (latitude != 1000) {
@@ -1501,7 +1507,8 @@ class _BodyState extends State<Body> {
       if (name != '' &&
           _validateEmail(email) &&
           latitude != 1000 &&
-          (manyBirds >= manyFemale + manyMale)) {
+          ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
+              (manyBirds >= manyFemale + manyMale && almostOneUnsure))) {
         bool isSended = await RemoteService().sendData(params);
         if (isSended) {
           await Future.delayed(Duration.zero, () {
@@ -1553,8 +1560,8 @@ class _BodyState extends State<Body> {
           isLoaded = !isLoaded;
         });
 
-        String message =
-            _buildErrorMessage(name, email, manyBirds, manyFemale, manyMale);
+        String message = _buildErrorMessage(
+            name, email, manyBirds, manyFemale, manyMale, almostOneUnsure);
 
         await Future.delayed(
           Duration.zero,

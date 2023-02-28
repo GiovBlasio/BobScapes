@@ -36,7 +36,7 @@ class HeardPage2State with ChangeNotifier {
   bool get firstAccessFemaleCounter => _firstAccessFemaleCounter;
   bool get firstAccessYoungCounter => _firstAccessYoungCounter;
   bool get firstAccessBroodsCounter => _firstAccessBroodsCounter;
-  bool get check => _maleCheck || _totalCheck || _femaleCheck;
+  bool get almostOneUnsure => _maleCheck || _totalCheck || _femaleCheck;
 
   void changeWhatSee(String value) {
     _whatSee = value;
@@ -115,7 +115,7 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void decrementTotalCounter() {
-    if (total < _totalCounter || check) {
+    if (total < _totalCounter || almostOneUnsure) {
       _totalCounter > 0 ? _totalCounter-- : _totalCounter;
     }
     notifyListeners();
