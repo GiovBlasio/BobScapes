@@ -20,6 +20,7 @@ import 'heard_page1/time_form.dart';
 import 'heard_page1/custom_radio_button.dart';
 import 'heard_page1/location_form.dart';
 import 'heard_page1/personal_info.dart';
+import 'heard_page2/counters.dart';
 import 'heard_page2/numerical_question.dart';
 import 'heard_page2/custom_dropdown_menu.dart' as heard2;
 import 'heard_page3/comment_form.dart';
@@ -309,7 +310,6 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   prefixIcon: Container(
-                    //color: Colors.red,
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: SvgPicture.asset(
                       "assets/icons/icon-mail.svg",
@@ -689,45 +689,7 @@ class _BodyState extends State<Body> {
                       // SizedBox(
                       //   height: 20.h,
                       // ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        child: const NumericalQuestion(
-                          title: "How many adult birds?",
-                          id: 1,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      const Divider(),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        child: const NumericalQuestion(
-                          title: "How many adult male?",
-                          id: 2,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      const Divider(),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        child: const NumericalQuestion(
-                            title: "How many adult female?", id: 3),
-                      ),
+                      const Counters(),
                       SizedBox(
                         height: 30.h,
                       ),
