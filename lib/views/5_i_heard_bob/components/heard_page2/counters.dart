@@ -84,7 +84,10 @@ class _CountersState extends State<Counters> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: kColor3,
+                          color: valueFirst > 0 &&
+                                  valueFirst > valueSecond + valueThird
+                              ? kColor3
+                              : const Color(0XFFF2F2F2),
                           border: Border.all(color: kTextColor, width: 0.4),
                           borderRadius: const BorderRadius.all(
                             Radius.circular(3.5),
@@ -97,7 +100,10 @@ class _CountersState extends State<Counters> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               setState(() {
-                                if (valueFirst > 0) valueFirst = valueFirst - 1;
+                                if (valueFirst > 0 &&
+                                    valueFirst > valueSecond + valueThird) {
+                                  valueFirst = valueFirst - 1;
+                                }
 
                                 controllerFirst.text = valueFirst.toString();
                                 context
