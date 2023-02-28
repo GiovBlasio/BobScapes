@@ -256,6 +256,7 @@ class _CountersState extends State<Counters> {
                   ),
                 ],
               ),
+              // Text('$isCheckedFirst')
             ],
           ),
         ),
@@ -392,20 +393,27 @@ class _CountersState extends State<Counters> {
 
                                   controllerSecond.text =
                                       valueSecond.toString();
-                                  if (valueSecond == valueFirst &&
+
+                                  if ((valueSecond == valueFirst ||
+                                          valueFirst ==
+                                              valueSecond + valueThird) &&
                                       isCheckedThird) {
-                                    for (int i = valueThird; i > 0; i--) {
-                                      context
-                                          .read<HeardPage2State>()
-                                          .decrementFemaleCounter();
+                                    if (valueSecond == valueFirst) {
+                                      for (int i = valueThird; i > 0; i--) {
+                                        context
+                                            .read<HeardPage2State>()
+                                            .decrementFemaleCounter();
+                                      }
+                                      valueThird = 0;
                                     }
-                                    valueThird = 0;
                                     controllerThird.text =
                                         valueThird.toString();
-                                    isCheckedThird = !isCheckedThird;
+
                                     context
                                         .read<HeardPage2State>()
-                                        .changeFemaleCheck();
+                                        .changeFemaleCheckToFalse();
+
+                                    isCheckedThird = false;
                                   }
                                   if (isCheckedSecond) {
                                     isCheckedSecond = !isCheckedSecond;
@@ -496,7 +504,8 @@ class _CountersState extends State<Counters> {
                     ),
                   ),
                 ],
-              )
+              ),
+              // Text('$isCheckedSecond')
             ],
           ),
         ),
@@ -627,20 +636,27 @@ class _CountersState extends State<Counters> {
 
                                     controllerThird.text =
                                         valueThird.toString();
-                                    if (valueThird == valueFirst &&
+                                    if ((valueThird == valueFirst ||
+                                            valueFirst ==
+                                                valueSecond + valueThird) &&
                                         isCheckedSecond) {
-                                      for (int i = valueSecond; i > 0; i--) {
-                                        context
-                                            .read<HeardPage2State>()
-                                            .decrementMaleCounter();
+                                      if (valueThird == valueFirst) {
+                                        for (int i = valueSecond; i > 0; i--) {
+                                          context
+                                              .read<HeardPage2State>()
+                                              .decrementMaleCounter();
+                                        }
+                                        valueSecond = 0;
                                       }
-                                      valueSecond = 0;
                                       controllerSecond.text =
                                           valueSecond.toString();
-                                      isCheckedSecond = !isCheckedSecond;
+                                      isCheckedSecond = false;
                                       context
                                           .read<HeardPage2State>()
-                                          .changeMaleCheck();
+                                          .changeMaleCheckToFalse();
+                                      // context
+                                      //     .read<HeardPage2State>()
+                                      //     .changeMaleCheck();
                                     }
                                     if (isCheckedThird) {
                                       isCheckedThird = !isCheckedThird;
@@ -732,7 +748,8 @@ class _CountersState extends State<Counters> {
                       ),
                     ),
                   ],
-                )
+                ),
+                // Text('$isCheckedThird')
               ],
             )),
       ],

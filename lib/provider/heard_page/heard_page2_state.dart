@@ -88,6 +88,16 @@ class HeardPage2State with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeFemaleCheckToFalse() {
+    _femaleCheck = false;
+    notifyListeners();
+  }
+
+  void changeMaleCheckToFalse() {
+    _maleCheck = false;
+    notifyListeners();
+  }
+
   void changeYoungCheck() {
     _youngCheck = !_youngCheck;
     notifyListeners();
@@ -125,12 +135,6 @@ class HeardPage2State with ChangeNotifier {
     if (total < _totalCounter) {
       _maleCounter++;
     }
-    if (_maleCounter == _totalCounter) {
-      for (int i = _femaleCounter; i > 0; i--) {
-        decrementFemaleCounter();
-      }
-      changeFemaleCheck();
-    }
 
     notifyListeners();
   }
@@ -139,12 +143,7 @@ class HeardPage2State with ChangeNotifier {
     if (total < _totalCounter) {
       _femaleCounter++;
     }
-    if (_femaleCounter == _totalCounter) {
-      for (int i = _maleCounter; i > 0; i--) {
-        decrementMaleCounter();
-      }
-      changeMaleCheck();
-    }
+
     notifyListeners();
   }
 
