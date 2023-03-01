@@ -785,7 +785,7 @@ class _CustomDropDownMenuState extends State<_CustomDropDownMenu> {
                     Text(
                       item,
                       style: TextStyle(
-                          fontSize: 12.sp,
+                          fontSize: 14.sp,
                           fontFamily: 'Manrope',
                           fontWeight: FontWeight.w700,
                           color: kTextColor),

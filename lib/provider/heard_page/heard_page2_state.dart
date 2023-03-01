@@ -125,24 +125,20 @@ class HeardPage2State with ChangeNotifier {
   }
 
   void decrementTotalCounter() {
-    if (total < _totalCounter || almostOneUnsure) {
+    // if (total < _totalCounter || almostOneUnsure) {
       _totalCounter > 0 ? _totalCounter-- : _totalCounter;
-    }
+    // }
     notifyListeners();
   }
 
   void incrementMaleCounter() {
-    if (total < _totalCounter) {
-      _maleCounter++;
-    }
+    _maleCounter++;
 
     notifyListeners();
   }
 
   void incrementFemaleCounter() {
-    if (total < _totalCounter) {
-      _femaleCounter++;
-    }
+    _femaleCounter++;
 
     notifyListeners();
   }

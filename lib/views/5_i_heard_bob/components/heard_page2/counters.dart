@@ -84,8 +84,12 @@ class _CountersState extends State<Counters> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: valueFirst > 0 &&
-                                  valueFirst > valueSecond + valueThird
+                          color: ((isCheckedSecond ||
+                                          isCheckedThird ||
+                                          (valueThird + valueSecond <
+                                              valueFirst)) &&
+                                      valueFirst > 0) ||
+                                  isCheckedFirst
                               ? kColor3
                               : const Color(0XFFF2F2F2),
                           border: Border.all(color: kTextColor, width: 0.4),
@@ -100,8 +104,11 @@ class _CountersState extends State<Counters> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               setState(() {
-                                if (valueFirst > 0 &&
-                                    valueFirst > valueSecond + valueThird) {
+                                if ((isCheckedSecond ||
+                                        isCheckedThird ||
+                                        (valueThird + valueSecond <
+                                            valueFirst)) &&
+                                    valueFirst > 0) {
                                   valueFirst = valueFirst - 1;
                                 }
 
@@ -300,7 +307,7 @@ class _CountersState extends State<Counters> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: valueSecond > 0
+                          color: valueSecond > 0 || isCheckedSecond
                               ? kColor3
                               : const Color(0xFFF2F2F2),
                           border: Border.all(color: kTextColor, width: 0.4),
@@ -370,7 +377,11 @@ class _CountersState extends State<Counters> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: valueSecond + valueThird < valueFirst
+                          color: (valueSecond + valueThird < valueFirst &&
+                                      !isCheckedThird) ||
+                                  (valueSecond < valueFirst &&
+                                      isCheckedThird) ||
+                                  isCheckedSecond
                               ? kColor3
                               : const Color(0XFFF2F2F2),
                           border: Border.all(color: kTextColor, width: 0.4),
@@ -385,7 +396,10 @@ class _CountersState extends State<Counters> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               setState(() {
-                                if (valueSecond + valueThird < valueFirst) {
+                                if ((valueSecond + valueThird < valueFirst &&
+                                        !isCheckedThird) ||
+                                    (valueSecond < valueFirst &&
+                                        isCheckedThird)) {
                                   valueSecond = valueSecond + 1;
                                   context
                                       .read<HeardPage2State>()
@@ -394,18 +408,15 @@ class _CountersState extends State<Counters> {
                                   controllerSecond.text =
                                       valueSecond.toString();
 
-                                  if ((valueSecond == valueFirst ||
-                                          valueFirst ==
-                                              valueSecond + valueThird) &&
+                                  if ((valueSecond == valueFirst) &&
                                       isCheckedThird) {
-                                    if (valueSecond == valueFirst) {
-                                      for (int i = valueThird; i > 0; i--) {
-                                        context
-                                            .read<HeardPage2State>()
-                                            .decrementFemaleCounter();
-                                      }
-                                      valueThird = 0;
+                                    for (int i = valueThird; i > 0; i--) {
+                                      context
+                                          .read<HeardPage2State>()
+                                          .decrementFemaleCounter();
                                     }
+                                    valueThird = 0;
+
                                     controllerThird.text =
                                         valueThird.toString();
 
@@ -415,6 +426,21 @@ class _CountersState extends State<Counters> {
 
                                     isCheckedThird = false;
                                   }
+                                  if (isCheckedSecond) {
+                                    isCheckedSecond = !isCheckedSecond;
+                                    context
+                                        .read<HeardPage2State>()
+                                        .changeMaleCheck();
+                                    if (isCheckedFirst) {
+                                      isCheckedFirst = !isCheckedFirst;
+                                      context
+                                          .read<HeardPage2State>()
+                                          .changeTotalCheck();
+                                    }
+                                  }
+                                } else {
+                                  controllerSecond.text =
+                                      valueSecond.toString();
                                   if (isCheckedSecond) {
                                     isCheckedSecond = !isCheckedSecond;
                                     context
@@ -549,7 +575,7 @@ class _CountersState extends State<Counters> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: valueThird > 0
+                              color: valueThird > 0 || isCheckedThird
                                   ? kColor3
                                   : const Color(0XFFF2F2F2),
                               border: Border.all(color: kTextColor, width: 0.4),
@@ -613,7 +639,11 @@ class _CountersState extends State<Counters> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: valueSecond + valueThird < valueFirst
+                            color: ((valueSecond + valueThird < valueFirst &&
+                                            !isCheckedSecond) ||
+                                        (valueThird < valueFirst &&
+                                            isCheckedSecond)) ||
+                                    isCheckedThird
                                 ? kColor3
                                 : const Color(0XFFF2F2F2),
                             border: Border.all(color: kTextColor, width: 0.4),
@@ -628,7 +658,10 @@ class _CountersState extends State<Counters> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 setState(() {
-                                  if (valueSecond + valueThird < valueFirst) {
+                                  if ((valueSecond + valueThird < valueFirst &&
+                                          !isCheckedSecond) ||
+                                      (valueThird < valueFirst &&
+                                          isCheckedSecond)) {
                                     valueThird = valueThird + 1;
                                     context
                                         .read<HeardPage2State>()
@@ -636,18 +669,15 @@ class _CountersState extends State<Counters> {
 
                                     controllerThird.text =
                                         valueThird.toString();
-                                    if ((valueThird == valueFirst ||
-                                            valueFirst ==
-                                                valueSecond + valueThird) &&
+                                    if ((valueThird == valueFirst) &&
                                         isCheckedSecond) {
-                                      if (valueThird == valueFirst) {
-                                        for (int i = valueSecond; i > 0; i--) {
-                                          context
-                                              .read<HeardPage2State>()
-                                              .decrementMaleCounter();
-                                        }
-                                        valueSecond = 0;
+                                      for (int i = valueSecond; i > 0; i--) {
+                                        context
+                                            .read<HeardPage2State>()
+                                            .decrementMaleCounter();
                                       }
+                                      valueSecond = 0;
+
                                       controllerSecond.text =
                                           valueSecond.toString();
                                       isCheckedSecond = false;
@@ -658,6 +688,21 @@ class _CountersState extends State<Counters> {
                                       //     .read<HeardPage2State>()
                                       //     .changeMaleCheck();
                                     }
+                                    if (isCheckedThird) {
+                                      isCheckedThird = !isCheckedThird;
+                                      context
+                                          .read<HeardPage2State>()
+                                          .changeFemaleCheck();
+                                      if (isCheckedFirst) {
+                                        context
+                                            .read<HeardPage2State>()
+                                            .changeTotalCheck();
+                                        isCheckedFirst = !isCheckedFirst;
+                                      }
+                                    }
+                                  } else {
+                                    controllerThird.text =
+                                        valueThird.toString();
                                     if (isCheckedThird) {
                                       isCheckedThird = !isCheckedThird;
                                       context

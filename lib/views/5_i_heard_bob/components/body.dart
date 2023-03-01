@@ -1382,32 +1382,32 @@ class _BodyState extends State<Body> {
     if (name == '' &&
         _validateEmail(email) &&
         ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
+            almostOneUnsure)) {
       error = 'name';
     } else if (name != '' &&
         !_validateEmail(email) &&
         ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
+            almostOneUnsure)) {
       error = 'email';
     } else if (name != '' &&
         _validateEmail(email) &&
         !((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
+            almostOneUnsure)) {
       error = 'number of birds';
     } else if (name == '' &&
         !_validateEmail(email) &&
         ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
+            almostOneUnsure)) {
       error = 'name and email';
     } else if (name == '' &&
         _validateEmail(email) &&
         !((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
+            almostOneUnsure)) {
       error = 'name and number of birds';
     } else if (name != '' &&
         !_validateEmail(email) &&
         !((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-            manyBirds >= manyFemale + manyMale && almostOneUnsure)) {
+            almostOneUnsure)) {
       error = 'email and number of birds';
     } else {
       error = 'name, email and number of birds';
@@ -1508,7 +1508,7 @@ class _BodyState extends State<Body> {
           _validateEmail(email) &&
           latitude != 1000 &&
           ((manyBirds == manyFemale + manyMale && !almostOneUnsure) ||
-              (manyBirds >= manyFemale + manyMale && almostOneUnsure))) {
+              (almostOneUnsure))) {
         bool isSended = await RemoteService().sendData(params);
         if (isSended) {
           await Future.delayed(Duration.zero, () {
