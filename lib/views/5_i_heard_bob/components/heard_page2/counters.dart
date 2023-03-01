@@ -201,9 +201,9 @@ class _CountersState extends State<Counters> {
                                   .changeTotalCheck();
 
                               if (isCheckedFirst) {
-                                controllerFirst.text = '';
-                                controllerSecond.text = '';
-                                controllerThird.text = '';
+                                controllerFirst.text = 'Null';
+                                controllerSecond.text = 'Null';
+                                controllerThird.text = 'Null';
                                 if (!isCheckedSecond) {
                                   context
                                       .read<HeardPage2State>()
@@ -485,7 +485,7 @@ class _CountersState extends State<Counters> {
                                   controllerFirst.text = valueFirst.toString();
                                 }
                               } else {
-                                controllerSecond.text = '';
+                                controllerSecond.text = 'Null';
                               }
                             });
                           },
@@ -748,7 +748,7 @@ class _CountersState extends State<Counters> {
                                   controllerThird.text = valueThird.toString();
                                   controllerFirst.text = valueFirst.toString();
                                 } else {
-                                  controllerThird.text = '';
+                                  controllerThird.text = 'Null';
                                 }
                               });
                             },
@@ -933,7 +933,7 @@ class _CountersState extends State<Counters> {
                     .totalCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
       case 2:
@@ -944,7 +944,7 @@ class _CountersState extends State<Counters> {
                     .maleCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
 
@@ -956,12 +956,12 @@ class _CountersState extends State<Counters> {
                     .femaleCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
 
       default:
-        return ' ';
+        return 'Null';
     }
   }
 

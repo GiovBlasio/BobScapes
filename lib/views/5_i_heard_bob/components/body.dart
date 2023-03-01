@@ -1484,11 +1484,11 @@ class _BodyState extends State<Body> {
       "physicallySee": physicallySee,
       "releasedLocation": releasedLocation,
       //  "whatSee": whatSee,
-      "manyBirds": manyBirds,
-      "manyMale": manyMale,
-      "manyFemale": manyFemale,
-      "manyYoung": manyYoung,
-      "manyBroods": manyBroods,
+      // "manyBirds": manyBirds,
+      // "manyMale": manyMale,
+      // "manyFemale": manyFemale,
+      // "manyYoung": manyYoung,
+      // "manyBroods": manyBroods,
       "birdsCheck": birdsCheck,
       "maleCheck": maleCheck,
       "femaleCheck": femaleCheck,
@@ -1499,6 +1499,13 @@ class _BodyState extends State<Body> {
       "comment": comment,
       "state": locality
     };
+    if (!birdsCheck) params.putIfAbsent("manyBirds", () => manyBirds);
+    if (!maleCheck) params.putIfAbsent("manyMale", () => manyMale);
+    if (!femaleCheck) params.putIfAbsent("manyFemale", () => manyFemale);
+    if (!youngCheck) params.putIfAbsent("manyYoung", () => manyYoung);
+    if (!broodsCheck) params.putIfAbsent("manyBroods", () => manyBroods);
+
+    print(params);
 
     if (!isLoaded) {
       setState(() {

@@ -150,9 +150,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                       onPressed: () {
                         incrementCounter(widget.id);
                         isChecked == true ? changeCheck(widget.id) : null;
-                        setState(() {
-                          
-                        });
+                        setState(() {});
                         // // isChecked = initialCheck(widget.id);
                         // setState(() {});
                       },
@@ -421,7 +419,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                     .totalCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
       case 2:
@@ -432,7 +430,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                     .maleCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
 
@@ -444,7 +442,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                     .femaleCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
 
@@ -456,7 +454,7 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                     .youngCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
       case 5:
@@ -467,11 +465,11 @@ class _NumericalQuestionState extends State<NumericalQuestion> {
                     .broodsCounter)
                 .toString();
           } else {
-            return '';
+            return 'Null';
           }
         }
       default:
-        return ' ';
+        return 'Null';
     }
   }
 
