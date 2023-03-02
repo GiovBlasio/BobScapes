@@ -141,7 +141,7 @@ class _BodyState extends State<Body> {
           ),
         ),
         Positioned(
-          bottom: 65.h,
+          bottom: 0.h,
           top: 55.h,
           left: 0,
           right: 0,
@@ -169,27 +169,27 @@ class _BodyState extends State<Body> {
             icon: "assets/icons/gps.svg",
           ),
         ),
-        Positioned(
-          bottom: 0,
-          child: Row(
-            children: [
-              BottomButton(
-                color: kColor3,
-                title: "Bob Sightings Map",
-                iconPath: "assets/icons/eye.svg",
-                onPressed: () =>
-                    Navigator.pushNamed(context, BobSightingsScreen.routeName),
-              ),
-              BottomButton(
-                color: kColor1,
-                title: "Hear Bob",
-                iconPath: "assets/icons/music.svg",
-                onPressed: () =>
-                    Navigator.pushNamed(context, HearBobScreen.routeName),
-              ),
-            ],
-          ),
-        ),
+        // Positioned(
+        //   bottom: 0,
+        //   child: Row(
+        //     children: [
+        //       BottomButton(
+        //         color: kColor3,
+        //         title: "Bob Sightings Map",
+        //         iconPath: "assets/icons/eye.svg",
+        //         onPressed: () =>
+        //             Navigator.pushNamed(context, BobSightingsScreen.routeName),
+        //       ),
+        //       BottomButton(
+        //         color: kColor1,
+        //         title: "Hear Bob",
+        //         iconPath: "assets/icons/music.svg",
+        //         onPressed: () =>
+        //             Navigator.pushNamed(context, HearBobScreen.routeName),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         if (isLoaded)
           const Center(
             child: CircularProgressIndicator(
@@ -534,7 +534,7 @@ class _BodyState extends State<Body> {
                       Container(
                           color: Colors.transparent,
                           padding: EdgeInsets.only(
-                              left: 15.w, right: 15.w, top: 45.h, bottom: 35.h),
+                              left: 15.w, right: 15.w, top: 30.h, bottom: 10.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -746,7 +746,7 @@ class _BodyState extends State<Body> {
                       Container(
                         color: Colors.transparent.withAlpha(0),
                         padding: EdgeInsets.only(
-                            left: 15.w, right: 15.w, top: 45.h, bottom: 35.h),
+                            left: 15.w, right: 15.w, top: 45.h, bottom: 10.h),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -780,7 +780,7 @@ class _BodyState extends State<Body> {
                                     width: 5.w,
                                   ),
                                   Text(
-                                    "Back",
+                                    "Previous",
                                     style: TextStyle(
                                       fontSize: 14.sp,
                                       color: kTextColor,
@@ -1149,7 +1149,7 @@ class _BodyState extends State<Body> {
                                 width: 5.w,
                               ),
                               Text(
-                                "Back",
+                                "Previous",
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   color: kTextColor,
