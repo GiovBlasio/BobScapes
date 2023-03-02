@@ -201,7 +201,8 @@ class Body extends StatelessWidget {
                 const EdgeInsets.all(0),
               ),
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () =>
+                Navigator.popUntil(context, ModalRoute.withName('/home')),
             child: Text(
               'Back to home',
               style: TextStyle(
