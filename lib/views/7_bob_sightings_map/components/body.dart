@@ -202,7 +202,7 @@ class _BodyState extends State<Body> {
                                           right: 40.w,
                                         ),
                                         child: Text(
-                                          "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                                          "Any personal sighting information you share will only be used internally to inform management recommendations with our conservation partners: Quail Forever, USDA's NRCS, and University of Georgia Martin Game Lab.",
                                           style: TextStyle(
                                               color: kTextColor,
                                               fontFamily: 'Manrope',

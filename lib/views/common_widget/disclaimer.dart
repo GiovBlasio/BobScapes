@@ -77,7 +77,7 @@ class Disclaimer extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: (30), top: (20), bottom: (5), right: (40)),
                         child: Text(
-                          "Any personal sighting information you share will only be used internally to inform management recommendations with conservation partners such as Quail Forever, USDA’s NRCS, and University of Georgia Martin Game Lab.",
+                          "Any personal sighting information you share will only be used internally to inform management recommendations with our conservation partners: Quail Forever, USDA's NRCS, and University of Georgia Martin Game Lab.",
                           style: TextStyle(
                               color: kPrimaryColor,
                               fontFamily: 'Manrope',
