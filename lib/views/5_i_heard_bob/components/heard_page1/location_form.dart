@@ -563,9 +563,18 @@ class _LocationFormState extends State<LocationForm> {
       await Geolocator.requestPermission();
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
+        return null;
         // return Future.error("Location permission are denied");
+      } else {
+        Position position = (await Geolocator.getCurrentPosition());
+
+        //currentLatLng = LatLng(position.latitude, position.longitude);
+        //if (current != null && markers.contains(current)) markers.remove(current);
+
+        return position;
       }
     } else if (permission == LocationPermission.deniedForever) {
+      return null;
       // return Future.error("Location permission are permanently denied");
     } else {
       Position position = (await Geolocator.getCurrentPosition());
@@ -575,7 +584,7 @@ class _LocationFormState extends State<LocationForm> {
 
       return position;
     }
-    return null;
+    
   }
 
   String convertLatLng(double decimal, bool isLat) {
