@@ -3,17 +3,11 @@
 <plist version="1.0">
 	<dict>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-		<string>Bobscapes requires user location to contribute to a renewed national species
-			conservation effort. We will use location data for planning to restore northern bobwhite
-			quail.</string>
+		<string>Bobscapes requires user location to contribute to a renewed national species conservation effort. We will use location data for planning to restore northern bobwhite quail.</string>
 		<key>NSLocationAlwaysUsageDescription</key>
-		<string>Bobscapes requires user location to contribute to a renewed national species
-			conservation effort. We will use location data for planning to restore northern bobwhite
-			quail.</string>
+		<string>Bobscapes requires user location to contribute to a renewed national species conservation effort. We will use location data for planning to restore northern bobwhite quail.</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Bobscapes requires user location to contribute to a renewed national species
-			conservation effort. We will use location data for planning to restore northern bobwhite
-			quail.</string>
+		<string>Bobscapes requires user location to contribute to a renewed national species conservation effort. We will use location data for planning to restore northern bobwhite quail.</string>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
