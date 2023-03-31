@@ -77,6 +77,7 @@ class _LocationFormState extends State<LocationForm> {
 
       String longitude = convertLatLng(point.longitude, false);
       String liveLocation = '$latitude/$longitude';
+      point.latitude.toString();
       changeLocation(liveLocation, point.latitude.toStringAsFixed(3),
           point.longitude.toStringAsFixed(3));
 
@@ -567,6 +568,8 @@ class _LocationFormState extends State<LocationForm> {
         // return Future.error("Location permission are denied");
       } else {
         Position position = (await Geolocator.getCurrentPosition());
+        print(position.latitude);
+        print(position.longitude);
 
         //currentLatLng = LatLng(position.latitude, position.longitude);
         //if (current != null && markers.contains(current)) markers.remove(current);
@@ -578,13 +581,13 @@ class _LocationFormState extends State<LocationForm> {
       // return Future.error("Location permission are permanently denied");
     } else {
       Position position = (await Geolocator.getCurrentPosition());
-
+      print(position.latitude);
+      print(position.longitude);
       //currentLatLng = LatLng(position.latitude, position.longitude);
       //if (current != null && markers.contains(current)) markers.remove(current);
 
       return position;
     }
-    
   }
 
   String convertLatLng(double decimal, bool isLat) {
