@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>337030802639-0tjtv38meb562hpfm1orse6iv6cdp2ai.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.337030802639-0tjtv38meb562hpfm1orse6iv6cdp2ai</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA0nt8VuNErc3vPNR6Bv5e3f4xXoeigcTI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>337030802639</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fergusonlynchllc.bobscapes</string>
+	<key>PROJECT_ID</key>
+	<string>bobscapes-fd33a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bobscapes-fd33a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:337030802639:ios:78eadbb89c95f0473e5bba</string>
+</dict>
+</plist>

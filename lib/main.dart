@@ -1,6 +1,9 @@
+import 'package:bobscapes/services/analytics_services.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import 'constants.dart';
@@ -11,8 +14,17 @@ import 'provider/heard_page/home_state.dart';
 import 'routes.dart';
 import 'views/1_splash/splash_screen.dart';
 // import 'package:sizer/sizer.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+GetIt locator = GetIt.instance;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // locator.registerLazySingleton(() => AnalyticsService());
   runApp(
     MultiProvider(
       providers: [
@@ -37,11 +49,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
+   
     return ScreenUtilInit(
       builder: (context, child) {
         return MaterialApp(
+          navigatorObservers: <NavigatorObserver>[observer],
           builder: (context, child) {
             return ScrollConfiguration(
               behavior: MyBehavior(),
