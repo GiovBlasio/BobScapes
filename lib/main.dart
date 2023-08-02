@@ -1,4 +1,3 @@
-import 'package:bobscapes/services/analytics_services.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,6 @@ import 'provider/heard_page/heard_page3_state.dart';
 import 'provider/heard_page/home_state.dart';
 import 'routes.dart';
 import 'views/1_splash/splash_screen.dart';
-// import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -55,7 +53,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return ScreenUtilInit(
       builder: (context, child) {
         return MaterialApp(
