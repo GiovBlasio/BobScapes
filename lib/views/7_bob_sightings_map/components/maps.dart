@@ -46,21 +46,22 @@ class _MappaState extends State<Mappa> {
       mapController: _mapController,
       options: MapOptions(
           onMapEvent: (event) {
-            zoom = event.zoom;
+            zoom = event.camera.zoom;
           },
-          maxBounds: LatLngBounds(LatLng(0, -180.0), LatLng(75, -40.781693)),
+          initialCameraFit: CameraFit.bounds(bounds: LatLngBounds(LatLng(0, -180.0), LatLng(75, -40.781693))),
           minZoom: 3.5,
           maxZoom: 18,
-          center: currentLatLng,
-          zoom: zoom,
-          interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate),
+          initialCenter: currentLatLng,
+          initialZoom: zoom,
+          interactionOptions: InteractionOptions(flags: InteractiveFlag.all & ~InteractiveFlag.rotate ),
+          ),
       children: [
-        AttributionWidget.defaultWidget(
-          source: 'OpenStreetMap contributors',
-          onSourceTapped: null,
-        ),
+        // AttributionWidget.defaultWidget(
+        //   source: 'OpenStreetMap contributors',
+        //   onSourceTapped: null,
+        // ),
         TileLayer(
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.example.app',
         ),
@@ -125,13 +126,14 @@ class _MappaState extends State<Mappa> {
   }
 
   void _buildMarkers() {
+   
     for (model.Marker element in markers2) {
       Marker marker = Marker(
-        anchorPos: AnchorPos.align(AnchorAlign.top),
-        height: 50.h,
-        width: 50.h,
         point: LatLng(element.latitude, element.longitude),
-        builder: (context) => GestureDetector(
+        width: 50.h,
+        height: 50.h,
+        // Usa 'child' invece di 'builder'
+        child: GestureDetector(
           onTap: () => _showBottomSheet(context, element.state),
           child: SvgPicture.asset(
             "assets/icons/icon-pointer.svg",
@@ -143,8 +145,10 @@ class _MappaState extends State<Mappa> {
       state.add(element.state);
       sightings.add(element.sightings);
       markers.add(marker);
-      _getLocation();
     }
+
+    // Chiama _getLocation fuori dal ciclo se non serve ogni volta.
+    _getLocation();
 
     markers.sort((a, b) => b.point.latitude.compareTo(a.point.latitude));
   }
@@ -173,15 +177,16 @@ class _MappaState extends State<Mappa> {
 
     currentLatLng = LatLng(position.latitude, position.longitude);
     if (current != null && markers.contains(current)) markers.remove(current);
-    current = Marker(
-        height: 75,
-        width: 75,
-        point: currentLatLng,
-        builder: (BuildContext context) {
-          return SvgPicture.asset(
-            "assets/icons/icon-pin-here.svg",
-          );
-        });
+   current = Marker(
+  height: 75,
+  width: 75,
+  point: currentLatLng,
+  // Usa 'child' invece di 'builder'
+  child: SvgPicture.asset(
+    "assets/icons/icon-pin-here.svg",
+  ),
+);
+
     markers.add(current!);
     setState(() {
       _mapController.move(currentLatLng, zoom);

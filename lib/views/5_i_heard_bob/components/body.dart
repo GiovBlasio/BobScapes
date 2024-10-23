@@ -1461,8 +1461,7 @@ class _BodyState extends State<Body> {
     String locality = '';
     if (latitude != 1000) {
       List<Placemark> placemarks = await placemarkFromCoordinates(
-          latitude, longitude,
-          localeIdentifier: 'en_US');
+          latitude, longitude,);
       locality = placemarks.reversed.last.administrativeArea!;
     }
 

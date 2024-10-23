@@ -49,7 +49,7 @@ class _CustomAlertState extends State<CustomAlert> {
 
     audioPlayer.onPlayerStateChanged.listen((state) {
       setState(() {
-        isPlaying = state == PlayerState.PLAYING;
+        isPlaying = state == PlayerState.playing;
       });
     });
 
@@ -59,7 +59,7 @@ class _CustomAlertState extends State<CustomAlert> {
       });
     });
 
-    audioPlayer.onAudioPositionChanged.listen((newPosition) {
+    audioPlayer.onPositionChanged.listen((newPosition) {
       setState(() {
         position = newPosition;
       });
@@ -382,11 +382,12 @@ class _CustomAlertState extends State<CustomAlert> {
   }
 
   Future setAudio() async {
-    audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
     final player = AudioCache(prefix: "assets/music/");
 
     final url = await player.load(widget.path);
-    audioPlayer.setUrl(url.path, isLocal: true);
+    // audioPlayer.setUrl(url.path, isLocal: true);
+    audioPlayer.setSource(DeviceFileSource(url.path));
   }
 
   Widget _showDisclaimer(BuildContext context) {

@@ -14,10 +14,11 @@ import 'routes.dart';
 import 'views/1_splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
+import 'package:geocoding/geocoding.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> main() async {
+  setLocaleIdentifier('en_US');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

@@ -57,14 +57,15 @@ class _LocationFormState extends State<LocationForm> {
       );
 
       current = Marker(
-          height: 75,
-          width: 75,
-          point: currentLatLng,
-          builder: (BuildContext context) {
-            return SvgPicture.asset(
-              "assets/icons/icon-pointer.svg",
-            );
-          });
+        height: 75,
+        width: 75,
+        point: currentLatLng,
+        // Usa il parametro child invece di builder
+        child: SvgPicture.asset(
+          "assets/icons/icon-pointer.svg",
+        ),
+      );
+
     } else {
       dynamic point = LatLng(45, -120);
       dynamic result = await _getLocation();
@@ -84,16 +85,16 @@ class _LocationFormState extends State<LocationForm> {
       controller = TextEditingController(text: liveLocation);
       currentLatLng = LatLng(point.latitude, point.longitude);
       current = Marker(
-          height: 75,
-          width: 75,
-          point: currentLatLng,
-          builder: (BuildContext context) {
-            return SvgPicture.asset(
-              result != null
-                  ? "assets/icons/icon-pin-here.svg"
-                  : "assets/icons/icon-pointer.svg",
-            );
-          });
+        height: 75,
+        width: 75,
+        point: currentLatLng,
+        // Sostituisci builder con child
+        child: SvgPicture.asset(
+          result != null
+              ? "assets/icons/icon-pin-here.svg"
+              : "assets/icons/icon-pointer.svg",
+        ),
+      );
     }
 
     // current = Marker(
@@ -322,16 +323,17 @@ class _LocationFormState extends State<LocationForm> {
                                     return true;
                                   }
                                 });
-                                Marker marker = Marker(
-                                    anchorPos: AnchorPos.align(AnchorAlign.top),
-                                    height: 75,
-                                    width: 75,
-                                    point: point,
-                                    builder: (BuildContext context) {
-                                      return SvgPicture.asset(
-                                        "assets/icons/icon-pointer.svg",
-                                      );
-                                    });
+                               Marker marker = Marker(
+                                alignment: Alignment.topCenter,
+                                height: 75,
+                                width: 75,
+                                point: point,
+                                // Usa child invece di builder
+                                child: SvgPicture.asset(
+                                  "assets/icons/icon-pointer.svg",
+                                ),
+                              );
+
                                 markers.add(marker);
                                 pin = point;
                                 currentLatLng = pin;
@@ -351,21 +353,22 @@ class _LocationFormState extends State<LocationForm> {
 
                                 //Navigator.of(context).pop();
                               },
-                              maxBounds: LatLngBounds(
-                                  LatLng(0, -180.0), LatLng(75, -40.781693)),
+                              
+                              initialCameraFit: CameraFit.bounds(bounds: LatLngBounds(
+                                  LatLng(0, -180.0), LatLng(75, -40.781693))),
                               minZoom: 3,
                               maxZoom: 18,
-                              center: currentLatLng,
-                              zoom: 15,
-                              interactiveFlags: InteractiveFlag.all &
-                                  ~InteractiveFlag.rotate),
+                              initialCenter: currentLatLng,
+                                initialZoom: 15,
+                               interactionOptions: InteractionOptions(flags: InteractiveFlag.all &
+                                  ~InteractiveFlag.rotate)),
                           children: [
-                            AttributionWidget.defaultWidget(
-                              source: 'OpenStreetMap contributors',
-                              onSourceTapped: null,
-                            ),
+                            // AttributionWidget.defaultWidget(
+                            //   source: 'OpenStreetMap contributors',
+                            //   onSourceTapped: null,
+                            // ),
                             TileLayer(
-                              backgroundColor: Colors.white,
+                              // backgroundColor: Colors.white,
                               urlTemplate:
                                   'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                               userAgentPackageName: 'com.example.app',
@@ -412,15 +415,15 @@ class _LocationFormState extends State<LocationForm> {
                                           }
                                           currentLatLng = LatLng(
                                               point.latitude, point.longitude);
-                                          current = Marker(
-                                              height: 75,
-                                              width: 75,
-                                              point: currentLatLng,
-                                              builder: (BuildContext context) {
-                                                return SvgPicture.asset(
-                                                  "assets/icons/icon-pin-here.svg",
-                                                );
-                                              });
+                                         current = Marker(
+                                          height: 75,
+                                          width: 75,
+                                          point: currentLatLng,
+                                          // Utilizza il parametro child
+                                          child: SvgPicture.asset(
+                                            "assets/icons/icon-pin-here.svg",
+                                          ),
+                                        );
                                           markers.add(current);
                                           setState(() {});
                                           // setState(() {
