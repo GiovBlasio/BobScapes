@@ -1461,7 +1461,9 @@ class _BodyState extends State<Body> {
     String locality = '';
     if (latitude != 1000) {
       List<Placemark> placemarks = await placemarkFromCoordinates(
-          latitude, longitude,);
+        latitude,
+        longitude,
+      );
       locality = placemarks.reversed.last.administrativeArea!;
     }
 
@@ -1614,41 +1616,54 @@ class _BodyState extends State<Body> {
     // date = date.replaceAll('\'', '20');
     date = '${date.substring(0, 6)}20${date.substring(6)}';
 
-    DateTime d = DateFormat.yMd().parse(date);
-    DateTime t = DateFormat.jm().parse(time);
+    var formatter = DateFormat("hh:mm a");
 
-    int hours = 5;
-    switch (timeZone) {
-      case 'Central (CST)':
-        hours = 6;
-        break;
-      case 'Mountain (MST)':
-        hours = 7;
-        break;
-      case 'Pacific (PST)':
-        hours = 8;
-        break;
-      // case 'Alaska (UTC -9H)':
-      //   hours = 9;
-      //   break;
-      // case 'Hawaii-Aleutian (UTC -10H)':
-      //   hours = 10;
-      //   break;
+    try {
+      DateTime parsedTime = formatter.parse(time);
+      String isoFormattedTime =
+          "1970-01-01T${DateFormat('HH:mm:ss').format(parsedTime)}";
+
+      DateTime t = DateTime.parse(isoFormattedTime);
+
+      DateTime d = DateFormat.yMd().parse(date);
+      int hours = 5;
+      switch (timeZone) {
+        case 'Central (CST)':
+          hours = 6;
+          break;
+        case 'Mountain (MST)':
+          hours = 7;
+          break;
+        case 'Pacific (PST)':
+          hours = 8;
+          break;
+        // case 'Alaska (UTC -9H)':
+        //   hours = 9;
+        //   break;
+        // case 'Hawaii-Aleutian (UTC -10H)':
+        //   hours = 10;
+        //   break;
+      }
+
+      t = t.add(Duration(hours: hours));
+
+      DateTime dt = DateTime(
+        d.year,
+        d.month,
+        d.day,
+        t.hour,
+        t.minute,
+      );
+
+      String dts = dt.toString().substring(0, 19);
+
+      print("Orario convertito: $t"); 
+      return dts;
+    } catch (e) {
+      print("Errore di parsing: $e");
     }
 
-    t = t.add(Duration(hours: hours));
-
-    DateTime dt = DateTime(
-      d.year,
-      d.month,
-      d.day,
-      t.hour,
-      t.minute,
-    );
-
-    String dts = dt.toString().substring(0, 19);
-
-    return dts;
+    return '';
   }
 }
 

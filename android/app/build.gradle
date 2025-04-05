@@ -47,8 +47,8 @@ android {
         applicationId "com.fergusonlynchllc.bobscapes"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 6  // Incrementa questo valore
-        versionName "1.1"  // Cambia anche la versione a qualcosa di più recente
+        versionCode 7  // Incrementa questo valore
+        versionName "1.1.1"  // Cambia anche la versione a qualcosa di più recente
     }
 
     signingConfigs {
