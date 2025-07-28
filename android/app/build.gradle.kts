@@ -31,7 +31,7 @@ android {
     defaultConfig {
         applicationId = "com.fergusonlynchllc.bobscapes"
         minSdk = 21
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
