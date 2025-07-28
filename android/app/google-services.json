@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "337030802639",
+    "project_id": "bobscapes-fd33a",
+    "storage_bucket": "bobscapes-fd33a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337030802639:android:cdf8bf7d958e86403e5bba",
+        "android_client_info": {
+          "package_name": "com.fergusonlynchllc.bobscapes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337030802639-bctr9h85ah8q0htjdhpt15lif2p9abs3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoM9xuMxiAHACX2abOwjmVdjGnw1_99YM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337030802639-bctr9h85ah8q0htjdhpt15lif2p9abs3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "337030802639-0tjtv38meb562hpfm1orse6iv6cdp2ai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fergusonlynchllc.bobscapes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

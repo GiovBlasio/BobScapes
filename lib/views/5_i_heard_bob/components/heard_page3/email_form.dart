@@ -1,0 +1,160 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../constants.dart';
+import '../../../../provider/heard_page/heard_page3_state.dart';
+
+class EmailForm extends StatefulWidget {
+  const EmailForm({
+    super.key,
+  });
+
+  @override
+  State<EmailForm> createState() => _EmailFormState();
+}
+
+class _EmailFormState extends State<EmailForm> {
+  TextEditingController emailController = TextEditingController();
+
+  late bool isEnabled = true;
+
+  @override
+  void initState() {
+    _initialization();
+    super.initState();
+  }
+
+  void changeEmail(String email) {
+    context.read<HeardPage3State>().changeEmail(email);
+  }
+
+  void _initialization() {
+    isEnabled = Provider.of<HeardPage3State>(context, listen: false).isEnable;
+
+    String email = Provider.of<HeardPage3State>(context, listen: false).email;
+
+    if (email != '' && isEnabled) {
+      emailController = TextEditingController(text: email);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        RichText(
+          text: TextSpan(
+            style: TextStyle(
+                fontSize: 15.sp,
+                color: context.watch<HeardPage3State>().isEnable
+                    ? kTextColor
+                    : kTextColor.withOpacity(0.6),
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w400),
+            children: [
+              const TextSpan(text: 'Your email '),
+              if (context.watch<HeardPage3State>().isEnable)
+                const TextSpan(
+                    text: '(required)',
+                    style: TextStyle(
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w300,
+                        color: kTextColor)),
+            ],
+          ),
+        ),
+        Flexible(
+          child: Form(
+              child: TextFormField(
+            style: const TextStyle(
+                color: kTextColor,
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w500),
+            enableInteractiveSelection: false,
+            cursorColor: kTextColor,
+            enabled: context.watch<HeardPage3State>().isEnable,
+            keyboardType: TextInputType.emailAddress,
+            controller: emailController,
+            onChanged: (value) {
+              changeEmail(value);
+            },
+            validator: (value) {
+              return null;
+            },
+            decoration: InputDecoration(
+              enabled: context.watch<HeardPage3State>().isEnable,
+              labelStyle: TextStyle(
+                  color: context.watch<HeardPage3State>().isEnable
+                      ? kTextColor
+                      : null,
+                  fontSize: 16.sp,
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w500),
+              hintStyle: TextStyle(
+                  color: context.watch<HeardPage3State>().isEnable
+                      ? kTextColor.withOpacity(0.6)
+                      : null,
+                  fontSize: 14.sp,
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w300),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              contentPadding: EdgeInsets.all(
+                8.w,
+              ),
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: kTextColor,
+                ),
+              ),
+              disabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                ),
+              ),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: kTextColor,
+                ),
+              ),
+              border: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: kTextColor,
+                ),
+              ),
+              errorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1.5,
+                  color: Colors.red,
+                ),
+              ),
+              focusedErrorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1.5,
+                  color: Colors.red,
+                ),
+              ),
+              prefixIcon: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: 5.w),
+                child: SvgPicture.asset(
+                  "assets/icons/icon-mail.svg",
+                ),
+              ),
+              prefixIconConstraints: BoxConstraints(
+                  maxHeight: 28.w,
+                  maxWidth: 28.w),
+              hintText: "hello@aol.com",
+            ),
+          )),
+        ),
+      ],
+    );
+  }
+}
