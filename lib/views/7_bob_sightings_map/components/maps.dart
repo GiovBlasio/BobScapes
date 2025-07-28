@@ -45,16 +45,18 @@ class _MappaState extends State<Mappa> {
     return FlutterMap(
       mapController: _mapController,
       options: MapOptions(
-          onMapEvent: (event) {
-            zoom = event.camera.zoom;
-          },
-          initialCameraFit: CameraFit.bounds(bounds: LatLngBounds(LatLng(0, -180.0), LatLng(75, -40.781693))),
-          minZoom: 3.5,
-          maxZoom: 18,
-          initialCenter: currentLatLng,
-          initialZoom: zoom,
-          interactionOptions: InteractionOptions(flags: InteractiveFlag.all & ~InteractiveFlag.rotate ),
-          ),
+        onMapEvent: (event) {
+          zoom = event.camera.zoom;
+        },
+        initialCameraFit: CameraFit.bounds(
+            bounds: LatLngBounds(LatLng(0, -180.0), LatLng(75, -40.781693))),
+        minZoom: 3.5,
+        maxZoom: 18,
+        initialCenter: currentLatLng,
+        initialZoom: zoom,
+        interactionOptions: InteractionOptions(
+            flags: InteractiveFlag.all & ~InteractiveFlag.rotate),
+      ),
       children: [
         // AttributionWidget.defaultWidget(
         //   source: 'OpenStreetMap contributors',
@@ -63,7 +65,10 @@ class _MappaState extends State<Mappa> {
         TileLayer(
           // backgroundColor: Colors.white,
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
+          userAgentPackageName: 'com.fergusonlynchllc.bobscapes',
+          additionalOptions: {
+            'User-Agent': 'Bobscapes/1.1.1 (com.fergusonlynchllc.bobscapes)',
+          },
         ),
         MarkerLayer(
           markers: markers,
@@ -126,7 +131,6 @@ class _MappaState extends State<Mappa> {
   }
 
   void _buildMarkers() {
-   
     for (model.Marker element in markers2) {
       Marker marker = Marker(
         point: LatLng(element.latitude, element.longitude),
@@ -177,15 +181,15 @@ class _MappaState extends State<Mappa> {
 
     currentLatLng = LatLng(position.latitude, position.longitude);
     if (current != null && markers.contains(current)) markers.remove(current);
-   current = Marker(
-  height: 75,
-  width: 75,
-  point: currentLatLng,
-  // Usa 'child' invece di 'builder'
-  child: SvgPicture.asset(
-    "assets/icons/icon-pin-here.svg",
-  ),
-);
+    current = Marker(
+      height: 75,
+      width: 75,
+      point: currentLatLng,
+      // Usa 'child' invece di 'builder'
+      child: SvgPicture.asset(
+        "assets/icons/icon-pin-here.svg",
+      ),
+    );
 
     markers.add(current!);
     setState(() {

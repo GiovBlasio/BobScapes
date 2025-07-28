@@ -371,7 +371,10 @@ class _LocationFormState extends State<LocationForm> {
                               // backgroundColor: Colors.white,
                               urlTemplate:
                                   'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'com.example.app',
+                              userAgentPackageName: 'com.fergusonlynchllc.bobscapes',
+      additionalOptions: {
+        'User-Agent': 'Bobscapes/1.1.1 (com.fergusonlynchllc.bobscapes)',
+      },
                             ),
                             MarkerLayer(
                               markers: markers,
